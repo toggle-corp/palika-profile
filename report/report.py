@@ -11,7 +11,7 @@ WIDTH = 595
 HEIGHT = 842
 
 
-def Page1():
+def Page1(data):
     return Column(
         width=WIDTH,
         height=HEIGHT,
@@ -19,11 +19,11 @@ def Page1():
         padding=Rect(32),
     ).add(
         Header(),
-        Page1Content(),
+        Page1Content(data),
     )
 
 
-def Page2():
+def Page2(data):
     return Column(
         width=WIDTH,
         height=HEIGHT,
@@ -31,5 +31,5 @@ def Page2():
         padding=Rect(32),
     ).add(
         Header(),
-        Page2Content(),
+        Page2Content(data),
     )

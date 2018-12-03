@@ -4,12 +4,30 @@ from drafter.nodes import Text
 from report.common.color import Color
 
 
+materials = [
+    {'label': 'Stone', 'key': 'stone', 'icon': ''},
+    {'label': 'Aggregate', 'key': 'aggregate', 'icon': ''},
+    {'label': 'Sand', 'key': 'sand', 'icon': ''},
+    {'label': 'Timber', 'key': 'timber', 'icon': ''},
+    {'label': 'Cement (PPC)', 'key': 'cement_ppc', 'icon': ''},
+    {'label': 'Cement (OPC)', 'key': 'cement_opc', 'icon': ''},
+    {'label': 'Rebars', 'key': 'rebars', 'icon': ''},
+    {'label': 'Tin', 'key': 'tin', 'icon': ''},
+    {'label': 'Bricks', 'key': 'bricks', 'icon': ''},
+]
+
+
+def xstr(item):
+    # TODO: Separate by comma if isinstance(item, int)
+    return '{}'.format(item)
+
+
 def TR(widths, items):
     return Row(width='100%').add(
         *[
             Text(
                 width=widths[i],
-                markup=item,
+                markup=xstr(item),
                 font='RobotoCondensed 6',
                 alignment=Text.CENTER,
                 vertical_alignment=Text.MIDDLE,
@@ -72,25 +90,31 @@ def BottomBox():
     )
 
 
-def CMTable():
-    data = [
-        {
-            'Materials': 'Stone',
-            'Unit': 'm<sup><small>2</small></sup>',
-            'Req. Quantity*': '5121',
-            'Ava.': 'Y',
-            'Cost. (NRS.)**': '5121',
-        } for i in range(0, 10)
-    ]
+def CMTable(data):
+    rows = []
+    for material in materials:
+        key = material['key']
+        datum = data[key]
+        label = material['label']
 
-    headers = ['<b>{}</b>'.format(k) for k in data[0].keys()]
+        rows.append([
+            label,
+            datum['unit'],
+            datum['req_quantity'],
+            datum['ava'],
+            datum['cost'],
+        ])
+
+    headers = ['<b>{}</b>'.format(k) for k in [
+        'Materials', 'Unit', 'Req. Quantity*', 'Ava.', 'Cost. (NRS.)**',
+    ]]
     widths = ['25%', '15%', '25%', '10%', '25%']
 
     return Column(width='100%', padding=Rect([16, 14, 0, 14])).add(
         TR(widths=widths, items=headers),
         *[
-            TR(widths=widths, items=item.values())
-            for item in data[1:]
+            TR(widths=widths, items=row)
+            for row in rows
         ],
         BottomBox(),
     )

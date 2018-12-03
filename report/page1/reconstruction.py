@@ -47,35 +47,7 @@ def TwoValueLineChart(data, color):
     )
 
 
-def ReconstructionStatus():
-    data = [
-        {
-            'label': 'Total Eligible HHs',
-            'value1': 7070,
-            'value2': 0,
-        },
-        {
-            'label': 'PA Agreement',
-            'value1': 4900,
-            'value2': 1234,
-        },
-        {
-            'label': 'PA Agreement',
-            'value1': 1000,
-            'value2': 1342,
-        },
-        {
-            'label': 'PA Agreement',
-            'value1': 2300,
-            'value2': 1200,
-        },
-        {
-            'label': 'PA Agreement',
-            'value1': 3900,
-            'value2': 4567,
-        },
-    ]
-
+def ReconstructionStatus(data):
     rows = [
         TwoValueLineChart(datum, color=Color.ACCENT)
         for datum in data
@@ -105,7 +77,7 @@ def ReconstructionStatus():
     )
 
 
-def Houses():
+def Houses(data):
     return Column(width='100%').add(
         Text(
             text='Houses',
@@ -118,40 +90,22 @@ def Houses():
             margin=Rect([0, 0, 3, 0]),
         ).add(
             Text(
-                markup='<b>Under Construction</b>: {}'.format(1234),
+                markup='<b>Under Construction</b>: {}'.format(
+                    data['under_construction']
+                ),
                 font='RobotoCondensed 7.5',
             ),
             Text(
-                markup='<b>Completed</b>: {}'.format(1234),
+                markup='<b>Completed</b>: {}'.format(
+                    data['completed']
+                ),
                 font='RobotoCondensed 7.5',
             )
         ),
     )
 
 
-def RetrofitStatus():
-    data = [
-        {
-            'label': 'Total Eligible HHs',
-            'value1': 7070,
-            'value2': 0,
-        },
-        {
-            'label': 'PA Agreement',
-            'value1': 4900,
-            'value2': 1234,
-        },
-        {
-            'label': 'PA Agreement',
-            'value1': 1000,
-            'value2': 1342,
-        },
-        {
-            'label': 'PA Agreement',
-            'value1': 2300,
-            'value2': 1200,
-        },
-    ]
+def RetrofitStatus(data):
     rows = [
         TwoValueLineChart(datum, color=Color.ACCENT2)
         for datum in data
@@ -181,7 +135,7 @@ def RetrofitStatus():
     )
 
 
-def Grievances():
+def Grievances(data):
     return Column(width='50%').add(
         Text(
             text='Grievances',
@@ -190,17 +144,17 @@ def Grievances():
             margin=Rect([0, 0, 4, 0]),
         ),
         Text(
-            markup='<b>Registered:</b> {}'.format(1038),
+            markup='<b>Registered:</b> {}'.format(data['registered']),
             font='RobotoCondensed 7.5',
         ),
         Text(
-            markup='<b>Addressed:</b> {}'.format(971),
+            markup='<b>Addressed:</b> {}'.format(data['addressed']),
             font='RobotoCondensed 7.5',
         ),
     )
 
 
-def NonCompliance():
+def NonCompliance(data):
     return Column(width='50%').add(
         Text(
             text='Non-compliances',
@@ -209,27 +163,27 @@ def NonCompliance():
             margin=Rect([0, 0, 4, 0]),
         ),
         Text(
-            markup='<b>Registered:</b> {}'.format('-'),
+            markup='<b>Registered:</b> {}'.format(data['registered']),
             font='RobotoCondensed 7.5',
         ),
         Text(
-            markup='<b>Addressed:</b> {}'.format('-'),
+            markup='<b>Addressed:</b> {}'.format(data['addressed']),
             font='RobotoCondensed 7.5',
         ),
     )
 
 
-def ReconstructionAndRetrofit():
+def ReconstructionAndRetrofit(data):
     return Row(width='100%', padding=Rect(8)).add(
         Column(width='50%', padding=Rect([0, 8, 0, 2])).add(
-            ReconstructionStatus(),
-            Houses(),
+            ReconstructionStatus(data['reconstruction_status']),
+            Houses(data['houses']),
         ),
         Column(width='50%', padding=Rect([0, 2, 0, 8])).add(
-            RetrofitStatus(),
+            RetrofitStatus(data['retrofitting_status']),
             Row(width='100%').add(
-                Grievances(),
-                NonCompliance(),
+                Grievances(data['grievances']),
+                NonCompliance(data['non_compliances']),
             ),
         )
     )

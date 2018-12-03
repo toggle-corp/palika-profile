@@ -47,17 +47,26 @@ def Sector(label, items):
     )
 
 
-def OtherSectors():
+def OtherSectors(data):
+    schools = data['schools']
+    health_posts = data['health_posts']
+
     return Row(
         width='100%',
         height='100%',
     ).add(
         Sector(
             label='Schools',
-            items={'Damaged': '-', 'Under-construction': '-'},
+            items={
+                'Damaged': schools['damaged'],
+                'Under-construction': schools['under_construction'],
+            },
         ),
         Sector(
             label='Health Posts',
-            items={'Damaged': '-', 'Under-construction': '-'},
+            items={
+                'Damaged': health_posts['damaged'],
+                'Under-construction': health_posts['under_construction'],
+            },
         ),
     )

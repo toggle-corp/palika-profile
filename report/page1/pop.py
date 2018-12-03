@@ -21,7 +21,7 @@ def Label(label, color):
     )
 
 
-def Pop():
+def Pop(data):
     return Column(width='100%', height='100%').add(
         Row(
             width='100% - 16',
@@ -45,9 +45,9 @@ def Pop():
                     color=Color.BLACK,
                 ),
                 padding=Rect(4),
-                text='NRCS (Health)',
+                text=data['active'],
                 color=Color.DARK_GREEN,
-                font='RobotoCondensed 6',
+                font='RobotoCondensed 5',
             ),
             Text(
                 width='50%',
@@ -57,9 +57,9 @@ def Pop():
                     color=Color.BLACK,
                 ),
                 padding=Rect(4),
-                text='WeWorld (Education); HELVETAS, SABAL (Housing)',
+                text=data['passive'],
                 color=Color.DARK_ORANGE,
-                font='RobotoCondensed 6',
+                font='RobotoCondensed 5',
             ),
         )
     )

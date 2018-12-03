@@ -4,14 +4,10 @@ from drafter.nodes import Text, Hr
 from report.common.color import Color
 
 
-def Typologies():
+def Typologies(data):
     widths = ['60%', '20%', '20%']
-    headers = ['Typology', 'Municipal', 'District']
-    rows = [
-        ['Bricks/Stone and Mud Mortar Masonry', '84.8%', '82%'],
-        ['Bricks/Stone and Mud Mortar Masonry', '84.8%', '82%'],
-        ['Bricks/Stone and Mud Mortar Masonry', '84.8%', '82%'],
-    ]
+    headers = data['headers']
+    rows = data['data']
 
     return Column(
         width='100%',

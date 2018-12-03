@@ -71,14 +71,17 @@ class PieChart(Shape):
             ).repos_to_center(ctx).render(ctx)
 
 
-def Trainings():
+def Trainings(data):
+    short = data['short']
+    vocational = data['vocational']
+
     short_training = [
-        {'value': 47, 'color': Color.GRAY},
-        {'value': 370, 'color': Color.ACCENT},
+        {'value': short['reached'], 'color': Color.ACCENT},
+        {'value': short['remaining'], 'color': Color.GRAY},
     ]
     vocational_training = [
-        {'value': 591, 'color': Color.GRAY},
-        {'value': 20, 'color': Color.ACCENT},
+        {'value': vocational['reached'], 'color': Color.ACCENT},
+        {'value': vocational['remaining'], 'color': Color.GRAY},
     ]
 
     items = [

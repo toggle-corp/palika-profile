@@ -5,7 +5,7 @@ from drafter.nodes import Text
 from report.common.color import Color
 
 
-def Map():
+def Map(data):
     map_footer = \
         'Count of TA activities represents presence of any of the following:'\
         'Demonstration Construction; Door-to-Door Technical Assistance;'\

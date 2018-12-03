@@ -23,35 +23,27 @@ def Label(label, color):
     )
 
 
-def HH():
-    values = {
-        'Landless': 80,
-        'No Land Certificates': 1405,
-        'Right of way': 325,
-        'Affected by HEP': 0,
-        'Small plots': 150,
-        'Guthi land': 125,
-        'No information': 0,
-    }
+items = [
+    {'key': 'landless', 'label': 'Landless', 'color': hx('#ff6117')},
+    {'key': 'no_land_certificates', 'label': 'No Land Certificates', 'color': hx('#bf053d')},  # noqa
+    {'key': 'right_of_way', 'label': 'Right of way', 'color': hx('#7d0547')},
+    {'key': 'affected_by_hep', 'label': 'Affected by HEP', 'color': hx('#1e7a8c')},  # noqa
+    {'key': 'smallplots', 'label': 'Small plots', 'color': hx('#abd1b5')},
+    {'key': 'guthi_land', 'label': 'Guthi land', 'color': hx('#ffc202')},
+    {'key': 'no_info', 'label': 'No information', 'color': hx('#949499')},
+]
 
-    colors = {
-        'Landless': hx('#ff6117'),
-        'No Land Certificates': hx('#bf053d'),
-        'Right of way': hx('#7d0547'),
-        'Affected by HEP': hx('#1e7a8c'),
-        'Small plots': hx('#abd1b5'),
-        'Guthi land': hx('#ffc202'),
-        'No information': hx('#949499'),
-    }
 
-    keys = colors.keys()
-    total = sum(values.values())
+def HH(data):
+    total = sum(data.values())
 
     bars = []
     labels = []
-    for key in keys:
-        value = values.get(key)
-        color = colors[key]
+    for item in items:
+        key = item['key']
+        value = data.get(key, 0)
+        color = item['color']
+
         if value:
             bar = Text(
                 bg_color=color,
@@ -66,7 +58,7 @@ def HH():
             bars.append(bar)
 
         label = Label(
-            label=key,
+            label=item['label'],
             color=color,
         )
         labels.append(label)

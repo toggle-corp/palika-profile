@@ -4,15 +4,13 @@ from drafter.nodes import Text
 from report.common.color import Color
 
 
-def TechnicalStaff():
+def TechnicalStaff(data):
     widths = ['35%', '30%', '35%']
-
     headers = ['Staff', 'Available Nos.', 'Additional Req. Nos.']
+
     data = [
-        ['Engineers', '-', '-'],
-        ['Engineers', '-', '-'],
-        ['Engineers', '-', '-'],
-        ['Engineers', '-', '-'],
+        [item['label'], item['available'], item['additional']]
+        for item in data
     ]
 
     header_row = Row(width='100%').add(

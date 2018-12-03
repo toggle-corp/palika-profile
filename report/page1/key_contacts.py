@@ -25,41 +25,9 @@ def Contact(contact):
     )
 
 
-def KeyContacts():
-    contacts = [
-        {
-            'office': 'Municipal Office',
-            'name': 'Mr. Guman Dhoj Kunwar',
-            'title': 'Chairperson',
-            'contact': '98510123123',
-        },
-        {
-            'office': 'Municipal Office',
-            'name': 'Mr. Guman Dhoj Kunwar',
-            'title': 'Chairperson',
-            'contact': '98510123123',
-        },
-        {
-            'office': 'Municipal Office',
-            'name': 'Mr. Guman Dhoj Kunwar',
-            'title': 'Chairperson',
-            'contact': '98510123123',
-        },
-        {
-            'office': 'Municipal Office',
-            'name': 'Mr. Guman Dhoj Kunwar',
-            'title': 'Chairperson',
-            'contact': '98510123123',
-        },
-        {
-            'office': 'Municipal Office',
-            'name': 'Mr. Guman Dhoj Kunwar',
-            'title': 'Chairperson',
-            'contact': '98510123123',
-        },
-    ]
+def KeyContacts(data):
     return Row(
         width='100% - 32',
         justify='space-between',
         margin=Rect(16),
-    ).add(*[Contact(contact=contact) for contact in contacts])
+    ).add(*[Contact(contact=contact) for contact in data])

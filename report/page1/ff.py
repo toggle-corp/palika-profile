@@ -3,6 +3,7 @@ import math
 from drafter.nodes import Canvas
 from drafter.color import alpha
 from drafter.shapes import (
+    Shape,
     Arc,
     Rectangle,
     String,
@@ -11,20 +12,20 @@ from drafter.shapes import (
 from report.common.color import Color
 
 
-class Bagel:
-    def render(self, ctx):
-        grades = {
-            'Damage Grade (1-2)': {
-                'value': 589,
-                'color': alpha(Color.ACCENT, 0.5),
-            },
-            'Damage Grade (3-5)': {
-                'value': 5897,
-                'color': Color.ACCENT,
-            },
-        }
+class Bagel(Shape):
+    data = []
 
-        total_val = sum([item['value'] for item in grades.values()])
+    def render(self, ctx):
+        grades = []
+        alpha_value = 1
+        for datum in self.data:
+            grades.append({
+                **datum,
+                'color': alpha(Color.ACCENT, alpha_value)
+            })
+            alpha_value /= 2
+
+        total_val = sum([item['value'] for item in grades])
         last_angle = None
 
         w = self.w / 2 - 32
@@ -32,7 +33,8 @@ class Bagel:
         center = [w/2 + 32, h/2 + 32]
         radius = min(w, h) / 2
 
-        for label, item in grades.items():
+        for item in grades:
+            label = item['label']
             value = item['value']
             color = item['color']
 
@@ -53,7 +55,8 @@ class Bagel:
 
         x = self.w / 2 + 24
         y = 20
-        for label, item in grades.items():
+        for item in grades:
+            label = item['label']
             value = item['value']
             color = item['color']
 
@@ -87,9 +90,9 @@ class Bagel:
         ).repos_to_center(ctx).render(ctx)
 
 
-def FF(width='100%', height='100%'):
+def FF(data):
     return Canvas(
-        width=width,
-        height=height,
-        renderer=Bagel(),
+        width='100%',
+        height='100%',
+        renderer=Bagel(data=data['data']),
     )
