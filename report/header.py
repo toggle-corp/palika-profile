@@ -1,6 +1,6 @@
 from drafter.utils import Rect
 from drafter.layouts import Row, Column
-from drafter.nodes import Text, Hr, Vr
+from drafter.nodes import Text, Image, Hr, Vr
 
 from report.common.color import Color
 
@@ -12,7 +12,15 @@ def Header():
     ).add(
         Row(
             height=52,
+            relative=True,
         ).add(
+            Image(
+                filename='resources/images/logo.png',
+                width=96,
+                absolute=True,
+                top=-6,
+                left=0,
+            ),
             Text(
                 text='Palika Profile',
                 font='RobotoCondensed Bold 18',
