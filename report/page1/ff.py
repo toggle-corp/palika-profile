@@ -17,13 +17,13 @@ class Bagel(Shape):
 
     def render(self, ctx):
         grades = []
-        alpha_value = 1
+        alpha_value = 1 / (2 ** (len(self.data) - 1))
         for datum in self.data:
             grades.append({
                 **datum,
                 'color': alpha(Color.ACCENT, alpha_value)
             })
-            alpha_value /= 2
+            alpha_value *= 2
 
         total_val = sum([item['value'] for item in grades])
         last_angle = None

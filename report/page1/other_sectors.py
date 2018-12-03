@@ -1,19 +1,27 @@
 from drafter.utils import Rect
 from drafter.layouts import Row, Column
 from drafter.nodes import Text, Canvas
-from drafter.shapes import Circle
+from drafter.shapes import Circle, Image, Shape
 from report.common.color import Color
 
 
-class IconRenderer:
+class IconRenderer(Shape):
     def render(self, ctx):
         Circle(
             center=[self.w / 2, self.h / 2],
-            radius=28,
+            radius=24,
+        ).render(ctx)
+
+        Image(
+            filename=self.filename,
+            width=self.w / 2,
+            pos=[self.w / 2, self.h / 2],
+            center=True,
+            scale_uniform=True,
         ).render(ctx)
 
 
-def Sector(label, items):
+def Sector(label, items, icon):
     return Column(
         width='50%',
         height='100%',
@@ -23,7 +31,7 @@ def Sector(label, items):
         Canvas(
             width=56,
             height=56,
-            renderer=IconRenderer(),
+            renderer=IconRenderer(filename=icon),
         ),
         Text(
             text=label,
@@ -61,6 +69,7 @@ def OtherSectors(data):
                 'Damaged': schools['damaged'],
                 'Under-construction': schools['under_construction'],
             },
+            icon='resources/images/school.png',
         ),
         Sector(
             label='Health Posts',
@@ -68,5 +77,6 @@ def OtherSectors(data):
                 'Damaged': health_posts['damaged'],
                 'Under-construction': health_posts['under_construction'],
             },
+            icon='resources/images/hospital.png',
         ),
     )
