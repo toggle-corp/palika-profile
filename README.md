@@ -1,5 +1,12 @@
 # Palika Profile Report Generation
 
+## Setup
+
+Cairo: https://pycairo.readthedocs.io/en/latest/getting_started.html
+PyG: https://pygobject.readthedocs.io/en/latest/getting_started.html
+libffi: https://sourceware.org/libffi/
+pip install -e requirements.txt
+
 [Cairo](https://cairographics.org/pycairo/)
 and
 [PyGObject bindings](https://pygobject.readthedocs.io/en/latest/getting_started.html)
