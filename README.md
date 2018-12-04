@@ -1,16 +1,11 @@
 # Palika Profile Report Generation
 
 ## Setup
+Install the required dependancies; varies by OS:
 
-Cairo: https://pycairo.readthedocs.io/en/latest/getting_started.html
-PyG: https://pygobject.readthedocs.io/en/latest/getting_started.html
-libffi: https://sourceware.org/libffi/
-pip install -e requirements.txt
-
-[Cairo](https://cairographics.org/pycairo/)
-and
-[PyGObject bindings](https://pygobject.readthedocs.io/en/latest/getting_started.html)
-are required to run the pdf generation library (drafter).
+- Cairo: https://pycairo.readthedocs.io/en/latest/getting_started.html 
+- PyG: https://pygobject.readthedocs.io/en/latest/getting_started.html
+- libffi: https://sourceware.org/libffi/
 
 To run the test file:
 
