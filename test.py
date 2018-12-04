@@ -89,9 +89,9 @@ data = {
 
     # Status of construction materials
     'construction_materials': {
-        'stone': {'unit': 'msq', 'req_quantity': 97349, 'ava': 'Y', 'cost': 3000}, # noqa
-        'aggregate': {'unit': 'msq', 'req_quantity': 97349, 'ava': 'Y', 'cost': 3000}, # noqa
-        'sand': {'unit': 'msq', 'req_quantity': 97349, 'ava': 'Y', 'cost': 3000}, # noqa
+        'stone': {'unit': 'mq', 'req_quantity': 97349, 'ava': 'Y', 'cost': 3000}, # noqa
+        'aggregate': {'unit': 'mq', 'req_quantity': 97349, 'ava': 'Y', 'cost': 3000}, # noqa
+        'sand': {'unit': 'mq', 'req_quantity': 97349, 'ava': 'Y', 'cost': 3000}, # noqa
         'timber': {'unit': 'cu. ft.', 'req_quantity': 97349, 'ava': 'Y', 'cost': 3000}, # noqa
         'cement_ppc': {'unit': 'sack', 'req_quantity': 97349, 'ava': 'Y', 'cost': 3000}, # noqa
         'cement_opc': {'unit': 'sack', 'req_quantity': 97349, 'ava': 'Y', 'cost': 3000}, # noqa

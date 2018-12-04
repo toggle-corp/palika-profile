@@ -1,8 +1,17 @@
 from drafter.utils import Rect, Border
 from drafter.layouts import Row, Column
-from drafter.nodes import Text
+from drafter.nodes import Text, Image
 
 from report.common.color import Color
+
+
+def LegendImage():
+    return None
+    # return Image(filename="")
+
+
+def MapImage():
+    return None
 
 
 def Map(data):
@@ -18,13 +27,16 @@ def Map(data):
         width='100%',
         padding=Rect([16, 12, 10, 12]),
     ).add(
-        Row(
+        Column(
             width='100%',
             height=330,
             border=Border(
                 width=0.5,
                 color=Color.BLACK,
             )
+        ).add(
+            LegendImage(),
+            MapImage(),
         ),
         Text(
             width='100%',
