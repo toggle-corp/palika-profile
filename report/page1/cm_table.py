@@ -63,7 +63,7 @@ def TR(widths, items):
                 Image(
                     filename="resources/images/{}".format(item['icon']),
                     height=8,
-                    margin=Rect(2),
+                    margin=Rect([2, 4, 4, 4]),
                 ) if item.get('icon') else None,
                 Text(
                     markup=xstr(item.get('text')),
@@ -147,7 +147,7 @@ def CMTable(top_data, bot_data):
     headers = ['<b>{}</b>'.format(k) for k in [
         'Materials', 'Unit', 'Req. Quantity*', 'Ava.', 'Cost. (NRS.)**',
     ]]
-    widths = ['25%', '15%', '25%', '10%', '25%']
+    widths = ['28%', '12%', '25%', '10%', '25%']
 
     return Column(width='100%', padding=Rect([16, 14, 0, 14])).add(
         TR_Text(widths=widths, items=headers),

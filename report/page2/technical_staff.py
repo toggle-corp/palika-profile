@@ -4,7 +4,14 @@ from drafter.nodes import Text
 from report.common.color import Color
 from report.common.utils import fmt_thou
 
-def TechnicalStaff(tech_data, mason_data):
+def TechnicalStaffFooter(**kwargs):
+    return Text(
+        **kwargs,
+        text='Source: Municipal Survey',
+        font='RobotoCondensed light 5',
+    )
+
+def TechnicalStaff(data):
     widths = ['35%', '30%', '35%']
     headers = ['Staff', 'Available Nos.', 'Additional Req. Nos.']
 

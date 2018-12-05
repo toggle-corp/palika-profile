@@ -4,8 +4,15 @@ from drafter.nodes import Text
 from report.common.color import Color
 
 
-def Panel(*args, **kwargs):
+def empty(**kwargs):
+    return None
+
+
+def Panel(**kwargs):
     title = kwargs.pop('title', None)
+    left_footer = kwargs.pop('left_footer', empty)
+    right_footer = kwargs.pop('right_footer', empty)
+    footer_data = kwargs.pop('footer_data', empty)
 
     return Row(
         border=Border(
@@ -27,5 +34,16 @@ def Panel(*args, **kwargs):
             bg_color=Color.WHITE,
             padding=Rect([0, 6, 0, 6]),
         ),
-        *args,
+        left_footer(
+            absolute=True,
+            bottom=-12,
+            left=0,
+            data=footer_data,
+        ),
+        right_footer(
+            absolute=True,
+            bottom=-12,
+            right=2,
+            data=footer_data,
+        ),
     )
