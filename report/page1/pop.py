@@ -48,6 +48,7 @@ def Pop(data):
                 text=data['active'],
                 color=Color.DARK_GREEN,
                 font='RobotoCondensed 5',
+                auto_scale=True,
             ),
             Text(
                 width='50%',
@@ -60,6 +61,7 @@ def Pop(data):
                 text=data['passive'],
                 color=Color.DARK_ORANGE,
                 font='RobotoCondensed 5',
+                auto_scale=True,
             ),
         )
     )

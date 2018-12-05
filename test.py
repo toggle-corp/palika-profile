@@ -145,10 +145,10 @@ data = {
 
     # Status of technical staff
     'technical_staff': [
-        {'label': 'engineers', 'available': '-', 'additional': '-'},
-        {'label': 'sub_engineers', 'available': '-', 'additional': '-'},
-        {'label': 'asst_sub_engineers', 'available': '-', 'additional': '-'},
-        {'label': 'masons', 'available': '-', 'additional': '-'},
+        {'label': 'Sngineers', 'available': '-', 'additional': '-'},
+        {'label': 'Sub Engineers', 'available': '-', 'additional': '-'},
+        {'label': 'Asst Sub Engineers', 'available': '-', 'additional': '-'},
+        {'label': 'Masons', 'available': '-', 'additional': '-'},
     ],
 
     # Trainings
@@ -171,6 +171,20 @@ data = {
         {
             'q': 'Why do some households need to return the first tranche of 50,000 NPRs? If I need to return the tranche, how do I do it?', # noqa
             'a': 'On 6 September 2018, the NRA Steering Committee decided that earthquake affected households who received the housing reconstruction grant multiple times, from multiple sources, who have another house that was not damaged in the earthquake, or households that received the housing reconstruction grant by providing fake details must return the grant amount by 30 December 2018. Those who wish to return the grant amount can contact the relevant GMALI DLPIU Office or may contact NRA’s free phone helpline: 16660-01-72000 (NTC) 9801572111 (Ncell)'  # noqa
+        },
+    ],
+
+    # Futher Info:
+    'further_info': [
+        {
+            'name': 'Reshma Shrestha',
+            'title': 'Dist. Coordinator',
+            'phone': '9841264190',
+        },
+        {
+            'name': 'Ishwor Neupane',
+            'title': 'Dist. IM Officer',
+            'phone': '9841264190',
         },
     ],
 }

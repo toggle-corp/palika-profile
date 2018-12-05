@@ -8,6 +8,14 @@ from drafter.shapes import Shape, String, Pie
 from report.common.color import Color
 
 
+def TrainingsFooter(**kwargs):
+    return Text(
+        **kwargs,
+        text='Source: HRRP Analysis',
+        font='RobotoCondensed light 5',
+    )
+
+
 def Label(label, color):
     return Row(
         margin=Rect([0, 10, 0, 10]),
