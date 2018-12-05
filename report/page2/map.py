@@ -1,17 +1,8 @@
 from drafter.utils import Rect, Border
 from drafter.layouts import Row, Column
-from drafter.nodes import Text, Image
+from drafter.nodes import Text, Image, Canvas
 
 from report.common.color import Color
-
-
-def LegendImage():
-    return None
-    # return Image(filename="")
-
-
-def MapImage():
-    return None
 
 
 def Map(data):
@@ -29,15 +20,22 @@ def Map(data):
     ).add(
         Column(
             width='100%',
-            height=330,
+            height=380,
             border=Border(
                 width=0.5,
                 color=Color.BLACK,
             )
         ).add(
-            LegendImage(),
-            MapImage(),
-        ),
+        # Image(
+        #     filename=data['legend_uri'],
+        #     width='100%',
+        #     height='5%',
+        # )).add(
+        Image(
+            filename=data['map_uri'],
+            width='100%',
+            height='100%',
+        )),
         Text(
             width='100%',
             text=map_footer,

@@ -23,7 +23,7 @@ def Header():
             ),
             Text(
                 text='Palika Profile',
-                font='RobotoCondensed Bold 18',
+                font='Roboto Condensed 18',
                 color=Color.PRIMARY,
                 height='100%',
                 vertical_alignment=Text.BOTTOM,

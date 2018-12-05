@@ -3,6 +3,7 @@ from drafter.layouts import Row, Column
 from drafter.nodes import Text, Hr
 
 from report.common.color import Color
+from report.common.utils import fmt_thou
 
 
 def TwoValueLineChart(data, color):
@@ -21,27 +22,29 @@ def TwoValueLineChart(data, color):
         Text(
             width='40%',
             text=data['label'],
-            font='RobotoCondensed 7.5',
+            font='RobotoCondensed Bold 7.5',
         ),
         Row(width='60%', height='70%').add(
             Text(
-                text='{}'.format(v1),
-                font='Roboto bold 5',
+                text=fmt_thou(v1),
+                font='Roboto bold 7',
                 width='{}%'.format(v1p),
                 height='100%',
                 bg_color=color,
                 vertical_alignment=Text.MIDDLE,
                 padding=Rect([0, 4, 0, 4]),
+                color=Color.WHITE,
             ),
             Text(
-                text='{}'.format(v2 if v2 else ''),
-                font='Roboto bold 5',
+                text=fmt_thou(v2) if v2 else '',
+                font='Roboto bold 7',
                 width='{}%'.format(v2p),
                 height='100%',
                 bg_color=Color.GRAY,
                 vertical_alignment=Text.MIDDLE,
                 alignment=Text.RIGHT,
                 padding=Rect([0, 4, 0, 4]),
+                color=Color.WHITE,
             ),
         )
     )
@@ -91,13 +94,13 @@ def Houses(data):
         ).add(
             Text(
                 markup='<b>Under Construction</b>: {}'.format(
-                    data['under_construction']
+                    fmt_thou(data['under_construction'])
                 ),
                 font='RobotoCondensed 7.5',
             ),
             Text(
                 markup='<b>Completed</b>: {}'.format(
-                    data['completed']
+                    fmt_thou(data['completed'])
                 ),
                 font='RobotoCondensed 7.5',
             )
@@ -144,11 +147,11 @@ def Grievances(data):
             margin=Rect([0, 0, 4, 0]),
         ),
         Text(
-            markup='<b>Registered:</b> {}'.format(data['registered']),
+            markup='<b>Registered:</b> {}'.format(fmt_thou(data['registered'])),
             font='RobotoCondensed 7.5',
         ),
         Text(
-            markup='<b>Addressed:</b> {}'.format(data['addressed']),
+            markup='<b>Addressed:</b> {}'.format(fmt_thou(data['addressed'])),
             font='RobotoCondensed 7.5',
         ),
     )
@@ -163,11 +166,11 @@ def NonCompliance(data):
             margin=Rect([0, 0, 4, 0]),
         ),
         Text(
-            markup='<b>Registered:</b> {}'.format(data['registered']),
+            markup='<b>Registered:</b> {}'.format(fmt_thou(data['registered'])),
             font='RobotoCondensed 7.5',
         ),
         Text(
-            markup='<b>Addressed:</b> {}'.format(data['addressed']),
+            markup='<b>Addressed:</b> {}'.format(fmt_thou(data['addressed'])),
             font='RobotoCondensed 7.5',
         ),
     )

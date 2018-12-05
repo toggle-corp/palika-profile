@@ -2,7 +2,7 @@ from drafter.utils import Rect, Border
 from drafter.layouts import Row, Column
 from drafter.nodes import Text, Image
 from report.common.color import Color
-
+from report.common.utils import fmt_thou
 
 materials = [
     {'label': 'Stone', 'key': 'stone', 'icon': 'stone.png'},
@@ -11,12 +11,10 @@ materials = [
     {'label': 'Timber', 'key': 'timber', 'icon': 'timber.png'},
     {'label': 'Cement (PPC)', 'key': 'cement_ppc', 'icon': 'cement.png'},
     {'label': 'Cement (OPC)', 'key': 'cement_opc', 'icon': 'cement.png'},
-    {'label': 'Rebars', 'key': 'rebars', 'icon': 'rebar.png'},
+    {'label': 'Rebars', 'key': 'rebar', 'icon': 'rebar.png'},
     {'label': 'Tin', 'key': 'tin', 'icon': 'tin.png'},
     {'label': 'Bricks', 'key': 'bricks', 'icon': 'bricks.png'},
 ]
-
-
 def xstr(item):
     if item == 'mq':
         return 'm<span rise="2000" size="x-small">3</span>'
@@ -81,7 +79,7 @@ def TR(widths, items):
     )
 
 
-def BottomBox():
+def BottomBox(data):
     return Row(
         width='100%',
         margin=Rect([8, 0, 6, 0]),
@@ -91,19 +89,21 @@ def BottomBox():
         ),
         padding=Rect([1, 8, 4, 8]),
     ).add(
+        #title
         Column(width='50%').add(
             Text(
                 text='Types of workers',
                 font='RobotoCondensed bold 6',
             ),
             Text(
-                text='1. Skilled mason',
+                text='1. %s' % data['types_of_workers_1'],
                 font='RobotoCondensed 6',
+                padding=Rect([2, 0, 0, 0])
             ),
             Text(
-                text='2. Skilled mason',
+                text='2. %s' % data['types_of_workers_2'],
                 font='RobotoCondensed 6',
-            )
+            ),
         ),
         Column(width='50%').add(
             Text(
@@ -113,34 +113,35 @@ def BottomBox():
                 font='RobotoCondensed bold 6',
             ),
             Text(
-                text='1200/-',
-                width='100%',
-                alignment=Text.CENTER,
+                text='%s %s' % (fmt_thou(data['avg_wage_1']), '\-'),
+                width='65%',
+                alignment=Text.RIGHT,
                 font='RobotoCondensed 6',
+                padding=Rect([2, 0, 0, 0]),
             ),
             Text(
-                text='950/-',
-                width='100%',
-                alignment=Text.CENTER,
+                text='%s %s' % (fmt_thou(data['avg_wage_2']), '\-'),
+                width='65%',
+                alignment=Text.RIGHT,
                 font='RobotoCondensed 6',
             )
         ),
     )
 
 
-def CMTable(data):
+def CMTable(top_data, bot_data):
     rows = []
     for material in materials:
         key = material['key']
-        datum = data[key]
+        datum = top_data[key]
         label = material['label']
 
         rows.append([
             {'text': label, 'icon': material.get('icon')},
             {'text': datum['unit']},
-            {'text': datum['req_quantity']},
+            {'text': fmt_thou(datum['req_quantity'])},
             {'text': datum['ava']},
-            {'text': datum['cost']},
+            {'text': fmt_thou(datum['cost'])},
         ])
 
     headers = ['<b>{}</b>'.format(k) for k in [
@@ -154,5 +155,5 @@ def CMTable(data):
             TR(widths=widths, items=row)
             for row in rows
         ],
-        BottomBox(),
+        BottomBox(bot_data),
     )

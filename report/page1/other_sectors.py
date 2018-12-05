@@ -3,7 +3,7 @@ from drafter.layouts import Row, Column
 from drafter.nodes import Text, Canvas
 from drafter.shapes import Circle, Image, Shape
 from report.common.color import Color
-
+from report.common.utils import fmt_thou
 
 class IconRenderer(Shape):
     def render(self, ctx):
@@ -66,16 +66,16 @@ def OtherSectors(data):
         Sector(
             label='Schools',
             items={
-                'Damaged': schools['damaged'],
-                'Under-construction': schools['under_construction'],
+                'Damaged': fmt_thou(schools['damaged']),
+                'Under-construction': fmt_thou(schools['under_construction']),
             },
             icon='resources/images/school.png',
         ),
         Sector(
             label='Health Posts',
             items={
-                'Damaged': health_posts['damaged'],
-                'Under-construction': health_posts['under_construction'],
+                'Damaged': fmt_thou(health_posts['damaged']),
+                'Under-construction': fmt_thou(health_posts['under_construction']),
             },
             icon='resources/images/hospital.png',
         ),

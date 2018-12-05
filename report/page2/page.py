@@ -18,7 +18,7 @@ def Page(data):
             Panel(
                 title='Status of Technical Staff'.upper(),
                 width='50% - 10',
-            ).add(TechnicalStaff(data['technical_staff'])),
+            ).add(TechnicalStaff(data['technical_staff'], data['technical_staff_masons'])),
             Panel(
                 title='Trainings'.upper(),
                 height='100% - 20',

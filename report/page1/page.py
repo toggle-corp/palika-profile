@@ -49,7 +49,7 @@ def Page(data):
             Panel(
                 title='Status of construction materials'.upper(),
                 width='50%',
-            ).add(CMTable(data['construction_materials'])),
+            ).add(CMTable(data['construction_materials'], data['work_wage'])),
         ),
         Panel(
             title='Key Contacts'.upper(),

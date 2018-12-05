@@ -6,7 +6,7 @@ from drafter.nodes import Text, Canvas
 from drafter.shapes import Shape, String, Pie
 
 from report.common.color import Color
-
+from report.common.utils import fmt_thou
 
 def Label(label, color):
     return Row(
@@ -66,7 +66,7 @@ class PieChart(Shape):
 
             String(
                 pos=pie.calc_center(),
-                text='{}'.format(value),
+                text=fmt_thou(value),
                 font='RobotoCondensed 5',
             ).repos_to_center(ctx).render(ctx)
 

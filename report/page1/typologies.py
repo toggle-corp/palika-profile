@@ -54,7 +54,7 @@ def Typologies(data):
                             if i == 0
                             else Text.CENTER
                         ),
-                        padding=Rect([2, 0, 2, 0]),
+                        padding=Rect([4, 0, 4, 0]),
                     )
                     for i, item in enumerate(row)
                 ]

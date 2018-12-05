@@ -8,6 +8,7 @@ from drafter.shapes import (
     Rectangle,
     String,
 )
+from report.common.utils import fmt_thou
 
 from report.common.color import Color
 
@@ -69,7 +70,7 @@ class Bagel(Shape):
 
             String(
                 pos=[x + 14, y - 10],
-                markup='<small>{}</small>\n<b>{}</b>'.format(label, value),
+                markup='<small>{}</small>\n<b>{}</b>'.format(label, fmt_thou(value)),
                 font='RobotoCondensed 8',
             ).render(ctx)
 
@@ -77,7 +78,7 @@ class Bagel(Shape):
 
         String(
             pos=center,
-            markup='<small>Total</small>\n{}'.format(total_val),
+            markup='<small>Total</small>\n{}'.format(fmt_thou(total_val)),
             font='RobotoCondensed bold 9',
             alignment=String.CENTER,
         ).repos_to_center(ctx).render(ctx)
