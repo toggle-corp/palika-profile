@@ -11,7 +11,7 @@ def TechnicalStaffFooter(**kwargs):
         font='RobotoCondensed light 5',
     )
 
-def TechnicalStaff(data):
+def TechnicalStaff(tech_data, mason_data):
     widths = ['35%', '30%', '35%']
     headers = ['Staff', 'Available Nos.', 'Additional Req. Nos.']
 
