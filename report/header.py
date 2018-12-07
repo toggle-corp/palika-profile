@@ -5,7 +5,7 @@ from drafter.nodes import Text, Image, Hr, Vr
 from report.common.color import Color
 
 
-def Header():
+def Header(data):
     return Column(
         width='100%',
         margin=Rect([0, 5, 8, 5]),
@@ -37,7 +37,7 @@ def Header():
             ),
             Column(height='100%', justify='end').add(
                 Text(
-                    text='November 2018',
+                    text='{} {}'.format(data['rep_data']['month'], data['rep_data']['year']),
                     font='Roboto Light 8',
                     color=Color.PRIMARY
                 ),
