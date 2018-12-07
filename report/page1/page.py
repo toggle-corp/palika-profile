@@ -72,10 +72,10 @@ def Page(data):
         Panel(
             title='Key Contacts'.upper(),
             width='100%',
-            left_footer=LeftFootNotes,
-            right_footer=RightFootNotes,
+            # left_footer=LeftFootNotes,
+            # right_footer=RightFootNotes,
         ).add(
             KeyContacts(data['key_contacts']),
         ),
-        Sidebar(bottom=0, left=-12),
+        # Sidebar(bottom=0, left=-12),
     )

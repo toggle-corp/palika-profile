@@ -8,14 +8,31 @@ import pandas as pd
 error = []
 
 class report(object):
-    def __init__(self, gc, sht):
-        self.sht = sht
+    def __init__(self, gc, data_sht, meta_sht, faq_sht):
+        self.data_sht = data_sht
+        self.meta_sht = meta_sht
+        self.faq_sht = faq_sht
+
         self.gc = gc
 
+    def _get_faq(self, faq_num):
+        """get FAQ values. if no FAQ specified or invalid, go to default"""
+        #TODO: collect error here for when invalid or not in list
+        if faq_num not in self.faq_sht.index:
+            faq_num = self.meta_sht.loc['Default FAQ']['value']
+
+        return {'q': self.faq_sht.loc[faq_num]['question'], 'a': self.faq_sht.loc[faq_num]['answer']}
+
     def create_data(self):
-        cp = self.sht.loc[self.gc]
+        cp = self.data_sht.loc[self.gc]
 
         self.data =  {
+            #Date
+            'rep_data': {
+                'month': self.meta_sht.loc['Report Month']['value'],
+                'year' : self.meta_sht.loc['Report Year']['value'],
+            },
+
             # Facts and figures
             #title
             'facts_and_figures': {
@@ -167,8 +184,8 @@ class report(object):
             # FAQ
             'faq': [
                 {
-                    'q': 'Why do some households need to return the first tranche of 50,000 NPRs? If I need to return the tranche, how do I do it?', # noqa
-                    'a': 'On 6 September 2018, the NRA Steering Committee decided that earthquake affected households who received the housing reconstruction grant multiple times, from multiple sources, who have another house that was not damaged in the earthquake, or households that received the housing reconstruction grant by providing fake details must return the grant amount by 30 December 2018. Those who wish to return the grant amount can contact the relevant GMALI DLPIU Office or may contact NRA’s free phone helpline: 16660-01-72000 (NTC) 9801572111 (Ncell)'  # noqa
+                    'q': self._get_faq(cp['faq_number'])['q'],
+                    'a': self._get_faq(cp['faq_number'])['a']
                 },
             ],
 
@@ -187,20 +204,37 @@ class report(object):
             ],
         }
 
-def generate():
-    w = pd.read_excel(
-        './resources/data/profile_data_structure_template.xlsx',
-        sheet_name='Profile Data', index_col=0, header=0)
-
-    sht = w.drop(w.index[0:2])
+def _clean_headers(sht, num_cols):
+    """strip #s from headers, remove unnecessary header cols"""
     sht = sht.rename(columns=lambda x: x.strip('#'))
+    sht = sht.drop(sht.index[0:num_cols])
+    return sht
 
-    for v in sht.index.values:
+def generate():
+    XLS_URI = './resources/data/profile_data_structure_template.xlsx'
+
+    data = pd.read_excel(
+            XLS_URI,
+            sheet_name='Profile Data', index_col=0, header=0)
+
+    meta = pd.read_excel(
+            XLS_URI,
+            sheet_name='Meta', index_col=0, header=0)
+
+    faq = pd.read_excel(
+            XLS_URI,
+            sheet_name='FAQs', index_col=0, header=0)
+
+    data = _clean_headers(data, 2)
+    meta = _clean_headers(meta, 1)
+    faq = _clean_headers(faq, 1)
+
+    for v in data.index.values:
         print('running for %s' %v)
-        cur_rep = report(v, sht)
+        cur_rep = report(gc = v, data_sht = data, meta_sht = meta, faq_sht = faq)
         cur_rep.create_data()
 
-        PdfDraft('%s.pdf' %v)\
+        PdfDraft('./output/%s.pdf' %v)\
             .draw(Page1(cur_rep.data))\
             .draw(Page2(cur_rep.data))
 

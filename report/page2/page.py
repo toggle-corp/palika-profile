@@ -48,13 +48,13 @@ def Page(data):
             Panel(
                 title='Status of Technical Staff'.upper(),
                 width='50% - 10',
-                right_footer=TechnicalStaffFooter,
+                # right_footer=TechnicalStaffFooter,
             ).add(TechnicalStaff(data['technical_staff'], data['technical_staff_masons'])),
             Panel(
                 title='Trainings'.upper(),
                 height='100% - 20',
                 width='50% - 10',
-                right_footer=TrainingsFooter,
+                # right_footer=TrainingsFooter,
             ).add(Trainings(data['trainings'])),
         ),
         Panel(
@@ -64,8 +64,8 @@ def Page(data):
         Panel(
             title='FAQ',
             width='100% - 10',
-            left_footer=FurtherInfoNotes,
-            footer_data=data['further_info'],
+            # left_footer=FurtherInfoNotes,
+            # footer_data=data['further_info'],
         ).add(Footer(data['faq'])),
-        Sidebar(bottom=0, right=-12),
+        # Sidebar(bottom=0, right=-12),
     )
