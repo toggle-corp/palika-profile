@@ -1,6 +1,7 @@
 from drafter.draft import PdfDraft
 from report import Page1, Page2
-from report.common.utils import fmt_pct
+from report.common.utils import fmt_pct, clean_xls_headers, process_sht
+from report.common.boiler import import_titles
 
 import pandas as pd
 
@@ -31,14 +32,16 @@ class report(object):
             'rep_data': {
                 'month': self.meta_sht.loc['Report Month']['value'],
                 'year' : self.meta_sht.loc['Report Year']['value'],
+                'dist_nm': cp['district_name'],
+                'palika_nm': cp['palika_name'],
             },
 
             # Facts and figures
             #title
             'facts_and_figures': {
                 'data': [
-                    {'label' : 'Damage Grade (1-2)', 'value' : cp['damage_grade_1-2_cnt']},
-                    {'label' : 'Damage Grade (3-5)', 'value' : cp['damage_grade_3-5_cnt']},
+                    {'d1' : cp['damage_grade_1-2_cnt']},
+                    {'d2' : cp['damage_grade_3-5_cnt']},
                 ],
             },
 
@@ -204,15 +207,10 @@ class report(object):
             ],
         }
 
-def _clean_headers(sht, num_cols):
-    """strip #s from headers, remove unnecessary header cols"""
-    sht = sht.rename(columns=lambda x: x.strip('#'))
-    sht = sht.drop(sht.index[0:num_cols])
-    return sht
-
 def generate():
     XLS_URI = './resources/data/profile_data_structure_template.xlsx'
 
+    #TODO: test sheets OK?
     data = pd.read_excel(
             XLS_URI,
             sheet_name='Profile Data', index_col=0, header=0)
@@ -225,9 +223,20 @@ def generate():
             XLS_URI,
             sheet_name='FAQs', index_col=0, header=0)
 
-    data = _clean_headers(data, 2)
-    meta = _clean_headers(meta, 1)
-    faq = _clean_headers(faq, 1)
+    titles = pd.read_excel(
+            XLS_URI,
+            sheet_name='Titles', index_col=0, header=0)
+
+    #TODO: process the rest 2
+    titles = process_sht(titles)
+    titles.rename(lambda x: x.strip('#'), axis='rows', inplace = True)
+    titles = clean_xls_headers(titles, 1)
+    import_titles(titles)
+
+    data = clean_xls_headers(data, 2)
+    meta = clean_xls_headers(meta, 1)
+    faq = clean_xls_headers(faq, 1)
+
 
     for v in data.index.values[0:1]:
         print('running for %s' %v)

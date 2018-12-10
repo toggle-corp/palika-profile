@@ -4,6 +4,7 @@ from drafter.nodes import Text, Image, Hr, Vr
 from drafter.nodes.text import Pango
 
 from report.common.color import Color
+from report.common.boiler import boil
 
 
 def Header(data):
@@ -23,7 +24,7 @@ def Header(data):
                 left=0,
             ),
             Text(
-                text='Palika Profile',
+                text=boil('header_title'),
                 font_family='Roboto Condensed',
                 font_size=24,
                 font_weight=Pango.Weight.BOLD,
@@ -45,7 +46,7 @@ def Header(data):
                     color=Color.PRIMARY
                 ),
                 Text(
-                    text='Kavrepalanchok | Banepa Municipality',
+                    text = '{} | {} {}'.format(data['rep_data']['dist_nm'], data['rep_data']['palika_nm'], boil('header_municipality')),
                     font='Roboto Light 18',
                     color=Color.PRIMARY
                 )

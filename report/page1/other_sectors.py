@@ -2,8 +2,10 @@ from drafter.utils import Rect
 from drafter.layouts import Row, Column
 from drafter.nodes import Text, Canvas
 from drafter.shapes import Circle, Image, Shape
+
 from report.common.color import Color
 from report.common.utils import fmt_thou
+from report.common.boiler import boil
 
 class IconRenderer(Shape):
     def render(self, ctx):

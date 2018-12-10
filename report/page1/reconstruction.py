@@ -4,7 +4,7 @@ from drafter.nodes import Text, Hr
 
 from report.common.color import Color
 from report.common.utils import fmt_thou
-
+from report.common.boiler import boil
 
 def TwoValueLineChart(data, color):
     v1 = data['value1']

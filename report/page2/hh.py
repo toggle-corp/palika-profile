@@ -7,6 +7,7 @@ from drafter.color import hx
 
 from report.common.color import Color
 from report.common.utils import fmt_thou
+from report.common.boiler import boil
 
 def Label(label, color):
     return Row(

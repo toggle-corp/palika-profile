@@ -9,9 +9,10 @@ from drafter.shapes import (
     String,
     Pango,
 )
-from report.common.utils import fmt_thou
 
+from report.common.utils import fmt_thou
 from report.common.color import Color
+from report.common.boiler import boil
 
 
 class Bagel(Shape):
@@ -27,7 +28,7 @@ class Bagel(Shape):
             })
             alpha_value *= 2
 
-        total_val = sum([item['value'] for item in grades])
+        total_val = sum([item for item in grades])
         last_angle = None
 
         w = self.w / 2 - 32

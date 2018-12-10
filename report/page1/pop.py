@@ -1,6 +1,8 @@
 from drafter.utils import Rect, Border
 from drafter.layouts import Node, Row, Column
 from drafter.nodes import Text
+
+from report.common.boiler import boil
 from report.common.color import Color
 
 

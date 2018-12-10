@@ -1,8 +1,9 @@
 from drafter.utils import Rect
 from drafter.layouts import Row, Column
 from drafter.nodes import Text, Hr
-from report.common.color import Color
 
+from report.common.color import Color
+from report.common.boiler import boil
 
 def Item(index, **kwargs):
     if index == 0:

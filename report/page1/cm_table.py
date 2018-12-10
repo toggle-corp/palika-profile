@@ -1,8 +1,11 @@
 from drafter.utils import Rect, Border
 from drafter.layouts import Row, Column
 from drafter.nodes import Text, Image
+
 from report.common.color import Color
 from report.common.utils import fmt_thou
+from report.common.boiler import boil
+
 
 materials = [
     {'label': 'Stone', 'key': 'stone', 'icon': 'stone.png'},

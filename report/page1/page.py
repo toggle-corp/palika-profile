@@ -1,7 +1,9 @@
 from drafter.layouts import Row, Column
 from drafter.nodes import Text
+
 from report.common.panel import Panel
 from report.common.sidebar import Sidebar
+from report.common.boiler import boil
 from .ff import FF
 from .reconstruction import ReconstructionAndRetrofit
 from .cm_table import CMTable
@@ -11,10 +13,11 @@ from .other_sectors import OtherSectors
 from .key_contacts import KeyContacts
 
 
+
 def LeftFootNotes(**kwargs):
     return Text(
         **kwargs,
-        text='Sources: 1. CENSUS 2011 2. NRA CBS 3. NRA 5W (25/10/2018) 4. NRA/MoFALD/MoUD (01/10/2018)',  # noqa
+        text=boil('page_1_sources_footer'),
         font='RobotoCondensed 5',
     )
 
@@ -22,7 +25,7 @@ def LeftFootNotes(**kwargs):
 def RightFootNotes(**kwargs):
     return Text(
         **kwargs,
-        text='*Note: ‘-’ indicates information not available',
+        text=boil('page_1_no_info_footer'),
         font='RobotoCondensed 5',
     )
 
@@ -31,19 +34,19 @@ def Page(data):
     return Column(width='100%', relative=True).add(
         Row(width='100%').add(
             Panel(
-                title='Facts and Figures'.upper(),
+                title=boil('facts_and_figures_panel_title'),
                 height=148,
                 width='50% - 5',
             ).add(FF(data['facts_and_figures'])),
             Panel(
-                title='Major Housing Typologies'.upper(),
+                title=boil('typologies_panel_title'),
                 height=148,
                 width='50% - 5',
             ).add(Typologies(data['housing_typologies'])),
         ),
         Row(width='100%').add(
             Panel(
-                title='Housing Reconstruction & Retrofit Updates'.upper(),
+                title=boil('recon_&_retrofit_panel_title'),
                 width='100%',
             ).add(
                 ReconstructionAndRetrofit(
@@ -59,7 +62,7 @@ def Page(data):
                     width='100% - 10',
                 ).add(Pop(data['pos_presence'])),
                 Panel(
-                    title='OTHER SECTORS',
+                    title=boil('other_sectors_panel_title'),
                     height='55% - 20',
                     width='100% - 10',
                 ).add(OtherSectors(data['other_sectors'])),
