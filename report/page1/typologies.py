@@ -4,6 +4,23 @@ from drafter.nodes import Text, Hr
 from report.common.color import Color
 
 
+def Item(index, **kwargs):
+    if index == 0:
+        return Text(
+            font_family="Roboto Condensed",
+            font_size=8,
+            font_weight=Text.BOLD,
+            alignment=Text.LEFT,
+            **kwargs,
+        )
+
+    return Text(
+        font="Roboto light 8",
+        alignment=Text.CENTER,
+        **kwargs,
+    )
+
+
 def Typologies(data):
     widths = ['60%', '20%', '20%']
     headers = data['headers']
@@ -18,7 +35,9 @@ def Typologies(data):
                 Text(
                     width=widths[i],
                     text=header,
-                    font='RobotoCondensed bold 8',
+                    font_family="Roboto Condensed",
+                    font_size=8,
+                    font_weight=Text.BOLD,
                     color=Color.ACCENT,
                     alignment=(
                         Text.LEFT
@@ -41,19 +60,10 @@ def Typologies(data):
         *[
             Row(width='100%').add(
                 *[
-                    Text(
+                    Item(
                         width=widths[i],
                         text=item,
-                        font=(
-                            'RobotoCondensed bold 6'
-                            if i == 0
-                            else 'Roboto light 6'
-                        ),
-                        alignment=(
-                            Text.LEFT
-                            if i == 0
-                            else Text.CENTER
-                        ),
+                        index=i,
                         padding=Rect([4, 0, 4, 0]),
                     )
                     for i, item in enumerate(row)

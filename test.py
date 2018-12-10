@@ -229,7 +229,7 @@ def generate():
     meta = _clean_headers(meta, 1)
     faq = _clean_headers(faq, 1)
 
-    for v in data.index.values:
+    for v in data.index.values[0:1]:
         print('running for %s' %v)
         cur_rep = report(gc = v, data_sht = data, meta_sht = meta, faq_sht = faq)
         cur_rep.create_data()

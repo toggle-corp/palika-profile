@@ -7,6 +7,7 @@ from drafter.shapes import (
     Arc,
     Rectangle,
     String,
+    Pango,
 )
 from report.common.utils import fmt_thou
 
@@ -35,7 +36,6 @@ class Bagel(Shape):
         radius = min(w, h) / 2
 
         for item in grades:
-            label = item['label']
             value = item['value']
             color = item['color']
 
@@ -69,9 +69,10 @@ class Bagel(Shape):
             ).render(ctx)
 
             String(
-                pos=[x + 14, y - 10],
+                pos=[x + 14, y - 5],
                 markup='<small>{}</small>\n<b>{}</b>'.format(label, fmt_thou(value)),
-                font='RobotoCondensed 8',
+                font_family='Roboto Condensed',
+                font_size=8,
             ).render(ctx)
 
             y += 32
@@ -79,14 +80,18 @@ class Bagel(Shape):
         String(
             pos=center,
             markup='<small>Total</small>\n{}'.format(fmt_thou(total_val)),
-            font='RobotoCondensed bold 9',
+            font_family='Roboto Condensed',
+            font_size=9,
+            font_weight = Pango.Weight.BOLD,
             alignment=String.CENTER,
         ).repos_to_center(ctx).render(ctx)
 
         String(
             pos=[self.w / 2, self.h - 16],
             text='Damage Status - Private Structures',
-            font='RobotoCondensed bold 9',
+            font_family='Roboto Condensed',
+            font_size=9,
+            font_weight = Pango.Weight.BOLD,
             color=Color.ACCENT,
         ).repos_to_center(ctx).render(ctx)
 

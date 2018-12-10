@@ -143,16 +143,20 @@ def Grievances(data):
         Text(
             text='Grievances',
             color=Color.ACCENT,
-            font='RobotoCondensed bold 9',
+            font_family="Roboto Condensed",
+            font_size=9,
+            font_weight=Text.BOLD,
             margin=Rect([0, 0, 4, 0]),
         ),
         Text(
             markup='<b>Registered:</b> {}'.format(fmt_thou(data['registered'])),
-            font='RobotoCondensed 7.5',
+            font_family="Roboto Condensed",
+            font_size=7.5,
         ),
         Text(
             markup='<b>Addressed:</b> {}'.format(fmt_thou(data['addressed'])),
-            font='RobotoCondensed 7.5',
+            font_family="Roboto Condensed",
+            font_size=7.5,
         ),
     )
 
@@ -162,16 +166,20 @@ def NonCompliance(data):
         Text(
             text='Non-compliances',
             color=Color.ACCENT,
-            font='RobotoCondensed bold 9',
+            font_family="Roboto Condensed",
+            font_size=9,
+            font_weight=Text.BOLD,
             margin=Rect([0, 0, 4, 0]),
         ),
         Text(
             markup='<b>Registered:</b> {}'.format(fmt_thou(data['registered'])),
-            font='RobotoCondensed 7.5',
+            font_family="Roboto Condensed",
+            font_size=7.5,
         ),
         Text(
             markup='<b>Addressed:</b> {}'.format(fmt_thou(data['addressed'])),
-            font='RobotoCondensed 7.5',
+            font_family="Roboto Condensed",
+            font_size=7.5,
         ),
     )
 
