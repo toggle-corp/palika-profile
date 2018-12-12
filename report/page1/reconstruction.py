@@ -21,13 +21,15 @@ def TwoValueLineChart(data, color):
     ).add(
         Text(
             width='40%',
-            text=data['label'],
-            font='RobotoCondensed Bold 7.5',
+            text=boil(data['label']),
+            font_family="Roboto Condensed",
+            font_size=9,
+            font_weight=Text.BOLD,
         ),
         Row(width='60%', height='70%').add(
             Text(
                 text=fmt_thou(v1),
-                font='Roboto bold 7',
+                font='Roboto bold 8',
                 width='{}%'.format(v1p),
                 height='100%',
                 bg_color=color,
@@ -37,7 +39,7 @@ def TwoValueLineChart(data, color):
             ),
             Text(
                 text=fmt_thou(v2) if v2 else '',
-                font='Roboto bold 7',
+                font='Roboto bold 8',
                 width='{}%'.format(v2p),
                 height='100%',
                 bg_color=Color.GRAY,
@@ -52,14 +54,17 @@ def TwoValueLineChart(data, color):
 
 def ReconstructionStatus(data):
     rows = [
+        #pass up label, v1, v2
         TwoValueLineChart(datum, color=Color.ACCENT)
         for datum in data
     ]
 
     return Column(width='100%').add(
         Text(
-            text='Reconstruction Status',
-            font='RobotoCondensed bold 9',
+            text=boil('recon_&_retrofit_reconstruction_status_title'),
+            font_family="Roboto Condensed",
+            font_size=9,
+            font_weight=Text.BOLD,
             color=Color.ACCENT,
         ),
         Hr(
@@ -73,7 +78,7 @@ def ReconstructionStatus(data):
         Hr(
             width='100%',
             height=1,
-            margin=Rect([3, 0, 3, 0]),
+            margin=Rect([3, 0, 1, 0]),
             dash=[3],
             color=Color.PRIMARY,
         ),
@@ -83,9 +88,12 @@ def ReconstructionStatus(data):
 def Houses(data):
     return Column(width='100%').add(
         Text(
-            text='Houses',
-            font='RobotoCondensed bold 9',
+            text=boil('recon_&_retrofit_houses_title'),
+            font_family="Roboto Condensed",
+            font_size=9,
+            font_weight=Text.BOLD,
             color=Color.ACCENT,
+            margin=Rect([0, 0, 2, 0])
         ),
         Row(
             width='100%',
@@ -93,16 +101,18 @@ def Houses(data):
             margin=Rect([0, 0, 3, 0]),
         ).add(
             Text(
-                markup='<b>Under Construction</b>: {}'.format(
+                markup='<b>{}</b>: {}'.format(boil('recon_&_retrofit_under_construction'),
                     fmt_thou(data['under_construction'])
                 ),
-                font='RobotoCondensed 7.5',
+                font_family="Roboto Condensed",
+                font_size=7.5,
             ),
             Text(
-                markup='<b>Completed</b>: {}'.format(
+                markup='<b>{}</b>: {}'.format(boil('recon_&_retrofit_completed'),
                     fmt_thou(data['completed'])
                 ),
-                font='RobotoCondensed 7.5',
+                font_family="Roboto Condensed",
+                font_size=7.5,
             )
         ),
     )
@@ -116,8 +126,10 @@ def RetrofitStatus(data):
 
     return Column(width='100%').add(
         Text(
-            text='Retrofitting Status',
-            font='RobotoCondensed bold 9',
+            text=boil('recon_&_retrofit_retrofitting_status_title'),
+            font_family="Roboto Condensed",
+            font_size=9,
+            font_weight=Text.BOLD,
             color=Color.ACCENT,
         ),
         Hr(
@@ -141,20 +153,21 @@ def RetrofitStatus(data):
 def Grievances(data):
     return Column(width='50%').add(
         Text(
-            text='Grievances',
+            text=boil('recon_&_retrofit_grievances_title'),
             color=Color.ACCENT,
             font_family="Roboto Condensed",
             font_size=9,
             font_weight=Text.BOLD,
-            margin=Rect([0, 0, 4, 0]),
+            margin=Rect([3.2, 0, 5, 0]),
         ),
         Text(
-            markup='<b>Registered:</b> {}'.format(fmt_thou(data['registered'])),
+            markup='<b>{}:</b> {}'.format(boil('recon_&_retrofit_registered_(both)'), fmt_thou(data['registered'])),
             font_family="Roboto Condensed",
             font_size=7.5,
+            margin=Rect([0, 0, 3, 0])
         ),
         Text(
-            markup='<b>Addressed:</b> {}'.format(fmt_thou(data['addressed'])),
+            markup='<b>{}:</b> {}'.format(boil('recon_&_retrofit_addressed_(both)'),fmt_thou(data['addressed'])),
             font_family="Roboto Condensed",
             font_size=7.5,
         ),
@@ -164,20 +177,21 @@ def Grievances(data):
 def NonCompliance(data):
     return Column(width='50%').add(
         Text(
-            text='Non-compliances',
+            text=boil('recon_&_retrofit_non-compliances_title'),
             color=Color.ACCENT,
             font_family="Roboto Condensed",
             font_size=9,
             font_weight=Text.BOLD,
-            margin=Rect([0, 0, 4, 0]),
+            margin=Rect([3.2, 0, 5, 0]),
         ),
         Text(
-            markup='<b>Registered:</b> {}'.format(fmt_thou(data['registered'])),
+            markup='<b>{}:</b> {}'.format(boil('recon_&_retrofit_registered_(both)'), fmt_thou(data['registered'])),
             font_family="Roboto Condensed",
             font_size=7.5,
+            margin=Rect([0, 0, 3, 0])
         ),
         Text(
-            markup='<b>Addressed:</b> {}'.format(fmt_thou(data['addressed'])),
+            markup='<b>{}:</b> {}'.format(boil('recon_&_retrofit_addressed_(both)'), fmt_thou(data['addressed'])),
             font_family="Roboto Condensed",
             font_size=7.5,
         ),
@@ -186,11 +200,11 @@ def NonCompliance(data):
 
 def ReconstructionAndRetrofit(data):
     return Row(width='100%', padding=Rect(8)).add(
-        Column(width='50%', padding=Rect([0, 8, 0, 2])).add(
+        Column(width='50%', padding=Rect([3, 8, 0, 2])).add(
             ReconstructionStatus(data['reconstruction_status']),
             Houses(data['houses']),
         ),
-        Column(width='50%', padding=Rect([0, 2, 0, 8])).add(
+        Column(width='50%', padding=Rect([3, 2, 0, 8])).add(
             RetrofitStatus(data['retrofitting_status']),
             Row(width='100%').add(
                 Grievances(data['grievances']),

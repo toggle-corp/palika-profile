@@ -1,6 +1,6 @@
 from drafter.draft import PdfDraft
 from report import Page1, Page2
-from report.common.utils import fmt_pct, clean_xls_headers, process_sht
+from report.common.utils import clean_xls_headers, process_sht
 from report.common.boiler import import_titles
 
 import pandas as pd
@@ -39,40 +39,49 @@ class report(object):
             # Facts and figures
             #title
             'facts_and_figures': {
-                'data': [
-                    {'d1' : cp['damage_grade_1-2_cnt']},
-                    {'d2' : cp['damage_grade_3-5_cnt']},
-                ],
+                'd1' : cp['damage_grade_1-2_cnt'],
+                'd3' : cp['damage_grade_3-5_cnt']
             },
 
             # Major Housing Typologies
-            'housing_typologies': {
-                #title
-                'headers': ['Typology', 'Municipal', 'District'],
-                #title for types
-                'data': [[cp['type_%i_name' % i],
-                            fmt_pct(cp['type_%i_palika_pct' % i]),
-                            fmt_pct(cp['type_%i_district_pct' % i])]
-                         for i in range (1,7)]
-                ,
-            },
+            # very hacky work around with a lookup table as an iterator
+            'housing_typologies':
+                    [{
+                        'nm_look' : i[1],
+                        'muni_pct' : cp['%s_municipal_pct' % i[0]],
+                        'dist_pct' : cp['%s_district_pct' % i[0]]}
+                        for i in
+                            [('stone_and_cement' , 'typologies_stone_and_cement_mortar_masonry_row_title'),
+                            ('stone_and_mud' , 'typologies_stone_and_mud_mortar_masonry_row_title'),
+                            ('brick_and_cement' , 'typologies_brick_and_cement_mortar_masonry_row_title'),
+                            ('brick_and_mud' , 'typologies_brick_and_mud_mortar_masonry_row_title'),
+                            ('rcc_frame' , 'typologies_reinforced_cement_concrete_(rcc)_frame_row_title'),
+                            ('hybrid' , 'typologies_hybrid_structure_row_title'),
+                            ('timber_frame' , 'typologies_timber_frame_structure_row_title'),
+                            ('hollow_concrete' , 'typologies_hollow_concrete_block_masonry_row_title'),
+                            ('dry_stone' , 'typologies_dry_stone_masonry_row_title'),
+                            ('adobe' , 'typologies_adobe_structures_row_title'),
+                            ('bamboo' , 'typologies_bamboo_row_title'),
+                            ('sceb' , 'typologies_compressed_stabilized_earth_block_(sceb)_masonry_row_title'),
+                            ('light_steel' , 'typologies_light_steel_frame_structures_row_title')]
+                    ],
 
             # Housing Reconstruction & Retrofit Updates
             'reconstruction_retrofit_updates': {
                 'reconstruction_status': [
                     #title
-                    {'label': 'Total Eligible HHs', 'value1' : cp['total_eligible_hhs_(reconstruction)'], 'value2': 0},
+                    {'label': 'recon_&_retrofit_total_eligible_hhs_(both)', 'value1' : cp['total_eligible_hhs_(reconstruction)'], 'value2': 0},
 
-                    {'label': 'PA Agreement', 'value1' : cp['pa_agreement_cnt_(reconstruction)'],
+                    {'label': 'recon_&_retrofit_pa_agreement_(both)', 'value1' : cp['pa_agreement_cnt_(reconstruction)'],
                         'value2': cp['total_eligible_hhs_(reconstruction)'] - cp['pa_agreement_cnt_(reconstruction)']},
 
-                    {'label': 'PA Agreement', 'value1' : cp['1st_tranche_cnt_(reconstruction)'],
+                    {'label': 'recon_&_retrofit_ist_tranche_received_(both)', 'value1' : cp['1st_tranche_cnt_(reconstruction)'],
                         'value2': cp['total_eligible_hhs_(reconstruction)'] - cp['1st_tranche_cnt_(reconstruction)']},
 
-                    {'label': 'PA Agreement', 'value1' : cp['2nd_tranche_cnt_(reconstruction)'],
+                    {'label': 'recon_&_retrofit_iind_tranche_received_(both)', 'value1' : cp['2nd_tranche_cnt_(reconstruction)'],
                         'value2': cp['total_eligible_hhs_(reconstruction)'] - cp['2nd_tranche_cnt_(reconstruction)']},
 
-                    {'label': 'PA Agreement', 'value1' : cp['3rd_tranche_cnt_(reconstruction)'],
+                    {'label': 'recon_&_retrofit_iiird_tranche_received', 'value1' : cp['3rd_tranche_cnt_(reconstruction)'],
                         'value2': cp['total_eligible_hhs_(reconstruction)'] - cp['3rd_tranche_cnt_(reconstruction)']}
                 ],
 
@@ -82,15 +91,15 @@ class report(object):
                 },
 
                 'retrofitting_status': [
-                    {'label': 'Total Eligible HHs', 'value1': cp['total_eligible_hhs_(retrofit)'], 'value2': 0},
+                    {'label': 'recon_&_retrofit_total_eligible_hhs_(both)', 'value1': cp['total_eligible_hhs_(retrofit)'], 'value2': 0},
 
-                    {'label': 'PA Agreement', 'value1': cp['pa_agreement_cnt_(retrofit)'],
+                    {'label': 'recon_&_retrofit_pa_agreement_(both)', 'value1': cp['pa_agreement_cnt_(retrofit)'],
                      'value2': cp['total_eligible_hhs_(retrofit)'] - cp['pa_agreement_cnt_(retrofit)']},
 
-                    {'label': 'PA Agreement', 'value1': cp['1st_tranche_cnt_(retrofit)'],
+                    {'label': 'recon_&_retrofit_ist_tranche_received_(both)', 'value1': cp['1st_tranche_cnt_(retrofit)'],
                      'value2': cp['total_eligible_hhs_(retrofit)'] - cp['1st_tranche_cnt_(retrofit)']},
 
-                    {'label': 'PA Agreement', 'value1': cp['2nd_tranche_cnt_(retrofit)'],
+                    {'label': 'recon_&_retrofit_iind_tranche_received_(both)', 'value1': cp['2nd_tranche_cnt_(retrofit)'],
                      'value2': cp['total_eligible_hhs_(retrofit)'] - cp['2nd_tranche_cnt_(retrofit)']},
                 ],
 
@@ -116,22 +125,24 @@ class report(object):
                 'schools': {
                     'damaged': cp['schools_damaged_cnt'],
                     'under_construction': cp['school_completed_cnt'],
+                    'const_comp': cp['school_completed_cnt'],
                 },
                 'health_posts': {
                     'damaged': cp['health_posts_damaged_cnt'],
                     'under_construction': cp['health_posts_under_const_cnt'],
+                    'const_comp': cp['health_posts_completed_cnt'],
                 },
             },
 
             # Status of construction materials
             # title in cm_table
             'construction_materials': {
-                m : {'unit': 'mq', 'req_quantity': cp['%s_required_quantity' % m] , 'ava': cp['%s_availability' % m],
-                     'cost': cp['%s_cost' % m]}
+                m : {'req_quantity': cp['%s_required_quantity' % m] , 'ava': cp['%s_availability' % m],
+                        'cost': cp['%s_cost' % m]}
                 for m in ['stone', 'aggregate', 'sand', 'timber', 'cement_ppc', 'cement_opc', 'rebar', 'tin', 'bricks']},
 
             # Workers and wages
-            'work_wage': {v : cp[v] for v in ['types_of_workers_1', 'avg_wage_1', 'types_of_workers_2', 'avg_wage_2']},
+            'work_wage': {v : cp[v] for v in ['avg_wage_1', 'avg_wage_2']},
 
             # Key contacts
             'key_contacts': [

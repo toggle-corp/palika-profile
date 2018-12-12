@@ -1,24 +1,14 @@
 from drafter.utils import Rect, Border
 from drafter.layouts import Row, Column
 from drafter.nodes import Text, Image
+from drafter.shapes import Pango
 
 from report.common.color import Color
-from report.common.utils import fmt_thou
+from report.common.utils import fmt_thou, get_list_typo
 from report.common.boiler import boil
 
-
-materials = [
-    {'label': 'Stone', 'key': 'stone', 'icon': 'stone.png'},
-    {'label': 'Aggregate', 'key': 'aggregate', 'icon': 'aggregate.png'},
-    {'label': 'Sand', 'key': 'sand', 'icon': 'sand.png'},
-    {'label': 'Timber', 'key': 'timber', 'icon': 'timber.png'},
-    {'label': 'Cement (PPC)', 'key': 'cement_ppc', 'icon': 'cement.png'},
-    {'label': 'Cement (OPC)', 'key': 'cement_opc', 'icon': 'cement.png'},
-    {'label': 'Rebars', 'key': 'rebar', 'icon': 'rebar.png'},
-    {'label': 'Tin', 'key': 'tin', 'icon': 'tin.png'},
-    {'label': 'Bricks', 'key': 'bricks', 'icon': 'bricks.png'},
-]
 def xstr(item):
+    #TODO: nepali
     if item == 'mq':
         return 'm<span rise="2000" size="x-small">3</span>'
     # TODO: Separate by comma if isinstance(item, int)
@@ -35,11 +25,12 @@ def TR_Text(widths, items):
                     width=0.5,
                     color=Color.BLACK,
                 ),
-                padding=Rect(4),
+                padding=Rect(5),
             ).add(
                 Text(
                     markup=xstr(item),
-                    font='RobotoCondensed 6',
+                    font_family='Roboto Condensed',
+                    font_size=7,
                     width=("100%" if i != 0 else None),
                     height="100%",
                     alignment=Text.CENTER,
@@ -61,7 +52,7 @@ def TR(widths, items):
                     width=0.5,
                     color=Color.BLACK,
                 ),
-                padding=Rect([3, 0, 3, 0]),
+                padding=Rect([3, 6, 3, 0]) if i in (2, 4) else Rect([3, 0, 3, 0]),
             ).add(
                 Image(
                     filename="resources/images/{}".format(item['icon']),
@@ -70,10 +61,11 @@ def TR(widths, items):
                 ) if item.get('icon') else None,
                 Text(
                     markup=xstr(item.get('text')),
-                    font='RobotoCondensed 6',
+                    font_family='Roboto Condensed',
+                    font_size=7,
                     width=("100%" if i != 0 else None),
                     height="100%",
-                    alignment=Text.CENTER,
+                    alignment=Text.RIGHT if i in (2, 4) else Text.CENTER,
                     vertical_alignment=Text.MIDDLE,
                 )
             )
@@ -90,49 +82,77 @@ def BottomBox(data):
             width=0.5,
             color=Color.BLACK,
         ),
-        padding=Rect([1, 8, 4, 8]),
+        padding=Rect([2, 8, 4, 8]),
     ).add(
-        #title
         Column(width='50%').add(
             Text(
-                text='Types of workers',
-                font='RobotoCondensed bold 6',
+                text=boil('status_of_cm_types_of_workers'),
+                font_family='Roboto Condensed',
+                font_size=8,
+                font_weight=Pango.Weight.BOLD,
             ),
             Text(
-                text='1. %s' % data['types_of_workers_1'],
-                font='RobotoCondensed 6',
-                padding=Rect([2, 0, 0, 0])
+                text='{} {}'.format(boil('status_of_cm_list_1'), boil('status_of_cm_skilled_mason')),
+                font_family='Roboto Condensed',
+                font_size=8,
+                padding=Rect([2, 0, 2, 0])
             ),
             Text(
-                text='2. %s' % data['types_of_workers_2'],
-                font='RobotoCondensed 6',
+                text='{} {}'.format(boil('status_of_cm_list_2'), boil('status_of_cm_labourer')),
+                font_family='Roboto Condensed',
+                font_size=8,
             ),
         ),
-        Column(width='50%').add(
+        Column(width='60%').add(
             Text(
-                text='Avg. daily wage (NRs.)',
+                text=boil('status_of_cm_avg._daily_wage_(nrs.)'),
                 width='100%',
                 alignment=Text.CENTER,
-                font='RobotoCondensed bold 6',
+                font_family='Roboto Condensed',
+                font_size=8,
+                font_weight=Pango.Weight.BOLD,
             ),
             Text(
-                text='%s %s' % (fmt_thou(data['avg_wage_1']), '\-'),
+                text='%s %s' % (fmt_thou(data['avg_wage_1']), '/-'),
                 width='65%',
                 alignment=Text.RIGHT,
-                font='RobotoCondensed 6',
-                padding=Rect([2, 0, 0, 0]),
+                font_family='Roboto Condensed',
+                font_size=8,
+                padding=Rect([2, 0, 2, 0]),
             ),
             Text(
-                text='%s %s' % (fmt_thou(data['avg_wage_2']), '\-'),
+                text='%s %s' % (fmt_thou(data['avg_wage_2']), '/-'),
                 width='65%',
                 alignment=Text.RIGHT,
-                font='RobotoCondensed 6',
+                font_family='Roboto Condensed',
+                font_size=8,
+                padding=Rect([0, 0, 1, 0]),
             )
         ),
     )
 
-
 def CMTable(top_data, bot_data):
+    materials = [
+        {'label': boil('status_of_cm_stone'), 'key': 'stone', 'icon': 'stone.png',
+            'unit' : boil('status_of_cm_cubic_metre_measurement')},
+        {'label': boil('status_of_cm_aggregate'), 'key': 'aggregate', 'icon': 'aggregate.png',
+            'unit' : boil('status_of_cm_cubic_metre_measurement')},
+        {'label': boil('status_of_cm_sand'), 'key': 'sand', 'icon': 'sand.png',
+            'unit' : boil('status_of_cm_cubic_metre_measurement')},
+        {'label': boil('status_of_cm_timber'), 'key': 'timber', 'icon': 'timber.png',
+            'unit' : boil('status_of_cm_cubic_feet_measurement')},
+        {'label': boil('status_of_cm_cement_(ppc)'), 'key': 'cement_ppc', 'icon': 'cement.png',
+            'unit' : boil('status_of_cm_sack_measurement')},
+        {'label': boil('status_of_cm_cement_(opc)'), 'key': 'cement_opc', 'icon': 'cement.png',
+            'unit' : boil('status_of_cm_sack_measurement')},
+        {'label': boil('status_of_cm_rebars'), 'key': 'rebar', 'icon': 'rebar.png',
+            'unit' : boil('status_of_cm_kg_plural_measurement')},
+        {'label': boil('status_of_cm_tin'), 'key': 'tin', 'icon': 'tin.png',
+            'unit' : boil('status_of_cm_bundle_measurement')},
+        {'label': boil('status_of_cm_bricks'), 'key': 'bricks', 'icon': 'bricks.png',
+            'unit' : boil('status_of_cm_pieces_measurement')}
+    ]
+
     rows = []
     for material in materials:
         key = material['key']
@@ -141,15 +161,19 @@ def CMTable(top_data, bot_data):
 
         rows.append([
             {'text': label, 'icon': material.get('icon')},
-            {'text': datum['unit']},
+            {'text': material['unit']},
             {'text': fmt_thou(datum['req_quantity'])},
             {'text': datum['ava']},
             {'text': fmt_thou(datum['cost'])},
         ])
 
-    headers = ['<b>{}</b>'.format(k) for k in [
-        'Materials', 'Unit', 'Req. Quantity*', 'Ava.', 'Cost. (NRS.)**',
+    headers = ['<b>{}</b>'.format(boil(k)) for k in [
+        'status_of_cm_materials_header', 'status_of_cm_unit_header', 'status_of_cm_req._quantity*_header',
+        'status_of_cm_ava._header', 'status_of_cm_cost_(nrs.)**_header',
     ]]
+    
+
+    
     widths = ['28%', '12%', '25%', '10%', '25%']
 
     return Column(width='100%', padding=Rect([16, 14, 0, 14])).add(
