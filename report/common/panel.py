@@ -1,6 +1,7 @@
 from drafter.utils import Rect, Border
 from drafter.layouts import Row
 from drafter.nodes import Text
+from drafter.nodes.text import Pango
 from report.common.color import Color
 
 
@@ -27,7 +28,9 @@ def Panel(**kwargs):
         Text(
             text=title,
             absolute=True,
-            font='RobotoCondensed bold 9',
+            font_family='Roboto Condensed',
+            font_size=13,
+            font_weight=Pango.Weight.BOLD,
             color=Color.BLUE,
             top=-6,
             left=10,

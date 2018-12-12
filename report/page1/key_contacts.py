@@ -2,6 +2,8 @@ from drafter.utils import Rect
 from drafter.layouts import Row, Column
 from drafter.nodes import Text
 
+from report.common.boiler import boil
+
 
 def Contact(contact):
     return Column().add(

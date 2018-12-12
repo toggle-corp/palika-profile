@@ -1,67 +1,70 @@
 from drafter.utils import Rect, Border
 from drafter.layouts import Node, Row, Column
 from drafter.nodes import Text
+
+from report.common.boiler import boil
 from report.common.color import Color
 
+def sand():
+    t =         Text(
+            width='100%',
+            height='50%',
+            text='x',
+            color=Color.DARK_GREEN,
+            font_family="Roboto Condensed",
+            font_size=5,
+            auto_scale=True,
+        ),
+    b =         Text(
+            width='100%',
+            height='50%',
+            text='-'*300,
+            color=Color.DARK_GREEN,
+            font_family="Roboto Condensed",
+            font_size=5,
+            auto_scale=True,
+        ),
 
-def Label(label, color):
-    return Row(
-        padding=Rect(4),
+def PoGroup(data, **kwargs):
+    print(**kwargs)
+    return Column(
+        height='50%',
+        width='100%',
+        border=Border(
+            width=0.5,
+            color=Color.BLACK,
+        ),
     ).add(
-        Node(
-            width=10,
-            height=10,
-            bg_color=color,
-            margin=Rect([0, 4, 0, 0]),
+        Text(
+            width='100%',
+            height='50%',
+            text='| ' * 301,
+            color=Color.DARK_GREEN,
+            font_family="Roboto Condensed",
+            font_size=5,
+            auto_scale=True,
         ),
         Text(
-            text=label,
-            font='Roboto Light 6',
-        )
+            width='100%',
+            height='50%',
+            text='| '*301,
+            color=Color.DARK_GREEN,
+            font_family="Roboto Condensed",
+            font_size=5,
+            auto_scale=True,
+        ),
     )
-
 
 def Pop(data):
     return Column(width='100%', height='100%').add(
-        Row(
+        Column(
             width='100% - 16',
-            height='25% - 10',
-            justify='end',
-            margin=Rect([4, 8, 4, 8]),
+            height='76%',
+            margin=Rect([14, 8, 4, 8]),
         ).add(
-            Label(label='Active', color=Color.DARK_GREEN),
-            Label(label='Phased Out', color=Color.DARK_ORANGE),
-        ),
-        Row(
-            width='100% - 16',
-            height='75% - 10',
-            margin=Rect([4, 8, 4, 8]),
-        ).add(
-            Text(
-                width='50%',
-                height='100%',
-                border=Border(
-                    width=0.5,
-                    color=Color.BLACK,
-                ),
-                padding=Rect(4),
-                text=data['active'],
-                color=Color.DARK_GREEN,
-                font='RobotoCondensed 5',
-                auto_scale=True,
-            ),
-            Text(
-                width='50%',
-                height='100%',
-                border=Border(
-                    width=0.5,
-                    color=Color.BLACK,
-                ),
-                padding=Rect(4),
-                text=data['passive'],
-                color=Color.DARK_ORANGE,
-                font='RobotoCondensed 5',
-                auto_scale=True,
-            ),
+            PoGroup(data)
+        )
+        .add(
+            PoGroup(data)
         )
     )

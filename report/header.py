@@ -1,8 +1,10 @@
 from drafter.utils import Rect
 from drafter.layouts import Row, Column
 from drafter.nodes import Text, Image, Hr, Vr
+from drafter.nodes.text import Pango
 
 from report.common.color import Color
+from report.common.boiler import boil
 
 
 def Header(data):
@@ -22,8 +24,10 @@ def Header(data):
                 left=0,
             ),
             Text(
-                text='Palika Profile',
-                font='Roboto Condensed 18',
+                text=boil('header_title'),
+                font_family='Roboto Condensed',
+                font_size=24,
+                font_weight=Pango.Weight.BOLD,
                 color=Color.PRIMARY,
                 height='100%',
                 vertical_alignment=Text.BOTTOM,
@@ -38,12 +42,12 @@ def Header(data):
             Column(height='100%', justify='end').add(
                 Text(
                     text='{} {}'.format(data['rep_data']['month'], data['rep_data']['year']),
-                    font='Roboto Light 8',
+                    font='Roboto Light 10',
                     color=Color.PRIMARY
                 ),
                 Text(
-                    text='Kavrepalanchok | Banepa Municipality',
-                    font='Roboto Light 15',
+                    text = '{} | {} {}'.format(data['rep_data']['dist_nm'], data['rep_data']['palika_nm'], boil('header_municipality')),
+                    font='Roboto Light 18',
                     color=Color.PRIMARY
                 )
             )

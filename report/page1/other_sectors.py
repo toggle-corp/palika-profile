@@ -1,9 +1,11 @@
 from drafter.utils import Rect
 from drafter.layouts import Row, Column
 from drafter.nodes import Text, Canvas
-from drafter.shapes import Circle, Image, Shape
+from drafter.shapes import Circle, Image, Shape, Pango
+
 from report.common.color import Color
 from report.common.utils import fmt_thou
+from report.common.boiler import boil
 
 class IconRenderer(Shape):
     def render(self, ctx):
@@ -37,17 +39,22 @@ def Sector(label, items, icon):
             text=label,
             color=Color.ACCENT,
             margin=Rect(4),
-            font='RobotoCondensed bold 8',
+            font_family='Roboto Condensed',
+            font_size=8,
+            font_weight=Pango.Weight.BOLD,
         ),
         *[
             Row().add(
                 Text(
                     text='{}: '.format(key),
-                    font='RobotoCondensed bold 6',
+                    font_family='Roboto Condensed',
+                    font_size=8,
+                    font_weight=Pango.Weight.BOLD,
                 ),
                 Text(
                     text=value,
-                    font='RobotoCondensed 6',
+                    font_family='Roboto Condensed',
+                    font_size=8,
                 )
             )
             for key, value in items.items()
@@ -64,18 +71,20 @@ def OtherSectors(data):
         height='100%',
     ).add(
         Sector(
-            label='Schools',
+            label=boil('other_sectors_schools_title'),
             items={
-                'Damaged': fmt_thou(schools['damaged']),
-                'Under-construction': fmt_thou(schools['under_construction']),
+                    boil('other_sectors_damaged'): fmt_thou(schools['damaged']),
+                    boil('other_sectors_under-construction'): fmt_thou(schools['under_construction']),
+                    boil('other_sectors_const._completed'): fmt_thou(schools['const_comp']),
             },
             icon='resources/images/school.png',
         ),
         Sector(
-            label='Health Posts',
+            label=boil('other_sectors_health_posts_title'),
             items={
-                'Damaged': fmt_thou(health_posts['damaged']),
-                'Under-construction': fmt_thou(health_posts['under_construction']),
+                boil('other_sectors_damaged'): fmt_thou(health_posts['damaged']),
+                boil('other_sectors_under-construction'): fmt_thou(health_posts['under_construction']),
+                boil('other_sectors_const._completed'): fmt_thou(health_posts['const_comp']),
             },
             icon='resources/images/hospital.png',
         ),
