@@ -1,7 +1,9 @@
 """utility funcs"""
 #TODO: error collection
-
 import math
+
+from hrrpmaps.atlas_auto import at
+
 
 def fmt_thou(val):
     """format a value with thousands seperator"""
@@ -112,3 +114,33 @@ def get_list_typo(in_vals, top, sort):
         ret.append(['Others'] + mid)
 
     return ret
+
+def get_faq(faq_num, faq_sht, meta_sht):
+    """get FAQ values. if no FAQ specified or invalid, go to default"""
+    #TODO: collect error here for when invalid or not in list
+    if faq_num not in faq_sht.index:
+        faq_num = meta_sht.loc['Default FAQ']['value']
+
+    return {'q': faq_sht.loc[faq_num]['question'], 'a': faq_sht.loc[faq_num]['answer']}
+
+def gen_maps(pka_list):
+    #TODO: error, check if the provided palika codes are actually in our data
+    #TODO: delete once finished running
+
+    atlas = at(
+        data_uri='./resources/data/profile_data_structure_template.xlsx',
+        wards_uri='./resources/mapfiles/hrrp_shapes/wards/merge.shp',
+        palika_uri='./resources/mapfiles/hrrp_shapes/palika/GaPaNaPa_hrrp.shp',
+        dists_uri='./resources/mapfiles/hrrp_shapes/districts/Districts_hrrp.shp',
+        dists_syle='./resources/mapfiles/styles/dist_style.qml',
+        pka_style='./resources/mapfiles/styles/palika_style.qml',
+        pka_hide_style='./resources/mapfiles/styles/palika_hide_style.qml',
+        ward_style='./resources/mapfiles/styles/ward_style.qml',
+        atlas_style='./resources/mapfiles/styles/atlas_layout.qpt',
+        parent_join_cd='N_WCode',
+        to_join_code='ward',
+        pka_list=pka_list,
+        img_type='img',
+        out_path='./resources/mapfiles/map_tmp/')
+
+    atlas.make_maps()
