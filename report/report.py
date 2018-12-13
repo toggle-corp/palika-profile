@@ -30,6 +30,5 @@ def Page2(data):
         bg_color=Color.WHITE,
         padding=Rect(32),
     ).add(
-        # Header(),
         Page2Content(data),
     )
