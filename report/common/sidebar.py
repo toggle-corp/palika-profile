@@ -25,11 +25,11 @@ def Sidebar(**kwargs):
         Label('Connect with us:'.upper()),
         Icon('fb.png'),
         Label('HRRPNepal'),
-        Icon('fb.png'),
+        Icon('twitter.png'),
         Label('HRRP_Nepal'),
-        Icon('fb.png'),
+        Icon('flipboard.png'),
         Label('/photos/hrrp'),
-        Icon('fb.png'),
+        Icon('flickr.png'),
         Label('@HRRP'),
     ]
 
