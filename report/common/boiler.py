@@ -1,4 +1,4 @@
-"""for setting string dict and getting values"""
+"""fot getting string vals for boilerplate values. also handles translation"""
 
 strings = {}
 lang = 'en'
@@ -15,7 +15,9 @@ def import_titles(sht):
         np = r[1]['nepali']
 
         #TODO: error?
-        assert(cd not in strings)
+        if cd in strings:
+            raise Exception('Duplicate entry for %s in Titles xls' % cd)
+
         strings[cd] = {'en' : en, 'np' : np}
 
 def boil(key):

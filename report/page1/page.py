@@ -68,12 +68,12 @@ def Page(data):
                 ).add(OtherSectors(data['other_sectors'])),
             ),
             Panel(
-                title='Status of construction materials'.upper(),
+                title=boil('status_of_cm_panel_title'),
                 width='50%',
             ).add(CMTable(data['construction_materials'], data['work_wage'])),
         ),
         Panel(
-            title='Key Contacts'.upper(),
+            title=boil('key_contacts_panel_title'),
             width='100%',
             left_footer=LeftFootNotes,
             right_footer=RightFootNotes,

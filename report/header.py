@@ -46,7 +46,7 @@ def Header(data):
                     color=Color.PRIMARY
                 ),
                 Text(
-                    text = '{} | {} {}'.format(data['rep_data']['dist_nm'], data['rep_data']['palika_nm'], boil('header_municipality')),
+                    text = '{} | {}'.format(data['rep_data']['dist_nm'], data['rep_data']['palika_nm']),
                     font='Roboto Light 18',
                     color=Color.PRIMARY
                 )

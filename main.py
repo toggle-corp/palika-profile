@@ -1,3 +1,5 @@
+import os
+
 from drafter.draft import PdfDraft
 from report import Page1, Page2
 from report.common.utils import clean_xls_headers, process_sht, gen_maps
@@ -43,19 +45,23 @@ def generate(test_len = None, make_maps = True):
     meta = clean_xls_headers(meta, 1)
     faq = clean_xls_headers(faq, 1)
 
-    #do maps if needed
-    test_len = len(data.index) if not test_len else test_len
-    gen_maps(tuple(data.index)[:test_len])
+    #trim data if running  a test
+    data = data[:test_len] if test_len else data
+
+    if make_maps:
+        gen_maps(list(data.index))
 
     #process
-    for v in data.index.values[0:test_len]:
+    for v in data.index.values:
         print('Creating profile for for %s' %v)
         cur_rep = Report(gc = v, data_sht = data, meta_sht = meta, faq_sht = faq)
         cur_rep.create_data()
 
+        os.makedirs('./output/', exist_ok=True)
         PdfDraft('./output/%s.pdf' %v)\
             .draw(Page1(cur_rep.data))\
-            .draw(Page2(cur_rep.data))
+            # .draw(Page2(cur_rep.data))
 
 if __name__ == '__main__':
-    generate(test_len = 5, make_maps = True)
+    generate(test_len = 1, make_maps = False)
+    # generate(make_maps=False)

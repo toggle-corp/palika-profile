@@ -135,11 +135,11 @@ class Report(object):
             # Key contacts
             'key_contacts': [
                 {
-                    'office': cp['contact_%i_title' % c],
-                    'name': cp['contact_%i_name' % c],
-                    'title': cp['contact_%i_role' % c],
-                    'contact': str(cp['contact_%i_contact' % c])
-                } for c in range(1, 6)],
+                    'name': cp['%sname' % c],
+                    'title': cp['%srole' % c],
+                    'contact': str(cp['%scontact' % c])
+                } for c in ['municipal_contact_%i_' % n for n in range (1,5)]
+                                + ['nra_gmali_contact_', 'dlpiu_contact_']],
 
             # HHs with Land Issues
             'hhs': {

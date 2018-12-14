@@ -18,7 +18,7 @@ def sand():
     b =         Text(
             width='100%',
             height='50%',
-            text='-'*300,
+            text=''*300,
             color=Color.DARK_GREEN,
             font_family="Roboto Condensed",
             font_size=5,
@@ -38,7 +38,7 @@ def PoGroup(data, **kwargs):
         Text(
             width='100%',
             height='50%',
-            text='| ' * 301,
+            text=' ' * 301,
             color=Color.DARK_GREEN,
             font_family="Roboto Condensed",
             font_size=5,
@@ -47,7 +47,7 @@ def PoGroup(data, **kwargs):
         Text(
             width='100%',
             height='50%',
-            text='| '*301,
+            text=' '*301,
             color=Color.DARK_GREEN,
             font_family="Roboto Condensed",
             font_size=5,

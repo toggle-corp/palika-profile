@@ -50,7 +50,7 @@ def fmt_pct(val, pts):
         return '{0}{1}'.format(rnd, '%')
 
 
-def nan_to_none(col):
+def     nan_to_none(col):
     """set all NaNs to Nones in a list"""
     # TODO: better way?
     ret_l = []
