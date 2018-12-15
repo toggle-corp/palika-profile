@@ -80,7 +80,7 @@ class Bars(Shape):
             font_family=font_family,
             font_size=font_size,
             font_weight=font_weight,
-            color=Color.WHITE if not self.inv_v1_col else Color.ORANGE,
+            color=Color.WHITE if not self.inv_v1_col else self.bar_color,
             alignment=String.LEFT,
         ).render(ctx)
 

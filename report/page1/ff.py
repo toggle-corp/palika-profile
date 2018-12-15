@@ -75,8 +75,8 @@ class Bagel(Shape):
 
             Rectangle(
                 pos=[x, y],
-                size=[8, 8],
-                color=color,
+                size=[2, 2],
+                color=Color.BLUE,
                 line_width=0,
             ).render(ctx)
 

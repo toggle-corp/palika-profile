@@ -4,7 +4,7 @@ from drafter.color import rgb, rgba, hx
 class Color:
     BLACK = rgb(0, 0, 0)
     WHITE = rgb(255, 255, 255)
-    GRAY = rgba(0, 0, 0, 0.2)
+    GRAY = rgb(190, 190, 190)
 
     BLUE = rgb(26, 35, 126)
 

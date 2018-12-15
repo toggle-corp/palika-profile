@@ -9,7 +9,7 @@ from report.common.boiler import boil
 
 def xstr(item):
     #TODO: nepali
-    if item == 'mq':
+    if item == 'm3':
         return 'm<span rise="2000" size="x-small">3</span>'
     # TODO: Separate by comma if isinstance(item, int)
     return '{}'.format(item)
@@ -171,11 +171,8 @@ def CMTable(top_data, bot_data):
         'status_of_cm_materials_header', 'status_of_cm_unit_header', 'status_of_cm_req._quantity*_header',
         'status_of_cm_ava._header', 'status_of_cm_cost_(nrs.)**_header',
     ]]
-    
 
-    
     widths = ['28%', '12%', '25%', '10%', '25%']
-
     return Column(width='100%', padding=Rect([16, 14, 0, 14])).add(
         TR_Text(widths=widths, items=headers),
         *[
