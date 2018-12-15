@@ -6,7 +6,7 @@ from hrrpmaps.atlas_auto import at
 
 
 def fmt_thou(val):
-    """format a value with thousands seperator"""
+    """properly format a number with the right thounsands seperation into eng or np"""
     DEFAULT = '0'
     if val is None:
         return DEFAULT
@@ -118,12 +118,13 @@ def get_list_typo(in_vals, top, sort):
 def get_faq(faq_num, faq_sht, meta_sht):
     """get FAQ values. if no FAQ specified or invalid, go to default"""
     #TODO: collect error here for when invalid or not in list
+    #TODO: Nep trans
     if faq_num not in faq_sht.index:
-        faq_num = meta_sht.loc['Default FAQ']['value']
+        faq_num = meta_sht.loc['Default FAQ']['value_en']
 
     return {'q': faq_sht.loc[faq_num]['question'], 'a': faq_sht.loc[faq_num]['answer']}
 
-def gen_maps(pka_list):
+def gen_maps(pka_list, img_type):
     #TODO: error, check if the provided palika codes are actually in our data
     #TODO: delete once finished running
 
@@ -140,7 +141,7 @@ def gen_maps(pka_list):
         parent_join_cd='N_WCode',
         to_join_code='ward',
         pka_list=pka_list,
-        img_type='img',
+        img_type=img_type,
         out_path='./resources/mapfiles/map_tmp/')
 
     atlas.make_maps()

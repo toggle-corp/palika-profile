@@ -3,16 +3,19 @@ import math
 from drafter.utils import Rect
 from drafter.layouts import Node, Row, Column
 from drafter.nodes import Text, Canvas
-from drafter.shapes import Shape, String, Pie
+from drafter.shapes import Shape, String, Pie, Pango
 
 from report.common.color import Color
 from report.common.utils import fmt_thou
+from report.common.boiler import boil
+
 
 def TrainingsFooter(**kwargs):
     return Text(
         **kwargs,
-        text='Source: HRRP Analysis',
-        font='RobotoCondensed light 5',
+        text=boil('training_footer'),
+        font_family='Roboto Condensed Light',
+        font_size=5,
     )
 
 
@@ -46,7 +49,7 @@ class PieChart(Shape):
         ).repos_to_center(ctx).render(ctx)
 
         pie_center = [self.w/2, self.h/2 + 6]
-        radius = min(self.w/2, self.h/2 - 6)
+        radius = min(self.w/2, self.h/2 - 6 )
         last_angle = None
 
         total_val = sum([item['value'] for item in self.items])
@@ -75,7 +78,8 @@ class PieChart(Shape):
             String(
                 pos=pie.calc_center(),
                 text=fmt_thou(value),
-                font='RobotoCondensed 5',
+                font_family='Roboto Condensed',
+                font_size=5,
             ).repos_to_center(ctx).render(ctx)
 
 
@@ -93,8 +97,8 @@ def Trainings(data):
     ]
 
     items = [
-        {'label': 'Reached', 'color': Color.ACCENT},
-        {'label': 'Remaining', 'color': Color.GRAY},
+        {'label': boil('training_reached'), 'color': Color.ACCENT},
+        {'label': boil('training_remaining'), 'color': Color.GRAY},
     ]
 
     return Column(
@@ -104,9 +108,11 @@ def Trainings(data):
     ).add(
         Text(
             height=16,
-            text='Trainings (# out of total required)',
+            text=boil('training_sub_title'),
             color=Color.PRIMARY,
-            font='RobotoCondensed bold 8',
+            font_family='Roboto Condensed',
+            font_size=8,
+            font_weight=Pango.Weight.BOLD,
         ),
         Row(width='100%', height='100% - 32', padding=Rect(4)).add(
             Canvas(
@@ -114,7 +120,7 @@ def Trainings(data):
                 height='100%',
                 renderer=PieChart(
                     items=short_training,
-                    label='Short Training',
+                    label=boil('training_short_training'),
                 )
             ),
             Canvas(
@@ -122,7 +128,7 @@ def Trainings(data):
                 height='100%',
                 renderer=PieChart(
                     items=vocational_training,
-                    label='Vocational Training',
+                    label=boil('training_vocational_training'),
                 )
             ),
         ),

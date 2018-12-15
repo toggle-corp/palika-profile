@@ -4,7 +4,7 @@ from drafter.nodes import Text, Image
 from drafter.shapes import Pango
 
 from report.common.color import Color
-from report.common.utils import fmt_thou, get_list_typo
+from report.common.utils import fmt_thou
 from report.common.boiler import boil
 
 def xstr(item):

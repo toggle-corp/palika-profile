@@ -4,6 +4,7 @@ from drafter.utils import Rect
 from drafter.layouts import Node, Row, Column
 from drafter.nodes import Text
 from drafter.color import hx
+from drafter.shapes import Pango
 
 from report.common.color import Color
 from report.common.utils import fmt_thou
@@ -25,18 +26,19 @@ def Label(label, color):
         )
     )
 
-#title
-items = [
-    {'key': 'landless', 'label': 'Landless', 'color': hx('#ff6117')},
-    {'key': 'no_land_certificates', 'label': 'No Land Certificates', 'color': hx('#bf053d')},  # noqa
-    {'key': 'right_of_way', 'label': 'Right of way', 'color': hx('#7d0547')},
-    {'key': 'affected_by_hep', 'label': 'Affected by HEP', 'color': hx('#1e7a8c')},  # noqa
-    {'key': 'smallplots', 'label': 'Small plots', 'color': hx('#abd1b5')},
-    {'key': 'guthi_land', 'label': 'Guthi land', 'color': hx('#ffc202')},
-]
-
 def HH(data):
     total = sum(data.values())
+
+    # title
+    items = [
+        {'key': 'landless', 'label': boil('land_issues_landless'), 'color': hx('#ff6117')},
+        {'key': 'no_land_certificates', 'label': boil('land_issues_no_land_certificates'), 'color': hx('#bf053d')},
+        # noqa
+        {'key': 'right_of_way', 'label': boil('land_issues_right_of_way'), 'color': hx('#7d0547')},
+        {'key': 'affected_by_hep', 'label': boil('land_issues_affected_by_hep'), 'color': hx('#1e7a8c')},  # noqa
+        {'key': 'smallplots', 'label': boil('land_issues_small_plots'), 'color': hx('#abd1b5')},
+        {'key': 'guthi_land', 'label': boil('land_issues_guthi_land'), 'color': hx('#ffc202')},
+    ]
 
     bars = []
     labels = []
@@ -54,7 +56,9 @@ def HH(data):
                 vertical_alignment=Text.MIDDLE,
                 text=fmt_thou(value),
                 color=Color.WHITE,
-                font='Roboto bold 6.7',
+                font_family='Roboto Condensed',
+                font_size=6.7,
+                font_weight=Pango.Weight.BOLD,
             )
             bars.append(bar)
 

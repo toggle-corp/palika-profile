@@ -12,7 +12,7 @@ import pandas as pd
 error = []
 
 
-def generate(test_len = None, make_maps = True):
+def generate(lang = 'en', test_len = None, make_maps = True, map_img_type ='svg'):
     XLS_URI = './resources/data/profile_data_structure_template.xlsx'
 
     #read in sheets
@@ -49,19 +49,18 @@ def generate(test_len = None, make_maps = True):
     data = data[:test_len] if test_len else data
 
     if make_maps:
-        gen_maps(list(data.index))
+        gen_maps(list(data.index), map_img_type)
 
     #process
     for v in data.index.values:
         print('Creating profile for for %s' %v)
-        cur_rep = Report(gc = v, data_sht = data, meta_sht = meta, faq_sht = faq)
+        cur_rep = Report(gc = v, data_sht = data, meta_sht = meta, faq_sht = faq, map_img_type = map_img_type)
         cur_rep.create_data()
 
         os.makedirs('./output/', exist_ok=True)
         PdfDraft('./output/%s.pdf' %v)\
-            .draw(Page1(cur_rep.data))\
-            # .draw(Page2(cur_rep.data))
+            .draw(Page1(cur_rep.data, lang))\
+            .draw(Page2(cur_rep.data, lang))
 
 if __name__ == '__main__':
-    generate(test_len = 1, make_maps = False)
-    # generate(make_maps=False)
+    generate(test_len = 1, make_maps = False, map_img_type='svg', lang = 'en')

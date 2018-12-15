@@ -57,7 +57,7 @@ def Page(data):
         Row(width='100%').add(
             Column(width='50%', height='100%').add(
                 Panel(
-                    title='POs PRESENCE',
+                    title=boil('po_presence_pos_presence_title'),
                     height='45% - 20',
                     width='100% - 10',
                 ).add(Pop(data['pos_presence'])),

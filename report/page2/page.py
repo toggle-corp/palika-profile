@@ -1,6 +1,7 @@
 from drafter.utils import Rect
 from drafter.layouts import Row, Column
 from drafter.nodes import Text
+from drafter.shapes import Pango
 from report.common.panel import Panel
 from report.common.sidebar import Sidebar
 
@@ -9,13 +10,16 @@ from .technical_staff import TechnicalStaff, TechnicalStaffFooter
 from .trainings import Trainings, TrainingsFooter
 from .map import Map
 from .footer import Footer
+from report.common.boiler import boil
 
 
 def FurtherInfoNotes(data, **kwargs):
     return Row(**kwargs, width='100%', height=16).add(
         Text(
-            text='For further information:',
-            font='RobotoCondensed 5.5',
+            text=boil('page_2_futher_information'),
+            font_family='Roboto Condensed',
+            font_size=5.5,
+            font_weight=Pango.Weight.BOLD,
             padding=Rect([8, 0, 8, 0]),
         ),
         *[
@@ -26,11 +30,13 @@ def FurtherInfoNotes(data, **kwargs):
                         contact['name'],
                         contact['title'],
                     ),
-                    font='RobotoCondensed 5.5',
+                    font_family='Roboto Condensed',
+                    font_size=5.5,
                 ),
                 Text(
                     text='     {}'.format(contact['phone']),
-                    font='RobotoCondensed 5.5',
+                    font_family='Roboto Condensed',
+                    font_size=5.5,
                 ),
             )
             for i, contact in enumerate(data)
@@ -41,28 +47,28 @@ def FurtherInfoNotes(data, **kwargs):
 def Page(data):
     return Column(width='100%', relative=True).add(
         Panel(
-            title='HHs WITH LAND ISSUES',
+            title=boil('land_issues_panel_title'),
             width='100% - 10',
         ).add(HH(data['hhs'])),
         Row(width='100%').add(
             Panel(
-                title='Status of Technical Staff'.upper(),
+                title=boil('tech_staff_panel_title'),
                 width='50% - 10',
                 right_footer=TechnicalStaffFooter,
             ).add(TechnicalStaff(data['technical_staff'], data['technical_staff_masons'])),
             Panel(
-                title='Trainings'.upper(),
+                title=boil('training_panel_title'),
                 height='100% - 20',
                 width='50% - 10',
                 right_footer=TrainingsFooter,
             ).add(Trainings(data['trainings'])),
         ),
         Panel(
-            title='TA Activities Map',
+            title=boil('map_panel_title'),
             width='100% - 10',
         ).add(Map(data['map'])),
         Panel(
-            title='FAQ',
+            title=boil('faq_panel_title'),
             width='100% - 10',
             left_footer=FurtherInfoNotes,
             footer_data=data['further_info'],

@@ -1,10 +1,11 @@
 from report.common.utils import get_faq
 
 class Report(object):
-    def __init__(self, gc, data_sht, meta_sht, faq_sht):
+    def __init__(self, gc, data_sht, meta_sht, faq_sht, map_img_type):
         self.data_sht = data_sht
         self.meta_sht = meta_sht
         self.faq_sht = faq_sht
+        self.map_img_type = map_img_type
 
         self.gc = gc
 
@@ -14,8 +15,9 @@ class Report(object):
         self.data = {
             # Date
             'rep_data': {
-                'month': self.meta_sht.loc['Report Month']['value'],
-                'year': self.meta_sht.loc['Report Year']['value'],
+                #TODO: trans
+                'month': self.meta_sht.loc['Report Month']['value_en'],
+                'year': self.meta_sht.loc['Report Year']['value_en'],
                 'dist_nm': cp['district_name'],
                 'palika_nm': cp['palika_name'],
             },
@@ -153,17 +155,17 @@ class Report(object):
             # Status of technical staff
             # title
             'technical_staff': [
-                {'label': 'Engineers', 'available': cp['engineers_available_cnt'],
+                {'lookup': 'tech_staff_engineers', 'available': cp['engineers_available_cnt'],
                  'additional': cp['engineers_reqd_cnt']},
-                {'label': 'Sub-Engineers', 'available': cp['sub-engineers_available_cnt'],
+                {'lookup': 'tech_staff_sub-engineers', 'available': cp['sub-engineers_available_cnt'],
                  'additional': cp['sub-engineers_reqd_cnt']},
-                {'label': 'Asst. Sub-Engineers', 'available': cp['asst_sub-engineers_available_cnt'],
+                {'lookup': 'tech_staff_asst._sub-engineers', 'available': cp['asst_sub-engineers_available_cnt'],
                  'additional': cp['asst_sub-engineers_reqd_cnt']}
             ],
 
             # Status of Masons
             'technical_staff_masons':
-                {'label': 'Masons',
+                {'lookup': 'tech_staff_masons',
                  'available': [cp['masons_7_day_available_cnt'], cp['masons_50_day_available_cnt']],
                  'additional': [cp['masons_7_day_reqd_cnt'], cp['masons_50_day_reqd_cnt']]}
             ,
@@ -182,7 +184,7 @@ class Report(object):
 
             #TODO: delete after running?
             # MAP
-            'map': {'map_uri': './resources/mapfiles/map_tmp/%s.png' % self.gc,
+            'map': {'map_uri': './resources/mapfiles/map_tmp/%s.%s' % (self.gc, self.map_img_type),
                     'legend_uri': './resources/images/map_legend.png'},
 
             # FAQ

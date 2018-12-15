@@ -1,8 +1,9 @@
 from drafter.utils import Rect, Border
 from drafter.layouts import Row, Column
 from drafter.nodes import Text
+from drafter.shapes import Pango
 
-from report.common.color import Color
+from report.common.boiler import boil
 
 
 def Footer(data):
@@ -10,13 +11,16 @@ def Footer(data):
     for item in data:
         question = Text(
             width='100%',
-            text='Q: {}'.format(item['q']),
-            font='RobotoCondensed bold 6.5',
+            text='{}: {}'.format(boil('faq_q'), item['q']),
+            font_family='Roboto Condensed',
+            font_size=6.5,
+            font_weight=Pango.Weight.BOLD,
         )
         answer = Text(
             width='100%',
-            text='Ans: {}'.format(item['a']),
-            font='RobotoCondensed Light 6',
+            text='{}: {}'.format(boil('faq_a'), item['a']),
+            font_family='Roboto Condensed',
+            font_size=6,
         )
         faq_blocks.append(question)
         faq_blocks.append(answer)

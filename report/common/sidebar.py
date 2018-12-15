@@ -2,6 +2,8 @@ from drafter.utils import Rect
 from drafter.layouts import Row
 from drafter.nodes import Text, Image
 
+from report.common.boiler import boil
+
 
 def Label(text):
     return Text(
@@ -22,15 +24,15 @@ def Icon(filename):
 
 def Sidebar(**kwargs):
     children = [
-        Label('Connect with us:'.upper()),
+        Label(boil('social_connect')),
         Icon('fb.png'),
-        Label('HRRPNepal'),
+        Label(boil('social_fb')),
         Icon('twitter.png'),
-        Label('HRRP_Nepal'),
+        Label(boil('social_twitter')),
         Icon('flipboard.png'),
-        Label('/photos/hrrp'),
+        Label(boil('social_pinterest?')),
         Icon('flickr.png'),
-        Label('@HRRP'),
+        Label(boil('social_flickr')),
     ]
 
     return Row(
