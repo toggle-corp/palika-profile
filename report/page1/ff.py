@@ -10,7 +10,7 @@ from drafter.shapes import (
     Pango,
 )
 
-from report.common.utils import fmt_thou
+from report.common.utils import fmt_num
 from report.common.color import Color
 from report.common.boiler import boil
 
@@ -82,7 +82,7 @@ class Bagel(Shape):
 
             String(
                 pos=[x + 14, y - 5],
-                markup='<small>{}</small>\n<b>{}</b>'.format(label, fmt_thou(value)),
+                markup='<small>{}</small>\n<b>{}</b>'.format(label, fmt_num(value)),
                 font_family='Roboto Condensed',
                 font_size=11,
             ).render(ctx)
@@ -91,7 +91,7 @@ class Bagel(Shape):
 
         String(
             pos=center,
-            markup='<small>{}</small>\n{}<span rise="3800" size="xx-small" >2</span>'.format(boil('facts_and_figures_total'), fmt_thou(total_val)),
+            markup='<small>{}</small>\n{}<span rise="3800" size="xx-small" >2</span>'.format(boil('facts_and_figures_total'), fmt_num(total_val)),
             font_family='Roboto Condensed',
             font_size=11,
             font_weight = Pango.Weight.BOLD,

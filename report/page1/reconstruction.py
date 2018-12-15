@@ -3,7 +3,7 @@ from drafter.layouts import Row, Column
 from drafter.nodes import Text, Hr
 
 from report.common.color import Color
-from report.common.utils import fmt_thou
+from report.common.utils import fmt_num
 from report.common.boiler import boil
 
 def TwoValueLineChart(data, color):
@@ -28,7 +28,7 @@ def TwoValueLineChart(data, color):
         ),
         Row(width='60%', height='70%').add(
             Text(
-                text=fmt_thou(v1),
+                text=fmt_num(v1),
                 font='Roboto bold 8',
                 width='{}%'.format(v1p),
                 height='100%',
@@ -38,7 +38,7 @@ def TwoValueLineChart(data, color):
                 color=Color.WHITE,
             ),
             Text(
-                text=fmt_thou(v2) if v2 else '',
+                text=fmt_num(v2) if v2 else '',
                 font='Roboto bold 8',
                 width='{}%'.format(v2p),
                 height='100%',
@@ -102,15 +102,15 @@ def Houses(data):
         ).add(
             Text(
                 markup='<b>{}</b>: {}'.format(boil('recon_&_retrofit_under_construction'),
-                    fmt_thou(data['under_construction'])
-                ),
+                                              fmt_num(data['under_construction'])
+                                              ),
                 font_family="Roboto Condensed",
                 font_size=7.5,
             ),
             Text(
                 markup='<b>{}</b>: {}'.format(boil('recon_&_retrofit_completed'),
-                    fmt_thou(data['completed'])
-                ),
+                                              fmt_num(data['completed'])
+                                              ),
                 font_family="Roboto Condensed",
                 font_size=7.5,
             )
@@ -161,13 +161,13 @@ def Grievances(data):
             margin=Rect([3.2, 0, 5, 0]),
         ),
         Text(
-            markup='<b>{}:</b> {}'.format(boil('recon_&_retrofit_registered_(both)'), fmt_thou(data['registered'])),
+            markup='<b>{}:</b> {}'.format(boil('recon_&_retrofit_registered_(both)'), fmt_num(data['registered'])),
             font_family="Roboto Condensed",
             font_size=7.5,
             margin=Rect([0, 0, 3, 0])
         ),
         Text(
-            markup='<b>{}:</b> {}'.format(boil('recon_&_retrofit_addressed_(both)'),fmt_thou(data['addressed'])),
+            markup='<b>{}:</b> {}'.format(boil('recon_&_retrofit_addressed_(both)'), fmt_num(data['addressed'])),
             font_family="Roboto Condensed",
             font_size=7.5,
         ),
@@ -185,13 +185,13 @@ def NonCompliance(data):
             margin=Rect([3.2, 0, 5, 0]),
         ),
         Text(
-            markup='<b>{}:</b> {}'.format(boil('recon_&_retrofit_registered_(both)'), fmt_thou(data['registered'])),
+            markup='<b>{}:</b> {}'.format(boil('recon_&_retrofit_registered_(both)'), fmt_num(data['registered'])),
             font_family="Roboto Condensed",
             font_size=7.5,
             margin=Rect([0, 0, 3, 0])
         ),
         Text(
-            markup='<b>{}:</b> {}'.format(boil('recon_&_retrofit_addressed_(both)'), fmt_thou(data['addressed'])),
+            markup='<b>{}:</b> {}'.format(boil('recon_&_retrofit_addressed_(both)'), fmt_num(data['addressed'])),
             font_family="Roboto Condensed",
             font_size=7.5,
         ),

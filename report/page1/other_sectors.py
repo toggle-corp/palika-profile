@@ -4,7 +4,7 @@ from drafter.nodes import Text, Canvas
 from drafter.shapes import Circle, Image, Shape, Pango
 
 from report.common.color import Color
-from report.common.utils import fmt_thou
+from report.common.utils import fmt_num
 from report.common.boiler import boil
 
 class IconRenderer(Shape):
@@ -73,18 +73,18 @@ def OtherSectors(data):
         Sector(
             label=boil('other_sectors_schools_title'),
             items={
-                    boil('other_sectors_damaged'): fmt_thou(schools['damaged']),
-                    boil('other_sectors_under-construction'): fmt_thou(schools['under_construction']),
-                    boil('other_sectors_const._completed'): fmt_thou(schools['const_comp']),
+                    boil('other_sectors_damaged'): fmt_num(schools['damaged']),
+                    boil('other_sectors_under-construction'): fmt_num(schools['under_construction']),
+                    boil('other_sectors_const._completed'): fmt_num(schools['const_comp']),
             },
             icon='resources/images/school.png',
         ),
         Sector(
             label=boil('other_sectors_health_posts_title'),
             items={
-                boil('other_sectors_damaged'): fmt_thou(health_posts['damaged']),
-                boil('other_sectors_under-construction'): fmt_thou(health_posts['under_construction']),
-                boil('other_sectors_const._completed'): fmt_thou(health_posts['const_comp']),
+                boil('other_sectors_damaged'): fmt_num(health_posts['damaged']),
+                boil('other_sectors_under-construction'): fmt_num(health_posts['under_construction']),
+                boil('other_sectors_const._completed'): fmt_num(health_posts['const_comp']),
             },
             icon='resources/images/hospital.png',
         ),

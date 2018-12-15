@@ -4,7 +4,7 @@ from drafter.nodes import Text
 from drafter.shapes import Pango
 
 from report.common.color import Color
-from report.common.utils import fmt_thou
+from report.common.utils import fmt_num
 from report.common.boiler import boil
 
 def TechnicalStaffFooter(**kwargs):
@@ -20,8 +20,8 @@ def TechnicalStaff(tech_data, mason_data):
     headers = [boil('tech_staff_staff_title'), boil('tech_staff_available_title'), boil('tech_staff_addl_req_title')]
 
     tech_data = [
-        [boil(item['lookup']), fmt_thou(item['available']), fmt_thou(item['additional'])] for item in tech_data
-    ]
+        [boil(item['lookup']), fmt_num(item['available']), fmt_num(item['additional'])] for item in tech_data
+        ]
 
     mason_data = [boil(mason_data['lookup']), mason_data['available'], mason_data['additional']]
 
@@ -91,7 +91,7 @@ def TechnicalStaff(tech_data, mason_data):
                     height='100%',
                     width=widths[1],).add(
                 Text(
-                    text='{} ({} {})'.format(fmt_thou(mason_data[1][0]), 7, boil('tech_staff_days')),
+                    text='{} ({} {})'.format(fmt_num(mason_data[1][0]), 7, boil('tech_staff_days')),
                     font_family='Roboto Condensed',
                     font_size=5,
                     width='100%',
@@ -100,7 +100,7 @@ def TechnicalStaff(tech_data, mason_data):
                     )
                 ).add(
                 Text(
-                    text='{} ({})'.format(fmt_thou(mason_data[1][1]), 50, boil('tech_staff_days')),
+                    text='{} ({})'.format(fmt_num(mason_data[1][1]), 50, boil('tech_staff_days')),
                     font_family='Roboto Condensed',
                     font_size=5,
                     width='100%',
@@ -113,7 +113,7 @@ def TechnicalStaff(tech_data, mason_data):
                 width=widths[2])
                 .add(
                     Text(
-                        text='{} ({} {})'.format(fmt_thou(mason_data[2][0]), 7, boil('tech_staff_days')),
+                        text='{} ({} {})'.format(fmt_num(mason_data[2][0]), 7, boil('tech_staff_days')),
                         font_family='Roboto Condensed',
                         font_size=5,
                         width='100%',
@@ -122,7 +122,7 @@ def TechnicalStaff(tech_data, mason_data):
                     )
                 ).add(
                     Text(
-                        text='{} ({} {})'.format(fmt_thou(mason_data[2][1]), 50, boil('tech_staff_days')),
+                        text='{} ({} {})'.format(fmt_num(mason_data[2][1]), 50, boil('tech_staff_days')),
                         font_family='Roboto Condensed',
                         font_size=5,
                         width='100%',

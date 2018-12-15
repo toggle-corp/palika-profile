@@ -6,7 +6,7 @@ from drafter.nodes import Text, Canvas
 from drafter.shapes import Shape, String, Pie, Pango
 
 from report.common.color import Color
-from report.common.utils import fmt_thou
+from report.common.utils import fmt_num
 from report.common.boiler import boil
 
 
@@ -77,7 +77,7 @@ class PieChart(Shape):
 
             String(
                 pos=pie.calc_center(),
-                text=fmt_thou(value),
+                text=fmt_num(value),
                 font_family='Roboto Condensed',
                 font_size=5,
             ).repos_to_center(ctx).render(ctx)

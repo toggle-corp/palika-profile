@@ -4,7 +4,7 @@ from drafter.nodes import Text, Image
 from drafter.shapes import Pango
 
 from report.common.color import Color
-from report.common.utils import fmt_thou
+from report.common.utils import fmt_num
 from report.common.boiler import boil
 
 def xstr(item):
@@ -113,7 +113,7 @@ def BottomBox(data):
                 font_weight=Pango.Weight.BOLD,
             ),
             Text(
-                text='%s %s' % (fmt_thou(data['avg_wage_1']), '/-'),
+                text='%s %s' % (fmt_num(data['avg_wage_1']), '/-'),
                 width='65%',
                 alignment=Text.RIGHT,
                 font_family='Roboto Condensed',
@@ -121,7 +121,7 @@ def BottomBox(data):
                 padding=Rect([2, 0, 2, 0]),
             ),
             Text(
-                text='%s %s' % (fmt_thou(data['avg_wage_2']), '/-'),
+                text='%s %s' % (fmt_num(data['avg_wage_2']), '/-'),
                 width='65%',
                 alignment=Text.RIGHT,
                 font_family='Roboto Condensed',
@@ -162,9 +162,9 @@ def CMTable(top_data, bot_data):
         rows.append([
             {'text': label, 'icon': material.get('icon')},
             {'text': material['unit']},
-            {'text': fmt_thou(datum['req_quantity'])},
+            {'text': fmt_num(datum['req_quantity'])},
             {'text': datum['ava']},
-            {'text': fmt_thou(datum['cost'])},
+            {'text': fmt_num(datum['cost'])},
         ])
 
     headers = ['<b>{}</b>'.format(boil(k)) for k in [

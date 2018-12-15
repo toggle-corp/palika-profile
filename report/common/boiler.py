@@ -1,11 +1,15 @@
 """fot getting string vals for boilerplate values. also handles translation"""
 
 strings = {}
+lang = None
 
 def set_lang(l):
     global lang
     assert l in ('en', 'np')
     lang = l
+
+def get_lang():
+    return lang
 
 def import_titles(sht):
     """import titles from xls with en and np. give bad value if blank?"""

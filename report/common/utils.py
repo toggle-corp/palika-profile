@@ -3,11 +3,19 @@
 import math
 
 from hrrpmaps.atlas_auto import at
+from report.common.boiler import get_lang
 
+def swap_nep_chars(num):
+    """swap in nepal numerical characters"""
+    swap = { '0' : '०', '1' : '१', '2' : '२', '3' : '३', '4' : '४',
+             '5' : '५', '6' : '६', '7' : '७', '8' : '८', '9' : '९' }
+    return ''.join([swap[v] if v in swap else v for v in num])
 
-def fmt_thou(val):
-    """properly format a number with the right thounsands seperation into eng or np"""
-    DEFAULT = '0'
+def fmt_num(val):
+    """properly format a number with the right thounsands seperation into eng or np
+        remove decimals for all nums"""
+
+    DEFAULT = '-'
     if val is None:
         return DEFAULT
 
@@ -15,11 +23,34 @@ def fmt_thou(val):
         if math.isnan(val):
             return DEFAULT
 
-    return '{:,}'.format(round(val, 2))
+    v_str = str(round(val))
+    fmtd = ''
+
+    if get_lang() == 'np':
+        #a bit hacky
+        v_str = swap_nep_chars(v_str)
+        COMM_PT = 2
+        skip = ''
+
+        if len(v_str) > 3:
+            fmtd = ',' + v_str[-3:]
+            v_str = v_str[:-3]
+
+        if len(v_str) % 2 != 0:
+            skip = v_str[0] + ',' if len(v_str) > 1 else v_str[0]
+            v_str= v_str[1:]
+
+        fmtd = skip + ','.join([v_str[i:i + COMM_PT] for i in range(0, len(v_str), COMM_PT)]) + fmtd
+
+    else:
+        fmtd = '{:,}'.format(round(val, 2))
+
+    return fmtd
 
 
 def fmt_pct(val, pts):
     """assert that we have decimal pct and give it the required decimal points"""
+    ret = ''
     if isinstance(val, str):
         if '%' in val:
             return val
@@ -34,7 +65,7 @@ def fmt_pct(val, pts):
         raise Exception('bad decimal for {0}'.format(val))
 
     if math.isnan(val) or val == 0:
-        return '0.{}%'.format('0'*pts)
+        ret = '0.{}%'.format('0'*pts)
 
     else:
         #can be done using decimal fmt?
@@ -47,10 +78,15 @@ def fmt_pct(val, pts):
         elif l_r < pts:
             rnd += '0' * (pts - l_r)
 
-        return '{0}{1}'.format(rnd, '%')
+        ret = '{0}{1}'.format(rnd, '%')
+
+    if get_lang() == 'np':
+        ret = swap_nep_chars(ret)
+
+    return ret
 
 
-def     nan_to_none(col):
+def nan_to_none(col):
     """set all NaNs to Nones in a list"""
     # TODO: better way?
     ret_l = []

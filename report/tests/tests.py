@@ -63,7 +63,17 @@ class Tests(unittest.TestCase):
             ]
         self.assertEqual(utils.get_list_typo(l, 5, 1), [['v2', 2], ['v', 0]])
 
-    def test_num_line(self):
+    def test_fmt_num_np(self):
+        "get num back like 1,23,45,67,890"
+        boiler.set_lang('np')
+        self.assertEqual(utils.fmt_num(1234), '१,२३४')
+        self.assertEqual(utils.fmt_num(12345), '१२,३४५')
+        self.assertEqual(utils.fmt_num(123456789), '१२,३४,५६,७८९')
+        self.assertEqual(utils.fmt_num(3123456789), '३,१२,३४,५६,७८९')
+        self.assertEqual(utils.fmt_num(31234567890), '३१,२३,४५,६७,८९०')
+
+    def test_swap(self):
+        self.assertEqual(utils.swap_nep_chars('1,234.00%'), '१,२३४.००%')
 
 
 if __name__ == '__main__':

@@ -7,7 +7,7 @@ from drafter.color import hx
 from drafter.shapes import Pango
 
 from report.common.color import Color
-from report.common.utils import fmt_thou
+from report.common.utils import fmt_num
 from report.common.boiler import boil
 
 def Label(label, color):
@@ -54,7 +54,7 @@ def HH(data):
                 width='{}%'.format(value / total * 100),
                 alignment=Text.CENTER,
                 vertical_alignment=Text.MIDDLE,
-                text=fmt_thou(value),
+                text=fmt_num(value),
                 color=Color.WHITE,
                 font_family='Roboto Condensed',
                 font_size=6.7,
