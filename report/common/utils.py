@@ -2,7 +2,9 @@
 #TODO: error collection
 import math
 
+import cairo
 from hrrpmaps.atlas_auto import at
+
 from report.common.boiler import get_lang
 
 def swap_nep_chars(num):
@@ -181,3 +183,21 @@ def gen_maps(pka_list, img_type):
         out_path='./resources/mapfiles/map_tmp/')
 
     atlas.make_maps()
+
+def get_text_width(text, fontsize, font, font_weight):
+    """get width of text"""
+    if font_weight.lower() == 'bold':
+        font_weight = cairo.FONT_WEIGHT_BOLD
+    elif font_weight.lower() == 'normal':
+        font_weight = cairo.FONT_WEIGHT_NORMAL
+    else:
+        raise Exception ('font_weight must be in ("bold", "normal")')
+
+    surface = cairo.SVGSurface(None, 1280, 200)
+    cr = cairo.Context(surface)
+    cr.select_font_face(font, cairo.FONT_SLANT_NORMAL, font_weight)
+    cr.set_font_size(fontsize)
+    xbearing, ybearing, width, height, xadvance, yadvance = cr.text_extents(text)
+    return width
+
+print(get_text_width('hello', 9, 'Roboto Condensed', font_weight = 'normal'))

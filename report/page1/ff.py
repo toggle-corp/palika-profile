@@ -53,7 +53,7 @@ class Bagel(Shape):
 
             value_in_radians = value / total_val * 2 * math.pi
             if last_angle is None:
-                last_angle = -math.pi / 2.5 - value_in_radians / 2
+                last_angle = -math.pi/2
             angle = last_angle + value_in_radians
 
             Arc(
@@ -81,7 +81,7 @@ class Bagel(Shape):
             ).render(ctx)
 
             String(
-                pos=[x + 14, y - 5],
+                pos=[x + 14, y - 2],
                 markup='<small>{}</small>\n<b>{}</b>'.format(label, fmt_num(value)),
                 font_family='Roboto Condensed',
                 font_size=11,
@@ -91,7 +91,7 @@ class Bagel(Shape):
 
         String(
             pos=center,
-            markup='<small>{}</small>\n{}<span rise="3800" size="xx-small" >2</span>'.format(boil('facts_and_figures_total'), fmt_num(total_val)),
+            markup='<small>{}</small>\n{}'.format(boil('facts_and_figures_total'), fmt_num(total_val)),
             font_family='Roboto Condensed',
             font_size=11,
             font_weight = Pango.Weight.BOLD,

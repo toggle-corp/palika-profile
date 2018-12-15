@@ -1,18 +1,99 @@
 from drafter.utils import Rect
+from drafter.shapes import Shape, Rectangle, String
 from drafter.layouts import Row, Column
-from drafter.nodes import Text, Hr
+from drafter.nodes import Text, Hr, Canvas
+from drafter.shapes import Pango
 
 from report.common.color import Color
-from report.common.utils import fmt_num
+from report.common.utils import fmt_num, get_text_width
 from report.common.boiler import boil
 
-def TwoValueLineChart(data, color):
-    v1 = data['value1']
-    v2 = data['value2']
 
-    total = v1 + v2
-    v1p = v1 / total * 100
-    v2p = 100 - v1p
+class Bars(Shape):
+    def __init__(self, data):
+        self.data = data
+
+    def x_pos_v1(self):
+        if (self.v1_len + self.NUM_PAD) > self.r1_w:
+            self.inv_v1_col = True
+            return self.r1_w + self.NUM_PAD
+        else:
+            return self.NUM_PAD
+
+    def x_pos_v2(self):
+        if (self.v2_len + self.NUM_PAD) > self.r2_w:
+            self.inv_v2_col = True
+            return self.r1_w - self.v2_len - 2
+        else:
+            return self.F_W - self.v2_len - 2
+
+    def render(self, ctx):
+        self.F_W = 148
+        self.NUM_PAD = 2
+        font_family = 'Roboto'
+        font_size = 8
+        font_weight = Pango.Weight.BOLD
+        color = Color.WHITE
+
+        v1 = self.data['value1']
+        v2 = self.data['value2']
+
+        self.v1_str = fmt_num(v1)
+        self.v2_str = fmt_num(v2)
+
+        if self.v1_str == '0':
+            self.v1_str = ''
+        if self.v2_str == '0':
+            self.v2_str = ''
+
+        self.inv_v1_col = False
+        self.inv_v2_col = False
+
+        self.v1_len = get_text_width(self.v1_str, font_size, font_family, 'bold')
+        self.v2_len = get_text_width(self.v2_str, font_size, font_family, 'bold')
+
+        self.r1_w = (v1 / (v1 + v2)) * self.F_W
+        self.r2_w = (v2 / (v1 + v2)) * self.F_W
+
+        #v1 rect
+        Rectangle(
+            pos=[0, 0],
+            size=[self.r1_w, 12],
+            color=Color.ORANGE,
+            line_width=0,
+        ).render(ctx),
+
+        #v2 rect
+        Rectangle(
+            pos=[self.r1_w, 0],
+            size=[self.F_W - self.r1_w, 12],
+            color=Color.GRAY,
+            line_width=0,
+        ).render(ctx)
+
+        #v1 string
+        String(
+            pos=[self.x_pos_v1(), 1],
+            markup=self.v1_str,
+            font_family=font_family,
+            font_size=font_size,
+            font_weight=font_weight,
+            color=Color.WHITE if not self.inv_v1_col else Color.ORANGE,
+            alignment=String.LEFT,
+        ).render(ctx)
+
+        #v2 string
+        String(
+            pos=[self.x_pos_v2(), 1.5],
+            markup=self.v2_str,
+            font_family=font_family,
+            font_size=font_size,
+            font_weight=font_weight,
+            color=Color.WHITE if not self.inv_v2_col else Color.GRAY,
+            alignment=String.LEFT,
+        ).render(ctx)
+
+def TwoValueLineChart(data, color):
 
     return Row(
         width='100%',
@@ -26,31 +107,16 @@ def TwoValueLineChart(data, color):
             font_size=9,
             font_weight=Text.BOLD,
         ),
-        Row(width='60%', height='70%').add(
-            Text(
-                text=fmt_num(v1),
-                font='Roboto bold 8',
-                width='{}%'.format(v1p),
-                height='100%',
-                bg_color=color,
-                vertical_alignment=Text.MIDDLE,
-                padding=Rect([0, 4, 0, 4]),
-                color=Color.WHITE,
-            ),
-            Text(
-                text=fmt_num(v2) if v2 else '',
-                font='Roboto bold 8',
-                width='{}%'.format(v2p),
-                height='100%',
-                bg_color=Color.GRAY,
-                vertical_alignment=Text.MIDDLE,
-                alignment=Text.RIGHT,
-                padding=Rect([0, 4, 0, 4]),
-                color=Color.WHITE,
-            ),
+        # Row(width='60%', height='70%').add(add
+        Row(width='60%', height='70%')
+            .add(
+                Canvas(
+                    width='100%',
+                    height='100%',
+                    renderer=Bars(data),
+                )
         )
     )
-
 
 def ReconstructionStatus(data):
     rows = [

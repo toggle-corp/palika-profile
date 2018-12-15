@@ -8,7 +8,7 @@ class Color:
 
     BLUE = rgb(26, 35, 126)
 
-    ORANGE = hx('#ed7d31')
+    ORANGE = rgb(237,125,49)
     DARK_ORANGE = hx('e76726')
 
     GREEN = hx('#00b050')

@@ -60,7 +60,7 @@ def generate(lang = 'en', test_len = None, make_maps = True, map_img_type ='svg'
         os.makedirs('./output/', exist_ok=True)
         PdfDraft('./output/%s.pdf' %v)\
             .draw(Page1(cur_rep.data, lang))\
-            .draw(Page2(cur_rep.data, lang))
+            # .draw(Page2(cur_rep.data, lang))
 
 if __name__ == '__main__':
-    generate(test_len = 1, make_maps = False, map_img_type='svg', lang = 'en')
+    generate(test_len = 5, make_maps = False, map_img_type='svg', lang = 'en')
