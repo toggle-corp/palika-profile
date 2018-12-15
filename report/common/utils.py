@@ -168,20 +168,29 @@ def gen_maps(pka_list, img_type):
     #TODO: error, check if the provided palika codes are actually in our data
     #TODO: delete once finished running
 
+    print(get_lang())
+    if get_lang() in ('en', 'np'):
+        pka_style_lang = './resources/mapfiles/styles/palika_style_%s.qml' % get_lang()
+    else:
+        raise Exception('Bad language for map styling, bro.')
+
     atlas = at(
         data_uri='./resources/data/profile_data_structure_template.xlsx',
         wards_uri='./resources/mapfiles/hrrp_shapes/wards/merge.shp',
         palika_uri='./resources/mapfiles/hrrp_shapes/palika/GaPaNaPa_hrrp.shp',
         dists_uri='./resources/mapfiles/hrrp_shapes/districts/Districts_hrrp.shp',
+
         dists_syle='./resources/mapfiles/styles/dist_style.qml',
-        pka_style='./resources/mapfiles/styles/palika_style.qml',
+        pka_style=pka_style_lang,
         pka_hide_style='./resources/mapfiles/styles/palika_hide_style.qml',
         ward_style='./resources/mapfiles/styles/ward_style.qml',
         atlas_style='./resources/mapfiles/styles/atlas_layout.qpt',
+
         parent_join_cd='N_WCode',
         to_join_code='ward',
         pka_list=pka_list,
         img_type=img_type,
+
         out_path='./resources/mapfiles/map_tmp/')
 
     atlas.make_maps()

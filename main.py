@@ -4,7 +4,7 @@ from drafter.draft import PdfDraft
 from report import Page1, Page2
 from report.common.utils import clean_xls_headers, process_sht, gen_maps
 from report.common.Report import Report
-from report.common.boiler import import_titles
+from report.common.boiler import import_titles, set_lang
 
 import pandas as pd
 
@@ -12,7 +12,8 @@ import pandas as pd
 error = []
 
 
-def generate(lang = 'en', test_len = None, make_maps = True, map_img_type ='svg'):
+def generate(lang_in, test_len = None, make_maps = True, map_img_type ='svg'):
+    set_lang(lang_in)
     XLS_URI = './resources/data/profile_data_structure_template.xlsx'
 
     #read in sheets
@@ -58,10 +59,10 @@ def generate(lang = 'en', test_len = None, make_maps = True, map_img_type ='svg'
         cur_rep.create_data()
 
         os.makedirs('./output/', exist_ok=True)
-        PdfDraft('./output/%s_%s.pdf' %(v, lang)) \
-            .draw(Page1(cur_rep.data, lang)) \
-            .draw(Page2(cur_rep.data, lang))
+        PdfDraft('./output/%s_%s.pdf' %(v, lang_in)) \
+            .draw(Page1(cur_rep.data, lang_in)) \
+            .draw(Page2(cur_rep.data, lang_in))
 
 if __name__ == '__main__':
-    generate(test_len = 1, make_maps = False, map_img_type='svg', lang = 'en')
-    generate(test_len=1, make_maps=False, map_img_type='svg', lang='np')
+    # generate(lang_in = 'en', test_len = 5, make_maps = True, map_img_type='svg')
+    generate(lang_in='np', test_len=2, make_maps=True, map_img_type='svg')

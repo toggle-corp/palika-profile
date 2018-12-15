@@ -1,38 +1,38 @@
-<Layout printResolution="300" worldFileMap="{9f2a5b2b-f0e0-45f3-8a0e-3a9203f3d6c0}" units="mm" name="ne">
- <Snapper tolerance="5" snapToGuides="1" snapToItems="1" snapToGrid="0"/>
- <Grid resolution="10" offsetUnits="mm" resUnits="mm" offsetX="0" offsetY="0"/>
+<Layout printResolution="300" name="ne" worldFileMap="{9f2a5b2b-f0e0-45f3-8a0e-3a9203f3d6c0}" units="mm">
+ <Snapper snapToGuides="1" snapToItems="1" snapToGrid="0" tolerance="5"/>
+ <Grid resUnits="mm" offsetUnits="mm" offsetY="0" offsetX="0" resolution="10"/>
  <PageCollection>
-  <symbol clip_to_extent="1" type="fill" alpha="1" name="">
-   <layer pass="0" enabled="1" locked="0" class="SimpleFill">
-    <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-    <prop k="color" v="255,255,255,255"/>
-    <prop k="joinstyle" v="miter"/>
-    <prop k="offset" v="0,0"/>
-    <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-    <prop k="offset_unit" v="MM"/>
-    <prop k="outline_color" v="35,35,35,255"/>
-    <prop k="outline_style" v="no"/>
-    <prop k="outline_width" v="0.26"/>
-    <prop k="outline_width_unit" v="MM"/>
-    <prop k="style" v="solid"/>
+  <symbol type="fill" name="" clip_to_extent="1" alpha="1">
+   <layer pass="0" class="SimpleFill" enabled="1" locked="0">
+    <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+    <prop v="255,255,255,255" k="color"/>
+    <prop v="miter" k="joinstyle"/>
+    <prop v="0,0" k="offset"/>
+    <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+    <prop v="MM" k="offset_unit"/>
+    <prop v="35,35,35,255" k="outline_color"/>
+    <prop v="no" k="outline_style"/>
+    <prop v="0.26" k="outline_width"/>
+    <prop v="MM" k="outline_width_unit"/>
+    <prop v="solid" k="style"/>
     <data_defined_properties>
      <Option type="Map">
-      <Option type="QString" value="" name="name"/>
+      <Option value="" type="QString" name="name"/>
       <Option name="properties"/>
-      <Option type="QString" value="collection" name="type"/>
+      <Option value="collection" type="QString" name="type"/>
      </Option>
     </data_defined_properties>
    </layer>
   </symbol>
-  <LayoutItem groupUuid="" referencePoint="0" zValue="0" visibility="1" id="" uuid="{8a0804a6-650c-4d96-86e8-6a7e1d831248}" excludeFromExports="0" size="450,300,mm" background="true" positionLock="false" type="65638" outlineWidthM="0.3,mm" frameJoinStyle="miter" frame="false" opacity="1" positionOnPage="0,0,mm" itemRotation="0" position="0,0,mm" templateUuid="{8a0804a6-650c-4d96-86e8-6a7e1d831248}" blendMode="0">
-   <FrameColor green="0" blue="0" alpha="255" red="0"/>
-   <BackgroundColor green="255" blue="255" alpha="255" red="255"/>
+  <LayoutItem opacity="1" id="" frameJoinStyle="miter" visibility="1" position="0,0,mm" itemRotation="0" positionOnPage="0,0,mm" frame="false" positionLock="false" referencePoint="0" excludeFromExports="0" type="65638" blendMode="0" size="450,300,mm" groupUuid="" outlineWidthM="0.3,mm" background="true" zValue="0" templateUuid="{a2bf7e97-81a4-44b9-ad80-b276c2a88197}" uuid="{a2bf7e97-81a4-44b9-ad80-b276c2a88197}">
+   <FrameColor blue="0" green="0" red="0" alpha="255"/>
+   <BackgroundColor blue="255" green="255" red="255" alpha="255"/>
    <LayoutObject>
     <dataDefinedProperties>
      <Option type="Map">
-      <Option type="QString" value="" name="name"/>
+      <Option value="" type="QString" name="name"/>
       <Option name="properties"/>
-      <Option type="QString" value="collection" name="type"/>
+      <Option value="collection" type="QString" name="type"/>
      </Option>
     </dataDefinedProperties>
     <customproperties/>
@@ -40,25 +40,25 @@
   </LayoutItem>
   <GuideCollection visible="1"/>
  </PageCollection>
- <LayoutItem keepLayerSet="false" groupUuid="" referencePoint="0" drawCanvasItems="true" zValue="1" visibility="1" mapRotation="0" id="" uuid="{74b9ff5a-9314-47f6-bd47-a5e58f0da415}" excludeFromExports="0" size="450,300,mm" background="true" positionLock="false" followPreset="false" type="65639" outlineWidthM="0.3,mm" frameJoinStyle="miter" frame="false" opacity="1" positionOnPage="0,0,mm" itemRotation="0" position="0,0,mm" templateUuid="{74b9ff5a-9314-47f6-bd47-a5e58f0da415}" blendMode="0" followPresetName="">
-  <FrameColor green="0" blue="0" alpha="255" red="0"/>
-  <BackgroundColor green="255" blue="255" alpha="255" red="255"/>
+ <LayoutItem opacity="1" id="" frameJoinStyle="miter" followPresetName="" visibility="1" keepLayerSet="false" position="0,0,mm" itemRotation="0" positionOnPage="0,0,mm" frame="false" positionLock="false" referencePoint="0" excludeFromExports="0" type="65639" blendMode="0" size="450,300,mm" mapRotation="0" groupUuid="" outlineWidthM="0.3,mm" background="true" zValue="1" drawCanvasItems="true" followPreset="false" templateUuid="{14ede474-43e3-4df0-9c95-222bbd8abec1}" uuid="{14ede474-43e3-4df0-9c95-222bbd8abec1}">
+  <FrameColor blue="0" green="0" red="0" alpha="255"/>
+  <BackgroundColor blue="255" green="255" red="255" alpha="255"/>
   <LayoutObject>
    <dataDefinedProperties>
     <Option type="Map">
-     <Option type="QString" value="" name="name"/>
+     <Option value="" type="QString" name="name"/>
      <Option name="properties"/>
-     <Option type="QString" value="collection" name="type"/>
+     <Option value="collection" type="QString" name="type"/>
     </Option>
    </dataDefinedProperties>
    <customproperties/>
   </LayoutObject>
-  <Extent xmax="83.18792954748091972" xmin="82.89323185323370069" ymin="27.89964966942730129" ymax="28.09611479892541652"/>
+  <Extent ymax="28.09611479892543429" xmax="83.18792954748091972" ymin="27.89964966942728708" xmin="82.89323185323370069"/>
   <LayerSet/>
   <AtlasMap atlasDriven="1" scalingMode="2" margin="0.10000000000000001"/>
  </LayoutItem>
  <customproperties>
   <property value="png" key="atlasRasterFormat"/>
  </customproperties>
- <Atlas pageNameExpression="" sortFeatures="0" enabled="1" filterFeatures="0" filenamePattern="'output_'||@atlas_featurenumber" hideCoverage="0" coverageLayer=""/>
+ <Atlas coverageLayer="" filenamePattern="'output_'||@atlas_featurenumber" enabled="1" hideCoverage="0" filterFeatures="0" pageNameExpression="" sortFeatures="0"/>
 </Layout>

@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis projectname="" version="3.4.1-Madeira">
+<qgis version="3.4.1-Madeira" projectname="">
   <homePath path=""/>
   <title></title>
   <autotransaction active="0"/>
@@ -19,41 +19,41 @@
   </projectCrs>
   <layer-tree-group>
     <customproperties/>
-    <layer-tree-layer expanded="1" id="dists_e2afa3dc_de3c_45cc_b291_3ef5fd5c7625" providerKey="ogr" name="dists" checked="Qt::Checked" source="../hrrp_shapes/districts/Districts_hrrp.shp">
+    <layer-tree-layer source="../hrrp_shapes/districts/Districts_hrrp.shp" checked="Qt::Checked" name="dists" id="dists_07fff2c3_6328_41ea_a24a_44c90684a045" expanded="1" providerKey="ogr">
       <customproperties/>
     </layer-tree-layer>
-    <layer-tree-layer expanded="1" id="palikas_e55002a0_b532_4887_8cdb_c9353227a302" providerKey="ogr" name="palikas" checked="Qt::Checked" source="../hrrp_shapes/palika/GaPaNaPa_hrrp.shp">
+    <layer-tree-layer source="../hrrp_shapes/palika/GaPaNaPa_hrrp.shp" checked="Qt::Checked" name="palikas" id="palikas_eb198486_a131_47f5_aef3_c9396daf5e72" expanded="1" providerKey="ogr">
       <customproperties/>
     </layer-tree-layer>
-    <layer-tree-layer expanded="1" id="palika_hide_4e143633_b614_4d1a_82cd_b37e6d7df41c" providerKey="ogr" name="palika_hide" checked="Qt::Checked" source="../hrrp_shapes/palika/GaPaNaPa_hrrp.shp">
+    <layer-tree-layer source="../hrrp_shapes/palika/GaPaNaPa_hrrp.shp" checked="Qt::Checked" name="palika_hide" id="palika_hide_6007601a_975b_46f4_bb11_b8a2c24aa143" expanded="1" providerKey="ogr">
       <customproperties/>
     </layer-tree-layer>
-    <layer-tree-layer expanded="1" id="wards_ea5fde59_20ee_4738_8f30_6fdcd6e3da23" providerKey="ogr" name="wards" checked="Qt::Checked" source="../hrrp_shapes/wards/merge.shp">
+    <layer-tree-layer source="../hrrp_shapes/wards/merge.shp" checked="Qt::Checked" name="wards" id="wards_bf942832_656e_4186_a250_120b298ff322" expanded="1" providerKey="ogr">
       <customproperties/>
     </layer-tree-layer>
-    <layer-tree-layer expanded="1" id="data_75f9ca89_1f1d_4c4f_9631_779fa8a5b2b2" providerKey="ogr" name="data" checked="Qt::Checked" source="/tmp/tmp_data.csv">
+    <layer-tree-layer source="/tmp/tmp_data.csv" checked="Qt::Checked" name="data" id="data_d562c150_79ef_4801_8104_c0ca170b5530" expanded="1" providerKey="ogr">
       <customproperties/>
     </layer-tree-layer>
     <custom-order enabled="0">
-      <item>data_75f9ca89_1f1d_4c4f_9631_779fa8a5b2b2</item>
-      <item>wards_ea5fde59_20ee_4738_8f30_6fdcd6e3da23</item>
-      <item>palika_hide_4e143633_b614_4d1a_82cd_b37e6d7df41c</item>
-      <item>palikas_e55002a0_b532_4887_8cdb_c9353227a302</item>
-      <item>dists_e2afa3dc_de3c_45cc_b291_3ef5fd5c7625</item>
+      <item>data_d562c150_79ef_4801_8104_c0ca170b5530</item>
+      <item>wards_bf942832_656e_4186_a250_120b298ff322</item>
+      <item>palika_hide_6007601a_975b_46f4_bb11_b8a2c24aa143</item>
+      <item>palikas_eb198486_a131_47f5_aef3_c9396daf5e72</item>
+      <item>dists_07fff2c3_6328_41ea_a24a_44c90684a045</item>
     </custom-order>
   </layer-tree-group>
-  <snapping-settings unit="1" mode="2" tolerance="12" intersection-snapping="0" enabled="0" type="1">
+  <snapping-settings enabled="0" mode="2" type="1" intersection-snapping="0" unit="1" tolerance="12">
     <individual-layer-settings>
-      <layer-setting units="1" id="palika_hide_4e143633_b614_4d1a_82cd_b37e6d7df41c" tolerance="12" enabled="1" type="1"/>
-      <layer-setting units="1" id="dists_e2afa3dc_de3c_45cc_b291_3ef5fd5c7625" tolerance="12" enabled="1" type="1"/>
-      <layer-setting units="1" id="palikas_e55002a0_b532_4887_8cdb_c9353227a302" tolerance="12" enabled="1" type="1"/>
-      <layer-setting units="1" id="wards_ea5fde59_20ee_4738_8f30_6fdcd6e3da23" tolerance="12" enabled="1" type="1"/>
+      <layer-setting enabled="1" type="1" id="dists_07fff2c3_6328_41ea_a24a_44c90684a045" units="1" tolerance="12"/>
+      <layer-setting enabled="1" type="1" id="wards_bf942832_656e_4186_a250_120b298ff322" units="1" tolerance="12"/>
+      <layer-setting enabled="1" type="1" id="palikas_eb198486_a131_47f5_aef3_c9396daf5e72" units="1" tolerance="12"/>
+      <layer-setting enabled="1" type="1" id="palika_hide_6007601a_975b_46f4_bb11_b8a2c24aa143" units="1" tolerance="12"/>
     </individual-layer-settings>
   </snapping-settings>
   <relations/>
   <projectlayers>
-    <maplayer styleCategories="AllStyleCategories" autoRefreshTime="0" refreshOnNotifyEnabled="0" hasScaleBasedVisibilityFlag="0" minScale="1e+8" autoRefreshEnabled="0" maxScale="0" type="vector" geometry="No geometry" refreshOnNotifyMessage="" readOnly="0">
-      <id>data_75f9ca89_1f1d_4c4f_9631_779fa8a5b2b2</id>
+    <maplayer refreshOnNotifyEnabled="0" hasScaleBasedVisibilityFlag="0" refreshOnNotifyMessage="" type="vector" geometry="No geometry" autoRefreshEnabled="0" maxScale="0" minScale="1e+8" readOnly="0" autoRefreshTime="0" styleCategories="AllStyleCategories">
+      <id>data_d562c150_79ef_4801_8104_c0ca170b5530</id>
       <datasource>/tmp/tmp_data.csv</datasource>
       <keywordList>
         <value></value>
@@ -132,18 +132,18 @@
         </field>
       </fieldConfiguration>
       <aliases>
-        <alias field="ward" index="0" name=""/>
-        <alias field="value" index="1" name=""/>
+        <alias index="0" name="" field="ward"/>
+        <alias index="1" name="" field="value"/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <defaults>
-        <default field="ward" expression="" applyOnUpdate="0"/>
-        <default field="value" expression="" applyOnUpdate="0"/>
+        <default expression="" applyOnUpdate="0" field="ward"/>
+        <default expression="" applyOnUpdate="0" field="value"/>
       </defaults>
       <constraints>
-        <constraint field="ward" notnull_strength="0" exp_strength="0" constraints="0" unique_strength="0"/>
-        <constraint field="value" notnull_strength="0" exp_strength="0" constraints="0" unique_strength="0"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="ward"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="value"/>
       </constraints>
       <constraintExpressions>
         <constraint field="ward" desc="" exp=""/>
@@ -151,7 +151,7 @@
       </constraintExpressions>
       <expressionfields/>
       <attributeactions/>
-      <attributetableconfig sortOrder="0" actionWidgetStyle="dropDown" sortExpression="">
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
         <columns/>
       </attributetableconfig>
       <conditionalstyles>
@@ -171,14 +171,14 @@
       <previewExpression></previewExpression>
       <mapTip></mapTip>
     </maplayer>
-    <maplayer simplifyDrawingTol="1" simplifyAlgorithm="0" labelsEnabled="1" styleCategories="AllStyleCategories" simplifyDrawingHints="1" simplifyMaxScale="1" autoRefreshTime="0" refreshOnNotifyEnabled="0" hasScaleBasedVisibilityFlag="0" minScale="1e+8" simplifyLocal="1" autoRefreshEnabled="0" maxScale="0" type="vector" geometry="Polygon" refreshOnNotifyMessage="" readOnly="0">
+    <maplayer refreshOnNotifyEnabled="0" hasScaleBasedVisibilityFlag="0" simplifyDrawingTol="1" simplifyLocal="1" refreshOnNotifyMessage="" type="vector" geometry="Polygon" simplifyDrawingHints="1" autoRefreshEnabled="0" simplifyAlgorithm="0" maxScale="0" minScale="1e+8" readOnly="0" autoRefreshTime="0" labelsEnabled="1" simplifyMaxScale="1" styleCategories="AllStyleCategories">
       <extent>
         <xmin>82.74828021578791493</xmin>
         <ymin>26.84559060878216386</ymin>
         <xmax>87.67724759762447206</xmax>
         <ymax>28.79369013705984415</ymax>
       </extent>
-      <id>dists_e2afa3dc_de3c_45cc_b291_3ef5fd5c7625</id>
+      <id>dists_07fff2c3_6328_41ea_a24a_44c90684a045</id>
       <datasource>../hrrp_shapes/districts/Districts_hrrp.shp</datasource>
       <keywordList>
         <value></value>
@@ -235,26 +235,26 @@
         <Removable>1</Removable>
         <Searchable>1</Searchable>
       </flags>
-      <renderer-v2 symbollevels="0" forceraster="0" enableorderby="0" type="singleSymbol">
+      <renderer-v2 type="singleSymbol" enableorderby="0" symbollevels="0" forceraster="0">
         <symbols>
-          <symbol clip_to_extent="1" alpha="1" name="0" type="fill">
-            <layer class="SimpleFill" pass="0" locked="0" enabled="1">
-              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="color" v="183,72,75,0"/>
-              <prop k="joinstyle" v="bevel"/>
-              <prop k="offset" v="0,0"/>
-              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="35,35,35,255"/>
-              <prop k="outline_style" v="solid"/>
-              <prop k="outline_width" v="0.66"/>
-              <prop k="outline_width_unit" v="MM"/>
-              <prop k="style" v="solid"/>
+          <symbol type="fill" name="0" clip_to_extent="1" alpha="1">
+            <layer class="SimpleFill" pass="0" enabled="1" locked="0">
+              <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+              <prop v="183,72,75,0" k="color"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="35,35,35,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0.66" k="outline_width"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="solid" k="style"/>
               <data_defined_properties>
                 <Option type="Map">
-                  <Option value="" name="name" type="QString"/>
+                  <Option type="QString" name="name" value=""/>
                   <Option name="properties"/>
-                  <Option value="collection" name="type" type="QString"/>
+                  <Option type="QString" name="type" value="collection"/>
                 </Option>
               </data_defined_properties>
             </layer>
@@ -265,20 +265,20 @@
       </renderer-v2>
       <labeling type="simple">
         <settings>
-          <text-style fontSizeMapUnitScale="3x:0,0,0,0,0,0" namedStyle="Regular" fontLetterSpacing="0" multilineHeight="1" isExpression="0" fontStrikeout="0" textColor="0,0,0,255" fontWordSpacing="0" fontUnderline="0" blendMode="0" fontSizeUnit="Point" previewBkgrdColor="#ffffff" fontSize="10" fieldName="FIRST_DIST" textOpacity="1" fontWeight="50" fontCapitals="0" useSubstitutions="0" fontFamily=".SF NS Text" fontItalic="0">
-            <text-buffer bufferSize="1" bufferOpacity="1" bufferNoFill="1" bufferJoinStyle="128" bufferSizeUnits="MM" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferBlendMode="0" bufferDraw="1" bufferColor="255,255,255,255"/>
-            <background shapeOffsetUnit="MM" shapeBorderWidthUnit="MM" shapeBorderWidthMapUnitScale="3x:0,0,0,0,0,0" shapeSVGFile="" shapeType="0" shapeDraw="0" shapeOffsetMapUnitScale="3x:0,0,0,0,0,0" shapeRotationType="0" shapeSizeY="0" shapeOpacity="1" shapeRadiiX="0" shapeRotation="0" shapeSizeMapUnitScale="3x:0,0,0,0,0,0" shapeSizeX="0" shapeSizeUnit="MM" shapeOffsetX="0" shapeFillColor="255,255,255,255" shapeRadiiMapUnitScale="3x:0,0,0,0,0,0" shapeBlendMode="0" shapeSizeType="0" shapeRadiiY="0" shapeBorderWidth="0" shapeRadiiUnit="MM" shapeJoinStyle="64" shapeOffsetY="0" shapeBorderColor="128,128,128,255"/>
-            <shadow shadowUnder="0" shadowOffsetAngle="135" shadowColor="0,0,0,255" shadowOffsetUnit="MM" shadowOffsetDist="1" shadowBlendMode="6" shadowOpacity="0.7" shadowOffsetMapUnitScale="3x:0,0,0,0,0,0" shadowDraw="0" shadowOffsetGlobal="1" shadowRadius="1.5" shadowRadiusAlphaOnly="0" shadowRadiusUnit="MM" shadowRadiusMapUnitScale="3x:0,0,0,0,0,0" shadowScale="100"/>
+          <text-style useSubstitutions="0" fieldName="FIRST_DIST" fontSizeMapUnitScale="3x:0,0,0,0,0,0" fontSize="18" fontCapitals="0" previewBkgrdColor="#ffffff" textOpacity="1" fontItalic="0" multilineHeight="1" textColor="0,0,0,255" blendMode="0" fontUnderline="0" fontFamily=".SF NS Text" fontWordSpacing="0" fontWeight="50" namedStyle="Regular" fontLetterSpacing="0" fontStrikeout="0" isExpression="0" fontSizeUnit="Point">
+            <text-buffer bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferSizeUnits="MM" bufferBlendMode="0" bufferColor="255,255,255,255" bufferSize="2" bufferDraw="1" bufferOpacity="1" bufferJoinStyle="128" bufferNoFill="1"/>
+            <background shapeOffsetUnit="MM" shapeSVGFile="" shapeType="0" shapeFillColor="255,255,255,255" shapeRotationType="0" shapeRadiiY="0" shapeBorderWidth="0" shapeSizeType="0" shapeBorderWidthUnit="MM" shapeOpacity="1" shapeBlendMode="0" shapeRotation="0" shapeSizeX="0" shapeSizeMapUnitScale="3x:0,0,0,0,0,0" shapeSizeY="0" shapeBorderColor="128,128,128,255" shapeOffsetX="0" shapeSizeUnit="MM" shapeBorderWidthMapUnitScale="3x:0,0,0,0,0,0" shapeOffsetY="0" shapeRadiiMapUnitScale="3x:0,0,0,0,0,0" shapeOffsetMapUnitScale="3x:0,0,0,0,0,0" shapeJoinStyle="64" shapeDraw="0" shapeRadiiX="0" shapeRadiiUnit="MM"/>
+            <shadow shadowOffsetDist="1" shadowColor="0,0,0,255" shadowRadiusMapUnitScale="3x:0,0,0,0,0,0" shadowRadiusAlphaOnly="0" shadowOpacity="0.7" shadowOffsetMapUnitScale="3x:0,0,0,0,0,0" shadowOffsetGlobal="1" shadowDraw="0" shadowOffsetAngle="135" shadowRadiusUnit="MM" shadowOffsetUnit="MM" shadowRadius="1.5" shadowScale="100" shadowBlendMode="6" shadowUnder="0"/>
             <substitutions/>
           </text-style>
-          <text-format plussign="0" useMaxLineLengthForAutoWrap="1" leftDirectionSymbol="&lt;" rightDirectionSymbol=">" autoWrapLength="0" reverseDirectionSymbol="0" decimals="3" wrapChar="" multilineAlign="4294967295" placeDirectionSymbol="0" addDirectionSymbol="0" formatNumbers="0"/>
-          <placement preserveRotation="1" placementFlags="10" distUnits="MM" quadOffset="4" labelOffsetMapUnitScale="3x:0,0,0,0,0,0" maxCurvedCharAngleOut="-25" predefinedPositionOrder="TR,TL,BR,BL,R,L,TSR,BSR" centroidWhole="0" xOffset="0" rotationAngle="0" fitInPolygonOnly="0" offsetUnits="MM" repeatDistanceMapUnitScale="3x:0,0,0,0,0,0" centroidInside="0" offsetType="0" distMapUnitScale="3x:0,0,0,0,0,0" repeatDistance="0" dist="0" priority="5" yOffset="0" repeatDistanceUnits="MM" maxCurvedCharAngleIn="25" placement="0"/>
-          <rendering obstacleType="0" displayAll="0" fontLimitPixelSize="0" scaleMax="0" zIndex="0" maxNumLabels="2000" mergeLines="0" obstacleFactor="1" scaleMin="0" upsidedownLabels="0" scaleVisibility="0" obstacle="1" limitNumLabels="0" drawLabels="1" labelPerPart="0" fontMaxPixelSize="10000" minFeatureSize="0" fontMinPixelSize="3"/>
+          <text-format leftDirectionSymbol="&lt;" reverseDirectionSymbol="0" rightDirectionSymbol=">" useMaxLineLengthForAutoWrap="1" multilineAlign="4294967295" plussign="0" autoWrapLength="0" addDirectionSymbol="0" wrapChar="" placeDirectionSymbol="0" decimals="3" formatNumbers="0"/>
+          <placement repeatDistanceMapUnitScale="3x:0,0,0,0,0,0" dist="0" offsetUnits="MM" placement="0" yOffset="0" placementFlags="10" priority="5" offsetType="0" quadOffset="4" labelOffsetMapUnitScale="3x:0,0,0,0,0,0" fitInPolygonOnly="0" xOffset="0" rotationAngle="0" repeatDistance="0" predefinedPositionOrder="TR,TL,BR,BL,R,L,TSR,BSR" preserveRotation="1" maxCurvedCharAngleOut="-25" centroidWhole="0" centroidInside="0" maxCurvedCharAngleIn="25" repeatDistanceUnits="MM" distUnits="MM" distMapUnitScale="3x:0,0,0,0,0,0"/>
+          <rendering labelPerPart="0" fontMinPixelSize="3" upsidedownLabels="0" displayAll="0" obstacle="1" obstacleFactor="1" drawLabels="1" maxNumLabels="2000" scaleMin="0" scaleVisibility="0" mergeLines="0" obstacleType="0" limitNumLabels="0" fontMaxPixelSize="10000" zIndex="0" scaleMax="0" fontLimitPixelSize="0" minFeatureSize="0"/>
           <dd_properties>
             <Option type="Map">
-              <Option value="" name="name" type="QString"/>
+              <Option type="QString" name="name" value=""/>
               <Option name="properties"/>
-              <Option value="collection" name="type" type="QString"/>
+              <Option type="QString" name="type" value="collection"/>
             </Option>
           </dd_properties>
         </settings>
@@ -292,17 +292,17 @@
       <featureBlendMode>0</featureBlendMode>
       <layerOpacity>1</layerOpacity>
       <SingleCategoryDiagramRenderer diagramType="Histogram" attributeLegend="1">
-        <DiagramCategory opacity="1" sizeType="MM" minimumSize="0" scaleBasedVisibility="0" penWidth="0" barWidth="5" sizeScale="3x:0,0,0,0,0,0" lineSizeType="MM" height="15" maxScaleDenominator="1e+8" backgroundAlpha="255" rotationOffset="270" minScaleDenominator="0" penColor="#000000" lineSizeScale="3x:0,0,0,0,0,0" scaleDependency="Area" backgroundColor="#ffffff" width="15" labelPlacementMethod="XHeight" diagramOrientation="Up" penAlpha="255" enabled="0">
-          <fontProperties description=".SF NS Text,13,-1,5,50,0,0,0,0,0" style=""/>
-          <attribute field="" label="" color="#000000"/>
+        <DiagramCategory backgroundColor="#ffffff" opacity="1" sizeType="MM" penAlpha="255" backgroundAlpha="255" maxScaleDenominator="1e+8" lineSizeType="MM" minScaleDenominator="0" penWidth="0" scaleDependency="Area" scaleBasedVisibility="0" labelPlacementMethod="XHeight" height="15" enabled="0" diagramOrientation="Up" minimumSize="0" sizeScale="3x:0,0,0,0,0,0" width="15" lineSizeScale="3x:0,0,0,0,0,0" barWidth="5" penColor="#000000" rotationOffset="270">
+          <fontProperties style="" description=".SF NS Text,13,-1,5,50,0,0,0,0,0"/>
+          <attribute color="#000000" field="" label=""/>
         </DiagramCategory>
       </SingleCategoryDiagramRenderer>
-      <DiagramLayerSettings showAll="1" dist="0" zIndex="0" linePlacementFlags="18" placement="1" obstacle="0" priority="0">
+      <DiagramLayerSettings obstacle="0" priority="0" linePlacementFlags="18" placement="1" zIndex="0" dist="0" showAll="1">
         <properties>
           <Option type="Map">
-            <Option value="" name="name" type="QString"/>
+            <Option type="QString" name="name" value=""/>
             <Option name="properties"/>
-            <Option value="collection" name="type" type="QString"/>
+            <Option type="QString" name="type" value="collection"/>
           </Option>
         </properties>
       </DiagramLayerSettings>
@@ -327,18 +327,18 @@
         </field>
       </fieldConfiguration>
       <aliases>
-        <alias field="FIRST_DIST" index="0" name=""/>
-        <alias field="dist_cod" index="1" name=""/>
+        <alias index="0" name="" field="FIRST_DIST"/>
+        <alias index="1" name="" field="dist_cod"/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <defaults>
-        <default field="FIRST_DIST" expression="" applyOnUpdate="0"/>
-        <default field="dist_cod" expression="" applyOnUpdate="0"/>
+        <default expression="" applyOnUpdate="0" field="FIRST_DIST"/>
+        <default expression="" applyOnUpdate="0" field="dist_cod"/>
       </defaults>
       <constraints>
-        <constraint field="FIRST_DIST" notnull_strength="0" exp_strength="0" constraints="0" unique_strength="0"/>
-        <constraint field="dist_cod" notnull_strength="0" exp_strength="0" constraints="0" unique_strength="0"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="FIRST_DIST"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="dist_cod"/>
       </constraints>
       <constraintExpressions>
         <constraint field="FIRST_DIST" desc="" exp=""/>
@@ -348,11 +348,11 @@
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
       </attributeactions>
-      <attributetableconfig sortOrder="0" actionWidgetStyle="dropDown" sortExpression="">
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
         <columns>
-          <column name="FIRST_DIST" type="field" hidden="0" width="-1"/>
-          <column name="dist_cod" type="field" hidden="0" width="-1"/>
-          <column type="actions" hidden="1" width="-1"/>
+          <column width="-1" hidden="0" type="field" name="FIRST_DIST"/>
+          <column width="-1" hidden="0" type="field" name="dist_cod"/>
+          <column width="-1" hidden="1" type="actions"/>
         </columns>
       </attributetableconfig>
       <conditionalstyles>
@@ -383,8 +383,8 @@ def my_form_open(dialog, layer, feature):
       <featformsuppress>0</featformsuppress>
       <editorlayout>generatedlayout</editorlayout>
       <editable>
-        <field editable="1" name="FIRST_DIST"/>
-        <field editable="1" name="dist_cod"/>
+        <field name="FIRST_DIST" editable="1"/>
+        <field name="dist_cod" editable="1"/>
       </editable>
       <labelOnTop>
         <field labelOnTop="0" name="FIRST_DIST"/>
@@ -394,14 +394,14 @@ def my_form_open(dialog, layer, feature):
       <previewExpression>FIRST_DIST</previewExpression>
       <mapTip></mapTip>
     </maplayer>
-    <maplayer simplifyDrawingTol="1" simplifyAlgorithm="0" labelsEnabled="1" styleCategories="AllStyleCategories" simplifyDrawingHints="1" simplifyMaxScale="1" autoRefreshTime="0" refreshOnNotifyEnabled="0" hasScaleBasedVisibilityFlag="0" minScale="1e+8" simplifyLocal="1" autoRefreshEnabled="0" maxScale="0" type="vector" geometry="Polygon" refreshOnNotifyMessage="" readOnly="0">
+    <maplayer refreshOnNotifyEnabled="0" hasScaleBasedVisibilityFlag="0" simplifyDrawingTol="1" simplifyLocal="1" refreshOnNotifyMessage="" type="vector" geometry="Polygon" simplifyDrawingHints="1" autoRefreshEnabled="0" simplifyAlgorithm="0" maxScale="0" minScale="1e+8" readOnly="0" autoRefreshTime="0" labelsEnabled="1" simplifyMaxScale="1" styleCategories="AllStyleCategories">
       <extent>
         <xmin>82.74828021578794335</xmin>
         <ymin>26.84559060878213188</ymin>
         <xmax>87.67724759762448627</xmax>
         <ymax>28.79369013705981217</ymax>
       </extent>
-      <id>palika_hide_4e143633_b614_4d1a_82cd_b37e6d7df41c</id>
+      <id>palika_hide_6007601a_975b_46f4_bb11_b8a2c24aa143</id>
       <datasource>../hrrp_shapes/palika/GaPaNaPa_hrrp.shp</datasource>
       <keywordList>
         <value></value>
@@ -458,29 +458,29 @@ def my_form_open(dialog, layer, feature):
         <Removable>1</Removable>
         <Searchable>1</Searchable>
       </flags>
-      <renderer-v2 symbollevels="0" forceraster="0" enableorderby="0" type="RuleRenderer">
+      <renderer-v2 type="RuleRenderer" enableorderby="0" symbollevels="0" forceraster="0">
         <rules key="{edefbc57-463e-429c-aec5-ea0b07420134}">
-          <rule key="{d15d7337-862a-407b-b9bf-c5f7f5ac219e}" filter="$id !=  @atlas_featureid" symbol="0"/>
+          <rule symbol="0" key="{d15d7337-862a-407b-b9bf-c5f7f5ac219e}" filter="$id !=  @atlas_featureid"/>
         </rules>
         <symbols>
-          <symbol clip_to_extent="1" alpha="1" name="0" type="fill">
-            <layer class="SimpleFill" pass="0" locked="0" enabled="1">
-              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="color" v="252,252,252,255"/>
-              <prop k="joinstyle" v="bevel"/>
-              <prop k="offset" v="0,0"/>
-              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="35,35,35,255"/>
-              <prop k="outline_style" v="solid"/>
-              <prop k="outline_width" v="0.26"/>
-              <prop k="outline_width_unit" v="MM"/>
-              <prop k="style" v="solid"/>
+          <symbol type="fill" name="0" clip_to_extent="1" alpha="1">
+            <layer class="SimpleFill" pass="0" enabled="1" locked="0">
+              <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+              <prop v="252,252,252,255" k="color"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="35,35,35,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0.26" k="outline_width"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="solid" k="style"/>
               <data_defined_properties>
                 <Option type="Map">
-                  <Option value="" name="name" type="QString"/>
+                  <Option type="QString" name="name" value=""/>
                   <Option name="properties"/>
-                  <Option value="collection" name="type" type="QString"/>
+                  <Option type="QString" name="type" value="collection"/>
                 </Option>
               </data_defined_properties>
             </layer>
@@ -491,20 +491,20 @@ def my_form_open(dialog, layer, feature):
         <rules key="{b66ccf1d-c2fb-4ce5-bc1d-97f457bf60b2}">
           <rule key="{b41d95bf-b379-4cad-a502-b63bbe5733c5}" filter="&quot;Palika_cod&quot;  =  attribute(@atlas_feature , 'PalikaCode')">
             <settings>
-              <text-style fontSizeMapUnitScale="3x:0,0,0,0,0,0" namedStyle="Regular" fontLetterSpacing="0" multilineHeight="1" isExpression="0" fontStrikeout="0" textColor="0,0,0,255" fontWordSpacing="0" fontUnderline="0" blendMode="0" fontSizeUnit="Point" previewBkgrdColor="#ffffff" fontSize="10" fieldName="NEW_WARD_N" textOpacity="1" fontWeight="50" fontCapitals="0" useSubstitutions="0" fontFamily=".SF NS Text" fontItalic="0">
-                <text-buffer bufferSize="1" bufferOpacity="1" bufferNoFill="1" bufferJoinStyle="128" bufferSizeUnits="MM" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferBlendMode="0" bufferDraw="0" bufferColor="255,255,255,255"/>
-                <background shapeOffsetUnit="MM" shapeBorderWidthUnit="MM" shapeBorderWidthMapUnitScale="3x:0,0,0,0,0,0" shapeSVGFile="" shapeType="3" shapeDraw="1" shapeOffsetMapUnitScale="3x:0,0,0,0,0,0" shapeRotationType="0" shapeSizeY="0" shapeOpacity="1" shapeRadiiX="0" shapeRotation="0" shapeSizeMapUnitScale="3x:0,0,0,0,0,0" shapeSizeX="0" shapeSizeUnit="MM" shapeOffsetX="0" shapeFillColor="255,255,255,0" shapeRadiiMapUnitScale="3x:0,0,0,0,0,0" shapeBlendMode="0" shapeSizeType="0" shapeRadiiY="0" shapeBorderWidth="0.2" shapeRadiiUnit="MM" shapeJoinStyle="64" shapeOffsetY="0" shapeBorderColor="0,0,0,255"/>
-                <shadow shadowUnder="0" shadowOffsetAngle="135" shadowColor="0,0,0,255" shadowOffsetUnit="MM" shadowOffsetDist="1" shadowBlendMode="6" shadowOpacity="0.7" shadowOffsetMapUnitScale="3x:0,0,0,0,0,0" shadowDraw="0" shadowOffsetGlobal="1" shadowRadius="1.5" shadowRadiusAlphaOnly="0" shadowRadiusUnit="MM" shadowRadiusMapUnitScale="3x:0,0,0,0,0,0" shadowScale="100"/>
+              <text-style useSubstitutions="0" fieldName="NEW_WARD_N" fontSizeMapUnitScale="3x:0,0,0,0,0,0" fontSize="10" fontCapitals="0" previewBkgrdColor="#ffffff" textOpacity="1" fontItalic="0" multilineHeight="1" textColor="0,0,0,255" blendMode="0" fontUnderline="0" fontFamily=".SF NS Text" fontWordSpacing="0" fontWeight="50" namedStyle="Regular" fontLetterSpacing="0" fontStrikeout="0" isExpression="0" fontSizeUnit="Point">
+                <text-buffer bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferSizeUnits="MM" bufferBlendMode="0" bufferColor="255,255,255,255" bufferSize="1" bufferDraw="0" bufferOpacity="1" bufferJoinStyle="128" bufferNoFill="1"/>
+                <background shapeOffsetUnit="MM" shapeSVGFile="" shapeType="3" shapeFillColor="255,255,255,0" shapeRotationType="0" shapeRadiiY="0" shapeBorderWidth="0.2" shapeSizeType="0" shapeBorderWidthUnit="MM" shapeOpacity="1" shapeBlendMode="0" shapeRotation="0" shapeSizeX="0" shapeSizeMapUnitScale="3x:0,0,0,0,0,0" shapeSizeY="0" shapeBorderColor="0,0,0,255" shapeOffsetX="0" shapeSizeUnit="MM" shapeBorderWidthMapUnitScale="3x:0,0,0,0,0,0" shapeOffsetY="0" shapeRadiiMapUnitScale="3x:0,0,0,0,0,0" shapeOffsetMapUnitScale="3x:0,0,0,0,0,0" shapeJoinStyle="64" shapeDraw="1" shapeRadiiX="0" shapeRadiiUnit="MM"/>
+                <shadow shadowOffsetDist="1" shadowColor="0,0,0,255" shadowRadiusMapUnitScale="3x:0,0,0,0,0,0" shadowRadiusAlphaOnly="0" shadowOpacity="0.7" shadowOffsetMapUnitScale="3x:0,0,0,0,0,0" shadowOffsetGlobal="1" shadowDraw="0" shadowOffsetAngle="135" shadowRadiusUnit="MM" shadowOffsetUnit="MM" shadowRadius="1.5" shadowScale="100" shadowBlendMode="6" shadowUnder="0"/>
                 <substitutions/>
               </text-style>
-              <text-format plussign="0" useMaxLineLengthForAutoWrap="1" leftDirectionSymbol="&lt;" rightDirectionSymbol=">" autoWrapLength="0" reverseDirectionSymbol="0" decimals="3" wrapChar="" multilineAlign="4294967295" placeDirectionSymbol="0" addDirectionSymbol="0" formatNumbers="0"/>
-              <placement preserveRotation="1" placementFlags="14" distUnits="MM" quadOffset="4" labelOffsetMapUnitScale="3x:0,0,0,0,0,0" maxCurvedCharAngleOut="-25" predefinedPositionOrder="TR,TL,BR,BL,R,L,TSR,BSR" centroidWhole="1" xOffset="0" rotationAngle="0" fitInPolygonOnly="0" offsetUnits="MM" repeatDistanceMapUnitScale="3x:0,0,0,0,0,0" centroidInside="1" offsetType="0" distMapUnitScale="3x:0,0,0,0,0,0" repeatDistance="0" dist="0" priority="10" yOffset="0" repeatDistanceUnits="MM" maxCurvedCharAngleIn="25" placement="0"/>
-              <rendering obstacleType="0" displayAll="0" fontLimitPixelSize="0" scaleMax="0" zIndex="0" maxNumLabels="2000" mergeLines="0" obstacleFactor="1" scaleMin="0" upsidedownLabels="0" scaleVisibility="0" obstacle="0" limitNumLabels="0" drawLabels="1" labelPerPart="0" fontMaxPixelSize="10000" minFeatureSize="0" fontMinPixelSize="3"/>
+              <text-format leftDirectionSymbol="&lt;" reverseDirectionSymbol="0" rightDirectionSymbol=">" useMaxLineLengthForAutoWrap="1" multilineAlign="4294967295" plussign="0" autoWrapLength="0" addDirectionSymbol="0" wrapChar="" placeDirectionSymbol="0" decimals="3" formatNumbers="0"/>
+              <placement repeatDistanceMapUnitScale="3x:0,0,0,0,0,0" dist="0" offsetUnits="MM" placement="0" yOffset="0" placementFlags="14" priority="10" offsetType="0" quadOffset="4" labelOffsetMapUnitScale="3x:0,0,0,0,0,0" fitInPolygonOnly="0" xOffset="0" rotationAngle="0" repeatDistance="0" predefinedPositionOrder="TR,TL,BR,BL,R,L,TSR,BSR" preserveRotation="1" maxCurvedCharAngleOut="-25" centroidWhole="1" centroidInside="1" maxCurvedCharAngleIn="25" repeatDistanceUnits="MM" distUnits="MM" distMapUnitScale="3x:0,0,0,0,0,0"/>
+              <rendering labelPerPart="0" fontMinPixelSize="3" upsidedownLabels="0" displayAll="0" obstacle="0" obstacleFactor="1" drawLabels="1" maxNumLabels="2000" scaleMin="0" scaleVisibility="0" mergeLines="0" obstacleType="0" limitNumLabels="0" fontMaxPixelSize="10000" zIndex="0" scaleMax="0" fontLimitPixelSize="0" minFeatureSize="0"/>
               <dd_properties>
                 <Option type="Map">
-                  <Option value="" name="name" type="QString"/>
+                  <Option type="QString" name="name" value=""/>
                   <Option name="properties"/>
-                  <Option value="collection" name="type" type="QString"/>
+                  <Option type="QString" name="type" value="collection"/>
                 </Option>
               </dd_properties>
             </settings>
@@ -521,17 +521,17 @@ def my_form_open(dialog, layer, feature):
       <featureBlendMode>0</featureBlendMode>
       <layerOpacity>1</layerOpacity>
       <SingleCategoryDiagramRenderer diagramType="Histogram" attributeLegend="1">
-        <DiagramCategory opacity="1" sizeType="MM" minimumSize="0" scaleBasedVisibility="0" penWidth="0" barWidth="5" sizeScale="3x:0,0,0,0,0,0" lineSizeType="MM" height="15" maxScaleDenominator="1e+8" backgroundAlpha="255" rotationOffset="270" minScaleDenominator="0" penColor="#000000" lineSizeScale="3x:0,0,0,0,0,0" scaleDependency="Area" backgroundColor="#ffffff" width="15" labelPlacementMethod="XHeight" diagramOrientation="Up" penAlpha="255" enabled="0">
-          <fontProperties description=".SF NS Text,13,-1,5,50,0,0,0,0,0" style=""/>
-          <attribute field="" label="" color="#000000"/>
+        <DiagramCategory backgroundColor="#ffffff" opacity="1" sizeType="MM" penAlpha="255" backgroundAlpha="255" maxScaleDenominator="1e+8" lineSizeType="MM" minScaleDenominator="0" penWidth="0" scaleDependency="Area" scaleBasedVisibility="0" labelPlacementMethod="XHeight" height="15" enabled="0" diagramOrientation="Up" minimumSize="0" sizeScale="3x:0,0,0,0,0,0" width="15" lineSizeScale="3x:0,0,0,0,0,0" barWidth="5" penColor="#000000" rotationOffset="270">
+          <fontProperties style="" description=".SF NS Text,13,-1,5,50,0,0,0,0,0"/>
+          <attribute color="#000000" field="" label=""/>
         </DiagramCategory>
       </SingleCategoryDiagramRenderer>
-      <DiagramLayerSettings showAll="1" dist="0" zIndex="0" linePlacementFlags="18" placement="1" obstacle="0" priority="0">
+      <DiagramLayerSettings obstacle="0" priority="0" linePlacementFlags="18" placement="1" zIndex="0" dist="0" showAll="1">
         <properties>
           <Option type="Map">
-            <Option value="" name="name" type="QString"/>
+            <Option type="QString" name="name" value=""/>
             <Option name="properties"/>
-            <Option value="collection" name="type" type="QString"/>
+            <Option type="QString" name="type" value="collection"/>
           </Option>
         </properties>
       </DiagramLayerSettings>
@@ -540,6 +540,13 @@ def my_form_open(dialog, layer, feature):
         <checkConfiguration/>
       </geometryOptions>
       <fieldConfiguration>
+        <field name="Dis_Palika">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
         <field name="FIRST_DIST">
           <editWidget type="TextEdit">
             <config>
@@ -561,6 +568,13 @@ def my_form_open(dialog, layer, feature):
             </config>
           </editWidget>
         </field>
+        <field name="DistrictIn">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
         <field name="PalikaCode">
           <editWidget type="TextEdit">
             <config>
@@ -568,8 +582,29 @@ def my_form_open(dialog, layer, feature):
             </config>
           </editWidget>
         </field>
-        <field name="dist_cod">
-          <editWidget type="TextEdit">
+        <field name="Code_Joine">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="Dis_Nep">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="GPNP_Nep">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="F4">
+          <editWidget type="">
             <config>
               <Option/>
             </config>
@@ -577,47 +612,67 @@ def my_form_open(dialog, layer, feature):
         </field>
       </fieldConfiguration>
       <aliases>
-        <alias field="FIRST_DIST" index="0" name=""/>
-        <alias field="FIRST_GaPa" index="1" name=""/>
-        <alias field="FIRST_Type" index="2" name=""/>
-        <alias field="PalikaCode" index="3" name=""/>
-        <alias field="dist_cod" index="4" name=""/>
+        <alias index="0" name="" field="Dis_Palika"/>
+        <alias index="1" name="" field="FIRST_DIST"/>
+        <alias index="2" name="" field="FIRST_GaPa"/>
+        <alias index="3" name="" field="FIRST_Type"/>
+        <alias index="4" name="" field="DistrictIn"/>
+        <alias index="5" name="" field="PalikaCode"/>
+        <alias index="6" name="" field="Code_Joine"/>
+        <alias index="7" name="" field="Dis_Nep"/>
+        <alias index="8" name="" field="GPNP_Nep"/>
+        <alias index="9" name="" field="F4"/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <defaults>
-        <default field="FIRST_DIST" expression="" applyOnUpdate="0"/>
-        <default field="FIRST_GaPa" expression="" applyOnUpdate="0"/>
-        <default field="FIRST_Type" expression="" applyOnUpdate="0"/>
-        <default field="PalikaCode" expression="" applyOnUpdate="0"/>
-        <default field="dist_cod" expression="" applyOnUpdate="0"/>
+        <default expression="" applyOnUpdate="0" field="Dis_Palika"/>
+        <default expression="" applyOnUpdate="0" field="FIRST_DIST"/>
+        <default expression="" applyOnUpdate="0" field="FIRST_GaPa"/>
+        <default expression="" applyOnUpdate="0" field="FIRST_Type"/>
+        <default expression="" applyOnUpdate="0" field="DistrictIn"/>
+        <default expression="" applyOnUpdate="0" field="PalikaCode"/>
+        <default expression="" applyOnUpdate="0" field="Code_Joine"/>
+        <default expression="" applyOnUpdate="0" field="Dis_Nep"/>
+        <default expression="" applyOnUpdate="0" field="GPNP_Nep"/>
+        <default expression="" applyOnUpdate="0" field="F4"/>
       </defaults>
       <constraints>
-        <constraint field="FIRST_DIST" notnull_strength="0" exp_strength="0" constraints="0" unique_strength="0"/>
-        <constraint field="FIRST_GaPa" notnull_strength="0" exp_strength="0" constraints="0" unique_strength="0"/>
-        <constraint field="FIRST_Type" notnull_strength="0" exp_strength="0" constraints="0" unique_strength="0"/>
-        <constraint field="PalikaCode" notnull_strength="0" exp_strength="0" constraints="0" unique_strength="0"/>
-        <constraint field="dist_cod" notnull_strength="0" exp_strength="0" constraints="0" unique_strength="0"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="Dis_Palika"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="FIRST_DIST"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="FIRST_GaPa"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="FIRST_Type"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="DistrictIn"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="PalikaCode"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="Code_Joine"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="Dis_Nep"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="GPNP_Nep"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="F4"/>
       </constraints>
       <constraintExpressions>
+        <constraint field="Dis_Palika" desc="" exp=""/>
         <constraint field="FIRST_DIST" desc="" exp=""/>
         <constraint field="FIRST_GaPa" desc="" exp=""/>
         <constraint field="FIRST_Type" desc="" exp=""/>
+        <constraint field="DistrictIn" desc="" exp=""/>
         <constraint field="PalikaCode" desc="" exp=""/>
-        <constraint field="dist_cod" desc="" exp=""/>
+        <constraint field="Code_Joine" desc="" exp=""/>
+        <constraint field="Dis_Nep" desc="" exp=""/>
+        <constraint field="GPNP_Nep" desc="" exp=""/>
+        <constraint field="F4" desc="" exp=""/>
       </constraintExpressions>
       <expressionfields/>
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
       </attributeactions>
-      <attributetableconfig sortOrder="0" actionWidgetStyle="dropDown" sortExpression="">
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
         <columns>
-          <column type="actions" hidden="1" width="-1"/>
-          <column name="FIRST_DIST" type="field" hidden="0" width="-1"/>
-          <column name="FIRST_GaPa" type="field" hidden="0" width="-1"/>
-          <column name="FIRST_Type" type="field" hidden="0" width="-1"/>
-          <column name="PalikaCode" type="field" hidden="0" width="-1"/>
-          <column name="dist_cod" type="field" hidden="0" width="-1"/>
+          <column width="-1" hidden="1" type="actions"/>
+          <column width="-1" hidden="0" type="field" name="FIRST_DIST"/>
+          <column width="-1" hidden="0" type="field" name="FIRST_GaPa"/>
+          <column width="-1" hidden="0" type="field" name="FIRST_Type"/>
+          <column width="-1" hidden="0" type="field" name="PalikaCode"/>
+          <column width="-1" hidden="0" type="field" name="dist_cod"/>
         </columns>
       </attributetableconfig>
       <conditionalstyles>
@@ -648,29 +703,29 @@ def my_form_open(dialog, layer, feature):
       <featformsuppress>0</featformsuppress>
       <editorlayout>generatedlayout</editorlayout>
       <editable>
-        <field editable="1" name="DAN"/>
-        <field editable="1" name="DAS"/>
-        <field editable="1" name="DCODE"/>
-        <field editable="1" name="DDGNWW"/>
-        <field editable="1" name="DISTRICT"/>
-        <field editable="1" name="FIRST_DIST"/>
-        <field editable="1" name="FIRST_GaPa"/>
-        <field editable="1" name="FIRST_Type"/>
-        <field editable="1" name="GN_CODE"/>
-        <field editable="1" name="GaPa_NaPa"/>
-        <field editable="1" name="NEW_WARD_N"/>
-        <field editable="1" name="N_WCode"/>
-        <field editable="1" name="OBJECTID"/>
-        <field editable="1" name="OLD_VDCs"/>
-        <field editable="1" name="PalikaCode"/>
-        <field editable="1" name="Palika_Cod"/>
-        <field editable="1" name="Type_GN"/>
-        <field editable="0" name="data_Palika_Cod"/>
-        <field editable="0" name="data_val"/>
-        <field editable="0" name="data_value"/>
-        <field editable="1" name="dist_cod"/>
-        <field editable="0" name="out_Palika_Cod"/>
-        <field editable="0" name="out_val"/>
+        <field name="DAN" editable="1"/>
+        <field name="DAS" editable="1"/>
+        <field name="DCODE" editable="1"/>
+        <field name="DDGNWW" editable="1"/>
+        <field name="DISTRICT" editable="1"/>
+        <field name="FIRST_DIST" editable="1"/>
+        <field name="FIRST_GaPa" editable="1"/>
+        <field name="FIRST_Type" editable="1"/>
+        <field name="GN_CODE" editable="1"/>
+        <field name="GaPa_NaPa" editable="1"/>
+        <field name="NEW_WARD_N" editable="1"/>
+        <field name="N_WCode" editable="1"/>
+        <field name="OBJECTID" editable="1"/>
+        <field name="OLD_VDCs" editable="1"/>
+        <field name="PalikaCode" editable="1"/>
+        <field name="Palika_Cod" editable="1"/>
+        <field name="Type_GN" editable="1"/>
+        <field name="data_Palika_Cod" editable="0"/>
+        <field name="data_val" editable="0"/>
+        <field name="data_value" editable="0"/>
+        <field name="dist_cod" editable="1"/>
+        <field name="out_Palika_Cod" editable="0"/>
+        <field name="out_val" editable="0"/>
       </editable>
       <labelOnTop>
         <field labelOnTop="0" name="DAN"/>
@@ -701,14 +756,14 @@ def my_form_open(dialog, layer, feature):
       <previewExpression>OBJECTID</previewExpression>
       <mapTip></mapTip>
     </maplayer>
-    <maplayer simplifyDrawingTol="1" simplifyAlgorithm="0" labelsEnabled="1" styleCategories="AllStyleCategories" simplifyDrawingHints="1" simplifyMaxScale="1" autoRefreshTime="0" refreshOnNotifyEnabled="0" hasScaleBasedVisibilityFlag="0" minScale="1e+8" simplifyLocal="1" autoRefreshEnabled="0" maxScale="0" type="vector" geometry="Polygon" refreshOnNotifyMessage="" readOnly="0">
+    <maplayer refreshOnNotifyEnabled="0" hasScaleBasedVisibilityFlag="0" simplifyDrawingTol="1" simplifyLocal="1" refreshOnNotifyMessage="" type="vector" geometry="Polygon" simplifyDrawingHints="1" autoRefreshEnabled="0" simplifyAlgorithm="0" maxScale="0" minScale="1e+8" readOnly="0" autoRefreshTime="0" labelsEnabled="1" simplifyMaxScale="1" styleCategories="AllStyleCategories">
       <extent>
         <xmin>82.74828021578794335</xmin>
         <ymin>26.84559060878213188</ymin>
         <xmax>87.67724759762448627</xmax>
         <ymax>28.79369013705981217</ymax>
       </extent>
-      <id>palikas_e55002a0_b532_4887_8cdb_c9353227a302</id>
+      <id>palikas_eb198486_a131_47f5_aef3_c9396daf5e72</id>
       <datasource>../hrrp_shapes/palika/GaPaNaPa_hrrp.shp</datasource>
       <keywordList>
         <value></value>
@@ -765,26 +820,26 @@ def my_form_open(dialog, layer, feature):
         <Removable>1</Removable>
         <Searchable>1</Searchable>
       </flags>
-      <renderer-v2 symbollevels="0" forceraster="0" enableorderby="0" type="singleSymbol">
+      <renderer-v2 type="singleSymbol" enableorderby="0" symbollevels="0" forceraster="0">
         <symbols>
-          <symbol clip_to_extent="1" alpha="1" name="0" type="fill">
-            <layer class="SimpleFill" pass="0" locked="0" enabled="1">
-              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="color" v="255,158,23,0"/>
-              <prop k="joinstyle" v="bevel"/>
-              <prop k="offset" v="0,0"/>
-              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="35,35,35,255"/>
-              <prop k="outline_style" v="solid"/>
-              <prop k="outline_width" v="0.46"/>
-              <prop k="outline_width_unit" v="MM"/>
-              <prop k="style" v="solid"/>
+          <symbol type="fill" name="0" clip_to_extent="1" alpha="1">
+            <layer class="SimpleFill" pass="0" enabled="1" locked="0">
+              <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+              <prop v="255,158,23,0" k="color"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="35,35,35,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0.46" k="outline_width"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="solid" k="style"/>
               <data_defined_properties>
                 <Option type="Map">
-                  <Option value="" name="name" type="QString"/>
+                  <Option type="QString" name="name" value=""/>
                   <Option name="properties"/>
-                  <Option value="collection" name="type" type="QString"/>
+                  <Option type="QString" name="type" value="collection"/>
                 </Option>
               </data_defined_properties>
             </layer>
@@ -795,20 +850,20 @@ def my_form_open(dialog, layer, feature):
       </renderer-v2>
       <labeling type="simple">
         <settings>
-          <text-style fontSizeMapUnitScale="3x:0,0,0,0,0,0" namedStyle="Bold" fontLetterSpacing="0" multilineHeight="1" isExpression="0" fontStrikeout="0" textColor="0,0,0,255" fontWordSpacing="0" fontUnderline="0" blendMode="0" fontSizeUnit="Point" previewBkgrdColor="#ffffff" fontSize="10" fieldName="FIRST_GaPa" textOpacity="1" fontWeight="75" fontCapitals="0" useSubstitutions="0" fontFamily=".SF NS Text" fontItalic="0">
-            <text-buffer bufferSize="1" bufferOpacity="1" bufferNoFill="1" bufferJoinStyle="128" bufferSizeUnits="MM" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferBlendMode="0" bufferDraw="0" bufferColor="255,255,255,255"/>
-            <background shapeOffsetUnit="MM" shapeBorderWidthUnit="MM" shapeBorderWidthMapUnitScale="3x:0,0,0,0,0,0" shapeSVGFile="" shapeType="0" shapeDraw="0" shapeOffsetMapUnitScale="3x:0,0,0,0,0,0" shapeRotationType="0" shapeSizeY="0" shapeOpacity="1" shapeRadiiX="0" shapeRotation="0" shapeSizeMapUnitScale="3x:0,0,0,0,0,0" shapeSizeX="0" shapeSizeUnit="MM" shapeOffsetX="0" shapeFillColor="255,255,255,255" shapeRadiiMapUnitScale="3x:0,0,0,0,0,0" shapeBlendMode="0" shapeSizeType="0" shapeRadiiY="0" shapeBorderWidth="0" shapeRadiiUnit="MM" shapeJoinStyle="64" shapeOffsetY="0" shapeBorderColor="128,128,128,255"/>
-            <shadow shadowUnder="0" shadowOffsetAngle="135" shadowColor="0,0,0,255" shadowOffsetUnit="MM" shadowOffsetDist="1" shadowBlendMode="6" shadowOpacity="0.7" shadowOffsetMapUnitScale="3x:0,0,0,0,0,0" shadowDraw="0" shadowOffsetGlobal="1" shadowRadius="1.5" shadowRadiusAlphaOnly="0" shadowRadiusUnit="MM" shadowRadiusMapUnitScale="3x:0,0,0,0,0,0" shadowScale="100"/>
+          <text-style useSubstitutions="0" fieldName="GPNP_Nep" fontSizeMapUnitScale="3x:0,0,0,0,0,0" fontSize="18" fontCapitals="0" previewBkgrdColor="#ffffff" textOpacity="1" fontItalic="0" multilineHeight="1" textColor="0,0,0,255" blendMode="0" fontUnderline="0" fontFamily=".SF NS Text" fontWordSpacing="0" fontWeight="75" namedStyle="Bold" fontLetterSpacing="0" fontStrikeout="0" isExpression="0" fontSizeUnit="Point">
+            <text-buffer bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferSizeUnits="MM" bufferBlendMode="0" bufferColor="255,255,255,255" bufferSize="1" bufferDraw="0" bufferOpacity="1" bufferJoinStyle="128" bufferNoFill="1"/>
+            <background shapeOffsetUnit="MM" shapeSVGFile="" shapeType="0" shapeFillColor="255,255,255,255" shapeRotationType="0" shapeRadiiY="0" shapeBorderWidth="0" shapeSizeType="0" shapeBorderWidthUnit="MM" shapeOpacity="1" shapeBlendMode="0" shapeRotation="0" shapeSizeX="0" shapeSizeMapUnitScale="3x:0,0,0,0,0,0" shapeSizeY="0" shapeBorderColor="128,128,128,255" shapeOffsetX="0" shapeSizeUnit="MM" shapeBorderWidthMapUnitScale="3x:0,0,0,0,0,0" shapeOffsetY="0" shapeRadiiMapUnitScale="3x:0,0,0,0,0,0" shapeOffsetMapUnitScale="3x:0,0,0,0,0,0" shapeJoinStyle="64" shapeDraw="0" shapeRadiiX="0" shapeRadiiUnit="MM"/>
+            <shadow shadowOffsetDist="1" shadowColor="0,0,0,255" shadowRadiusMapUnitScale="3x:0,0,0,0,0,0" shadowRadiusAlphaOnly="0" shadowOpacity="0.7" shadowOffsetMapUnitScale="3x:0,0,0,0,0,0" shadowOffsetGlobal="1" shadowDraw="0" shadowOffsetAngle="135" shadowRadiusUnit="MM" shadowOffsetUnit="MM" shadowRadius="1.5" shadowScale="100" shadowBlendMode="6" shadowUnder="0"/>
             <substitutions/>
           </text-style>
-          <text-format plussign="0" useMaxLineLengthForAutoWrap="1" leftDirectionSymbol="&lt;" rightDirectionSymbol=">" autoWrapLength="0" reverseDirectionSymbol="0" decimals="3" wrapChar="" multilineAlign="4294967295" placeDirectionSymbol="0" addDirectionSymbol="0" formatNumbers="0"/>
-          <placement preserveRotation="1" placementFlags="10" distUnits="MM" quadOffset="4" labelOffsetMapUnitScale="3x:0,0,0,0,0,0" maxCurvedCharAngleOut="-25" predefinedPositionOrder="TR,TL,BR,BL,R,L,TSR,BSR" centroidWhole="0" xOffset="0" rotationAngle="0" fitInPolygonOnly="0" offsetUnits="MM" repeatDistanceMapUnitScale="3x:0,0,0,0,0,0" centroidInside="0" offsetType="0" distMapUnitScale="3x:0,0,0,0,0,0" repeatDistance="0" dist="0" priority="5" yOffset="0" repeatDistanceUnits="MM" maxCurvedCharAngleIn="25" placement="0"/>
-          <rendering obstacleType="0" displayAll="0" fontLimitPixelSize="0" scaleMax="0" zIndex="0" maxNumLabels="2000" mergeLines="0" obstacleFactor="1" scaleMin="0" upsidedownLabels="0" scaleVisibility="0" obstacle="1" limitNumLabels="0" drawLabels="1" labelPerPart="0" fontMaxPixelSize="10000" minFeatureSize="0" fontMinPixelSize="3"/>
+          <text-format leftDirectionSymbol="&lt;" reverseDirectionSymbol="0" rightDirectionSymbol=">" useMaxLineLengthForAutoWrap="1" multilineAlign="4294967295" plussign="0" autoWrapLength="0" addDirectionSymbol="0" wrapChar="" placeDirectionSymbol="0" decimals="3" formatNumbers="0"/>
+          <placement repeatDistanceMapUnitScale="3x:0,0,0,0,0,0" dist="0" offsetUnits="MM" placement="0" yOffset="0" placementFlags="10" priority="5" offsetType="0" quadOffset="4" labelOffsetMapUnitScale="3x:0,0,0,0,0,0" fitInPolygonOnly="0" xOffset="0" rotationAngle="0" repeatDistance="0" predefinedPositionOrder="TR,TL,BR,BL,R,L,TSR,BSR" preserveRotation="1" maxCurvedCharAngleOut="-25" centroidWhole="0" centroidInside="0" maxCurvedCharAngleIn="25" repeatDistanceUnits="MM" distUnits="MM" distMapUnitScale="3x:0,0,0,0,0,0"/>
+          <rendering labelPerPart="0" fontMinPixelSize="3" upsidedownLabels="0" displayAll="0" obstacle="1" obstacleFactor="1" drawLabels="1" maxNumLabels="2000" scaleMin="0" scaleVisibility="0" mergeLines="0" obstacleType="0" limitNumLabels="0" fontMaxPixelSize="10000" zIndex="0" scaleMax="0" fontLimitPixelSize="0" minFeatureSize="0"/>
           <dd_properties>
             <Option type="Map">
-              <Option value="" name="name" type="QString"/>
+              <Option type="QString" name="name" value=""/>
               <Option name="properties"/>
-              <Option value="collection" name="type" type="QString"/>
+              <Option type="QString" name="type" value="collection"/>
             </Option>
           </dd_properties>
         </settings>
@@ -823,17 +878,17 @@ def my_form_open(dialog, layer, feature):
       <featureBlendMode>0</featureBlendMode>
       <layerOpacity>1</layerOpacity>
       <SingleCategoryDiagramRenderer diagramType="Histogram" attributeLegend="1">
-        <DiagramCategory opacity="1" sizeType="MM" minimumSize="0" scaleBasedVisibility="0" penWidth="0" barWidth="5" sizeScale="3x:0,0,0,0,0,0" lineSizeType="MM" height="15" maxScaleDenominator="1e+8" backgroundAlpha="255" rotationOffset="270" minScaleDenominator="0" penColor="#000000" lineSizeScale="3x:0,0,0,0,0,0" scaleDependency="Area" backgroundColor="#ffffff" width="15" labelPlacementMethod="XHeight" diagramOrientation="Up" penAlpha="255" enabled="0">
-          <fontProperties description=".SF NS Text,13,-1,5,50,0,0,0,0,0" style=""/>
-          <attribute field="" label="" color="#000000"/>
+        <DiagramCategory backgroundColor="#ffffff" opacity="1" sizeType="MM" penAlpha="255" backgroundAlpha="255" maxScaleDenominator="1e+8" lineSizeType="MM" minScaleDenominator="0" penWidth="0" scaleDependency="Area" scaleBasedVisibility="0" labelPlacementMethod="XHeight" height="15" enabled="0" diagramOrientation="Up" minimumSize="0" sizeScale="3x:0,0,0,0,0,0" width="15" lineSizeScale="3x:0,0,0,0,0,0" barWidth="5" penColor="#000000" rotationOffset="270">
+          <fontProperties style="" description=".SF NS Text,13,-1,5,50,0,0,0,0,0"/>
+          <attribute color="#000000" field="" label=""/>
         </DiagramCategory>
       </SingleCategoryDiagramRenderer>
-      <DiagramLayerSettings showAll="1" dist="0" zIndex="0" linePlacementFlags="18" placement="1" obstacle="0" priority="0">
+      <DiagramLayerSettings obstacle="0" priority="0" linePlacementFlags="18" placement="1" zIndex="0" dist="0" showAll="1">
         <properties>
           <Option type="Map">
-            <Option value="" name="name" type="QString"/>
+            <Option type="QString" name="name" value=""/>
             <Option name="properties"/>
-            <Option value="collection" name="type" type="QString"/>
+            <Option type="QString" name="type" value="collection"/>
           </Option>
         </properties>
       </DiagramLayerSettings>
@@ -842,6 +897,13 @@ def my_form_open(dialog, layer, feature):
         <checkConfiguration/>
       </geometryOptions>
       <fieldConfiguration>
+        <field name="Dis_Palika">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
         <field name="FIRST_DIST">
           <editWidget type="TextEdit">
             <config>
@@ -863,6 +925,13 @@ def my_form_open(dialog, layer, feature):
             </config>
           </editWidget>
         </field>
+        <field name="DistrictIn">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
         <field name="PalikaCode">
           <editWidget type="TextEdit">
             <config>
@@ -870,7 +939,28 @@ def my_form_open(dialog, layer, feature):
             </config>
           </editWidget>
         </field>
-        <field name="dist_cod">
+        <field name="Code_Joine">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="Dis_Nep">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="GPNP_Nep">
+          <editWidget type="TextEdit">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="F4">
           <editWidget type="TextEdit">
             <config>
               <Option/>
@@ -879,47 +969,72 @@ def my_form_open(dialog, layer, feature):
         </field>
       </fieldConfiguration>
       <aliases>
-        <alias field="FIRST_DIST" index="0" name=""/>
-        <alias field="FIRST_GaPa" index="1" name=""/>
-        <alias field="FIRST_Type" index="2" name=""/>
-        <alias field="PalikaCode" index="3" name=""/>
-        <alias field="dist_cod" index="4" name=""/>
+        <alias index="0" name="" field="Dis_Palika"/>
+        <alias index="1" name="" field="FIRST_DIST"/>
+        <alias index="2" name="" field="FIRST_GaPa"/>
+        <alias index="3" name="" field="FIRST_Type"/>
+        <alias index="4" name="" field="DistrictIn"/>
+        <alias index="5" name="" field="PalikaCode"/>
+        <alias index="6" name="" field="Code_Joine"/>
+        <alias index="7" name="" field="Dis_Nep"/>
+        <alias index="8" name="" field="GPNP_Nep"/>
+        <alias index="9" name="" field="F4"/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <defaults>
-        <default field="FIRST_DIST" expression="" applyOnUpdate="0"/>
-        <default field="FIRST_GaPa" expression="" applyOnUpdate="0"/>
-        <default field="FIRST_Type" expression="" applyOnUpdate="0"/>
-        <default field="PalikaCode" expression="" applyOnUpdate="0"/>
-        <default field="dist_cod" expression="" applyOnUpdate="0"/>
+        <default expression="" applyOnUpdate="0" field="Dis_Palika"/>
+        <default expression="" applyOnUpdate="0" field="FIRST_DIST"/>
+        <default expression="" applyOnUpdate="0" field="FIRST_GaPa"/>
+        <default expression="" applyOnUpdate="0" field="FIRST_Type"/>
+        <default expression="" applyOnUpdate="0" field="DistrictIn"/>
+        <default expression="" applyOnUpdate="0" field="PalikaCode"/>
+        <default expression="" applyOnUpdate="0" field="Code_Joine"/>
+        <default expression="" applyOnUpdate="0" field="Dis_Nep"/>
+        <default expression="" applyOnUpdate="0" field="GPNP_Nep"/>
+        <default expression="" applyOnUpdate="0" field="F4"/>
       </defaults>
       <constraints>
-        <constraint field="FIRST_DIST" notnull_strength="0" exp_strength="0" constraints="0" unique_strength="0"/>
-        <constraint field="FIRST_GaPa" notnull_strength="0" exp_strength="0" constraints="0" unique_strength="0"/>
-        <constraint field="FIRST_Type" notnull_strength="0" exp_strength="0" constraints="0" unique_strength="0"/>
-        <constraint field="PalikaCode" notnull_strength="0" exp_strength="0" constraints="0" unique_strength="0"/>
-        <constraint field="dist_cod" notnull_strength="0" exp_strength="0" constraints="0" unique_strength="0"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="Dis_Palika"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="FIRST_DIST"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="FIRST_GaPa"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="FIRST_Type"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="DistrictIn"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="PalikaCode"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="Code_Joine"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="Dis_Nep"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="GPNP_Nep"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="F4"/>
       </constraints>
       <constraintExpressions>
+        <constraint field="Dis_Palika" desc="" exp=""/>
         <constraint field="FIRST_DIST" desc="" exp=""/>
         <constraint field="FIRST_GaPa" desc="" exp=""/>
         <constraint field="FIRST_Type" desc="" exp=""/>
+        <constraint field="DistrictIn" desc="" exp=""/>
         <constraint field="PalikaCode" desc="" exp=""/>
-        <constraint field="dist_cod" desc="" exp=""/>
+        <constraint field="Code_Joine" desc="" exp=""/>
+        <constraint field="Dis_Nep" desc="" exp=""/>
+        <constraint field="GPNP_Nep" desc="" exp=""/>
+        <constraint field="F4" desc="" exp=""/>
       </constraintExpressions>
       <expressionfields/>
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
       </attributeactions>
-      <attributetableconfig sortOrder="0" actionWidgetStyle="dropDown" sortExpression="">
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
         <columns>
-          <column name="FIRST_DIST" type="field" hidden="0" width="-1"/>
-          <column name="FIRST_GaPa" type="field" hidden="0" width="-1"/>
-          <column name="FIRST_Type" type="field" hidden="0" width="-1"/>
-          <column name="PalikaCode" type="field" hidden="0" width="-1"/>
-          <column name="dist_cod" type="field" hidden="0" width="-1"/>
-          <column type="actions" hidden="1" width="-1"/>
+          <column width="-1" hidden="0" type="field" name="FIRST_DIST"/>
+          <column width="-1" hidden="0" type="field" name="FIRST_GaPa"/>
+          <column width="-1" hidden="0" type="field" name="FIRST_Type"/>
+          <column width="-1" hidden="0" type="field" name="PalikaCode"/>
+          <column width="-1" hidden="1" type="actions"/>
+          <column width="-1" hidden="0" type="field" name="Dis_Palika"/>
+          <column width="-1" hidden="0" type="field" name="DistrictIn"/>
+          <column width="-1" hidden="0" type="field" name="Code_Joine"/>
+          <column width="-1" hidden="0" type="field" name="Dis_Nep"/>
+          <column width="-1" hidden="0" type="field" name="GPNP_Nep"/>
+          <column width="-1" hidden="0" type="field" name="F4"/>
         </columns>
       </attributetableconfig>
       <conditionalstyles>
@@ -950,16 +1065,28 @@ def my_form_open(dialog, layer, feature):
       <featformsuppress>0</featformsuppress>
       <editorlayout>generatedlayout</editorlayout>
       <editable>
-        <field editable="1" name="FIRST_DIST"/>
-        <field editable="1" name="FIRST_GaPa"/>
-        <field editable="1" name="FIRST_Type"/>
-        <field editable="1" name="PalikaCode"/>
-        <field editable="1" name="dist_cod"/>
+        <field name="Code_Joine" editable="1"/>
+        <field name="Dis_Nep" editable="1"/>
+        <field name="Dis_Palika" editable="1"/>
+        <field name="DistrictIn" editable="1"/>
+        <field name="F4" editable="1"/>
+        <field name="FIRST_DIST" editable="1"/>
+        <field name="FIRST_GaPa" editable="1"/>
+        <field name="FIRST_Type" editable="1"/>
+        <field name="GPNP_Nep" editable="1"/>
+        <field name="PalikaCode" editable="1"/>
+        <field name="dist_cod" editable="1"/>
       </editable>
       <labelOnTop>
+        <field labelOnTop="0" name="Code_Joine"/>
+        <field labelOnTop="0" name="Dis_Nep"/>
+        <field labelOnTop="0" name="Dis_Palika"/>
+        <field labelOnTop="0" name="DistrictIn"/>
+        <field labelOnTop="0" name="F4"/>
         <field labelOnTop="0" name="FIRST_DIST"/>
         <field labelOnTop="0" name="FIRST_GaPa"/>
         <field labelOnTop="0" name="FIRST_Type"/>
+        <field labelOnTop="0" name="GPNP_Nep"/>
         <field labelOnTop="0" name="PalikaCode"/>
         <field labelOnTop="0" name="dist_cod"/>
       </labelOnTop>
@@ -967,14 +1094,14 @@ def my_form_open(dialog, layer, feature):
       <previewExpression>FIRST_DIST</previewExpression>
       <mapTip></mapTip>
     </maplayer>
-    <maplayer simplifyDrawingTol="1" simplifyAlgorithm="0" labelsEnabled="1" styleCategories="AllStyleCategories" simplifyDrawingHints="1" simplifyMaxScale="1" autoRefreshTime="0" refreshOnNotifyEnabled="0" hasScaleBasedVisibilityFlag="0" minScale="1e+8" simplifyLocal="1" autoRefreshEnabled="0" maxScale="0" type="vector" geometry="Polygon" refreshOnNotifyMessage="" readOnly="0">
+    <maplayer refreshOnNotifyEnabled="0" hasScaleBasedVisibilityFlag="0" simplifyDrawingTol="1" simplifyLocal="1" refreshOnNotifyMessage="" type="vector" geometry="Polygon" simplifyDrawingHints="1" autoRefreshEnabled="0" simplifyAlgorithm="0" maxScale="0" minScale="1e+8" readOnly="0" autoRefreshTime="0" labelsEnabled="1" simplifyMaxScale="1" styleCategories="AllStyleCategories">
       <extent>
         <xmin>376679.24482180655468255</xmin>
         <ymin>2974410.04958633938804269</ymin>
         <xmax>862492.79343876882921904</xmax>
         <ymax>3185931.29989916644990444</ymax>
       </extent>
-      <id>wards_ea5fde59_20ee_4738_8f30_6fdcd6e3da23</id>
+      <id>wards_bf942832_656e_4186_a250_120b298ff322</id>
       <datasource>../hrrp_shapes/wards/merge.shp</datasource>
       <keywordList>
         <value></value>
@@ -1018,7 +1145,7 @@ def my_form_open(dialog, layer, feature):
       </resourceMetadata>
       <provider encoding="UTF-8">ogr</provider>
       <vectorjoins>
-        <join editable="0" joinLayerId="data_75f9ca89_1f1d_4c4f_9631_779fa8a5b2b2" cascadedDelete="0" upsertOnEdit="0" targetFieldName="N_WCode" memoryCache="1" joinFieldName="ward" dynamicForm="0"/>
+        <join targetFieldName="N_WCode" joinFieldName="ward" cascadedDelete="0" upsertOnEdit="0" joinLayerId="data_d562c150_79ef_4801_8104_c0ca170b5530" memoryCache="1" editable="0" dynamicForm="0"/>
       </vectorjoins>
       <layerDependencies/>
       <dataDependencies/>
@@ -1033,247 +1160,247 @@ def my_form_open(dialog, layer, feature):
         <Removable>1</Removable>
         <Searchable>1</Searchable>
       </flags>
-      <renderer-v2 symbollevels="0" forceraster="0" enableorderby="0" type="categorizedSymbol" attr="data_value">
+      <renderer-v2 type="categorizedSymbol" attr="data_value" enableorderby="0" symbollevels="0" forceraster="0">
         <categories>
-          <category label="0" value="0" render="true" symbol="0"/>
-          <category label="1" value="1" render="true" symbol="1"/>
-          <category label="2" value="2" render="true" symbol="2"/>
-          <category label="3" value="3" render="true" symbol="3"/>
-          <category label="4" value="4" render="true" symbol="4"/>
-          <category label="5" value="5" render="true" symbol="5"/>
-          <category label="6" value="6" render="true" symbol="6"/>
-          <category label="7" value="7" render="true" symbol="7"/>
+          <category symbol="0" render="true" label="0" value="0"/>
+          <category symbol="1" render="true" label="1" value="1"/>
+          <category symbol="2" render="true" label="2" value="2"/>
+          <category symbol="3" render="true" label="3" value="3"/>
+          <category symbol="4" render="true" label="4" value="4"/>
+          <category symbol="5" render="true" label="5" value="5"/>
+          <category symbol="6" render="true" label="6" value="6"/>
+          <category symbol="7" render="true" label="7" value="7"/>
         </categories>
         <symbols>
-          <symbol clip_to_extent="1" alpha="1" name="0" type="fill">
-            <layer class="SimpleFill" pass="0" locked="0" enabled="1">
-              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="color" v="217,220,222,255"/>
-              <prop k="joinstyle" v="bevel"/>
-              <prop k="offset" v="0,0"/>
-              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="35,35,35,255"/>
-              <prop k="outline_style" v="solid"/>
-              <prop k="outline_width" v="0.26"/>
-              <prop k="outline_width_unit" v="MM"/>
-              <prop k="style" v="solid"/>
+          <symbol type="fill" name="0" clip_to_extent="1" alpha="1">
+            <layer class="SimpleFill" pass="0" enabled="1" locked="0">
+              <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+              <prop v="217,220,222,255" k="color"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="35,35,35,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0.26" k="outline_width"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="solid" k="style"/>
               <data_defined_properties>
                 <Option type="Map">
-                  <Option value="" name="name" type="QString"/>
+                  <Option type="QString" name="name" value=""/>
                   <Option name="properties"/>
-                  <Option value="collection" name="type" type="QString"/>
+                  <Option type="QString" name="type" value="collection"/>
                 </Option>
               </data_defined_properties>
             </layer>
           </symbol>
-          <symbol clip_to_extent="1" alpha="1" name="1" type="fill">
-            <layer class="SimpleFill" pass="0" locked="0" enabled="1">
-              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="color" v="206,229,161,255"/>
-              <prop k="joinstyle" v="bevel"/>
-              <prop k="offset" v="0,0"/>
-              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="35,35,35,255"/>
-              <prop k="outline_style" v="solid"/>
-              <prop k="outline_width" v="0.26"/>
-              <prop k="outline_width_unit" v="MM"/>
-              <prop k="style" v="solid"/>
+          <symbol type="fill" name="1" clip_to_extent="1" alpha="1">
+            <layer class="SimpleFill" pass="0" enabled="1" locked="0">
+              <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+              <prop v="206,229,161,255" k="color"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="35,35,35,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0.26" k="outline_width"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="solid" k="style"/>
               <data_defined_properties>
                 <Option type="Map">
-                  <Option value="" name="name" type="QString"/>
+                  <Option type="QString" name="name" value=""/>
                   <Option name="properties"/>
-                  <Option value="collection" name="type" type="QString"/>
+                  <Option type="QString" name="type" value="collection"/>
                 </Option>
               </data_defined_properties>
             </layer>
           </symbol>
-          <symbol clip_to_extent="1" alpha="1" name="2" type="fill">
-            <layer class="SimpleFill" pass="0" locked="0" enabled="1">
-              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="color" v="182,208,132,255"/>
-              <prop k="joinstyle" v="bevel"/>
-              <prop k="offset" v="0,0"/>
-              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="35,35,35,255"/>
-              <prop k="outline_style" v="solid"/>
-              <prop k="outline_width" v="0.26"/>
-              <prop k="outline_width_unit" v="MM"/>
-              <prop k="style" v="solid"/>
+          <symbol type="fill" name="2" clip_to_extent="1" alpha="1">
+            <layer class="SimpleFill" pass="0" enabled="1" locked="0">
+              <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+              <prop v="182,208,132,255" k="color"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="35,35,35,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0.26" k="outline_width"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="solid" k="style"/>
               <data_defined_properties>
                 <Option type="Map">
-                  <Option value="" name="name" type="QString"/>
+                  <Option type="QString" name="name" value=""/>
                   <Option name="properties"/>
-                  <Option value="collection" name="type" type="QString"/>
+                  <Option type="QString" name="type" value="collection"/>
                 </Option>
               </data_defined_properties>
             </layer>
           </symbol>
-          <symbol clip_to_extent="1" alpha="1" name="3" type="fill">
-            <layer class="SimpleFill" pass="0" locked="0" enabled="1">
-              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="color" v="155,179,107,255"/>
-              <prop k="joinstyle" v="bevel"/>
-              <prop k="offset" v="0,0"/>
-              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="35,35,35,255"/>
-              <prop k="outline_style" v="solid"/>
-              <prop k="outline_width" v="0.26"/>
-              <prop k="outline_width_unit" v="MM"/>
-              <prop k="style" v="solid"/>
+          <symbol type="fill" name="3" clip_to_extent="1" alpha="1">
+            <layer class="SimpleFill" pass="0" enabled="1" locked="0">
+              <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+              <prop v="155,179,107,255" k="color"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="35,35,35,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0.26" k="outline_width"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="solid" k="style"/>
               <data_defined_properties>
                 <Option type="Map">
-                  <Option value="" name="name" type="QString"/>
+                  <Option type="QString" name="name" value=""/>
                   <Option name="properties"/>
-                  <Option value="collection" name="type" type="QString"/>
+                  <Option type="QString" name="type" value="collection"/>
                 </Option>
               </data_defined_properties>
             </layer>
           </symbol>
-          <symbol clip_to_extent="1" alpha="1" name="4" type="fill">
-            <layer class="SimpleFill" pass="0" locked="0" enabled="1">
-              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="color" v="136,154,84,255"/>
-              <prop k="joinstyle" v="bevel"/>
-              <prop k="offset" v="0,0"/>
-              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="35,35,35,255"/>
-              <prop k="outline_style" v="solid"/>
-              <prop k="outline_width" v="0.26"/>
-              <prop k="outline_width_unit" v="MM"/>
-              <prop k="style" v="solid"/>
+          <symbol type="fill" name="4" clip_to_extent="1" alpha="1">
+            <layer class="SimpleFill" pass="0" enabled="1" locked="0">
+              <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+              <prop v="136,154,84,255" k="color"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="35,35,35,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0.26" k="outline_width"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="solid" k="style"/>
               <data_defined_properties>
                 <Option type="Map">
-                  <Option value="" name="name" type="QString"/>
+                  <Option type="QString" name="name" value=""/>
                   <Option name="properties"/>
-                  <Option value="collection" name="type" type="QString"/>
+                  <Option type="QString" name="type" value="collection"/>
                 </Option>
               </data_defined_properties>
             </layer>
           </symbol>
-          <symbol clip_to_extent="1" alpha="1" name="5" type="fill">
-            <layer class="SimpleFill" pass="0" locked="0" enabled="1">
-              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="color" v="113,129,64,255"/>
-              <prop k="joinstyle" v="bevel"/>
-              <prop k="offset" v="0,0"/>
-              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="35,35,35,255"/>
-              <prop k="outline_style" v="solid"/>
-              <prop k="outline_width" v="0.26"/>
-              <prop k="outline_width_unit" v="MM"/>
-              <prop k="style" v="solid"/>
+          <symbol type="fill" name="5" clip_to_extent="1" alpha="1">
+            <layer class="SimpleFill" pass="0" enabled="1" locked="0">
+              <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+              <prop v="113,129,64,255" k="color"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="35,35,35,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0.26" k="outline_width"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="solid" k="style"/>
               <data_defined_properties>
                 <Option type="Map">
-                  <Option value="" name="name" type="QString"/>
+                  <Option type="QString" name="name" value=""/>
                   <Option name="properties"/>
-                  <Option value="collection" name="type" type="QString"/>
+                  <Option type="QString" name="type" value="collection"/>
                 </Option>
               </data_defined_properties>
             </layer>
           </symbol>
-          <symbol clip_to_extent="1" alpha="1" name="6" type="fill">
-            <layer class="SimpleFill" pass="0" locked="0" enabled="1">
-              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="color" v="93,107,48,255"/>
-              <prop k="joinstyle" v="bevel"/>
-              <prop k="offset" v="0,0"/>
-              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="35,35,35,255"/>
-              <prop k="outline_style" v="solid"/>
-              <prop k="outline_width" v="0.26"/>
-              <prop k="outline_width_unit" v="MM"/>
-              <prop k="style" v="solid"/>
+          <symbol type="fill" name="6" clip_to_extent="1" alpha="1">
+            <layer class="SimpleFill" pass="0" enabled="1" locked="0">
+              <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+              <prop v="93,107,48,255" k="color"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="35,35,35,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0.26" k="outline_width"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="solid" k="style"/>
               <data_defined_properties>
                 <Option type="Map">
-                  <Option value="" name="name" type="QString"/>
+                  <Option type="QString" name="name" value=""/>
                   <Option name="properties"/>
-                  <Option value="collection" name="type" type="QString"/>
+                  <Option type="QString" name="type" value="collection"/>
                 </Option>
               </data_defined_properties>
             </layer>
           </symbol>
-          <symbol clip_to_extent="1" alpha="1" name="7" type="fill">
-            <layer class="SimpleFill" pass="0" locked="0" enabled="1">
-              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="color" v="78,90,36,255"/>
-              <prop k="joinstyle" v="bevel"/>
-              <prop k="offset" v="0,0"/>
-              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="35,35,35,255"/>
-              <prop k="outline_style" v="solid"/>
-              <prop k="outline_width" v="0.26"/>
-              <prop k="outline_width_unit" v="MM"/>
-              <prop k="style" v="solid"/>
+          <symbol type="fill" name="7" clip_to_extent="1" alpha="1">
+            <layer class="SimpleFill" pass="0" enabled="1" locked="0">
+              <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+              <prop v="78,90,36,255" k="color"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="35,35,35,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0.26" k="outline_width"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="solid" k="style"/>
               <data_defined_properties>
                 <Option type="Map">
-                  <Option value="" name="name" type="QString"/>
+                  <Option type="QString" name="name" value=""/>
                   <Option name="properties"/>
-                  <Option value="collection" name="type" type="QString"/>
+                  <Option type="QString" name="type" value="collection"/>
                 </Option>
               </data_defined_properties>
             </layer>
           </symbol>
         </symbols>
         <source-symbol>
-          <symbol clip_to_extent="1" alpha="1" name="0" type="fill">
-            <layer class="SimpleFill" pass="0" locked="0" enabled="1">
-              <prop k="border_width_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="color" v="183,72,75,255"/>
-              <prop k="joinstyle" v="bevel"/>
-              <prop k="offset" v="0,0"/>
-              <prop k="offset_map_unit_scale" v="3x:0,0,0,0,0,0"/>
-              <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="35,35,35,255"/>
-              <prop k="outline_style" v="solid"/>
-              <prop k="outline_width" v="0.26"/>
-              <prop k="outline_width_unit" v="MM"/>
-              <prop k="style" v="solid"/>
+          <symbol type="fill" name="0" clip_to_extent="1" alpha="1">
+            <layer class="SimpleFill" pass="0" enabled="1" locked="0">
+              <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+              <prop v="183,72,75,255" k="color"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="35,35,35,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0.26" k="outline_width"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="solid" k="style"/>
               <data_defined_properties>
                 <Option type="Map">
-                  <Option value="" name="name" type="QString"/>
+                  <Option type="QString" name="name" value=""/>
                   <Option name="properties"/>
-                  <Option value="collection" name="type" type="QString"/>
+                  <Option type="QString" name="type" value="collection"/>
                 </Option>
               </data_defined_properties>
             </layer>
           </symbol>
         </source-symbol>
-        <colorramp name="[source]" type="gradient">
-          <prop k="color1" v="247,252,245,255"/>
-          <prop k="color2" v="0,68,27,255"/>
-          <prop k="discrete" v="0"/>
-          <prop k="rampType" v="gradient"/>
-          <prop k="stops" v="0.13;229,245,224,255:0.26;199,233,192,255:0.39;161,217,155,255:0.52;116,196,118,255:0.65;65,171,93,255:0.78;35,139,69,255:0.9;0,109,44,255"/>
+        <colorramp type="gradient" name="[source]">
+          <prop v="247,252,245,255" k="color1"/>
+          <prop v="0,68,27,255" k="color2"/>
+          <prop v="0" k="discrete"/>
+          <prop v="gradient" k="rampType"/>
+          <prop v="0.13;229,245,224,255:0.26;199,233,192,255:0.39;161,217,155,255:0.52;116,196,118,255:0.65;65,171,93,255:0.78;35,139,69,255:0.9;0,109,44,255" k="stops"/>
         </colorramp>
         <rotation/>
         <sizescale/>
       </renderer-v2>
       <labeling type="rule-based">
-        <rules key="{aefd05f3-ffdb-4457-8e3a-a0e1b4d6a870}">
-          <rule key="{5e5300af-b0e7-4592-8096-6db5c5fef19e}" filter="&quot;Palika_cod&quot;  =  attribute(@atlas_feature , 'PalikaCode')">
+        <rules key="{ea536a21-20ec-4ffc-b017-04417cbb12fd}">
+          <rule key="{b4a33fac-5631-464a-8ec5-83e94722b681}" filter="&quot;Palika_cod&quot;  =  attribute(@atlas_feature , 'PalikaCode')">
             <settings>
-              <text-style fontSizeMapUnitScale="3x:0,0,0,0,0,0" namedStyle="Regular" fontLetterSpacing="0" multilineHeight="1" isExpression="0" fontStrikeout="0" textColor="0,0,0,255" fontWordSpacing="0" fontUnderline="0" blendMode="0" fontSizeUnit="Point" previewBkgrdColor="#ffffff" fontSize="10" fieldName="NEW_WARD_N" textOpacity="1" fontWeight="50" fontCapitals="0" useSubstitutions="0" fontFamily=".SF NS Text" fontItalic="0">
-                <text-buffer bufferSize="1" bufferOpacity="1" bufferNoFill="1" bufferJoinStyle="128" bufferSizeUnits="MM" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferBlendMode="0" bufferDraw="0" bufferColor="255,255,255,255"/>
-                <background shapeOffsetUnit="MM" shapeBorderWidthUnit="MM" shapeBorderWidthMapUnitScale="3x:0,0,0,0,0,0" shapeSVGFile="" shapeType="3" shapeDraw="1" shapeOffsetMapUnitScale="3x:0,0,0,0,0,0" shapeRotationType="0" shapeSizeY="0" shapeOpacity="1" shapeRadiiX="0" shapeRotation="0" shapeSizeMapUnitScale="3x:0,0,0,0,0,0" shapeSizeX="0" shapeSizeUnit="MM" shapeOffsetX="0" shapeFillColor="255,255,255,255" shapeRadiiMapUnitScale="3x:0,0,0,0,0,0" shapeBlendMode="0" shapeSizeType="0" shapeRadiiY="0" shapeBorderWidth="0.2" shapeRadiiUnit="MM" shapeJoinStyle="64" shapeOffsetY="0" shapeBorderColor="0,0,0,255"/>
-                <shadow shadowUnder="0" shadowOffsetAngle="135" shadowColor="0,0,0,255" shadowOffsetUnit="MM" shadowOffsetDist="1" shadowBlendMode="6" shadowOpacity="0.7" shadowOffsetMapUnitScale="3x:0,0,0,0,0,0" shadowDraw="0" shadowOffsetGlobal="1" shadowRadius="1.5" shadowRadiusAlphaOnly="0" shadowRadiusUnit="MM" shadowRadiusMapUnitScale="3x:0,0,0,0,0,0" shadowScale="100"/>
+              <text-style useSubstitutions="0" fieldName="NEW_WARD_N" fontSizeMapUnitScale="3x:0,0,0,0,0,0" fontSize="15" fontCapitals="0" previewBkgrdColor="#ffffff" textOpacity="1" fontItalic="0" multilineHeight="1" textColor="0,0,0,255" blendMode="0" fontUnderline="0" fontFamily=".SF NS Text" fontWordSpacing="0" fontWeight="50" namedStyle="Regular" fontLetterSpacing="0" fontStrikeout="0" isExpression="0" fontSizeUnit="Point">
+                <text-buffer bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferSizeUnits="MM" bufferBlendMode="0" bufferColor="255,255,255,255" bufferSize="1" bufferDraw="0" bufferOpacity="1" bufferJoinStyle="128" bufferNoFill="1"/>
+                <background shapeOffsetUnit="MM" shapeSVGFile="" shapeType="3" shapeFillColor="255,255,255,255" shapeRotationType="0" shapeRadiiY="0" shapeBorderWidth="0.2" shapeSizeType="0" shapeBorderWidthUnit="MM" shapeOpacity="1" shapeBlendMode="0" shapeRotation="0" shapeSizeX="0" shapeSizeMapUnitScale="3x:0,0,0,0,0,0" shapeSizeY="0" shapeBorderColor="0,0,0,255" shapeOffsetX="0" shapeSizeUnit="MM" shapeBorderWidthMapUnitScale="3x:0,0,0,0,0,0" shapeOffsetY="0" shapeRadiiMapUnitScale="3x:0,0,0,0,0,0" shapeOffsetMapUnitScale="3x:0,0,0,0,0,0" shapeJoinStyle="64" shapeDraw="1" shapeRadiiX="0" shapeRadiiUnit="MM"/>
+                <shadow shadowOffsetDist="1" shadowColor="0,0,0,255" shadowRadiusMapUnitScale="3x:0,0,0,0,0,0" shadowRadiusAlphaOnly="0" shadowOpacity="0.7" shadowOffsetMapUnitScale="3x:0,0,0,0,0,0" shadowOffsetGlobal="1" shadowDraw="0" shadowOffsetAngle="135" shadowRadiusUnit="MM" shadowOffsetUnit="MM" shadowRadius="1.5" shadowScale="100" shadowBlendMode="6" shadowUnder="0"/>
                 <substitutions/>
               </text-style>
-              <text-format plussign="0" useMaxLineLengthForAutoWrap="1" leftDirectionSymbol="&lt;" rightDirectionSymbol=">" autoWrapLength="0" reverseDirectionSymbol="0" decimals="3" wrapChar="" multilineAlign="4294967295" placeDirectionSymbol="0" addDirectionSymbol="0" formatNumbers="0"/>
-              <placement preserveRotation="1" placementFlags="14" distUnits="MM" quadOffset="4" labelOffsetMapUnitScale="3x:0,0,0,0,0,0" maxCurvedCharAngleOut="-25" predefinedPositionOrder="TR,TL,BR,BL,R,L,TSR,BSR" centroidWhole="1" xOffset="0" rotationAngle="0" fitInPolygonOnly="0" offsetUnits="MM" repeatDistanceMapUnitScale="3x:0,0,0,0,0,0" centroidInside="1" offsetType="0" distMapUnitScale="3x:0,0,0,0,0,0" repeatDistance="0" dist="0" priority="10" yOffset="0" repeatDistanceUnits="MM" maxCurvedCharAngleIn="25" placement="0"/>
-              <rendering obstacleType="0" displayAll="0" fontLimitPixelSize="0" scaleMax="0" zIndex="0" maxNumLabels="2000" mergeLines="0" obstacleFactor="1" scaleMin="0" upsidedownLabels="0" scaleVisibility="0" obstacle="0" limitNumLabels="0" drawLabels="1" labelPerPart="0" fontMaxPixelSize="10000" minFeatureSize="0" fontMinPixelSize="3"/>
+              <text-format leftDirectionSymbol="&lt;" reverseDirectionSymbol="0" rightDirectionSymbol=">" useMaxLineLengthForAutoWrap="1" multilineAlign="4294967295" plussign="0" autoWrapLength="0" addDirectionSymbol="0" wrapChar="" placeDirectionSymbol="0" decimals="3" formatNumbers="0"/>
+              <placement repeatDistanceMapUnitScale="3x:0,0,0,0,0,0" dist="0" offsetUnits="MM" placement="0" yOffset="0" placementFlags="14" priority="10" offsetType="0" quadOffset="4" labelOffsetMapUnitScale="3x:0,0,0,0,0,0" fitInPolygonOnly="0" xOffset="0" rotationAngle="0" repeatDistance="0" predefinedPositionOrder="TR,TL,BR,BL,R,L,TSR,BSR" preserveRotation="1" maxCurvedCharAngleOut="-25" centroidWhole="1" centroidInside="1" maxCurvedCharAngleIn="25" repeatDistanceUnits="MM" distUnits="MM" distMapUnitScale="3x:0,0,0,0,0,0"/>
+              <rendering labelPerPart="0" fontMinPixelSize="3" upsidedownLabels="0" displayAll="0" obstacle="0" obstacleFactor="1" drawLabels="1" maxNumLabels="2000" scaleMin="0" scaleVisibility="0" mergeLines="0" obstacleType="0" limitNumLabels="0" fontMaxPixelSize="10000" zIndex="0" scaleMax="0" fontLimitPixelSize="0" minFeatureSize="0"/>
               <dd_properties>
                 <Option type="Map">
-                  <Option value="" name="name" type="QString"/>
+                  <Option type="QString" name="name" value=""/>
                   <Option name="properties"/>
-                  <Option value="collection" name="type" type="QString"/>
+                  <Option type="QString" name="type" value="collection"/>
                 </Option>
               </dd_properties>
             </settings>
@@ -1290,17 +1417,17 @@ def my_form_open(dialog, layer, feature):
       <featureBlendMode>0</featureBlendMode>
       <layerOpacity>1</layerOpacity>
       <SingleCategoryDiagramRenderer diagramType="Histogram" attributeLegend="1">
-        <DiagramCategory opacity="1" sizeType="MM" minimumSize="0" scaleBasedVisibility="0" penWidth="0" barWidth="5" sizeScale="3x:0,0,0,0,0,0" lineSizeType="MM" height="15" maxScaleDenominator="1e+8" backgroundAlpha="255" rotationOffset="270" minScaleDenominator="0" penColor="#000000" lineSizeScale="3x:0,0,0,0,0,0" scaleDependency="Area" backgroundColor="#ffffff" width="15" labelPlacementMethod="XHeight" diagramOrientation="Up" penAlpha="255" enabled="0">
-          <fontProperties description=".SF NS Text,13,-1,5,50,0,0,0,0,0" style=""/>
-          <attribute field="" label="" color="#000000"/>
+        <DiagramCategory backgroundColor="#ffffff" opacity="1" sizeType="MM" penAlpha="255" backgroundAlpha="255" maxScaleDenominator="1e+8" lineSizeType="MM" minScaleDenominator="0" penWidth="0" scaleDependency="Area" scaleBasedVisibility="0" labelPlacementMethod="XHeight" height="15" enabled="0" diagramOrientation="Up" minimumSize="0" sizeScale="3x:0,0,0,0,0,0" width="15" lineSizeScale="3x:0,0,0,0,0,0" barWidth="5" penColor="#000000" rotationOffset="270">
+          <fontProperties style="" description=".SF NS Text,13,-1,5,50,0,0,0,0,0"/>
+          <attribute color="#000000" field="" label=""/>
         </DiagramCategory>
       </SingleCategoryDiagramRenderer>
-      <DiagramLayerSettings showAll="1" dist="0" zIndex="0" linePlacementFlags="18" placement="1" obstacle="0" priority="0">
+      <DiagramLayerSettings obstacle="0" priority="0" linePlacementFlags="18" placement="1" zIndex="0" dist="0" showAll="1">
         <properties>
           <Option type="Map">
-            <Option value="" name="name" type="QString"/>
+            <Option type="QString" name="name" value=""/>
             <Option name="properties"/>
-            <Option value="collection" name="type" type="QString"/>
+            <Option type="QString" name="type" value="collection"/>
           </Option>
         </properties>
       </DiagramLayerSettings>
@@ -1409,54 +1536,54 @@ def my_form_open(dialog, layer, feature):
         </field>
       </fieldConfiguration>
       <aliases>
-        <alias field="OBJECTID" index="0" name=""/>
-        <alias field="DCODE" index="1" name=""/>
-        <alias field="DISTRICT" index="2" name=""/>
-        <alias field="DAN" index="3" name=""/>
-        <alias field="DAS" index="4" name=""/>
-        <alias field="OLD_VDCs" index="5" name=""/>
-        <alias field="GaPa_NaPa" index="6" name=""/>
-        <alias field="Type_GN" index="7" name=""/>
-        <alias field="GN_CODE" index="8" name=""/>
-        <alias field="NEW_WARD_N" index="9" name=""/>
-        <alias field="DDGNWW" index="10" name=""/>
-        <alias field="N_WCode" index="11" name=""/>
-        <alias field="Palika_Cod" index="12" name=""/>
-        <alias field="data_value" index="13" name=""/>
+        <alias index="0" name="" field="OBJECTID"/>
+        <alias index="1" name="" field="DCODE"/>
+        <alias index="2" name="" field="DISTRICT"/>
+        <alias index="3" name="" field="DAN"/>
+        <alias index="4" name="" field="DAS"/>
+        <alias index="5" name="" field="OLD_VDCs"/>
+        <alias index="6" name="" field="GaPa_NaPa"/>
+        <alias index="7" name="" field="Type_GN"/>
+        <alias index="8" name="" field="GN_CODE"/>
+        <alias index="9" name="" field="NEW_WARD_N"/>
+        <alias index="10" name="" field="DDGNWW"/>
+        <alias index="11" name="" field="N_WCode"/>
+        <alias index="12" name="" field="Palika_Cod"/>
+        <alias index="13" name="" field="data_value"/>
       </aliases>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
       <defaults>
-        <default field="OBJECTID" expression="" applyOnUpdate="0"/>
-        <default field="DCODE" expression="" applyOnUpdate="0"/>
-        <default field="DISTRICT" expression="" applyOnUpdate="0"/>
-        <default field="DAN" expression="" applyOnUpdate="0"/>
-        <default field="DAS" expression="" applyOnUpdate="0"/>
-        <default field="OLD_VDCs" expression="" applyOnUpdate="0"/>
-        <default field="GaPa_NaPa" expression="" applyOnUpdate="0"/>
-        <default field="Type_GN" expression="" applyOnUpdate="0"/>
-        <default field="GN_CODE" expression="" applyOnUpdate="0"/>
-        <default field="NEW_WARD_N" expression="" applyOnUpdate="0"/>
-        <default field="DDGNWW" expression="" applyOnUpdate="0"/>
-        <default field="N_WCode" expression="" applyOnUpdate="0"/>
-        <default field="Palika_Cod" expression="" applyOnUpdate="0"/>
-        <default field="data_value" expression="" applyOnUpdate="0"/>
+        <default expression="" applyOnUpdate="0" field="OBJECTID"/>
+        <default expression="" applyOnUpdate="0" field="DCODE"/>
+        <default expression="" applyOnUpdate="0" field="DISTRICT"/>
+        <default expression="" applyOnUpdate="0" field="DAN"/>
+        <default expression="" applyOnUpdate="0" field="DAS"/>
+        <default expression="" applyOnUpdate="0" field="OLD_VDCs"/>
+        <default expression="" applyOnUpdate="0" field="GaPa_NaPa"/>
+        <default expression="" applyOnUpdate="0" field="Type_GN"/>
+        <default expression="" applyOnUpdate="0" field="GN_CODE"/>
+        <default expression="" applyOnUpdate="0" field="NEW_WARD_N"/>
+        <default expression="" applyOnUpdate="0" field="DDGNWW"/>
+        <default expression="" applyOnUpdate="0" field="N_WCode"/>
+        <default expression="" applyOnUpdate="0" field="Palika_Cod"/>
+        <default expression="" applyOnUpdate="0" field="data_value"/>
       </defaults>
       <constraints>
-        <constraint field="OBJECTID" notnull_strength="0" exp_strength="0" constraints="0" unique_strength="0"/>
-        <constraint field="DCODE" notnull_strength="0" exp_strength="0" constraints="0" unique_strength="0"/>
-        <constraint field="DISTRICT" notnull_strength="0" exp_strength="0" constraints="0" unique_strength="0"/>
-        <constraint field="DAN" notnull_strength="0" exp_strength="0" constraints="0" unique_strength="0"/>
-        <constraint field="DAS" notnull_strength="0" exp_strength="0" constraints="0" unique_strength="0"/>
-        <constraint field="OLD_VDCs" notnull_strength="0" exp_strength="0" constraints="0" unique_strength="0"/>
-        <constraint field="GaPa_NaPa" notnull_strength="0" exp_strength="0" constraints="0" unique_strength="0"/>
-        <constraint field="Type_GN" notnull_strength="0" exp_strength="0" constraints="0" unique_strength="0"/>
-        <constraint field="GN_CODE" notnull_strength="0" exp_strength="0" constraints="0" unique_strength="0"/>
-        <constraint field="NEW_WARD_N" notnull_strength="0" exp_strength="0" constraints="0" unique_strength="0"/>
-        <constraint field="DDGNWW" notnull_strength="0" exp_strength="0" constraints="0" unique_strength="0"/>
-        <constraint field="N_WCode" notnull_strength="0" exp_strength="0" constraints="0" unique_strength="0"/>
-        <constraint field="Palika_Cod" notnull_strength="0" exp_strength="0" constraints="0" unique_strength="0"/>
-        <constraint field="data_value" notnull_strength="0" exp_strength="0" constraints="0" unique_strength="0"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="OBJECTID"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="DCODE"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="DISTRICT"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="DAN"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="DAS"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="OLD_VDCs"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="GaPa_NaPa"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="Type_GN"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="GN_CODE"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="NEW_WARD_N"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="DDGNWW"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="N_WCode"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="Palika_Cod"/>
+        <constraint exp_strength="0" notnull_strength="0" unique_strength="0" constraints="0" field="data_value"/>
       </constraints>
       <constraintExpressions>
         <constraint field="OBJECTID" desc="" exp=""/>
@@ -1478,23 +1605,23 @@ def my_form_open(dialog, layer, feature):
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
       </attributeactions>
-      <attributetableconfig sortOrder="0" actionWidgetStyle="dropDown" sortExpression="">
+      <attributetableconfig sortExpression="" sortOrder="0" actionWidgetStyle="dropDown">
         <columns>
-          <column name="OBJECTID" type="field" hidden="0" width="-1"/>
-          <column name="DCODE" type="field" hidden="0" width="-1"/>
-          <column name="DISTRICT" type="field" hidden="0" width="-1"/>
-          <column name="DAN" type="field" hidden="0" width="-1"/>
-          <column name="DAS" type="field" hidden="0" width="-1"/>
-          <column name="OLD_VDCs" type="field" hidden="0" width="-1"/>
-          <column name="GaPa_NaPa" type="field" hidden="0" width="-1"/>
-          <column name="Type_GN" type="field" hidden="0" width="-1"/>
-          <column name="GN_CODE" type="field" hidden="0" width="-1"/>
-          <column name="NEW_WARD_N" type="field" hidden="0" width="-1"/>
-          <column name="DDGNWW" type="field" hidden="0" width="-1"/>
-          <column name="N_WCode" type="field" hidden="0" width="-1"/>
-          <column name="Palika_Cod" type="field" hidden="0" width="-1"/>
-          <column type="actions" hidden="1" width="-1"/>
-          <column name="data_value" type="field" hidden="0" width="-1"/>
+          <column width="-1" hidden="0" type="field" name="OBJECTID"/>
+          <column width="-1" hidden="0" type="field" name="DCODE"/>
+          <column width="-1" hidden="0" type="field" name="DISTRICT"/>
+          <column width="-1" hidden="0" type="field" name="DAN"/>
+          <column width="-1" hidden="0" type="field" name="DAS"/>
+          <column width="-1" hidden="0" type="field" name="OLD_VDCs"/>
+          <column width="-1" hidden="0" type="field" name="GaPa_NaPa"/>
+          <column width="-1" hidden="0" type="field" name="Type_GN"/>
+          <column width="-1" hidden="0" type="field" name="GN_CODE"/>
+          <column width="-1" hidden="0" type="field" name="NEW_WARD_N"/>
+          <column width="-1" hidden="0" type="field" name="DDGNWW"/>
+          <column width="-1" hidden="0" type="field" name="N_WCode"/>
+          <column width="-1" hidden="0" type="field" name="Palika_Cod"/>
+          <column width="-1" hidden="1" type="actions"/>
+          <column width="-1" hidden="0" type="field" name="data_value"/>
         </columns>
       </attributetableconfig>
       <conditionalstyles>
@@ -1525,24 +1652,24 @@ def my_form_open(dialog, layer, feature):
       <featformsuppress>0</featformsuppress>
       <editorlayout>generatedlayout</editorlayout>
       <editable>
-        <field editable="1" name="DAN"/>
-        <field editable="1" name="DAS"/>
-        <field editable="1" name="DCODE"/>
-        <field editable="1" name="DDGNWW"/>
-        <field editable="1" name="DISTRICT"/>
-        <field editable="1" name="GN_CODE"/>
-        <field editable="1" name="GaPa_NaPa"/>
-        <field editable="1" name="NEW_WARD_N"/>
-        <field editable="1" name="N_WCode"/>
-        <field editable="1" name="OBJECTID"/>
-        <field editable="1" name="OLD_VDCs"/>
-        <field editable="1" name="Palika_Cod"/>
-        <field editable="1" name="Type_GN"/>
-        <field editable="0" name="data_Palika_Cod"/>
-        <field editable="0" name="data_val"/>
-        <field editable="0" name="data_value"/>
-        <field editable="0" name="out_Palika_Cod"/>
-        <field editable="0" name="out_val"/>
+        <field name="DAN" editable="1"/>
+        <field name="DAS" editable="1"/>
+        <field name="DCODE" editable="1"/>
+        <field name="DDGNWW" editable="1"/>
+        <field name="DISTRICT" editable="1"/>
+        <field name="GN_CODE" editable="1"/>
+        <field name="GaPa_NaPa" editable="1"/>
+        <field name="NEW_WARD_N" editable="1"/>
+        <field name="N_WCode" editable="1"/>
+        <field name="OBJECTID" editable="1"/>
+        <field name="OLD_VDCs" editable="1"/>
+        <field name="Palika_Cod" editable="1"/>
+        <field name="Type_GN" editable="1"/>
+        <field name="data_Palika_Cod" editable="0"/>
+        <field name="data_val" editable="0"/>
+        <field name="data_value" editable="0"/>
+        <field name="out_Palika_Cod" editable="0"/>
+        <field name="out_val" editable="0"/>
       </editable>
       <labelOnTop>
         <field labelOnTop="0" name="DAN"/>
@@ -1570,38 +1697,38 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
   </projectlayers>
   <layerorder>
-    <layer id="data_75f9ca89_1f1d_4c4f_9631_779fa8a5b2b2"/>
-    <layer id="wards_ea5fde59_20ee_4738_8f30_6fdcd6e3da23"/>
-    <layer id="palika_hide_4e143633_b614_4d1a_82cd_b37e6d7df41c"/>
-    <layer id="palikas_e55002a0_b532_4887_8cdb_c9353227a302"/>
-    <layer id="dists_e2afa3dc_de3c_45cc_b291_3ef5fd5c7625"/>
+    <layer id="data_d562c150_79ef_4801_8104_c0ca170b5530"/>
+    <layer id="wards_bf942832_656e_4186_a250_120b298ff322"/>
+    <layer id="palika_hide_6007601a_975b_46f4_bb11_b8a2c24aa143"/>
+    <layer id="palikas_eb198486_a131_47f5_aef3_c9396daf5e72"/>
+    <layer id="dists_07fff2c3_6328_41ea_a24a_44c90684a045"/>
   </layerorder>
   <properties>
-    <Paths>
-      <Absolute type="bool">false</Absolute>
-    </Paths>
+    <SpatialRefSys>
+      <ProjectionsEnabled type="int">1</ProjectionsEnabled>
+    </SpatialRefSys>
+    <Measurement>
+      <AreaUnits type="QString"></AreaUnits>
+      <DistanceUnits type="QString"></DistanceUnits>
+    </Measurement>
     <PositionPrecision>
       <DecimalPlaces type="int">2</DecimalPlaces>
       <Automatic type="bool">true</Automatic>
     </PositionPrecision>
-    <Measurement>
-      <DistanceUnits type="QString"></DistanceUnits>
-      <AreaUnits type="QString"></AreaUnits>
-    </Measurement>
+    <Paths>
+      <Absolute type="bool">false</Absolute>
+    </Paths>
     <PAL>
-      <DrawOutlineLabels type="bool">true</DrawOutlineLabels>
-      <DrawRectOnly type="bool">false</DrawRectOnly>
-      <ShowingPartialsLabels type="bool">true</ShowingPartialsLabels>
       <CandidatesPoint type="int">16</CandidatesPoint>
       <CandidatesLine type="int">50</CandidatesLine>
+      <ShowingPartialsLabels type="bool">true</ShowingPartialsLabels>
+      <ShowingCandidates type="bool">false</ShowingCandidates>
+      <DrawRectOnly type="bool">false</DrawRectOnly>
+      <DrawOutlineLabels type="bool">true</DrawOutlineLabels>
+      <CandidatesPolygon type="int">30</CandidatesPolygon>
       <ShowingAllLabels type="bool">false</ShowingAllLabels>
       <SearchMethod type="int">0</SearchMethod>
-      <ShowingCandidates type="bool">false</ShowingCandidates>
-      <CandidatesPolygon type="int">30</CandidatesPolygon>
     </PAL>
-    <SpatialRefSys>
-      <ProjectionsEnabled type="int">1</ProjectionsEnabled>
-    </SpatialRefSys>
   </properties>
   <visibility-presets/>
   <transformContext/>
@@ -1614,7 +1741,7 @@ def my_form_open(dialog, layer, feature):
     <abstract></abstract>
     <links/>
     <author>Ewan Oglethorpe</author>
-    <creation>2018-12-15T16:27:26</creation>
+    <creation>2018-12-15T20:34:11</creation>
   </projectMetadata>
   <Annotations/>
   <Layouts/>
