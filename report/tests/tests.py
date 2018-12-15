@@ -16,8 +16,8 @@ class Tests(unittest.TestCase):
         self.assertEqual('fine', boiler.get('t'))
 
     ####report.commons.utils
-    def test_nan_non(self):
-        self.assertEqual(utils.nan_to_none([1, math.nan, 'test']), [1, None, 'test'])
+    def test_nan_conv(self):
+        self.assertEqual(utils.nan_list_conv([1, math.nan, 'test'], None), [1, None, 'test'])
 
     def test_decimal_prop(self):
         self.assertEqual(utils.fmt_pct(0.5, 2), '50.00%')
@@ -66,6 +66,7 @@ class Tests(unittest.TestCase):
     def test_fmt_num_np(self):
         "get num back like 1,23,45,67,890"
         boiler.set_lang('np')
+        self.assertEqual(utils.fmt_num(123), '१२३')
         self.assertEqual(utils.fmt_num(1234), '१,२३४')
         self.assertEqual(utils.fmt_num(12345), '१२,३४५')
         self.assertEqual(utils.fmt_num(123456789), '१२,३४,५६,७८९')

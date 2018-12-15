@@ -38,11 +38,13 @@ def fmt_num(val):
             fmtd = ',' + v_str[-3:]
             v_str = v_str[:-3]
 
-        if len(v_str) % 2 != 0:
-            skip = v_str[0] + ',' if len(v_str) > 1 else v_str[0]
-            v_str= v_str[1:]
+            if len(v_str) % 2 != 0:
+                skip = v_str[0] + ',' if len(v_str) > 1 else v_str[0]
+                v_str= v_str[1:]
 
-        fmtd = skip + ','.join([v_str[i:i + COMM_PT] for i in range(0, len(v_str), COMM_PT)]) + fmtd
+            fmtd = skip + ','.join([v_str[i:i + COMM_PT] for i in range(0, len(v_str), COMM_PT)]) + fmtd
+        else:
+            fmtd = v_str
 
     else:
         fmtd = '{:,}'.format(round(val, 2))
@@ -88,14 +90,14 @@ def fmt_pct(val, pts):
     return ret
 
 
-def nan_to_none(col):
-    """set all NaNs to Nones in a list"""
+def nan_list_conv(col, r_v):
+    """set all NaNs to r-v in a list"""
     # TODO: better way?
     ret_l = []
     for v in col:
         if isinstance(v, float):
             if math.isnan(v):
-                v = None
+                v = r_v
 
         ret_l.append(v)
 
@@ -123,7 +125,7 @@ def process_sht(sht):
         in progress....
     """
 
-    sht = sht.apply(lambda x : nan_to_none(x))
+    sht = sht.apply(lambda x : nan_list_conv(x, None))
     return sht
 
 def get_list_typo(in_vals, top, sort):
@@ -199,5 +201,3 @@ def get_text_width(text, fontsize, font, font_weight):
     cr.set_font_size(fontsize)
     xbearing, ybearing, width, height, xadvance, yadvance = cr.text_extents(text)
     return width
-
-print(get_text_width('hello', 9, 'Roboto Condensed', font_weight = 'normal'))

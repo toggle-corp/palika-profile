@@ -34,7 +34,7 @@ def TechnicalStaff(tech_data, mason_data):
                 text=item,
                 width=widths[i],
                 font_family='Roboto Condensed',
-                font_size=6,
+                font_size=7,
                 font_weight=Pango.Weight.BOLD,
                 padding=Rect(4),
                 alignment=(
@@ -55,10 +55,11 @@ def TechnicalStaff(tech_data, mason_data):
                     border=Border(width=0.5, color=Color.BLACK),
                     text=item,
                     width=widths[i],
+                    height='15',
                     font_family='Roboto Condensed',
-                    font_size=6,
-                    font_weight=Pango.Weight.BOLD,
-                    padding=Rect(4),
+                    font_size=7,
+                    font_weight=Pango.Weight.BOLD if i == 0 else None,
+                    padding=Rect([2,0,0,4]),
                     alignment=(
                         Text.LEFT
                         if i == 0
@@ -81,17 +82,16 @@ def TechnicalStaff(tech_data, mason_data):
                 width=widths[0],
                 font_family='Roboto Condensed',
                 font_weight=Pango.Weight.BOLD,
-                font_size=6,
+                font_size=7,
                 padding=Rect(4),
                 alignment=Text.LEFT,
             ),
-            #TODO: make num nepali
             Column(
                     border=Border(width=0.5, color=Color.BLACK),
                     height='100%',
                     width=widths[1],).add(
                 Text(
-                    text='{} ({} {})'.format(fmt_num(mason_data[1][0]), 7, boil('tech_staff_days')),
+                    text='{} ({} {})'.format(fmt_num(mason_data[1][0]), fmt_num(7), boil('tech_staff_days')),
                     font_family='Roboto Condensed',
                     font_size=5,
                     width='100%',
@@ -100,7 +100,7 @@ def TechnicalStaff(tech_data, mason_data):
                     )
                 ).add(
                 Text(
-                    text='{} ({})'.format(fmt_num(mason_data[1][1]), 50, boil('tech_staff_days')),
+                    text='{} ({})'.format(fmt_num(mason_data[1][1]), fmt_num(50), boil('tech_staff_days')),
                     font_family='Roboto Condensed',
                     font_size=5,
                     width='100%',
@@ -113,7 +113,7 @@ def TechnicalStaff(tech_data, mason_data):
                 width=widths[2])
                 .add(
                     Text(
-                        text='{} ({} {})'.format(fmt_num(mason_data[2][0]), 7, boil('tech_staff_days')),
+                        text='{} ({} {})'.format(fmt_num(mason_data[2][0]), fmt_num(7), boil('tech_staff_days')),
                         font_family='Roboto Condensed',
                         font_size=5,
                         width='100%',
@@ -122,7 +122,7 @@ def TechnicalStaff(tech_data, mason_data):
                     )
                 ).add(
                     Text(
-                        text='{} ({} {})'.format(fmt_num(mason_data[2][1]), 50, boil('tech_staff_days')),
+                        text='{} ({} {})'.format(fmt_num(mason_data[2][1]), fmt_num(50), boil('tech_staff_days')),
                         font_family='Roboto Condensed',
                         font_size=5,
                         width='100%',

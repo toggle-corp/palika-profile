@@ -6,34 +6,36 @@ from drafter.shapes import Pango
 
 from report.common.color import Color
 from report.common.utils import fmt_num, get_text_width
-from report.common.boiler import boil
+from report.common.boiler import boil, get_lang
 
 
 class Bars(Shape):
-    def __init__(self, data):
+    def __init__(self, data, bar_color):
         self.data = data
+        self.bar_color = bar_color
 
-    def x_pos_v1(self):
+    def _x_pos_v1(self):
         if (self.v1_len + self.NUM_PAD) > self.r1_w:
             self.inv_v1_col = True
             return self.r1_w + self.NUM_PAD
         else:
             return self.NUM_PAD
 
-    def x_pos_v2(self):
+    def _x_pos_v2(self):
         if (self.v2_len + self.NUM_PAD) > self.r2_w:
             self.inv_v2_col = True
-            return self.r1_w - self.v2_len - 2
+            return self.r1_w - self.v2_len - self.NUM_PAD
         else:
-            return self.F_W - self.v2_len - 2
+            return self.F_W - self.v2_len - self.NUM_PAD
 
     def render(self, ctx):
         self.F_W = 148
-        self.NUM_PAD = 2
+        self.NUM_PAD = 2 if get_lang() == 'en' else 4
+        Y_PAD = 1 if get_lang() == 'en' else 0
+
         font_family = 'Roboto'
         font_size = 8
         font_weight = Pango.Weight.BOLD
-        color = Color.WHITE
 
         v1 = self.data['value1']
         v2 = self.data['value2']
@@ -41,9 +43,9 @@ class Bars(Shape):
         self.v1_str = fmt_num(v1)
         self.v2_str = fmt_num(v2)
 
-        if self.v1_str == '0':
+        if v1 == 0:
             self.v1_str = ''
-        if self.v2_str == '0':
+        if v2 == 0:
             self.v2_str = ''
 
         self.inv_v1_col = False
@@ -59,7 +61,7 @@ class Bars(Shape):
         Rectangle(
             pos=[0, 0],
             size=[self.r1_w, 12],
-            color=Color.ORANGE,
+            color=self.bar_color,
             line_width=0,
         ).render(ctx),
 
@@ -73,7 +75,7 @@ class Bars(Shape):
 
         #v1 string
         String(
-            pos=[self.x_pos_v1(), 1],
+            pos=[self._x_pos_v1(), Y_PAD],
             markup=self.v1_str,
             font_family=font_family,
             font_size=font_size,
@@ -84,7 +86,7 @@ class Bars(Shape):
 
         #v2 string
         String(
-            pos=[self.x_pos_v2(), 1.5],
+            pos=[self._x_pos_v2(), Y_PAD],
             markup=self.v2_str,
             font_family=font_family,
             font_size=font_size,
@@ -93,7 +95,7 @@ class Bars(Shape):
             alignment=String.LEFT,
         ).render(ctx)
 
-def TwoValueLineChart(data, color):
+def TwoValueLineChart(data, bar_color):
 
     return Row(
         width='100%',
@@ -113,7 +115,7 @@ def TwoValueLineChart(data, color):
                 Canvas(
                     width='100%',
                     height='100%',
-                    renderer=Bars(data),
+                    renderer=Bars(data, bar_color),
                 )
         )
     )
@@ -121,7 +123,7 @@ def TwoValueLineChart(data, color):
 def ReconstructionStatus(data):
     rows = [
         #pass up label, v1, v2
-        TwoValueLineChart(datum, color=Color.ACCENT)
+        TwoValueLineChart(datum, bar_color=Color.ACCENT)
         for datum in data
     ]
 
@@ -186,7 +188,7 @@ def Houses(data):
 
 def RetrofitStatus(data):
     rows = [
-        TwoValueLineChart(datum, color=Color.ACCENT2)
+        TwoValueLineChart(datum, bar_color=Color.ACCENT2)
         for datum in data
     ]
 
