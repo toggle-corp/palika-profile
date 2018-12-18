@@ -28,6 +28,7 @@ RUN apt-get update -y ; \
         python3-gi \
         python3-gi-cairo \
         gir1.2-gtk-3.0 \
+        gir1.2-rsvg-2.0 \
         qgis-server \
         python-qgis
 
