@@ -2,18 +2,44 @@ import unittest
 import math
 
 from report.common import boiler, utils
+from report.page2 import hh
+
+import numpy as np
 
 
 class Tests(unittest.TestCase):
 
-    ####trans
+    def setUp(self):
+        self.hh_test_data = {
+            'v1': 10,
+            'v2': None,
+            'v3': 0,
+            'v4': np.NaN,
+            'v5': 20,
+            'v6': 1000
+        }
+        self.hh_test_filt_res = \
+            [{'key' : 'v1', 'val' : 10},
+               {'key' : 'v5', 'val' : 20},
+               {'key' : 'v6', 'val' : 1000}]
+
+        boiler.set_lang('en')
+
+    ####boil
     def test_trans_blank(self):
-        res = boiler.get('not included')
+        res = boiler.boil('not included')
         self.assertEqual(res, '***VALUE NOT IN XLS***')
 
-    def test_trans_ok(self):
-        res = boiler.set('t,', 'fine')
-        self.assertEqual('fine', boiler.get('t'))
+    ####hh
+    def test_get_widths(self):
+        res = [{'key' : 'v1', 'val' : 10, 'w' : 18},
+               {'key' : 'v5', 'val' : 20, 'w' : 18},
+               {'key' : 'v6', 'val' : 1000, 'w' : 600}]
+        # self.assertEqual(hh._get_widths(self.hh_test_filt_res), res)
+
+    def test_filter_items(self):
+        items = [{'key' : 'v%i' % i} for i in range(1,7)]
+        self.assertEqual(hh._filter_items(items, self.hh_test_data), self.hh_test_filt_res)
 
     ####report.commons.utils
     def test_nan_conv(self):

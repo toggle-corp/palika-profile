@@ -229,8 +229,8 @@
     <sizescale/>
   </renderer-v2>
   <labeling type="rule-based">
-    <rules key="{ea536a21-20ec-4ffc-b017-04417cbb12fd}">
-      <rule key="{b4a33fac-5631-464a-8ec5-83e94722b681}" filter="&quot;Palika_cod&quot;  =  attribute(@atlas_feature , 'PalikaCode')">
+    <rules key="{82e427aa-a68c-401d-b513-fb11774dca62}">
+      <rule key="{b8a96278-82af-4e9a-ae3c-a7eca92df04a}" filter="&quot;Palika_cod&quot;  =  attribute(@atlas_feature , 'PalikaCode')">
         <settings>
           <text-style textColor="0,0,0,255" fontFamily=".SF NS Text" previewBkgrdColor="#ffffff" fieldName="NEW_WARD_N" fontStrikeout="0" fontItalic="0" fontWeight="50" fontCapitals="0" fontLetterSpacing="0" multilineHeight="1" fontUnderline="0" fontSize="15" blendMode="0" isExpression="0" textOpacity="1" fontWordSpacing="0" fontSizeMapUnitScale="3x:0,0,0,0,0,0" fontSizeUnit="Point" useSubstitutions="0" namedStyle="Regular">
             <text-buffer bufferDraw="0" bufferSizeUnits="MM" bufferSize="1" bufferNoFill="1" bufferJoinStyle="128" bufferOpacity="1" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferBlendMode="0" bufferColor="255,255,255,255"/>
@@ -239,7 +239,7 @@
             <substitutions/>
           </text-style>
           <text-format reverseDirectionSymbol="0" autoWrapLength="0" useMaxLineLengthForAutoWrap="1" leftDirectionSymbol="&lt;" placeDirectionSymbol="0" addDirectionSymbol="0" decimals="3" rightDirectionSymbol=">" multilineAlign="4294967295" wrapChar="" formatNumbers="0" plussign="0"/>
-          <placement offsetUnits="MM" offsetType="0" xOffset="0" maxCurvedCharAngleIn="25" repeatDistanceUnits="MM" placement="0" preserveRotation="1" fitInPolygonOnly="0" placementFlags="14" priority="10" repeatDistance="0" repeatDistanceMapUnitScale="3x:0,0,0,0,0,0" rotationAngle="0" maxCurvedCharAngleOut="-25" dist="0" quadOffset="4" predefinedPositionOrder="TR,TL,BR,BL,R,L,TSR,BSR" centroidWhole="1" centroidInside="1" yOffset="0" labelOffsetMapUnitScale="3x:0,0,0,0,0,0" distUnits="MM" distMapUnitScale="3x:0,0,0,0,0,0"/>
+          <placement offsetUnits="MM" offsetType="0" xOffset="0" maxCurvedCharAngleIn="25" repeatDistanceUnits="MM" placement="0" preserveRotation="1" fitInPolygonOnly="0" placementFlags="14" priority="10" repeatDistance="0" repeatDistanceMapUnitScale="3x:0,0,0,0,0,0" rotationAngle="0" maxCurvedCharAngleOut="-25" dist="5" quadOffset="4" predefinedPositionOrder="TR,TL,BR,BL,R,L,TSR,BSR" centroidWhole="1" centroidInside="1" yOffset="0" labelOffsetMapUnitScale="3x:0,0,0,0,0,0" distUnits="MM" distMapUnitScale="3x:0,0,0,0,0,0"/>
           <rendering minFeatureSize="0" fontMinPixelSize="3" obstacle="0" mergeLines="0" displayAll="0" fontMaxPixelSize="10000" maxNumLabels="2000" fontLimitPixelSize="0" scaleMax="0" limitNumLabels="0" zIndex="0" obstacleFactor="1" obstacleType="0" upsidedownLabels="0" scaleVisibility="0" drawLabels="1" scaleMin="0" labelPerPart="0"/>
           <dd_properties>
             <Option type="Map">
@@ -253,7 +253,9 @@
     </rules>
   </labeling>
   <customproperties>
-    <property value="OBJECTID" key="dualview/previewExpressions"/>
+    <property key="dualview/previewExpressions">
+      <value>OBJECTID</value>
+    </property>
     <property value="0" key="embeddedWidgets/count"/>
     <property key="variableNames"/>
     <property key="variableValues"/>

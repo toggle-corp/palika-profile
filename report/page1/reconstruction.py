@@ -54,8 +54,15 @@ class Bars(Shape):
         self.v1_len = get_text_width(self.v1_str, font_size, font_family, 'bold')
         self.v2_len = get_text_width(self.v2_str, font_size, font_family, 'bold')
 
-        self.r1_w = (v1 / (v1 + v2)) * self.F_W
-        self.r2_w = (v2 / (v1 + v2)) * self.F_W
+        #TODO: revert with full check
+        self.r1_w = 0 if (v1 + v2) == 0 else (v1 / (v1 + v2)) * self.F_W
+        self.r2_w = 0 if (v1 + v2) == 0 else (v2 / (v1 + v2)) * self.F_W
+
+        from report.common.utils import is_nan
+        if is_nan(self.r1_w):
+            self.r1_w = 0
+        if is_nan(self.r2_w):
+            self.r2_w = 0
 
         #v1 rect
         Rectangle(
@@ -63,7 +70,7 @@ class Bars(Shape):
             size=[self.r1_w, 12],
             color=self.bar_color,
             line_width=0,
-        ).render(ctx),
+        ).render(ctx)
 
         #v2 rect
         Rectangle(
@@ -102,13 +109,13 @@ def TwoValueLineChart(data, bar_color):
         height=16,
         margin=Rect([4, 0, 0, 0]),
     ).add(
-        Text(
-            width='40%',
-            text=boil(data['label']),
-            font_family="Roboto Condensed",
-            font_size=9,
-            font_weight=Text.BOLD,
-        ),
+            Text(
+                width='40%',
+                text=boil(data['label']),
+                font_family="Roboto Condensed",
+                font_size=9,
+                font_weight=Text.BOLD,
+            ),
         # Row(width='60%', height='70%').add(add
         Row(width='60%', height='70%')
             .add(

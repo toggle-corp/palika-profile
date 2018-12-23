@@ -106,8 +106,8 @@ class Report(object):
 
             # POs Presence
             'pos_presence': {
-                'active': (cp['active_pos_list']),
-                'passive': (cp['phased_out_pos_list']),
+                'po_presence_active': (cp['active_pos_list']),
+                'po_presence_phased_out': (cp['phased_out_pos_list']),
             },
 
             # Other Sectors
@@ -148,6 +148,7 @@ class Report(object):
                 'landless': cp['landless_cnt'],
                 'right_of_way': cp['right_of_way_cnt'],
                 'no_land_certificates': cp['no_land_cert_cnt'],
+                'affected_by_hep' : cp['hep_cnt'],
                 'smallplots': cp['small_plots_cnt'],
                 'guthi_land': cp['guthi_land_cnt'],
             },
@@ -190,22 +191,17 @@ class Report(object):
             # FAQ
             'faq': [
                 {
-                    'q': get_faq(cp['faq_number'], self.faq_sht, self.meta_sht)['q'],
-                    'a': get_faq(cp['faq_number'], self.faq_sht, self.meta_sht)['a']
-                },
+                    'q': get_faq(cp['faq_number_%i' % i], self.faq_sht, self.meta_sht)['q'],
+                    'a': get_faq(cp['faq_number_%i' % i], self.faq_sht, self.meta_sht)['a']
+                } for i in range(1,3)
             ],
 
             # Further info
             'further_info': [
                 {
-                    'name': 'Reshma Shrestha',
-                    'title': 'Dist. Coordinator',
-                    'phone': '9841264190',
-                },
-                {
-                    'name': 'Ishwor Neupane',
-                    'title': 'Dist. IM Officer',
-                    'phone': '9841264190',
-                },
+                    'name': cp['further_info_%i_name' % i],
+                    'title': cp['further_info_%i_title' % i],
+                    'phone': cp['further_info_%i_number' % i],
+                } for i in range (1,4)
             ],
         }

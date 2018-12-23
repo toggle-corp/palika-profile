@@ -29,7 +29,7 @@ class Bagel(Shape):
                 title = boil('facts_and_figures_damage_grade_(1-2)')
                 dmg_val = self.data['d1']
             elif k == 'd3' :
-                title = boil('facts_and_figures_damage_grade_(1-2)')
+                title = boil('facts_and_figures_damage_grade_(3-5)')
                 dmg_val = self.data['d3']
 
             grades.append({
@@ -68,6 +68,7 @@ class Bagel(Shape):
 
         x = self.w / 2 + 24
         y = 32
+
         for item in grades:
             label = item['label']
             value = item['value']
@@ -75,9 +76,10 @@ class Bagel(Shape):
 
             Rectangle(
                 pos=[x, y],
-                size=[2, 2],
-                color=Color.BLUE,
+                size=[9, 9],
+                color=color,
                 line_width=0,
+                line_color = color
             ).render(ctx)
 
             String(

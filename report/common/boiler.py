@@ -32,12 +32,15 @@ def boil(key):
     if key not in strings:
         #TODO: error
         print('Key not in xls: %s' % str(key))
-        print(strings)
         return ('***VALUE NOT IN XLS***')
 
     if strings[key][lang] is None:
         #TODO: error
         print('String value not in xls for language %s: %s' % (lang, str(key)))
         return('***VALUE NOT IN XLS***')
+
+    # if is_nan(strings[key][lang]):
+    #     print('String value not in xls for language %s: %s' % (lang, str(key)))
+    #     return('-')
 
     return strings[key][lang]

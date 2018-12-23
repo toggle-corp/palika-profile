@@ -25,7 +25,8 @@ def fmt_num(val):
         if math.isnan(val):
             return DEFAULT
 
-    v_str = str(round(val))
+    #TODO: revert
+    v_str = str(round(int(val)))
     fmtd = ''
 
     if get_lang() == 'np':
@@ -47,7 +48,8 @@ def fmt_num(val):
             fmtd = v_str
 
     else:
-        fmtd = '{:,}'.format(round(val, 2))
+        #TODO: revert
+        fmtd = '{:,}'.format(round(int(val), 2))
 
     return fmtd
 
@@ -66,7 +68,9 @@ def fmt_pct(val, pts):
                 raise Exception('bad decimal for {0}'.format(val))
 
     if val > 1:
-        raise Exception('bad decimal for {0}'.format(val))
+        #TODO: revert
+        # raise Exception('bad decimal for {0}'.format(val))
+        val/=100
 
     if math.isnan(val) or val == 0:
         ret = '0.{}%'.format('0'*pts)
@@ -74,13 +78,15 @@ def fmt_pct(val, pts):
     else:
         #can be done using decimal fmt?
         rnd = str(round(val * 100, pts))
-        l_r = len(rnd.split('.')[1])
+        #TODO: revert?
+        if len(rnd.split('.')) > 1:
+            l_r = len(rnd.split('.')[1])
 
-        if pts == 0:
-            rnd = rnd.split('.')[0]
+            if pts == 0:
+                rnd = rnd.split('.')[0]
 
-        elif l_r < pts:
-            rnd += '0' * (pts - l_r)
+            elif l_r < pts:
+                rnd += '0' * (pts - l_r)
 
         ret = '{0}{1}'.format(rnd, '%')
 
@@ -210,3 +216,13 @@ def get_text_width(text, fontsize, font, font_weight):
     cr.set_font_size(fontsize)
     xbearing, ybearing, width, height, xadvance, yadvance = cr.text_extents(text)
     return width
+
+def is_nan(val):
+    try:
+        if math.isnan(val):
+             return True
+    except:
+        pass
+
+    return False
+

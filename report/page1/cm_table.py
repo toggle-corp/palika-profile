@@ -4,7 +4,7 @@ from drafter.nodes import Text, Image
 from drafter.shapes import Pango
 
 from report.common.color import Color
-from report.common.utils import fmt_num
+from report.common.utils import fmt_num, is_nan
 from report.common.boiler import boil
 
 def xstr(item):
@@ -158,6 +158,17 @@ def CMTable(top_data, bot_data):
         key = material['key']
         datum = top_data[key]
         label = material['label']
+
+        #TODO: rm this override for ava for general checking method
+
+        if is_nan(datum['ava']):
+            datum['ava'] = '-'
+
+        #TODO: revert
+        try:
+            datum['cost'] = int(datum['cost'])
+        except:
+            datum['cost'] = 0
 
         rows.append([
             {'text': label, 'icon': material.get('icon')},
