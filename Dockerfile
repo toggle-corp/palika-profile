@@ -34,7 +34,7 @@ RUN apt-get update -y ; \
 
 WORKDIR /code
 
-RUN curl -L https://github.com/google/roboto/releases/download/v2.138/roboto-android.zip -o /tmp/font.zip && \
+RUN curl -L https://noto-website-2.storage.googleapis.com/pkgs/NotoSansDevanagari-hinted.zip -o /tmp/font.zip && \
     unzip -o /tmp/font.zip -d /root/.fonts/ && \
     fc-cache --force --verbose
 
