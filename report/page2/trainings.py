@@ -6,7 +6,7 @@ from drafter.nodes import Text, Canvas
 from drafter.shapes import Shape, String, Pie, Pango, LineShape, SlantedLine
 
 from report.common.color import Color
-from report.common.utils import fmt_num, nan_list_conv
+from report.common.utils import fmt_num
 from report.common.boiler import boil
 
 
@@ -53,7 +53,7 @@ class PieChart(Shape):
         radius = min(self.w/2, self.h/2)
         last_angle = None
 
-        total_val = sum(nan_list_conv([item['value'] for item in self.items],0))
+        total_val = sum([item['value'] if item['value'] is not None else 0 for item in self.items])
 
         #we need to draw numbers at the end so they're on top - store them in this array then render after pies
         nums = []

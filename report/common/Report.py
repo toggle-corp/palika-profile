@@ -186,6 +186,7 @@ class Report(object):
             #TODO: delete after running?
             # MAP
             'map': {'map_uri': './resources/mapfiles/map_tmp/%s.%s' % (self.gc, self.map_img_type),
+                    'default_map_uri': './resources/images/no_map.svg',
                     'legend_uri': './resources/images/map_legend.png'},
 
             # FAQ

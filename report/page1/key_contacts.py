@@ -42,11 +42,11 @@ def KeyContacts(data):
     titles = [boil('key_contacts_municipal_office_title')]*4 + [boil('key_contacts_gmali/nra_title'),
                         boil('key_contacts_dlpiu-building_title')]
 
-    return Column(margin=Rect()).add(Row(
+    return Column(margin=Rect([0,0,0,5])).add(Row(
         width='100%',
-        padding=Rect([15, 0, 20, 24]),
+        padding=Rect([15, 0, 20, 0]),
     ).add(*[Contact(i, titles[i], contact) for i, contact in enumerate(data[:3])])).add(
      Row(
         width='100%',
-        padding=Rect([0, 0, 12, 24]),
+        padding=Rect([0, 0, 12, 0]),
     ).add(*[Contact(i+3, titles[i+3], contact) for i, contact in enumerate(data[3:])]))

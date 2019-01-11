@@ -10,7 +10,7 @@ from drafter.shapes import (
     Pango,
 )
 
-from report.common.utils import fmt_num
+from report.common.utils import fmt_num, is_nan
 from report.common.color import Color
 from report.common.boiler import boil
 
@@ -51,7 +51,11 @@ class Bagel(Shape):
             value = item['value']
             color = item['color']
 
+            #TODO: revert
             value_in_radians = value / total_val * 2 * math.pi
+            if is_nan(value_in_radians):
+                value_in_radians = 0
+
             if last_angle is None:
                 last_angle = -math.pi/2
             angle = last_angle + value_in_radians

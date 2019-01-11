@@ -4,10 +4,10 @@ from drafter.layouts import Row, Column
 from drafter.nodes import Text, Hr, Canvas
 from drafter.shapes import Pango
 
+from report.common import ZERO_DEFAULT
 from report.common.color import Color
 from report.common.utils import fmt_num, get_text_width
 from report.common.boiler import boil, get_lang
-
 
 class Bars(Shape):
     def __init__(self, data, bar_color):
@@ -22,30 +22,26 @@ class Bars(Shape):
             return self.NUM_PAD
 
     def _x_pos_v2(self):
-        if (self.v2_len + self.NUM_PAD) > self.r2_w:
+        if self.r2_w == 0:
+            self.inv_v2_col = True
+            return self.F_W - self.v2_len
+        elif (self.v2_len + self.NUM_PAD) > self.r2_w:
             self.inv_v2_col = True
             return self.r1_w - self.v2_len - self.NUM_PAD
         else:
             return self.F_W - self.v2_len - self.NUM_PAD
 
-    def render(self, ctx):
-        self.F_W = 148
-        self.NUM_PAD = 2 if get_lang() == 'en' else 4
-        Y_PAD = 1 if get_lang() == 'en' else 0
-
+    def _draw_regular_rect(self):
         font_family = 'Roboto'
         font_size = 8
         font_weight = Pango.Weight.BOLD
 
-        v1 = self.data['value1']
-        v2 = self.data['value2']
+        self.v1_str = fmt_num(self.v1)
+        self.v2_str = fmt_num(self.v2)
 
-        self.v1_str = fmt_num(v1)
-        self.v2_str = fmt_num(v2)
-
-        if v1 == 0:
+        if self.v1 == 0:
             self.v1_str = ''
-        if v2 == 0:
+        if self.v2 == 0:
             self.v2_str = ''
 
         self.inv_v1_col = False
@@ -54,9 +50,10 @@ class Bars(Shape):
         self.v1_len = get_text_width(self.v1_str, font_size, font_family, 'bold')
         self.v2_len = get_text_width(self.v2_str, font_size, font_family, 'bold')
 
+        self.r1_w = 0 if (self.v1 + self.v2) == 0 else (self.v1 / (self.v1 + self.v2)) * self.F_W
+        self.r2_w = 0 if (self.v1 + self.v2) == 0 else (self.v2 / (self.v1 + self.v2)) * self.F_W
+
         #TODO: revert with full check
-        self.r1_w = 0 if (v1 + v2) == 0 else (v1 / (v1 + v2)) * self.F_W
-        self.r2_w = 0 if (v1 + v2) == 0 else (v2 / (v1 + v2)) * self.F_W
 
         from report.common.utils import is_nan
         if is_nan(self.r1_w):
@@ -64,43 +61,90 @@ class Bars(Shape):
         if is_nan(self.r2_w):
             self.r2_w = 0
 
+        if self.v1_str == ZERO_DEFAULT:
+            self.v1_str = ''
+
+        #end revert
+
         #v1 rect
         Rectangle(
             pos=[0, 0],
-            size=[self.r1_w, 12],
+            size=[self.r1_w, self.RECT_HEIGHT],
             color=self.bar_color,
             line_width=0,
-        ).render(ctx)
+        ).render(self.ctx)
 
         #v2 rect
         Rectangle(
             pos=[self.r1_w, 0],
-            size=[self.F_W - self.r1_w, 12],
+            size=[self.F_W - self.r1_w, self.RECT_HEIGHT],
             color=Color.GRAY,
             line_width=0,
-        ).render(ctx)
+        ).render(self.ctx)
 
         #v1 string
         String(
-            pos=[self._x_pos_v1(), Y_PAD],
+            pos=[self._x_pos_v1(), self.Y_PAD],
             markup=self.v1_str,
             font_family=font_family,
             font_size=font_size,
             font_weight=font_weight,
             color=Color.WHITE if not self.inv_v1_col else self.bar_color,
             alignment=String.LEFT,
-        ).render(ctx)
+        ).render(self.ctx)
 
         #v2 string
         String(
-            pos=[self._x_pos_v2(), Y_PAD],
+            pos=[self._x_pos_v2(), self.Y_PAD],
             markup=self.v2_str,
             font_family=font_family,
             font_size=font_size,
             font_weight=font_weight,
             color=Color.WHITE if not self.inv_v2_col else Color.GRAY,
             alignment=String.LEFT,
-        ).render(ctx)
+        ).render(self.ctx)
+
+    def _draw_empty_rect(self):
+        """for when there is zero values for both types"""
+        font_family = 'Roboto'
+        font_size = 8
+        font_weight = Pango.Weight.BOLD
+
+        Rectangle(
+            pos=[0, 0],
+            size=[self.F_W, self.RECT_HEIGHT],
+            color=Color.WHITE,
+            line_width=1,
+            line_color = Color.LIGHT_GRAY,
+        ).render(self.ctx)
+
+        String(
+            pos=[self.F_W/2, self.Y_PAD],
+            markup=fmt_num(0),
+            font_family=font_family,
+            font_size=font_size,
+            font_weight=font_weight,
+            color=Color.BLACK,
+        ).render(self.ctx)
+
+
+    def render(self, ctx):
+        self.ctx = ctx
+        self.F_W = 148
+        self.NUM_PAD = 2 if get_lang() == 'en' else 4
+        self.Y_PAD = 1 if get_lang() == 'en' else 0
+        self.RECT_HEIGHT = 12
+
+        #TODO: logic?
+
+        self.v1 = self.data['value1']
+        self.v2 = self.data['value2']
+
+        if sum([self.v1, self.v2]) > 0:
+            self._draw_regular_rect()
+        else:
+            self._draw_empty_rect()
+
 
 def TwoValueLineChart(data, bar_color):
 

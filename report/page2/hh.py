@@ -7,7 +7,7 @@ from drafter.color import hx
 from drafter.shapes import Pango
 
 from report.common.color import Color
-from report.common.utils import fmt_num, get_text_width, nan_list_conv
+from report.common.utils import fmt_num, get_text_width
 from report.common.boiler import boil
 
 BAR_FNT_SZ = 11
@@ -31,12 +31,12 @@ def _rect_size(hh_cnt, font_size, font, font_weight, sum_total):
 def _get_widths(items):
     """get the appropriate widths, keeping in mind that small text will get larger boxes
         we assume no 0s are passed"""
-    #TODO: revert
-    for v in items:
-        try:
-            v['val'] = int(v['val'])
-        except:
-            pass
+    # #TODO: revert
+    # for v in items:
+    #     try:
+    #         v['val'] = int(v['val'])
+    #     except:
+    #         pass
 
     total = sum(v['val'] for v in items)
 
@@ -68,11 +68,11 @@ def _filter_items(items, data):
     for v in items:
         d_v = data[v['key']]
 
-        #TODO: revert with check
-        try:
-            d_v = int(d_v)
-        except:
-            pass
+        # #TODO: revert with check
+        # try:
+        #     d_v = int(d_v)
+        # except:
+        #     pass
 
         if d_v and not math.isnan(d_v) and d_v > 0:
             v['val'] = data[v['key']]

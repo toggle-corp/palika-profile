@@ -2,14 +2,19 @@ import unittest
 import math
 
 from report.common import boiler, utils
+from report.common.Sheet import Sheet
 from report.page2 import hh
 
 import numpy as np
+import pandas as pd
 
 
+# TODO: break up into seperate test files
 class Tests(unittest.TestCase):
-
     def setUp(self):
+        boiler.set_lang('en')
+
+        # hh
         self.hh_test_data = {
             'v1': 10,
             'v2': None,
@@ -19,32 +24,69 @@ class Tests(unittest.TestCase):
             'v6': 1000
         }
         self.hh_test_filt_res = \
-            [{'key' : 'v1', 'val' : 10},
-               {'key' : 'v5', 'val' : 20},
-               {'key' : 'v6', 'val' : 1000}]
+            [{'key': 'v1', 'val': 10},
+             {'key': 'v5', 'val': 20},
+             {'key': 'v6', 'val': 1000}]
 
-        boiler.set_lang('en')
-
-    ####boil
+    ####report.common.boiler
     def test_trans_blank(self):
         res = boiler.boil('not included')
         self.assertEqual(res, '***VALUE NOT IN XLS***')
 
     ####hh
     def test_get_widths(self):
-        res = [{'key' : 'v1', 'val' : 10, 'w' : 18},
-               {'key' : 'v5', 'val' : 20, 'w' : 18},
-               {'key' : 'v6', 'val' : 1000, 'w' : 600}]
+        res = [{'key': 'v1', 'val': 10, 'w': 18},
+               {'key': 'v5', 'val': 20, 'w': 18},
+               {'key': 'v6', 'val': 1000, 'w': 600}]
         # self.assertEqual(hh._get_widths(self.hh_test_filt_res), res)
 
     def test_filter_items(self):
-        items = [{'key' : 'v%i' % i} for i in range(1,7)]
+        items = [{'key': 'v%i' % i} for i in range(1, 7)]
         self.assertEqual(hh._filter_items(items, self.hh_test_data), self.hh_test_filt_res)
 
-    ####report.commons.utils
+    ####report.common.Sheet
     def test_nan_conv(self):
-        self.assertEqual(utils.nan_list_conv([1, math.nan, 'test'], None), [1, None, 'test'])
+        test_sht = Sheet(pd.DataFrame([1, math.nan, 'test'], columns=['test']))
+        self.assertEqual(test_sht.nan_list_conv('test', None), [1, None, 'test'])
 
+    def test_clean_int(self):
+        col_nm = 'test'
+        test_sht = Sheet(pd.DataFrame([1, '3', 2.5, math.nan, 'test'], columns=[col_nm]))
+        self.assertEqual(test_sht._clean_int(col_nm, test_sht.sht[col_nm]), [1, 3, 2, None, None])
+
+    def test_clean_str(self):
+        col_nm = 'test'
+        test_sht = Sheet(pd.DataFrame(['xx', 2.5, math.nan, ''], columns=[col_nm]))
+        self.assertEqual(test_sht._clean_str(col_nm, test_sht.sht[col_nm]),
+                         ['xx', '2.5', None, ''])
+
+    def test_clean_dec(self):
+        col_nm = 'test'
+        test_sht = Sheet(pd.DataFrame(['xx', 2.5, math.nan, .8, '.1', 1, 0], columns=[col_nm]))
+        self.assertEqual(test_sht._clean_dec(col_nm, test_sht.sht[col_nm]),
+                         [None, 2.5, None, .8, .1, 1, 0])
+
+    def test_clean_pct(self):
+        col_nm = 'test'
+        test_sht = Sheet(pd.DataFrame(['xx', 2.5, math.nan, .8, '.1', 1, 0], columns=[col_nm]))
+        self.assertEqual(test_sht._clean_pct(col_nm, test_sht.sht[col_nm]),
+                         [None, None, None, .8, .1, 1, 0])
+
+    def test_clean_uid_missing(self):
+        col_nm = 'test'
+        test_sht = Sheet(pd.DataFrame([], columns=[col_nm],
+                                      index = [1, 2, 3, 4, math.nan]))
+        test_sht._clean_uid(col_nm, list(test_sht.sht.index))
+        self.assertEqual(len(test_sht.errors[0]['message']), 1)
+
+    def test_clean_uid_rep(self):
+        col_nm = 'test'
+        test_sht = Sheet(pd.DataFrame([1, 2, 3, 4, 4], columns=[col_nm]))
+        test_sht._clean_uid(col_nm, test_sht.sht[col_nm])
+        self.assertEqual('Duplicate UID values detected',
+                         test_sht.errors[0]['message'])
+
+    ####report.commons.utils
     def test_decimal_prop(self):
         self.assertEqual(utils.fmt_pct(0.5, 2), '50.00%')
         self.assertEqual(utils.fmt_pct(0.5, 0), '50%')
@@ -55,17 +97,17 @@ class Tests(unittest.TestCase):
 
     def test_list_typo(self):
         l = [
-                ('v', None, 1, 10),
-                ('v2', 2, None, 34),
-                ('v3', None, 4, 5),
-                ('v4', 200, 5, 2),
-                ('v5', None, 1, 3),
-                ('v6', 20, 2, 256),
-                ('v7', 15, 3, 4),
-                ('v8', 15, 5, 322),
-                ('v9', 10, 6, 13),
-                ('v11', 9, 1, 3),
-                ('v12', 9, 1, 4),
+            ('v', None, 1, 10),
+            ('v2', 2, None, 34),
+            ('v3', None, 4, 5),
+            ('v4', 200, 5, 2),
+            ('v5', None, 1, 3),
+            ('v6', 20, 2, 256),
+            ('v7', 15, 3, 4),
+            ('v8', 15, 5, 322),
+            ('v9', 10, 6, 13),
+            ('v11', 9, 1, 3),
+            ('v12', 9, 1, 4),
         ]
         self.assertEqual(utils.get_list_typo(l, 5, 1),
                          [['v4', 200, 5, 2], ['v6', 20, 2, 256], ['v7', 15, 3, 4], ['v8', 15, 5, 322],
@@ -73,7 +115,7 @@ class Tests(unittest.TestCase):
 
     def test_list_typo_bad_len(self):
         pass
-        #TODO: func call?
+        # TODO: func call?
         # l = [(1), (1, 2)]
         #
         # with self.assertRaises(AssertionError) as cm:
@@ -84,9 +126,9 @@ class Tests(unittest.TestCase):
 
     def test_list_typo_short(self):
         l = [
-                ('v', None),
-                ('v2', 2)
-            ]
+            ('v', None),
+            ('v2', 2)
+        ]
         self.assertEqual(utils.get_list_typo(l, 5, 1), [['v2', 2], ['v', 0]])
 
     def test_fmt_num_np(self):

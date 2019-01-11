@@ -165,10 +165,10 @@ def CMTable(top_data, bot_data):
             datum['ava'] = '-'
 
         #TODO: revert
-        try:
-            datum['cost'] = int(datum['cost'])
-        except:
-            datum['cost'] = 0
+        # try:
+        #     datum['cost'] = int(datum['cost'])
+        # except:
+        #     datum['cost'] = 0
 
         rows.append([
             {'text': label, 'icon': material.get('icon')},

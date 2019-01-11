@@ -67,8 +67,6 @@ def PoGroup(h, pos):
     #TODO: set global val for what blank is
     label = pos[0]
     pos_list = pos[1]
-    if pos_list == '-':
-        pos_list = 'No POs Reported'
 
     return Column(
         width='98%',
@@ -87,15 +85,15 @@ def PoGroup(h, pos):
             font_family="Roboto Condensed",
             font_size=7,
             #TODO: fix bug where row cuts off early
-            auto_scale=False,
+            auto_scale_height=False,
             padding=Rect([1, 0, 5, 3]),
         ),
     )
 
 def Pop(data):
     for k,v in data.items():
-        if is_nan(v):
-            data[k] = '-'
+        if not v:
+            data[k] = 'No POs Reported'
 
     hs = _calc_box_hs([v for v in data.values()])
 
