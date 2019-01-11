@@ -147,11 +147,15 @@ class Bars(Shape):
 
 
 def TwoValueLineChart(data, bar_color):
+    if get_lang() == 'en':
+        row_margin = [4, 0, 0, 0]
+    elif get_lang() == 'np':
+        row_margin = [6, 0, 0, 0]
 
     return Row(
         width='100%',
         height=16,
-        margin=Rect([4, 0, 0, 0]),
+        margin=Rect(row_margin),
     ).add(
             Text(
                 width='40%',
