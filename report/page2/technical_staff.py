@@ -59,7 +59,7 @@ def TechnicalStaff(tech_data, mason_data):
                     font_family='Roboto Condensed',
                     font_size=7,
                     font_weight=Pango.Weight.BOLD if i == 0 else None,
-                    padding=Rect([2,0,0,4]),
+                    padding=Rect([3,0,0,4]),
                     alignment=(
                         Text.LEFT
                         if i == 0
@@ -100,7 +100,7 @@ def TechnicalStaff(tech_data, mason_data):
                     )
                 ).add(
                 Text(
-                    text='{} ({})'.format(fmt_num(mason_data[1][1]), fmt_num(50), boil('tech_staff_days')),
+                    text='{} ({} {})'.format(fmt_num(mason_data[1][1]), fmt_num(50), boil('tech_staff_days')),
                     font_family='Roboto Condensed',
                     font_size=5,
                     width='100%',

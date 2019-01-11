@@ -6,7 +6,7 @@ from drafter.nodes import Text, Canvas
 from drafter.shapes import Shape, String, Pie, Pango, LineShape, SlantedLine
 
 from report.common.color import Color
-from report.common.utils import fmt_num, nan_list_conv
+from report.common.utils import fmt_num
 from report.common.boiler import boil
 
 
@@ -53,44 +53,61 @@ class PieChart(Shape):
         radius = min(self.w/2, self.h/2)
         last_angle = None
 
-        total_val = sum(nan_list_conv([item['value'] for item in self.items],0))
-        for item in self.items:
-            value = item['value']
-            color = item['color']
+        total_val = sum([item['value'] if item['value'] is not None else 0 for item in self.items])
 
-            value_in_radians = value / total_val * 2 * math.pi
-            if last_angle is None:
-                last_angle = -math.pi / 2.5 - value_in_radians / 2
+        #we need to draw numbers at the end so they're on top - store them in this array then render after pies
+        nums = []
 
-            angle = last_angle + value_in_radians
+        # TODO: more graceful
+        if total_val > 0:
+            for it, item in enumerate(self.items):
+                value = item['value']
+                color = item['color']
 
-            pct_cov = value / total_val
-            if pct_cov != 0:
-                if .05 < pct_cov < .95:
-                    l_w = 1
-                else:
-                    l_w = 0
+                value_in_radians = value / total_val * 2 * math.pi
+                if last_angle is None:
+                    last_angle = -math.pi / 2.5 - value_in_radians / 2
 
-                pie = Pie(
-                    center=pie_center,
-                    radius=radius,
-                    color=color,
-                    # only give an outline line if we have more than 10 pct (so we don't have white sliver
-                    line_width=l_w,
-                    line_color=Color.WHITE,
-                    angle1=(last_angle),
-                    angle2=(angle),
-                )
-                pie.render(ctx)
-                last_angle = angle
+                angle = last_angle + value_in_radians
 
-                String(
-                    pos=pie.calc_center(),
-                    text=fmt_num(value) if pct_cov > .05 else '',
-                    font_family='Roboto Condensed',
-                    font_size=5,
-                    line_cap = LineShape
-                ).repos_to_center(ctx).render(ctx)
+                #don't show outline if very small sliver
+                pct_cov = value / total_val
+                if pct_cov != 0:
+                    if .05 < pct_cov < .95:
+                        l_w = 1
+
+                    else:
+                        l_w = 0
+
+                    pie = Pie(
+                        center=pie_center,
+                        radius=radius,
+                        color=color,
+                        # only give an outline line if we have more than 10 pct (so we don't have white sliver
+                        line_width=l_w,
+                        line_color=Color.WHITE,
+                        angle1=(last_angle),
+                        angle2=(angle),
+                    )
+                    pie.render(ctx)
+                    last_angle = angle
+
+                    num_pos = pie.calc_center()
+                    if pct_cov < .05:
+                        num_pos[0] += 7
+
+                    nums.append(
+                        String(
+                            pos=num_pos,
+                            text=fmt_num(value),
+                            font_family='Roboto Condensed',
+                            font_size=5,
+                            line_cap = LineShape
+                        )
+                    )
+
+            for v in nums:
+                v.repos_to_center(ctx).render(ctx)
 
         # SlantedLine(
         #     p1 = [pie_center[0], pie_center[1] - radius],

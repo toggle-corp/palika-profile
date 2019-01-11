@@ -71,5 +71,15 @@ def Typologies(data):
                 ]
             )
             for row in rows
-        ]
-    )
+        ],
+        Text(
+                width='100%',
+                #TODO: add to lib
+                text='CBS damage assessment survey, 2011',
+                font_family="Roboto Light",
+                font_size=6,
+                alignment=Text.RIGHT,
+                color=Color.GRAY,
+                padding=Rect([0,0,10,0])
+            ),
+        )

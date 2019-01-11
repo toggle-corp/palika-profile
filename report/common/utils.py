@@ -6,6 +6,7 @@ import cairo
 from hrrpmaps.atlas_auto import at
 
 from report.common.boiler import get_lang
+from report.common import ZERO_DEFAULT
 
 def swap_nep_chars(num):
     """swap in nepal numerical characters"""
@@ -17,20 +18,21 @@ def fmt_num(val):
     """properly format a number with the right thounsands seperation into eng or np
         remove decimals for all nums"""
 
-    DEFAULT = '-'
     if val is None:
-        return DEFAULT
+        return ZERO_DEFAULT
 
     elif isinstance(val, float):
         if math.isnan(val):
-            return DEFAULT
+            return ZERO_DEFAULT
 
-    v_str = str(round(val))
-    fmtd = ''
+    #TODO: revert (swa_nep_chars command)
+    # v_str = str(round(int(val)))
+
+    fmtd = None
 
     if get_lang() == 'np':
         #a bit hacky
-        v_str = swap_nep_chars(v_str)
+        v_str = swap_nep_chars(val)
         COMM_PT = 2
         skip = ''
 
@@ -47,7 +49,8 @@ def fmt_num(val):
             fmtd = v_str
 
     else:
-        fmtd = '{:,}'.format(round(val, 2))
+        #TODO: revert
+        fmtd = '{:,}'.format(round(int(val), 2))
 
     return fmtd
 
@@ -65,8 +68,10 @@ def fmt_pct(val, pts):
             except Exception:
                 raise Exception('bad decimal for {0}'.format(val))
 
-    if val > 1:
-        raise Exception('bad decimal for {0}'.format(val))
+    # if val > 1:
+    #     #TODO: revert
+    #     # raise Exception('bad decimal for {0}'.format(val))
+    #     val/=100
 
     if math.isnan(val) or val == 0:
         ret = '0.{}%'.format('0'*pts)
@@ -74,13 +79,15 @@ def fmt_pct(val, pts):
     else:
         #can be done using decimal fmt?
         rnd = str(round(val * 100, pts))
-        l_r = len(rnd.split('.')[1])
+        #TODO: revert?
+        if len(rnd.split('.')) > 1:
+            l_r = len(rnd.split('.')[1])
 
-        if pts == 0:
-            rnd = rnd.split('.')[0]
+            if pts == 0:
+                rnd = rnd.split('.')[0]
 
-        elif l_r < pts:
-            rnd += '0' * (pts - l_r)
+            elif l_r < pts:
+                rnd += '0' * (pts - l_r)
 
         ret = '{0}{1}'.format(rnd, '%')
 
@@ -90,51 +97,14 @@ def fmt_pct(val, pts):
     return ret
 
 
-def nan_list_conv(col, r_v):
-    """set all NaNs to r-v in a list"""
-    # TODO: better way?
-    ret_l = []
-    for v in col:
-        if isinstance(v, float):
-            if math.isnan(v):
-                v = r_v
-
-        ret_l.append(v)
-
-    return ret_l
-
-
-def clean_xls_headers(sht, num_cols):
-    """strip #s from headers, remove unnecessary header cols"""
-    sht = sht.rename(columns=lambda x: x.strip('#'))
-    sht = sht.drop(sht.index[0:num_cols])
-    return sht
-
-
-def process_sht(sht):
-    """run processing functions on sheet
-        DONE:
-        # set nans to None
-        # rm #s from index
-
-        TODO:
-        # check to see if correct types in cols
-        # merge with clean_xls_headers?
-
-
-        in progress....
-    """
-
-    sht = sht.apply(lambda x : nan_list_conv(x, None))
-    return sht
-
 def get_list_typo(in_vals, top, sort):
     """
     read in a list of tups of (type, pct_1, pct_2) and return top X sorted by 'sort', and then 1 - sum(rest) for "Others"
     """
     assert(len(set(len(v) for v in in_vals)) == 1)
 
-    vals = sorted([[(v if i == 0 else 0 if v is None or math.isnan(v) else v) for i, v in enumerate(t)]
+    #TODO: revert nan
+    vals = sorted([[(v if i == 0 else 0 if (v is None or is_nan(v)) else v) for i, v in enumerate(t)]
                    for t in in_vals], key = lambda x : x[sort], reverse=True)
 
     if len(vals) < top:
@@ -210,3 +180,13 @@ def get_text_width(text, fontsize, font, font_weight):
     cr.set_font_size(fontsize)
     xbearing, ybearing, width, height, xadvance, yadvance = cr.text_extents(text)
     return width
+
+def is_nan(val):
+    try:
+        if math.isnan(val):
+             return True
+    except:
+        pass
+
+    return False
+

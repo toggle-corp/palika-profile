@@ -28,6 +28,7 @@ def Map(data):
         )).add(
         Image(
             filename=data['map_uri'],
+            default_filename=data['default_map_uri'],
             width='99%',
             height='95%',
             padding=Rect([0,0,3,5])
