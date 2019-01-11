@@ -1,0 +1,30 @@
+sudo: required
+
+language: generic
+
+services:
+    - docker
+
+before_install:
+  # NOTE: Remove this after drafter and hrrp-maps integration is fixed
+    - git clone https://github.com/bibekdahal/drafter /tmp/drafter
+    - git clone https://github.com/eoglethorpe/hrrp-maps /tmp/hrrp-maps
+    - mv /tmp/drafter/drafter ./
+    - mv /tmp/hrrp-maps/hrrpmaps ./
+    - sed -i "/self.app.setPrefixPath('\/Applications\/QGIS3.app\/Contents\/MacOS', True)/d" ./hrrpmaps/atlas_auto.py
+
+    - docker pull ${DOCKER_IMAGE} || true
+    - docker build --cache-from ${DOCKER_IMAGE} --tag ${DOCKER_IMAGE} .
+
+before_script:
+    - echo 'before_script'
+
+after_success:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker push ${DOCKER_IMAGE}
+    - ./release_build.sh
+
+env:
+  global:
+    - DOCKER_IMAGE='devtc/palika-profile:dev'
+    - DOCKER_IMAGE_RC='devtc/palika-profile:latest'
