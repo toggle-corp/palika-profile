@@ -4,6 +4,7 @@ from drafter.nodes import Text
 from drafter.shapes import Pango
 from report.common.panel import Panel
 from report.common.sidebar import Sidebar
+from report.common.utils import is_nan
 
 from .hh import HH
 from .technical_staff import TechnicalStaff, TechnicalStaffFooter
@@ -14,16 +15,18 @@ from report.common.boiler import boil
 
 
 def FurtherInfoNotes(data, **kwargs):
+    #TODO: check nans before entering
+
     return Row(**kwargs, width='100%', height=16).add(
         Text(
             text=boil('page_2_futher_information'),
             font_family='Roboto Condensed',
-            font_size=5.5,
+            font_size=7,
             font_weight=Pango.Weight.BOLD,
-            padding=Rect([8, 0, 8, 0]),
+            padding=Rect([12.5, 0, 0, 5]),
         ),
         *[
-            Column(width='30%', padding=Rect(8)).add(
+            Column(width='20%', padding=Rect(8)).add(
                 Text(
                     text='{}. {} ({})'.format(
                         i + 1,
@@ -31,15 +34,16 @@ def FurtherInfoNotes(data, **kwargs):
                         contact['title'],
                     ),
                     font_family='Roboto Condensed',
-                    font_size=5.5,
+                    font_size=7,
+                    padding=Rect([5, 0, 0, 0]),
                 ),
                 Text(
                     text='     {}'.format(contact['phone']),
                     font_family='Roboto Condensed',
-                    font_size=5.5,
+                    font_size=7,
                 ),
             )
-            for i, contact in enumerate(data)
+            for i, contact in enumerate(data) if not all([is_nan(v) for v in contact.values()])
         ]
     )
 

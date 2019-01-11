@@ -8,6 +8,7 @@ from report.common.boiler import boil
 
 
 def Header(data):
+
     return Column(
         width='100%',
         margin=Rect([0, 5, 8, 5]),
