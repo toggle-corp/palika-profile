@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/bash +x
 
 # Ignore if not ( not pull request and branch is `release`)
 if ! [ \

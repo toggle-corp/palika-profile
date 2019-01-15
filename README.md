@@ -19,4 +19,14 @@
 # TODO: Add volume for input folder
 # cd to folder where you need output
 docker run --rm -it -v "$(pwd):/code/output/" devtc/palika-profile:dev bash -c 'python3 main.py'
+
+# Develop
+docker run --rm -it -v "$(pwd):/code" devtc/palika-profile:dev bash
+
+
+# Develop with local drafter and hrrp-maps code
+docker run --rm -it \
+    -v "$(pwd)/..path_to_drafter/:/dep/drafter" \
+    -v "$(pwd)/..path_to_hrrp-maps:/dep/hrrp-maps" \
+    -v "$(pwd):/code" devtc/palika-profile:dev bash
 ```

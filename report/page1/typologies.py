@@ -65,7 +65,7 @@ def Typologies(data):
                         width=widths[i],
                         text=item if i==0 else fmt_pct(item, pts = 2),
                         index=i,
-                        padding=Rect([4.5, 0, 4.5, 0]),
+                        padding=Rect([2.5, 0, 2.5, 0]),
                     )
                     for i, item in enumerate(row)
                 ]

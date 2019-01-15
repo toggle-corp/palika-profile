@@ -79,5 +79,6 @@ def generate(lang_in, test_len=None, make_maps=True, map_img_type='svg'):
             print('skipping ' + PATH % (v, lang_in))
 
 if __name__ == '__main__':
-    generate(lang_in='en', test_len=1, make_maps=False, map_img_type='svg')
+    generate(lang_in='en', test_len=1, make_maps=True, map_img_type='svg')
+    generate(lang_in='np', test_len=1, make_maps=True, map_img_type='svg')
     # generate(lang_in='en', test_len=None, make_maps=False, map_img_type='svg')
