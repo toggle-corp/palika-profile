@@ -60,7 +60,7 @@ def generate(lang_in, test_len=None, make_maps=True, map_img_type='svg'):
     # faq = clean_xls_headers(faq, 1)
 
     if make_maps:
-        gen_maps(list(data.index), map_img_type)
+        gen_maps(list(data.sht.index), map_img_type)
 
     # process
     PATH = './output/%s_%s.pdf'
