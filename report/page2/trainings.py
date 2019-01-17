@@ -3,7 +3,7 @@ import math
 from drafter.utils import Rect
 from drafter.layouts import Node, Row, Column
 from drafter.nodes import Text, Canvas
-from drafter.shapes import Shape, String, Pie, Pango, LineShape, SlantedLine
+from drafter.shapes import Shape, String, Pie, Pango, LineShape
 
 from report.common.color import Color
 from report.common.utils import fmt_num
@@ -32,7 +32,8 @@ def Label(label, color):
         ),
         Text(
             text=label,
-            font='Roboto Light 6',
+            font='Roboto Light',
+            font_size=6,
         )
     )
 
@@ -45,7 +46,8 @@ class PieChart(Shape):
         String(
             pos=[self.w/2, 0],
             text=self.label,
-            font='Roboto Light 7',
+            font='Roboto Light',
+            font_size=7,
             alignment=Text.CENTER,
         ).repos_to_center(ctx).render(ctx)
 
@@ -53,9 +55,15 @@ class PieChart(Shape):
         radius = min(self.w/2, self.h/2)
         last_angle = None
 
-        total_val = sum([item['value'] if item['value'] is not None else 0 for item in self.items])
+        total_val = sum(
+            [
+                item['value'] if item['value'] is not None else 0
+                for item in self.items
+            ]
+        )
 
-        #we need to draw numbers at the end so they're on top - store them in this array then render after pies
+        # we need to draw numbers at the end so they're on top
+        # - store them in this array then render after pies
         nums = []
 
         # TODO: more graceful
@@ -70,7 +78,7 @@ class PieChart(Shape):
 
                 angle = last_angle + value_in_radians
 
-                #don't show outline if very small sliver
+                # don't show outline if very small sliver
                 pct_cov = value / total_val
                 if pct_cov != 0:
                     if .05 < pct_cov < .95:
@@ -83,7 +91,8 @@ class PieChart(Shape):
                         center=pie_center,
                         radius=radius,
                         color=color,
-                        # only give an outline line if we have more than 10 pct (so we don't have white sliver
+                        # only give an outline line if we have more than 10 pct
+                        # (so we don't have white sliver
                         line_width=l_w,
                         line_color=Color.WHITE,
                         angle1=(last_angle),
@@ -102,7 +111,7 @@ class PieChart(Shape):
                             text=fmt_num(value),
                             font_family='Roboto Condensed',
                             font_size=5,
-                            line_cap = LineShape
+                            line_cap=LineShape
                         )
                     )
 

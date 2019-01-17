@@ -13,12 +13,12 @@ from .other_sectors import OtherSectors
 from .key_contacts import KeyContacts
 
 
-
 def LeftFootNotes(**kwargs):
     return Text(
         **kwargs,
         text=boil('page_1_sources_footer'),
-        font='RobotoCondensed 5',
+        font='RobotoCondensed',
+        font_size=5,
     )
 
 
@@ -26,7 +26,8 @@ def RightFootNotes(**kwargs):
     return Text(
         **kwargs,
         text=boil('page_1_no_info_footer'),
-        font='RobotoCondensed 5',
+        font='RobotoCondensed',
+        font_size=5,
     )
 
 

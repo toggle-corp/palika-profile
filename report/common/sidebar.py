@@ -8,7 +8,8 @@ from report.common.boiler import boil
 def Label(text):
     return Text(
         text=text,
-        font='RobotoCondensed 6',
+        font='RobotoCondensed',
+        font_size=6,
         padding=Rect(2),
     )
 

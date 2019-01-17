@@ -116,3 +116,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Maps tmp files
+resources/mapfiles/map_tmp/*
