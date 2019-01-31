@@ -28,8 +28,9 @@ def Typologies(data):
     headers = [
         boil('typologies_typology'), boil('typologies_municipal'), boil('typologies_district')
     ]
+    #TODO: assert that we don't have duplicate keys?
     #flatten and add dict
-    rows = get_list_typo([[boil(v['nm_look']), v['muni_pct'], v['dist_pct']] for v in data], 5, 1)
+    rows = get_list_typo([{'key': boil(v['nm_look']), 'muni_pct': v['muni_pct'], 'dist_pct': v['dist_pct']} for v in data], 5)
 
     return Column(
         width='100%',

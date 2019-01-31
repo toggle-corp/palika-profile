@@ -1,6 +1,7 @@
 """utility funcs"""
 #TODO: error collection
 import math
+from collections import OrderedDict
 
 import cairo
 from hrrpmaps.atlas_auto import at
@@ -32,7 +33,7 @@ def fmt_num(val):
 
     if get_lang() == 'np':
         #a bit hacky
-        v_str = swap_nep_chars(val)
+        v_str = swap_nep_chars(str(val))
         COMM_PT = 2
         skip = ''
 
@@ -97,31 +98,50 @@ def fmt_pct(val, pts):
     return ret
 
 
-def get_list_typo(in_vals, top, sort):
+def get_list_typo(in_vals, top):
     """
-    read in a list of tups of (type, pct_1, pct_2) and return top X sorted by 'sort', and then 1 - sum(rest) for "Others"
+    read in a list of tups of (type, pct_1, pct_2) and return:
+        [valid entries meaning not 0]
+        top X sorted by 'sort' in pct_1 until we reach 0 or if the len of valid entries >=top, display 1-sum(other)
+        if len valid entries < top, start showing for pct_2
+            if len valid entries for pct_1 + pct_2 >= top, display 1-sum(other)
+            if len valid entries for pct_1 + pct_2 is still < top, only do that many rows
+
+    input: [{'key' : x, 'muni_pct' : y, 'dist_pct' : z}]
     """
-    assert(len(set(len(v) for v in in_vals)) == 1)
+    out_vals = OrderedDict()
+
+    for k,v in in_vals.items():
+        in_vals[k] = {ik:0 if iv is None or is_nan(iv) else iv for ik, iv in v.items()}
+
+    in_vals = OrderedDict(sorted(in_vals.items(), key=lambda x: x[1]['muni_pct'], reverse = True))
+
+    for i in range(0, top):
+        it = list(in_vals.items())[i]
+        if it[1]['muni_pct'] > 0:
+            out_vals[it[0]] = it[1]
+        else:
+            break
+
+    print(out_vals)
+
+    def _calc_other(calc_vals, col):
+        mid = [0] * (len(calc_vals[col]) - 1)
+        print(mid)
+        for v in calc_vals:
+            for i in range(len(mid)):
+                # +1 bc we're skipping one position of the index
+                mid[i] += v[i + 1]
+
+        return(['Others'] + mid)
 
     #TODO: revert nan
-    vals = sorted([[(v if i == 0 else 0 if (v is None or is_nan(v)) else v) for i, v in enumerate(t)]
-                   for t in in_vals], key = lambda x : x[sort], reverse=True)
+    vals = fancy_sort(in_vals, PCT_1_IND)
 
-    if len(vals) < top:
-        ret = vals
-
-    else:
-        ret = []
-        for v in vals[:top]:
-            ret.append(v)
-
-        mid = [0 for v in range(len(vals[1]) - 1)]
-        for v in vals[top:]:
-            for i in range(len(mid)):
-                #+1 bc we're skipping one position of the index
-                mid[i] += v[i+1]
-
-        ret.append(['Others'] + mid)
+    valid_pct_1 = [v for v in vals if v[PCT_1_IND] > 0]
+    ret = valid_pct_1[:top]
+    if len(ret) >= top:
+        ret.append(_calc_other(vals[:top], 1))
 
     return ret
 
