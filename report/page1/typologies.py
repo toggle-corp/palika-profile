@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 from drafter.utils import Rect
 from drafter.layouts import Row, Column
 from drafter.nodes import Text, Hr
@@ -28,8 +30,11 @@ def Typologies(data):
     headers = [
         boil('typologies_typology'), boil('typologies_municipal'), boil('typologies_district')
     ]
+    #TODO: assert that we don't have duplicate keys?
     #flatten and add dict
-    rows = get_list_typo([[boil(v['nm_look']), v['muni_pct'], v['dist_pct']] for v in data], 5, 1)
+    rows = get_list_typo(OrderedDict((boil(k), v) for k,v in data.items()), 5)
+    for v in rows.items():
+        print(v)
 
     return Column(
         width='100%',
@@ -63,18 +68,20 @@ def Typologies(data):
                 *[
                     Item(
                         width=widths[i],
-                        text=item if i==0 else fmt_pct(item, pts = 2),
+                        text=k if i==0 else fmt_pct(list(d_v.items())[i-1][1], pts = 2),
                         index=i,
                         padding=Rect([4.5, 0, 4.5, 0]),
                     )
-                    for i, item in enumerate(row)
+                    # i, item in enumerate(d_v.values())
+                    for i in range(len(d_v.values())+1)
                 ]
             )
-            for row in rows
+            for k, d_v in rows.items()
         ],
         Text(
                 width='100%',
                 #TODO: add to lib
+                #TODO: anchor to bottom
                 text='CBS damage assessment survey, 2011',
                 font_family="Roboto Light",
                 font_size=6,

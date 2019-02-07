@@ -1,8 +1,10 @@
 import unittest
 import math
+from collections import OrderedDict
 
 from report.common import boiler, utils
 from report.common.Sheet import Sheet
+from report.common.boiler import strings
 from report.page2 import hh
 
 import numpy as np
@@ -13,6 +15,7 @@ import pandas as pd
 class Tests(unittest.TestCase):
     def setUp(self):
         boiler.set_lang('en')
+        strings['typologies_others'] = {'en' : 'Others'}
 
         # hh
         self.hh_test_data = {
@@ -77,7 +80,7 @@ class Tests(unittest.TestCase):
         test_sht = Sheet(pd.DataFrame([], columns=[col_nm],
                                       index = [1, 2, 3, 4, math.nan]))
         test_sht._clean_uid(col_nm, list(test_sht.sht.index))
-        self.assertEqual(len(test_sht.errors[0]['message']), 1)
+        self.assertEqual(len(test_sht.errors), 1)
 
     def test_clean_uid_rep(self):
         col_nm = 'test'
@@ -95,23 +98,67 @@ class Tests(unittest.TestCase):
         self.assertEqual(utils.fmt_pct(0.5123, 2), '51.23%')
         self.assertEqual(utils.fmt_pct(0.512312342, 2), '51.23%')
 
-    def test_list_typo(self):
-        l = [
-            ('v', None, 1, 10),
-            ('v2', 2, None, 34),
-            ('v3', None, 4, 5),
-            ('v4', 200, 5, 2),
-            ('v5', None, 1, 3),
-            ('v6', 20, 2, 256),
-            ('v7', 15, 3, 4),
-            ('v8', 15, 5, 322),
-            ('v9', 10, 6, 13),
-            ('v11', 9, 1, 3),
-            ('v12', 9, 1, 4),
-        ]
-        self.assertEqual(utils.get_list_typo(l, 5, 1),
-                         [['v4', 200, 5, 2], ['v6', 20, 2, 256], ['v7', 15, 3, 4], ['v8', 15, 5, 322],
-                          ['v9', 10, 6, 13], ['Others', 20, 8, 59]])
+    def test_list_typo_all_muni(self):
+        l = OrderedDict()
+        l['v'] = {'muni_pct' : None, 'dist_pct' : 1}
+        l['v2'] = {'muni_pct' : 2, 'dist_pct' : None}
+        l['v3'] = {'muni_pct' : None, 'dist_pct' : 4}
+        l['v4'] = {'muni_pct' : 200, 'dist_pct' : 5}
+        l['v5'] = {'muni_pct' : None, 'dist_pct' : 1}
+        l['v6'] = {'muni_pct' : 20, 'dist_pct' : 2}
+        l['v7'] = {'muni_pct' : 15, 'dist_pct' : 3}
+        l['v8'] = {'muni_pct' : 15, 'dist_pct' : 5}
+        l['v9'] = {'muni_pct' : 10, 'dist_pct' : 6}
+        l['v11'] = {'muni_pct' : 9, 'dist_pct' : 1}
+        l['v12'] = {'muni_pct' : 9, 'dist_pct' : 1}
+
+        res = OrderedDict()
+        res['v4'] = {'muni_pct': 200, 'dist_pct': 5}
+        res['v6'] = {'muni_pct': 20, 'dist_pct': 2}
+        res['v7'] = {'muni_pct': 15, 'dist_pct': 3}
+        res['v8'] = {'muni_pct': 15, 'dist_pct': 5}
+        res['v9'] = {'muni_pct': 10, 'dist_pct': 6}
+        res['Others'] = {'muni_pct': 20, 'dist_pct': 8}
+
+        self.assertEqual(utils.get_list_typo(l, 6), res)
+
+    def test_list_typo_short_pct1_enough_pct2(self):
+        l = OrderedDict()
+        l['v4'] = {'muni_pct' :  200, 'dist_pct' : 5}
+        l['v6'] = {'muni_pct' :  20, 'dist_pct' : 2}
+        l['v7'] = {'muni_pct' :  15, 'dist_pct' : 3}
+        l['v'] = {'muni_pct' :  None, 'dist_pct' : 1}
+        l['v2'] = {'muni_pct' :  None, 'dist_pct' : 4}
+        l['v3'] = {'muni_pct' :  None, 'dist_pct' : 4}
+        l['v5'] = {'muni_pct' :  None, 'dist_pct' : 1}
+
+        res = OrderedDict()
+        res['v4'] = {'muni_pct': 200, 'dist_pct': 5}
+        res['v6'] = {'muni_pct': 20, 'dist_pct': 2}
+        res['v7'] = {'muni_pct': 15, 'dist_pct': 3}
+        res['v2'] = {'muni_pct': 0, 'dist_pct': 4}
+        res['v3'] = {'muni_pct': 0, 'dist_pct': 4}
+        res['Others'] = {'muni_pct': 0, 'dist_pct': 2}
+
+        self.assertEqual(utils.get_list_typo(l, 5), res)
+
+    def test_list_typo_short_pct1_exact_pct2(self):
+        l = OrderedDict()
+        l['v4'] = {'muni_pct' :  200, 'dist_pct' : 5}
+        l['v6'] = {'muni_pct' :  20, 'dist_pct' : 2}
+        l['v7'] = {'muni_pct' :  15, 'dist_pct' : 3}
+        l['v'] = {'muni_pct' :  None, 'dist_pct' : 1}
+        l['v2'] = {'muni_pct' :  None, 'dist_pct' : 4}
+
+        res = OrderedDict()
+        res['v4'] = {'muni_pct': 200, 'dist_pct': 5}
+        res['v6'] = {'muni_pct': 20, 'dist_pct': 2}
+        res['v7'] = {'muni_pct': 15, 'dist_pct': 3}
+        res['v2'] = {'muni_pct': 0, 'dist_pct': 4}
+        res['v'] = {'muni_pct': 0, 'dist_pct': 1}
+
+        self.assertEqual(utils.get_list_typo(l, 5), res)
+
 
     def test_list_typo_bad_len(self):
         pass
@@ -129,7 +176,7 @@ class Tests(unittest.TestCase):
             ('v', None),
             ('v2', 2)
         ]
-        self.assertEqual(utils.get_list_typo(l, 5, 1), [['v2', 2], ['v', 0]])
+        self.assertEqual(utils.get_list_typo(l, 5), [['v2', 2], ['v', 0]])
 
     def test_fmt_num_np(self):
         "get num back like 1,23,45,67,890"

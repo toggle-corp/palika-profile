@@ -1,11 +1,13 @@
 """utility funcs"""
 #TODO: error collection
 import math
+import copy
+from collections import OrderedDict
 
 import cairo
 from hrrpmaps.atlas_auto import at
 
-from report.common.boiler import get_lang
+from report.common.boiler import get_lang, boil
 from report.common import ZERO_DEFAULT
 
 def swap_nep_chars(num):
@@ -32,7 +34,7 @@ def fmt_num(val):
 
     if get_lang() == 'np':
         #a bit hacky
-        v_str = swap_nep_chars(val)
+        v_str = swap_nep_chars(str(val))
         COMM_PT = 2
         skip = ''
 
@@ -73,7 +75,7 @@ def fmt_pct(val, pts):
     #     # raise Exception('bad decimal for {0}'.format(val))
     #     val/=100
 
-    if math.isnan(val) or val == 0:
+    if val is None or val == 0:
         ret = '0.{}%'.format('0'*pts)
 
     else:
@@ -97,33 +99,62 @@ def fmt_pct(val, pts):
     return ret
 
 
-def get_list_typo(in_vals, top, sort):
+def get_list_typo(in_vals, top):
     """
-    read in a list of tups of (type, pct_1, pct_2) and return top X sorted by 'sort', and then 1 - sum(rest) for "Others"
+    read in a list of tups of (type, pct_1, pct_2) and return:
+        [valid entries meaning not 0]
+        top X sorted by 'sort' in pct_1 until we reach 0 or if the len of valid entries >=top, display 1-sum(other)
+        if len valid entries < top, start showing for pct_2
+            if len valid entries for pct_1 + pct_2 >= top, display 1-sum(other)
+            if len valid entries for pct_1 + pct_2 is still < top, only do that many rows
+
+    input: [{'key' : x, 'muni_pct' : y, 'dist_pct' : z}]
     """
-    assert(len(set(len(v) for v in in_vals)) == 1)
+    #TODO: hacky method
+    FRST_COL = 'muni_pct'
+    SCND_COL = 'dist_pct'
+    out_vals = OrderedDict()
 
-    #TODO: revert nan
-    vals = sorted([[(v if i == 0 else 0 if (v is None or is_nan(v)) else v) for i, v in enumerate(t)]
-                   for t in in_vals], key = lambda x : x[sort], reverse=True)
+    for k,v in in_vals.items():
+        in_vals[k] = {ik:0 if iv is None or is_nan(iv) else iv for ik, iv in v.items()}
 
-    if len(vals) < top:
-        ret = vals
+    in_vals = OrderedDict(sorted(in_vals.items(), key=lambda x: x[1][FRST_COL], reverse = True))
+
+
+    def _sum_grp(col):
+        #sum group in in_vals for appropriate col and pop applied values
+
+        tmp_it = copy.copy(in_vals)
+        for i,v in enumerate(tmp_it.items()):
+            # range(0, min(top, len(in_vals.size))):
+            it = list(tmp_it.items())[i]
+            if i == top-1 or v[1][col] <= 0:
+                break
+
+            else:
+                out_vals[it[0]] = it[1]
+                in_vals.pop(v[0])
+
+        return in_vals, out_vals, sum([v[1][col] for v in in_vals.items()])
+
+    # handle first col
+    in_vals, out_vals, rem_sum = _sum_grp(FRST_COL)
+    top -= len(out_vals)-1
+
+    #add sum if there are still first col values, otherwise move to second col
+    if rem_sum > 0:
+        out_vals[boil('typologies_others')] = {FRST_COL : rem_sum,
+                                               SCND_COL : sum([v[1][SCND_COL] for v in in_vals.items()])}
 
     else:
-        ret = []
-        for v in vals[:top]:
-            ret.append(v)
+        # handle second col
+        in_vals = OrderedDict(sorted(in_vals.items(), key=lambda x: x[1][SCND_COL], reverse=True))
+        in_vals, out_vals, rem_sum = _sum_grp(SCND_COL)
+        if rem_sum > 0:
+            out_vals[boil('typologies_others')] = {FRST_COL: 0,
+                                                   SCND_COL: sum([v[1][SCND_COL] for v in in_vals.items()])}
 
-        mid = [0 for v in range(len(vals[1]) - 1)]
-        for v in vals[top:]:
-            for i in range(len(mid)):
-                #+1 bc we're skipping one position of the index
-                mid[i] += v[i+1]
-
-        ret.append(['Others'] + mid)
-
-    return ret
+    return out_vals
 
 def get_faq(faq_num, faq_sht, meta_sht):
     """get FAQ values. if no FAQ specified or invalid, go to default"""

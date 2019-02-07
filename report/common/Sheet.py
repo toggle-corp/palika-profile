@@ -1,5 +1,6 @@
 """various funcs for cleaning input data"""
 import math
+import os
 
 from report.common.boiler import import_titles
 from report.common import XLS_URI, SHT_RESERVE_CHAR
@@ -11,13 +12,22 @@ import pandas as pd
 # TODO: do pandas DF creation in init? ie for data clean
 # TODO: collate errors
 class Sheet(object):
-    def __init__(self, sht, num_rows_strip=0, remove_reserve_dims=None, reserve_val=None, process_specific=None):
+    def __init__(self, sht, skip = None, test_len = None, overwrite = None, OUTPUT_PATH = None, lang_in = None,
+                 num_rows_strip=0, remove_reserve_dims=None, reserve_val=None, process_specific=None):
+
         self.sht = sht
         self.num_rows_strip = num_rows_strip
         self.remove_reserve_dims = remove_reserve_dims
         self.reserve_val = reserve_val
         self.process_specific = process_specific
         self.errors = []
+
+        # data sheet specific
+        self.skip = skip
+        self.test_len = test_len
+        self.overwrite = overwrite
+        self.OUTPUT_PATH = OUTPUT_PATH
+        self.lang_in = lang_in
 
     def process(self):
         self.clean_headers()
@@ -88,19 +98,28 @@ class Sheet(object):
             elif v.type == 'pct':
                 self.sht[v.Index] = self._clean_pct(v.Index, self.sht[v.Index])
             elif v.type == 'uid':
-                #UIDs are indexes
-                self._clean_uid(v.Index, list(self.sht.index))
+                #UIDs are indexes, and are coerced to being strings if they're not
+                self.sht.index = self._clean_uid(v.Index, list(self.sht.index))
             else:
                 raise Exception('Bad item type for type {}. Must be in (int, str, dec, pct, uid). '
                                 'Did you change something in the data_types sheet?'.format(v))
 
-    def _add_error(self, message, index=None, column=None):
-        """create error log for data in excel sheet.
-            index: index where error occurred
-            column: column where error occurred
-            message: description of error
-        """
-        self.errors.append(dict(message=message, index=index, column=column))
+        self._trim_data()
+
+    def _trim_data(self):
+        # drop specified list
+        self.sht.drop([str(v) for v in self.skip], axis = 'index', errors = 'ignore', inplace = True)
+
+        # trim to appropriate length
+        self.sht = self.sht[:self.test_len] if self.test_len else self.sht
+
+        # remove files we don't want to overwrite
+        if not self.overwrite:
+            rm_over = list(set([v.split('_')[0] for v in os.listdir(self.OUTPUT_PATH) if '_{}.pdf'.format(self.lang_in) in v])
+                           & set(self.sht.index.values))
+
+            print('Not overwriting: ', sorted(rm_over))
+            self.sht.drop(rm_over, axis = 'index', inplace = True)
 
     def _clean_int(self, col_nm, srs):
         """apply int cleaning functions to a pd Series PANDAS PANDAS PANDAS PANDAS
@@ -193,12 +212,25 @@ class Sheet(object):
 
     def _clean_uid(self, col_nm, idx_vals):
         """apply uid cleaning functions to a list of indices. check if nan, and then if any repeats"""
-        col = []
-        for v in idx_vals:
-            if is_nan(v):
-                self._add_error(message='Bad UID value for {}. It is blank.'
-                                .format(str(v)), column=col_nm, index='Missing')
 
         #TODO: list repeats?
         if len(idx_vals) != len(set(idx_vals)):
             self._add_error(message='Duplicate UID values detected', column=col_nm, index='N/A')
+
+        col = []
+        for v in idx_vals:
+            if is_nan(v):
+                self._add_error(message='Bad UID value for {}. It is blank and is being skipped.'
+                                .format(str(v)), column=col_nm, index='Missing')
+            else:
+                col.append(str(v))
+
+        return col
+
+    def _add_error(self, message, index=None, column=None):
+        """create error log for data in excel sheet.
+            index: index where error occurred
+            column: column where error occurred
+            message: description of error
+        """
+        self.errors.append(dict(message=message, index=index, column=column))
