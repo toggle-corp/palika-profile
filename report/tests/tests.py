@@ -159,7 +159,6 @@ class Tests(unittest.TestCase):
 
         self.assertEqual(utils.get_list_typo(l, 5), res)
 
-
     def test_list_typo_bad_len(self):
         pass
         # TODO: func call?

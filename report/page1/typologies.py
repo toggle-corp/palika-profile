@@ -8,6 +8,8 @@ from report.common.color import Color
 from report.common.boiler import boil, get_lang
 from report.common.utils import fmt_pct, get_list_typo
 
+NUM_ROWS = 6
+NUM_COLS = 3
 
 def Item(index, **kwargs):
     if index == 0:
@@ -23,7 +25,6 @@ def Item(index, **kwargs):
             font="Roboto light",
             font_size=8,
             alignment=Text.RIGHT,
-            text=fmt_pct(kwargs.pop('text'), pts=2),
             **kwargs,
         )
 
@@ -42,12 +43,8 @@ def Typologies(data):
         row_seperator_padding = [4.5, 0, 4.5, 0]
 
     # flatten and add dict
-    #TODO: assert that we don't have duplicate keys?
-    rows = get_list_typo(
-        [[boil(v['nm_look']), v['muni_pct'], v['dist_pct']] for v in data],
-        5,
-        1,
-    )
+    #TODO: assert that we don't have duplicate keys? (exclude blanks))
+    rows = get_list_typo(OrderedDict((boil(k), v) for k,v in data.items()), 5)
 
     return Column(
         width='100%',
@@ -85,16 +82,31 @@ def Typologies(data):
                         index=i,
                         padding=Rect(row_seperator_padding),
                     )
-                    # i, item in enumerate(d_v.values())
-                    for i in range(len(d_v.values())+1)
+                    for i in range(NUM_COLS)
                 ]
             )
             for k, d_v in rows.items()
         ],
+
+        *[
+            Row(width='100%').add(
+                *[
+                    Item(
+                        width=widths[i],
+                        text=' ',
+                        index=i,
+                        padding=Rect(row_seperator_padding),
+                    )
+                    for i in range(NUM_COLS)
+                    ]
+            )
+            for v in range(NUM_ROWS - len(rows))
+        ],
+
         Text(
                 width='100%',
                 #TODO: add to lib
-                text='CBS damage assessment survey, 2011',
+                text=boil('typologies_cbs_footer'),
                 font_family="Roboto Light",
                 font_size=6,
                 alignment=Text.RIGHT,
