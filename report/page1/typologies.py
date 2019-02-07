@@ -21,6 +21,7 @@ def Item(index, **kwargs):
             font="Roboto light",
             font_size=8,
             alignment=Text.RIGHT,
+            text=fmt_pct(kwargs.pop('text'), pts=2),
             **kwargs,
         )
 
@@ -76,7 +77,7 @@ def Typologies(data):
                 *[
                     Item(
                         width=widths[i],
-                        text=item if i == 0 else fmt_pct(item, pts=2),
+                        text=item,
                         index=i,
                         padding=Rect(row_seperator_padding),
                     )

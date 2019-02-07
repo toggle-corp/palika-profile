@@ -99,16 +99,29 @@ def fmt_pct(val, pts):
 
 def get_list_typo(in_vals, top, sort):
     """
-    read in a list of tups of (type, pct_1, pct_2) and return top X sorted by 'sort', and then 1 - sum(rest) for "Others"
+    read in a list of tups of (type, pct_1, pct_2)
+    and return top X sorted by 'sort', and then 1 - sum(rest) for "Others"
     """
     assert(len(set(len(v) for v in in_vals)) == 1)
 
-    #TODO: revert nan
-    vals = sorted([[(v if i == 0 else 0 if (v is None or is_nan(v)) else v) for i, v in enumerate(t)]
-                   for t in in_vals], key = lambda x : x[sort], reverse=True)
+    # TODO: revert nan
+    vals = sorted(
+        [
+            [
+                (v if i == 0 else 0 if (v is None or is_nan(v)) else v)
+                for i, v in enumerate(t)
+            ]
+            for t in in_vals
+        ],
+        key=lambda x: x[sort], reverse=True
+    )
 
     if len(vals) < top:
         ret = vals
+        # Add fake row data
+        ret.extend(
+            [(' ') for rem in range(top + 1 - len(vals))]
+        )
 
     else:
         ret = []
@@ -118,12 +131,13 @@ def get_list_typo(in_vals, top, sort):
         mid = [0 for v in range(len(vals[1]) - 1)]
         for v in vals[top:]:
             for i in range(len(mid)):
-                #+1 bc we're skipping one position of the index
+                # +1 bc we're skipping one position of the index
                 mid[i] += v[i+1]
 
         ret.append(['Others'] + mid)
 
     return ret
+
 
 def get_faq(faq_num, faq_sht, meta_sht):
     """get FAQ values. if no FAQ specified or invalid, go to default"""

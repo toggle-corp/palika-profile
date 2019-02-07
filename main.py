@@ -31,7 +31,7 @@ def generate(lang_in, test_len=None, make_maps=True, map_img_type='svg'):
         process_specific='data',
     )
     data.process()
-    print('Errors for data:\n', data.errors)
+    # print('Errors for data:\n', data.errors)
 
     meta = Sheet(
         pd.read_excel(
@@ -107,6 +107,6 @@ def generate(lang_in, test_len=None, make_maps=True, map_img_type='svg'):
 
 
 if __name__ == '__main__':
-    generate(lang_in='en', test_len=1, make_maps=True, map_img_type='svg')
+    generate(lang_in='en', test_len=1, make_maps=False, map_img_type='svg')
     # generate(lang_in='np', test_len=1, make_maps=True, map_img_type='svg')
     # generate(lang_in='np', test_len=1, make_maps=True, map_img_type='svg')
