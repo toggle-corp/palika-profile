@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 from report.common.utils import get_faq
 
 class Report(object):
@@ -32,10 +34,11 @@ class Report(object):
             # Major Housing Typologies
             # very hacky work around with a lookup table as an iterator
             'housing_typologies':
-                [{
-                     'nm_look': i[1],
+                OrderedDict([
+                (
+                     i[1], {
                      'muni_pct': cp['%s_municipal_pct' % i[0]],
-                     'dist_pct': cp['%s_district_pct' % i[0]]}
+                     'dist_pct': cp['%s_district_pct' % i[0]]})
                  for i in
                  [('stone_and_cement', 'typologies_stone_and_cement_mortar_masonry_row_title'),
                   ('stone_and_mud', 'typologies_stone_and_mud_mortar_masonry_row_title'),
@@ -50,7 +53,7 @@ class Report(object):
                   ('bamboo', 'typologies_bamboo_row_title'),
                   ('sceb', 'typologies_compressed_stabilized_earth_block_(sceb)_masonry_row_title'),
                   ('light_steel', 'typologies_light_steel_frame_structures_row_title')]
-                 ],
+                 ]),
 
             # Housing Reconstruction & Retrofit Updates
             'reconstruction_retrofit_updates': {

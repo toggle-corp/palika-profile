@@ -1,12 +1,13 @@
 """utility funcs"""
 #TODO: error collection
 import math
+import copy
 from collections import OrderedDict
 
 import cairo
 from hrrpmaps.atlas_auto import at
 
-from report.common.boiler import get_lang
+from report.common.boiler import get_lang, boil
 from report.common import ZERO_DEFAULT
 
 def swap_nep_chars(num):
@@ -74,7 +75,7 @@ def fmt_pct(val, pts):
     #     # raise Exception('bad decimal for {0}'.format(val))
     #     val/=100
 
-    if math.isnan(val) or val == 0:
+    if val is None or val == 0:
         ret = '0.{}%'.format('0'*pts)
 
     else:
@@ -109,41 +110,51 @@ def get_list_typo(in_vals, top):
 
     input: [{'key' : x, 'muni_pct' : y, 'dist_pct' : z}]
     """
+    #TODO: hacky method
+    FRST_COL = 'muni_pct'
+    SCND_COL = 'dist_pct'
     out_vals = OrderedDict()
 
     for k,v in in_vals.items():
         in_vals[k] = {ik:0 if iv is None or is_nan(iv) else iv for ik, iv in v.items()}
 
-    in_vals = OrderedDict(sorted(in_vals.items(), key=lambda x: x[1]['muni_pct'], reverse = True))
+    in_vals = OrderedDict(sorted(in_vals.items(), key=lambda x: x[1][FRST_COL], reverse = True))
 
-    for i in range(0, top):
-        it = list(in_vals.items())[i]
-        if it[1]['muni_pct'] > 0:
-            out_vals[it[0]] = it[1]
-        else:
-            break
 
-    print(out_vals)
+    def _sum_grp(col):
+        #sum group in in_vals for appropriate col and pop applied values
 
-    def _calc_other(calc_vals, col):
-        mid = [0] * (len(calc_vals[col]) - 1)
-        print(mid)
-        for v in calc_vals:
-            for i in range(len(mid)):
-                # +1 bc we're skipping one position of the index
-                mid[i] += v[i + 1]
+        tmp_it = copy.copy(in_vals)
+        for i,v in enumerate(tmp_it.items()):
+            # range(0, min(top, len(in_vals.size))):
+            it = list(tmp_it.items())[i]
+            if i == top-1 or v[1][col] <= 0:
+                break
 
-        return(['Others'] + mid)
+            else:
+                out_vals[it[0]] = it[1]
+                in_vals.pop(v[0])
 
-    #TODO: revert nan
-    vals = fancy_sort(in_vals, PCT_1_IND)
+        return in_vals, out_vals, sum([v[1][col] for v in in_vals.items()])
 
-    valid_pct_1 = [v for v in vals if v[PCT_1_IND] > 0]
-    ret = valid_pct_1[:top]
-    if len(ret) >= top:
-        ret.append(_calc_other(vals[:top], 1))
+    # handle first col
+    in_vals, out_vals, rem_sum = _sum_grp(FRST_COL)
+    top -= len(out_vals)-1
 
-    return ret
+    #add sum if there are still first col values, otherwise move to second col
+    if rem_sum > 0:
+        out_vals[boil('typologies_others')] = {FRST_COL : rem_sum,
+                                               SCND_COL : sum([v[1][SCND_COL] for v in in_vals.items()])}
+
+    else:
+        # handle second col
+        in_vals = OrderedDict(sorted(in_vals.items(), key=lambda x: x[1][SCND_COL], reverse=True))
+        in_vals, out_vals, rem_sum = _sum_grp(SCND_COL)
+        if rem_sum > 0:
+            out_vals[boil('typologies_others')] = {FRST_COL: 0,
+                                                   SCND_COL: sum([v[1][SCND_COL] for v in in_vals.items()])}
+
+    return out_vals
 
 def get_faq(faq_num, faq_sht, meta_sht):
     """get FAQ values. if no FAQ specified or invalid, go to default"""

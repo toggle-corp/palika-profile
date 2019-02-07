@@ -4,6 +4,7 @@ from collections import OrderedDict
 
 from report.common import boiler, utils
 from report.common.Sheet import Sheet
+from report.common.boiler import strings
 from report.page2 import hh
 
 import numpy as np
@@ -14,6 +15,7 @@ import pandas as pd
 class Tests(unittest.TestCase):
     def setUp(self):
         boiler.set_lang('en')
+        strings['typologies_others'] = {'en' : 'Others'}
 
         # hh
         self.hh_test_data = {
@@ -118,25 +120,44 @@ class Tests(unittest.TestCase):
         res['v9'] = {'muni_pct': 10, 'dist_pct': 6}
         res['Others'] = {'muni_pct': 20, 'dist_pct': 8}
 
+        self.assertEqual(utils.get_list_typo(l, 6), res)
+
+    def test_list_typo_short_pct1_enough_pct2(self):
+        l = OrderedDict()
+        l['v4'] = {'muni_pct' :  200, 'dist_pct' : 5}
+        l['v6'] = {'muni_pct' :  20, 'dist_pct' : 2}
+        l['v7'] = {'muni_pct' :  15, 'dist_pct' : 3}
+        l['v'] = {'muni_pct' :  None, 'dist_pct' : 1}
+        l['v2'] = {'muni_pct' :  None, 'dist_pct' : 4}
+        l['v3'] = {'muni_pct' :  None, 'dist_pct' : 4}
+        l['v5'] = {'muni_pct' :  None, 'dist_pct' : 1}
+
+        res = OrderedDict()
+        res['v4'] = {'muni_pct': 200, 'dist_pct': 5}
+        res['v6'] = {'muni_pct': 20, 'dist_pct': 2}
+        res['v7'] = {'muni_pct': 15, 'dist_pct': 3}
+        res['v2'] = {'muni_pct': 0, 'dist_pct': 4}
+        res['v3'] = {'muni_pct': 0, 'dist_pct': 4}
+        res['Others'] = {'muni_pct': 0, 'dist_pct': 2}
+
         self.assertEqual(utils.get_list_typo(l, 5), res)
 
-    # def test_list_typo_short_pct1_enough_pct2(self):
-    #     l = [
-    #         ('v4', 200, 5),
-    #         ('v6', 20, 2),
-    #         ('v7', 15, 3),
-    #         ('v', None, 1),
-    #         ('v2', None, 4),
-    #         ('v3', None, 4),
-    #         ('v5', None, 1),
-    #     ]
-    #     self.assertEqual(utils.get_list_typo(l, 5),
-    #                      [['v4', 200, 5],
-    #                       ['v6', 20, 2],
-    #                       ['v7', 15, 3],
-    #                       ['v8', 15, 5],
-    #                       ['v9', 10, 6],
-    #                       ['Others', 20]])
+    def test_list_typo_short_pct1_exact_pct2(self):
+        l = OrderedDict()
+        l['v4'] = {'muni_pct' :  200, 'dist_pct' : 5}
+        l['v6'] = {'muni_pct' :  20, 'dist_pct' : 2}
+        l['v7'] = {'muni_pct' :  15, 'dist_pct' : 3}
+        l['v'] = {'muni_pct' :  None, 'dist_pct' : 1}
+        l['v2'] = {'muni_pct' :  None, 'dist_pct' : 4}
+
+        res = OrderedDict()
+        res['v4'] = {'muni_pct': 200, 'dist_pct': 5}
+        res['v6'] = {'muni_pct': 20, 'dist_pct': 2}
+        res['v7'] = {'muni_pct': 15, 'dist_pct': 3}
+        res['v2'] = {'muni_pct': 0, 'dist_pct': 4}
+        res['v'] = {'muni_pct': 0, 'dist_pct': 1}
+
+        self.assertEqual(utils.get_list_typo(l, 5), res)
 
 
     def test_list_typo_bad_len(self):

@@ -87,5 +87,5 @@ def generate(skip = [], lang_in='en', overwrite=False, test_len=None, make_maps=
             # .draw(Page2(cur_rep.data, lang_in))
 
 if __name__ == '__main__':
-    generate(skip= [51001, 51002], lang_in='en', test_len=1, make_maps=False, map_img_type='svg', overwrite = True)
+    generate(skip= [51001, 51002], lang_in='en', test_len=10, make_maps=False, map_img_type='svg', overwrite = True)
     # generate(lang_in='en', test_len=None, make_maps=False, map_img_type='svg')
