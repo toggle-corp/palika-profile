@@ -225,6 +225,10 @@ class Sheet(object):
             else:
                 col.append(str(v))
 
+        #TODO: list repeats?
+        if len(idx_vals) != len(set(idx_vals)):
+            self._add_error(message='Duplicate UID values detected', column=col_nm, index='N/A')
+
         return col
 
     def _add_error(self, message, index=None, column=None):

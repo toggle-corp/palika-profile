@@ -32,8 +32,7 @@ RUN apt-get update -y ; \
         qgis-server \
         python-qgis
 
-WORKDIR /code
-
+# Install required fonts
 RUN curl -L https://github.com/google/roboto/releases/download/v2.138/roboto-android.zip -o /tmp/font.zip && \
     unzip -o /tmp/font.zip -d /root/.fonts/ && \
     curl -L https://noto-website-2.storage.googleapis.com/pkgs/NotoSansDevanagari-hinted.zip -o /tmp/font1.zip && \
@@ -42,8 +41,12 @@ RUN curl -L https://github.com/google/roboto/releases/download/v2.138/roboto-and
     unzip -o /tmp/font2.zip -d /root/.fonts/ && \
     fc-cache --force --verbose
 
-COPY ./requirements.txt /code/requirements.txt
+WORKDIR /code
 
-RUN  pip3 install -r requirements.txt
-
+# Need to reinstall hrrpmaps and drafter for each build
 COPY . /code/
+
+RUN echo 'alias python=python3' >> ~/.bashrc && \
+    pip3 install -r requirements.txt && \
+    pip3 install --src /dep/ -e "git+https://github.com/eoglethorpe/hrrp-maps@master#egg=hrrpmaps" && \
+    pip3 install --src /dep/ -e "git+https://github.com/toggle-corp/drafter@develop#egg=drafter"

@@ -6,25 +6,25 @@ services:
     - docker
 
 before_install:
-  # NOTE: Remove this after drafter and hrrp-maps integration is fixed
-    - git clone https://github.com/bibekdahal/drafter /tmp/drafter
-    - git clone https://github.com/eoglethorpe/hrrp-maps /tmp/hrrp-maps
-    - mv /tmp/drafter/drafter ./
-    - mv /tmp/hrrp-maps/hrrpmaps ./
-    - sed -i "/self.app.setPrefixPath('\/Applications\/QGIS3.app\/Contents\/MacOS', True)/d" ./hrrpmaps/atlas_auto.py
-
-    - docker pull ${DOCKER_IMAGE} || true
-    - docker build --cache-from ${DOCKER_IMAGE} --tag ${DOCKER_IMAGE} .
+    - get_image() { [[ "$(docker images -q ${1} 2> /dev/null)" != "" ]] && echo ${1} || echo ${2}; }
+    - docker pull ${DOCKER_IMAGE_L} || true
+    - docker pull ${DOCKER_IMAGE_B} || true
+    - |
+      docker build\
+      --cache-from $(get_image ${DOCKER_IMAGE_B} ${DOCKER_IMAGE_L})\
+      --tag ${DOCKER_IMAGE_B} --tag ${DOCKER_IMAGE_L} .
 
 before_script:
-    - echo 'before_script'
+    - echo 'TODO add test script here'
 
 after_success:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - docker push ${DOCKER_IMAGE}
-    - ./release_build.sh
+    - docker push ${DOCKER_IMAGE_L}
+    - docker push ${DOCKER_IMAGE_B}
 
 env:
   global:
-    - DOCKER_IMAGE='devtc/palika-profile:dev'
-    - DOCKER_IMAGE_RC='devtc/palika-profile:latest'
+    - DOCKER_IMAGE=devtc/palika-profile
+    - ORIGIN_BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
+    - DOCKER_IMAGE_L=${DOCKER_IMAGE}:latest
+    - DOCKER_IMAGE_B=${DOCKER_IMAGE}:${ORIGIN_BRANCH}

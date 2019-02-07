@@ -110,23 +110,23 @@ def get_list_typo(in_vals, top):
 
     input: [{'key' : x, 'muni_pct' : y, 'dist_pct' : z}]
     """
+
     #TODO: hacky method
     FRST_COL = 'muni_pct'
     SCND_COL = 'dist_pct'
     out_vals = OrderedDict()
+
 
     for k,v in in_vals.items():
         in_vals[k] = {ik:0 if iv is None or is_nan(iv) else iv for ik, iv in v.items()}
 
     in_vals = OrderedDict(sorted(in_vals.items(), key=lambda x: x[1][FRST_COL], reverse = True))
 
-
     def _sum_grp(col):
         #sum group in in_vals for appropriate col and pop applied values
 
         tmp_it = copy.copy(in_vals)
         for i,v in enumerate(tmp_it.items()):
-            # range(0, min(top, len(in_vals.size))):
             it = list(tmp_it.items())[i]
             if i == top-1 or v[1][col] <= 0:
                 break
@@ -155,6 +155,7 @@ def get_list_typo(in_vals, top):
                                                    SCND_COL: sum([v[1][SCND_COL] for v in in_vals.items()])}
 
     return out_vals
+
 
 def get_faq(faq_num, faq_sht, meta_sht):
     """get FAQ values. if no FAQ specified or invalid, go to default"""

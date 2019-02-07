@@ -14,7 +14,9 @@ OUTPUT_PATH = './output/'
 PDF_TITLE = '%s_%s.pdf'
 PDF_WRITE_PATH = OUTPUT_PATH + PDF_TITLE
 
-def generate(skip = [], lang_in='en', overwrite=False, test_len=None, make_maps=True, map_img_type='svg'):
+def generate(skip= [], lang_in='en', test_len=None, make_maps=False, make_scnd=True, map_img_type='svg',
+             overwrite=False):
+
     set_lang(lang_in)
 
     # read in sheets
@@ -61,7 +63,7 @@ def generate(skip = [], lang_in='en', overwrite=False, test_len=None, make_maps=
     titles.process()
 
     # clean sheets
-    # #TODO: process the rest 2
+    # # TODO: process the rest 2
     # titles = process_sht(titles)
     # titles.rename(lambda x: x.strip('#'), axis='rows', inplace = True)
     # import_titles(titles)
@@ -70,22 +72,32 @@ def generate(skip = [], lang_in='en', overwrite=False, test_len=None, make_maps=
     # meta = clean_xls_headers(meta, 1)
     # faq = clean_xls_headers(faq, 1)
 
+    palika_codes = data.sht.index[:test_len] if test_len else data.sht.index
+
     if make_maps:
-        gen_maps(list(data.sht.index), map_img_type)
+        gen_maps(list(palika_codes), map_img_type)
 
     # process
     print('Creating for: ', data.sht.index.values)
-    for v in data.sht.index.values:
+
+    PATH = './output/%s_%s.pdf'
+    for v in palika_codes:
         print('Creating profile for %s' % v)
         cur_rep = Report(gc=v, data_sht=data.sht, meta_sht=meta.sht,
                          faq_sht=faq.sht, map_img_type=map_img_type)
         cur_rep.create_data()
 
         os.makedirs(OUTPUT_PATH, exist_ok=True)
-        PdfDraft(PDF_WRITE_PATH % (v, lang_in)) \
+        pdf_draft = PdfDraft(PDF_WRITE_PATH % (v, lang_in)) \
             .draw(Page1(cur_rep.data, lang_in))
-            # .draw(Page2(cur_rep.data, lang_in))
+        if make_scnd:
+            pdf_draft.draw(Page2(cur_rep.data, lang_in))
 
 if __name__ == '__main__':
-    generate(skip= [51001, 51002], lang_in='en', test_len=10, make_maps=False, map_img_type='svg', overwrite = True)
-    # generate(lang_in='en', test_len=None, make_maps=False, map_img_type='svg')
+    generate(skip= [51001, 51002],
+             lang_in='en', 
+             test_len=10, 
+             make_maps=False,
+             make_scnd=True,
+             map_img_type='svg', 
+             overwrite = True)

@@ -16,21 +16,27 @@ BAR_STYLE = 'bold'
 TOTAL_W_BAR = 555
 NUM_PADDING = 555*.02
 
+
 def _rect_size(hh_cnt, font_size, font, font_weight, sum_total):
     """if overlap, return smallest possible width"""
-    # TODO: get actual width as opposed to manually specifying incase it changes
+    # TODO: get actual width as opposed to manually specifying incase it changes # noqa
     rel_w = TOTAL_W_BAR * (hh_cnt / sum_total)
-    actual_w = get_text_width(fmt_num(hh_cnt), font_size, font, font_weight) + NUM_PADDING
+    actual_w = get_text_width(
+        fmt_num(hh_cnt), font_size, font, font_weight,
+    ) + NUM_PADDING
 
-    #if the box is too wide for its box - set at min
+    # if the box is too wide for its box - set at min
     if rel_w < actual_w:
         return actual_w, False
     else:
         return rel_w, True
 
+
 def _get_widths(items):
-    """get the appropriate widths, keeping in mind that small text will get larger boxes
-        we assume no 0s are passed"""
+    """
+    get the appropriate widths, keeping in mind that small text will get
+    larger boxes we assume no 0s are passed
+    """
     # #TODO: revert
     # for v in items:
     #     try:
@@ -42,18 +48,22 @@ def _get_widths(items):
 
     if total > 0:
         for v in items:
-            v['w'], v['flex'] = _rect_size(v['val'], BAR_FNT_SZ, BAR_FNT, BAR_STYLE, total)
+            v['w'], v['flex'] = _rect_size(
+                v['val'], BAR_FNT_SZ, BAR_FNT, BAR_STYLE, total,
+            )
 
-        #get width taken up by fixed width boxes and total sum of flex boxes
-        len_variable = TOTAL_W_BAR - sum(v['w'] for v in items if not v['flex'])
+        # get width taken up by fixed width boxes and total sum of flex boxes
+        len_variable = TOTAL_W_BAR - sum(
+            v['w'] for v in items if not v['flex']
+        )
         flex_sum = sum(v['w'] for v in items if v['flex'])
 
-        #for flex items, convert them to the proper share of the flex values
+        # for flex items, convert them to the proper share of the flex values
         for v in items:
             if v['flex']:
-                v['w'] = len_variable * (v['w']/ flex_sum)
+                v['w'] = len_variable * (v['w'] / flex_sum)
 
-        #convert lengths to percentages
+        # convert lengths to percentages
         for v in items:
             v['w'] /= TOTAL_W_BAR / 100
 
@@ -61,6 +71,7 @@ def _get_widths(items):
 
     else:
         return None
+
 
 def _filter_items(items, data):
     """filter items and add their vals"""
@@ -80,6 +91,7 @@ def _filter_items(items, data):
 
     return keep
 
+
 def Label(label, color):
     return Row(
         margin=Rect([8, 0, 0, 0]),
@@ -92,10 +104,12 @@ def Label(label, color):
         ),
         Text(
             text=label,
-            font='Roboto Light 8',
-            padding=Rect([2.5,0,0,0])
+            font='Roboto Light',
+            font_size=8,
+            padding=Rect([2.5, 0, 0, 0])
         )
     )
+
 
 def HH(data):
     """for showing the HH bar. logic:
@@ -106,12 +120,36 @@ def HH(data):
 
     # info f.e type
     items = [
-        {'key': 'landless', 'label': boil('land_issues_landless'), 'color': hx('#ff6117')},
-        {'key': 'no_land_certificates', 'label': boil('land_issues_no_land_certificates'), 'color': hx('#bf053d')}, # noqa
-        {'key': 'right_of_way', 'label': boil('land_issues_right_of_way'), 'color': hx('#7d0547')},
-        {'key': 'affected_by_hep', 'label': boil('land_issues_affected_by_hep'), 'color': hx('#1e7a8c')},  # noqa
-        {'key': 'smallplots', 'label': boil('land_issues_small_plots'), 'color': hx('#abd1b5')},
-        {'key': 'guthi_land', 'label': boil('land_issues_guthi_land'), 'color': hx('#ffc202')},
+        {
+            'key': 'landless',
+            'label': boil('land_issues_landless'),
+            'color': hx('#ff6117'),
+        },
+        {
+            'key': 'no_land_certificates',
+            'label': boil('land_issues_no_land_certificates'),
+            'color': hx('#bf053d'),
+        },
+        {
+            'key': 'right_of_way',
+            'label': boil('land_issues_right_of_way'),
+            'color': hx('#7d0547'),
+        },
+        {
+            'key': 'affected_by_hep',
+            'label': boil('land_issues_affected_by_hep'),
+            'color': hx('#1e7a8c'),
+        },
+        {
+            'key': 'smallplots',
+            'label': boil('land_issues_small_plots'),
+            'color': hx('#abd1b5'),
+        },
+        {
+            'key': 'guthi_land',
+            'label': boil('land_issues_guthi_land'),
+            'color': hx('#ffc202'),
+        },
     ]
 
     # add val and drop item if it's zero or invalid
@@ -150,7 +188,10 @@ def HH(data):
             padding=Rect([16, 16, 8, 16]),
         ).add(
             Row(width='100%').add(*bars),
-            Row(width='100%', justify='space-between' if len(labels) > 1 else None).add(*labels)
+            Row(
+                width='100%',
+                justify='space-between' if len(labels) > 1 else None,
+            ).add(*labels)
         )
 
     else:
@@ -165,6 +206,6 @@ def HH(data):
                 font_family='Roboto Condensed',
                 font_size=18,
                 font_weight=Pango.Weight.BOLD,
-                margin=Rect([0,0,43,0]),
+                margin=Rect([0, 0, 43, 0]),
+            )
         )
-    )

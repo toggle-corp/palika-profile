@@ -7,6 +7,7 @@ from report.common.color import Color
 from report.common.utils import fmt_num
 from report.common.boiler import boil
 
+
 def TechnicalStaffFooter(**kwargs):
     return Text(
         **kwargs,
@@ -15,21 +16,34 @@ def TechnicalStaffFooter(**kwargs):
         font_size=5,
     )
 
+
 def TechnicalStaff(tech_data, mason_data):
     widths = ['35%', '30%', '35%']
-    headers = [boil('tech_staff_staff_title'), boil('tech_staff_available_title'), boil('tech_staff_addl_req_title')]
+    headers = [
+        boil('tech_staff_staff_title'),
+        boil('tech_staff_available_title'),
+        boil('tech_staff_addl_req_title')
+    ]
 
     tech_data = [
-        [boil(item['lookup']), fmt_num(item['available']), fmt_num(item['additional'])] for item in tech_data
-        ]
+        [
+            boil(item['lookup']),
+            fmt_num(item['available']),
+            fmt_num(item['additional'])
+        ] for item in tech_data
+    ]
 
-    mason_data = [boil(mason_data['lookup']), mason_data['available'], mason_data['additional']]
+    mason_data = [
+        boil(mason_data['lookup']),
+        mason_data['available'],
+        mason_data['additional']
+    ]
 
     # mason_data = [mason_data['label'], 100, 300]
 
     header_row = Row(width='100%').add(
-    *[
-        Text(
+        *[
+            Text(
                 border=Border(width=0.5, color=Color.BLACK),
                 text=item,
                 width=widths[i],
@@ -43,11 +57,11 @@ def TechnicalStaff(tech_data, mason_data):
                     else Text.CENTER
                 ),
             )
-        for i, item in enumerate(headers)
+            for i, item in enumerate(headers)
         ]
     )
 
-    #add non masons
+    # add non masons
     data_rows = [
         Row(width='100%').add(
             *[
@@ -59,7 +73,7 @@ def TechnicalStaff(tech_data, mason_data):
                     font_family='Roboto Condensed',
                     font_size=7,
                     font_weight=Pango.Weight.BOLD if i == 0 else None,
-                    padding=Rect([3,0,0,4]),
+                    padding=Rect([3, 0, 0, 4]),
                     alignment=(
                         Text.LEFT
                         if i == 0
@@ -72,48 +86,60 @@ def TechnicalStaff(tech_data, mason_data):
         for row in tech_data
     ]
 
-    #add masons
+    # add masons
     data_rows.append(
         Row(width='100%').add(
-        *[
-            Text(
-                border=Border(width=0.5, color=Color.BLACK),
-                text=mason_data[0],
-                width=widths[0],
-                font_family='Roboto Condensed',
-                font_weight=Pango.Weight.BOLD,
-                font_size=7,
-                padding=Rect(4),
-                alignment=Text.LEFT,
-            ),
-            Column(
+            *[
+                Text(
+                    border=Border(width=0.5, color=Color.BLACK),
+                    text=mason_data[0],
+                    width=widths[0],
+                    font_family='Roboto Condensed',
+                    font_weight=Pango.Weight.BOLD,
+                    font_size=7,
+                    padding=Rect(4),
+                    alignment=Text.LEFT,
+                ),
+                Column(
                     border=Border(width=0.5, color=Color.BLACK),
                     height='100%',
                     width=widths[1],).add(
-                Text(
-                    text='{} ({} {})'.format(fmt_num(mason_data[1][0]), fmt_num(7), boil('tech_staff_days')),
-                    font_family='Roboto Condensed',
-                    font_size=5,
-                    width='100%',
-                    alignment=Text.CENTER,
-                    padding=Rect([2,0,0,0]),
-                    )
-                ).add(
-                Text(
-                    text='{} ({} {})'.format(fmt_num(mason_data[1][1]), fmt_num(50), boil('tech_staff_days')),
-                    font_family='Roboto Condensed',
-                    font_size=5,
-                    width='100%',
-                    alignment=Text.CENTER,
-                )
-            ),
-            Column(
-                border=Border(width=0.5, color=Color.BLACK),
-                height='100%',
-                width=widths[2])
+                        Text(
+                            text='{} ({} {})'.format(
+                                fmt_num(mason_data[1][0]),
+                                fmt_num(7),
+                                boil('tech_staff_days')
+                            ),
+                            font_family='Roboto Condensed',
+                            font_size=5,
+                            width='100%',
+                            alignment=Text.CENTER,
+                            padding=Rect([2, 0, 0, 0]),
+                        )
+                    ).add(
+                        Text(
+                            text='{} ({} {})'.format(
+                                fmt_num(mason_data[1][1]),
+                                fmt_num(50),
+                                boil('tech_staff_days')
+                            ),
+                            font_family='Roboto Condensed',
+                            font_size=5,
+                            width='100%',
+                            alignment=Text.CENTER,
+                        )
+                    ),
+                Column(
+                    border=Border(width=0.5, color=Color.BLACK),
+                    height='100%',
+                    width=widths[2])
                 .add(
                     Text(
-                        text='{} ({} {})'.format(fmt_num(mason_data[2][0]), fmt_num(7), boil('tech_staff_days')),
+                        text='{} ({} {})'.format(
+                            fmt_num(mason_data[2][0]),
+                            fmt_num(7),
+                            boil('tech_staff_days')
+                        ),
                         font_family='Roboto Condensed',
                         font_size=5,
                         width='100%',
@@ -122,15 +148,20 @@ def TechnicalStaff(tech_data, mason_data):
                     )
                 ).add(
                     Text(
-                        text='{} ({} {})'.format(fmt_num(mason_data[2][1]), fmt_num(50), boil('tech_staff_days')),
+                        text='{} ({} {})'.format(
+                            fmt_num(mason_data[2][1]),
+                            fmt_num(50),
+                            boil('tech_staff_days')
+                        ),
                         font_family='Roboto Condensed',
                         font_size=5,
                         width='100%',
                         alignment=Text.CENTER,
                     )
-            ),
-        ]
-    ))
+                ),
+            ]
+        )
+    )
     #
     # Row(width=widths[1],
     #     border=Border(width=0.5, color=Color.BLACK),
@@ -139,6 +170,7 @@ def TechnicalStaff(tech_data, mason_data):
     #         Text(
     #             text='xx22',
     #             font='RobotoCondensed bold 6',
+    #             font_size='RobotoCondensed bold',
     #             alignment=Text.CENTER,
     #         ),
     #     ).add(Row(border=Border(width=0.5, color=Color.BLACK)).add(

@@ -42,14 +42,22 @@ def Header(data):
             ),
             Column(height='100%', justify='end').add(
                 Text(
-                    text='{} {}'.format(data['rep_data']['month'], data['rep_data']['year']),
-                    font='Roboto Light 10',
-                    color=Color.PRIMARY
+                    text='{} {}'.format(
+                        data['rep_data']['month'],
+                        data['rep_data']['year'],
+                    ),
+                    font='Roboto Light',
+                    font_size=10,
+                    color=Color.PRIMARY,
                 ),
                 Text(
-                    text = '{} | {}'.format(data['rep_data']['dist_nm'], data['rep_data']['palika_nm']),
-                    font='Roboto Light 18',
-                    color=Color.PRIMARY
+                    text='{} | {}'.format(
+                        data['rep_data']['dist_nm'],
+                        data['rep_data']['palika_nm'],
+                    ),
+                    font='Roboto Light',
+                    font_size=18,
+                    color=Color.PRIMARY,
                 )
             )
         ),
