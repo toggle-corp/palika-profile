@@ -154,6 +154,8 @@ def get_list_typo(in_vals, top):
             out_vals[boil('typologies_others')] = {FRST_COL: 0,
                                                    SCND_COL: sum([v[1][SCND_COL] for v in in_vals.items()])}
 
+
+
     return out_vals
 
 
