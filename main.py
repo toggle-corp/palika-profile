@@ -96,7 +96,7 @@ def generate(skip= [], lang_in='en', test_len=None, make_maps=False, make_scnd=T
 if __name__ == '__main__':
     generate(skip= [51001, 51002],
              lang_in='en', 
-             test_len=10, 
+             test_len=1,
              make_maps=False,
              make_scnd=True,
              map_img_type='svg', 
