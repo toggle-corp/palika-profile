@@ -159,16 +159,8 @@ def CMTable(top_data, bot_data):
         datum = top_data[key]
         label = material['label']
 
-        #TODO: rm this override for ava for general checking method
-
-        if is_nan(datum['ava']):
+        if datum['ava'] is None:
             datum['ava'] = '-'
-
-        #TODO: revert
-        # try:
-        #     datum['cost'] = int(datum['cost'])
-        # except:
-        #     datum['cost'] = 0
 
         rows.append([
             {'text': label, 'icon': material.get('icon')},

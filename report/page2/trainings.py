@@ -116,6 +116,9 @@ class PieChart(Shape):
                     )
 
             for v in nums:
+                if len(nums) == 1:
+                    nums[0].pos = pie.calc_central_point(1)
+
                 v.repos_to_center(ctx).render(ctx)
 
         # SlantedLine(
