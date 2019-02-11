@@ -118,4 +118,4 @@ dmypy.json
 .pyre/
 
 # Maps tmp files
-resources/mapfiles/map_tmp/*
+pdf_generator/resources/mapfiles/map_tmp/*
