@@ -119,3 +119,6 @@ dmypy.json
 
 # Maps tmp files
 pdf_generator/resources/mapfiles/map_tmp/*
+
+# custom docker-compose file
+docker-compose-custom.yml

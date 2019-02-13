@@ -1,0 +1,43 @@
+version: '3.2'
+
+services:
+    db:
+        image: postgres:9.5
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+
+    redis:
+        image: redis:latest
+        volumes:
+            - redis-data:/data
+
+    server:
+        build:
+          context: ./
+        env_file:
+            - .env
+        command: bash -c '/code/scripts/wait-for-it.sh db:5432 && /code/scripts/run_develop.sh'
+        volumes:
+            - ./:/code
+            - ..path_to_drafter/:/dep/drafter
+            - ..path_to_hrrp-maps:/dep/hrrp-maps
+        ports:
+            - '8008:8000'
+        depends_on:
+            - db
+            - redis
+
+    react-plugins:
+        build:
+          context: ./react-plugins/
+        env_file:
+            - .env
+        # command: bash -c '/code/scripts/run_develop.sh'
+        volumes:
+            - ./react-plugins/:/code
+        ports:
+            - '3008:3000'
+
+volumes:
+  postgres-data:
+  redis-data:
