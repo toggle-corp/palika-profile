@@ -1,0 +1,34 @@
+server:
+  image:
+    name: Palika Profile Server
+    build: ./
+    value: palikaprofile/server
+  tags:
+    ORIGIN_BRANCH:
+      push: on_build
+      env:
+        - TRAVIS_PULL_REQUEST_BRANCH
+        - TRAVIS_BRANCH
+    LATEST:
+      push: on_test
+      value: latest
+    RELEASE:
+      push: on_release
+      value: release
+react-plugins:
+  image:
+    name: Palika Profile React Plugins
+    build: ./react-plugins
+    value: palikaprofile/react-plugins
+  tags:
+    ORIGIN_BRANCH:
+      push: on_build
+      env:
+        - TRAVIS_PULL_REQUEST_BRANCH
+        - TRAVIS_BRANCH
+    LATEST:
+      push: on_test
+      value: latest
+    RELEASE:
+      push: on_release
+      value: release

@@ -3,28 +3,21 @@ sudo: required
 language: generic
 
 services:
-    - docker
+  - docker
 
 before_install:
-    - get_image() { [[ "$(docker images -q ${1} 2> /dev/null)" != "" ]] && echo ${1} || echo ${2}; }
-    - docker pull ${DOCKER_IMAGE_L} || true
-    - docker pull ${DOCKER_IMAGE_B} || true
-    - |
-      docker build\
-      --cache-from $(get_image ${DOCKER_IMAGE_B} ${DOCKER_IMAGE_L})\
-      --tag ${DOCKER_IMAGE_B} --tag ${DOCKER_IMAGE_L} .
+  - curl https://s3.amazonaws.com/toggle-utils/docker_ci --output docker_ci && chmod +x docker_ci
+
+  # Pull docker images
+  - ./docker_ci pull
 
 before_script:
-    - echo 'TODO add test script here'
+  # Build server
+  - ./docker_ci build
+
+script:
+  - echo 'TODO add test script here'
 
 after_success:
-    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - docker push ${DOCKER_IMAGE_L}
-    - docker push ${DOCKER_IMAGE_B}
-
-env:
-  global:
-    - DOCKER_IMAGE=devtc/palika-profile
-    - ORIGIN_BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
-    - DOCKER_IMAGE_L=${DOCKER_IMAGE}:latest
-    - DOCKER_IMAGE_B=${DOCKER_IMAGE}:${ORIGIN_BRANCH}
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - ./docker_ci push --on on_build
