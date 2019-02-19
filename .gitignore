@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# yarn
+node_modules/
+build/
+
 # Build files
 *.pdf
 
@@ -118,4 +122,12 @@ dmypy.json
 .pyre/
 
 # Maps tmp files
-resources/mapfiles/map_tmp/*
+pdf_generator/resources/mapfiles/map_tmp/*
+
+# custom docker-compose file
+docker-compose-custom.yml
+
+# react-plugins vendors
+react-plugins/src/vendor/react-rest-request/
+react-plugins/src/vendor/react-store/
+

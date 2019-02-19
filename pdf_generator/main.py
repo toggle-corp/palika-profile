@@ -38,7 +38,7 @@ def generate(skip= [], lang_in='en', test_len=None, make_maps=False, make_scnd=T
     data.process()
 
     print('Errors for data:')
-    print(data.errors)
+    # print(data.errors)
 
     meta = Sheet(pd.read_excel(XLS_URI, sheet_name='Meta', index_col=0, header=0),
                     num_rows_strip=1,
@@ -92,6 +92,7 @@ def generate(skip= [], lang_in='en', test_len=None, make_maps=False, make_scnd=T
             .draw(Page1(cur_rep.data, lang_in))
         if make_scnd:
             pdf_draft.draw(Page2(cur_rep.data, lang_in))
+
 
 if __name__ == '__main__':
     generate(skip= [51001, 51002],

@@ -1,6 +1,7 @@
+
 # Palika Profile Report Generation
 
-## Requirements
+### Requirements
 
 - Cairo: https://pycairo.readthedocs.io/en/latest/getting_started.html
 
@@ -13,20 +14,31 @@
 - maps: https://github.com/eoglethorpe/hrrp-maps
 
 
-# Docker
-
+### Docker [Development]
 ```
-# TODO: Add volume for input folder
-# cd to folder where you need output
-docker run --rm -it -v "$(pwd):/code/output/" devtc/palika-profile:latest bash -c 'python3 main.py'
+docker-compose pull # pull images (you can use this instead of build)
+docker-compose build # build images
+docker-compose up # start the containers
+```
 
-# Develop
-docker run --rm -it -v "$(pwd):/code" devtc/palika-profile:latest bash
+#### Develop with local drafter and hrrp-maps code
+- create new `docker-compose-custom.yml` using `docker-compose.yml`
+- update `server` **volumes** entry with **drafter** or **hrrp-maps** code path
+```
+        volumes:
+            - ./:/code
+            - ..path_to_drafter/:/dep/drafter
+            - ..path_to_hrrp-maps:/dep/hrrp-maps
+```
+- and start the server
+```
+docker-compose -f docker-compose-custom.yml up
+```
 
-
-# Develop with local drafter and hrrp-maps code
-docker run --rm -it \
-    -v "$(pwd)/..path_to_drafter/:/dep/drafter" \
-    -v "$(pwd)/..path_to_hrrp-maps:/dep/hrrp-maps" \
-    -v "$(pwd):/code" devtc/palika-profile:latest bash
+### Docker [Production]
+```
+docker-compose -f production.yml up -d # start containers in daemon mode
+docker-compose -f production.yml logs -f # follow logs
+docker-compose -f production.yml stop # stop containers
+docker-compose -f production.yml down # stop and delete containers
 ```
