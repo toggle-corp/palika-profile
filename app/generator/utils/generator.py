@@ -116,6 +116,7 @@ def generate(
 
     total_palika = len(palika_codes)
     completed = 0
+    pdf_files = []
     update_palika_progress({
         'pdf': {
             'total': total_palika,
@@ -132,15 +133,20 @@ def generate(
         pdf_draft = PdfDraft(pdf_file_path).draw(Page1(cur_rep.data, lang_in))
         if make_scnd:
             pdf_draft.draw(Page2(cur_rep.data, lang_in))
+
+        pdf_files.append(pdf_file_path)
         completed += 1
-        with open(pdf_file_path, 'rb') as fp:
-            Export.objects.create(
-                generator=generator,
-                file=File(fp, pdf_file_path.split('/')[-1]),
-            )
         update_palika_progress({
             'pdf': {
                 'total': total_palika,
                 'complete': completed,
             },
         })
+
+    # Save files to database
+    for pdf_file in pdf_files:
+        with open(pdf_file, 'rb') as fp:
+            Export.objects.create(
+                generator=generator,
+                file=File(fp, pdf_file_path.split('/')[-1]),
+            )

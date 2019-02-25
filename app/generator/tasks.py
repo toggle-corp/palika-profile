@@ -24,7 +24,7 @@ def generate_pdf(self, id):
             pdf_generator.generate(
                 self, generator,
                 lang_in='en',
-                test_len=5,
+                test_len=10,
                 make_maps=False,
                 make_scnd=True,
                 map_img_type='svg',

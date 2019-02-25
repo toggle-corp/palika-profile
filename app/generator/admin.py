@@ -27,3 +27,8 @@ class GeneratorAdmin(admin.ModelAdmin):
     ordering = ('file', 'created_at', 'updated_at')
     list_filter = ('created_at', 'updated_at', 'status')
     readonly_fields = ['data', 'errors', 'status']
+
+
+@admin.register(Export)
+class ExportAdmin(admin.ModelAdmin):
+    search_fields = ('file',)
