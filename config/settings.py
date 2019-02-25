@@ -34,8 +34,9 @@ ALLOWED_HOSTS = [os.environ.get('DJANGO_ALLOWED_HOSTS', '*')]
 # Application definition
 
 LOCAL_APPS = [
-    'generator',
     'commons',
+    'generator',
+    'geo',
 ]
 
 INSTALLED_APPS = [
@@ -194,13 +195,10 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_VERSIONING_CLASS':
         'rest_framework.versioning.URLPathVersioning',
-    'DEFAULT_FILTER_BACKENDS': (
-        'django_filters.rest_framework.DjangoFilterBackend',
-    ),
 
     'DEFAULT_PAGINATION_CLASS':
         'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 20,
+    'PAGE_SIZE': 10,
 
     'TEST_REQUEST_DEFAULT_FORMAT': 'json',
 }
@@ -217,3 +215,14 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = 'app/media'
 MEDIA_URL = '/media/'
+
+LOGIN_REDIRECT_URL = '/admin/'
+LOGOUT_REDIRECT_URL = '/admin/login/'
+
+REACT_ENDPOINT = os.environ.get(
+    'REACT_ENDPOINT', 'http://localhost:3008',
+)
+
+CORE_OUTPUT_PATH = '/tmp/core/'
+CORE_PDF_TITLE = '%s_%s.pdf'
+CORE_PDF_WRITE_PATH = CORE_OUTPUT_PATH + CORE_PDF_TITLE

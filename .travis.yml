@@ -8,6 +8,11 @@ services:
 before_install:
   - curl https://s3.amazonaws.com/toggle-utils/docker_ci --output docker_ci && chmod +x docker_ci
 
+  - mkdir -p $REACT_STORE_DIR
+  - git clone https://github.com/toggle-corp/react-store.git $REACT_STORE_DIR
+  - git --git-dir=$REACT_STORE_DIR/.git --no-pager show --pretty=fuller --quiet
+  - cp $REACT_STORE_DIR/stylesheets/_user-imports-sample.scss $REACT_STORE_DIR/stylesheets/_user-imports.scss
+
   # Pull docker images
   - ./docker_ci pull
 
@@ -21,3 +26,7 @@ script:
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - ./docker_ci push --on on_build
+
+env:
+  global:
+    - REACT_STORE_DIR=react-plugins/src/vendor/react-store

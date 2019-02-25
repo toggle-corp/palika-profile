@@ -1,0 +1,9 @@
+@import '~base-scss/base';
+
+.table {
+    border: $width-separator-thin solid $color-separator;
+
+    span {
+        color: $color-text-label;
+    }
+}

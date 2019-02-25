@@ -1,0 +1,18 @@
+{% extends "react_plugins_base.html" %}
+{% load i18n admin_urls static admin_list %}
+
+{% block breadcrumb %}&rsaquo; List Generators{% endblock %}
+
+{% block content %}
+    <div id="generator-list"></div>
+
+    {% load react_serve %}
+    <script type="text/javascript" src="{% react_serve 'react-plugins.js' %}"></script>
+    <script>
+        let messageNo = 1;
+        reactPlugins.render(
+            'Generators',
+            '#generator-list',
+        );
+    </script>
+{% endblock %}

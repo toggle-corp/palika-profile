@@ -1,0 +1,82 @@
+[
+    {
+        "model": "geo.GeoArea",
+        "pk": 1,
+        "fields": {
+            "title": "Ward",
+            "file": "core/resources/mapfiles/hrrp_shapes/wards/merge.shp",
+            "geo_type": "ward"
+        }
+    },
+    {
+        "model": "geo.GeoArea",
+        "pk": 2,
+        "fields": {
+            "title": "Palika",
+            "file": "core/resources/mapfiles/hrrp_shapes/palika/GaPaNaPa_hrrp.shp",
+            "geo_type": "palika"
+        }
+    },
+    {
+        "model": "geo.GeoArea",
+        "pk": 3,
+        "fields": {
+            "title": "District",
+            "file": "core/resources/mapfiles/hrrp_shapes/districts/Districts_hrrp.shp",
+            "geo_type": "district"
+        }
+    },
+    {
+        "model": "geo.GeoStyle",
+        "pk": 1,
+        "fields": {
+            "title": "District styling",
+            "file": "core/resources/mapfiles/styles/dist_style.qml",
+            "geoarea": 3
+        }
+    },
+    {
+        "model": "geo.GeoStyle",
+        "pk": 2,
+        "fields": {
+            "title": "Palika styling (english)",
+            "file": "core/resources/mapfiles/styles/palika_style_en.qml",
+            "geoarea": 2
+        }
+    },
+    {
+        "model": "geo.GeoStyle",
+        "pk": 3,
+        "fields": {
+            "title": "Palika styling (Nepali)",
+            "file": "core/resources/mapfiles/styles/palika_style_np.qml",
+            "geoarea": 2
+        }
+    },
+    {
+        "model": "geo.GeoStyle",
+        "pk": 4,
+        "fields": {
+            "title": "Hidden palika styling",
+            "file": "core/resources/mapfiles/styles/palika_hide_style.qml",
+            "geoarea": 2
+        }
+    },
+    {
+        "model": "geo.GeoStyle",
+        "pk": 5,
+        "fields": {
+            "title": "Ward Styling",
+            "file": "core/resources/mapfiles/styles/ward_style.qml",
+            "geoarea": 1
+        }
+    },
+    {
+        "model": "geo.GeoStyle",
+        "pk": 6,
+        "fields": {
+            "title": "Atlas Layout",
+            "file": "core/resources/mapfiles/styles/atlas_layout.qpt"
+        }
+    }
+]
