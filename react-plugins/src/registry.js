@@ -1,5 +1,7 @@
-import Message from './components/Message';
+import Generators from './views/Generators';
+import GeneratorAdd from './views/Generators/Add';
 
 export default {
-    Message,
+    Generators,
+    GeneratorAdd,
 };

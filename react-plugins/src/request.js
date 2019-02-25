@@ -1,13 +1,14 @@
+import update from '#rsu/immutable-update';
+
 import {
     createRequestCoordinator,
     createRequestClient,
-    RestRequest,
+    methods,
 } from '@togglecorp/react-rest-request';
 
-import update from '#rsu/immutable-update';
+export * from '@togglecorp/react-rest-request';
 
-// TODO: Use env variable to fill endpoint
-const wsEndpoint = '/api/v1';
+const wsEndpoint = process.env.RP_WS_ENDPOINT || '/api/v1';
 
 const getCookie = (name) => {
     if (!document.cookie) {
@@ -43,28 +44,46 @@ export const alterResponseErrorToFaramError = (errors) => {
     );
 };
 
-export const RequestCoordinator = createRequestCoordinator({
+
+export const createConnectedRequestCoordinator = () => createRequestCoordinator({
+    transformParams: (params) => {
+        const csrfToken = getCookie('csrftoken');
+
+        const {
+            extras: {
+                isFormData = false,
+            } = {},
+        } = params;
+
+        if (isFormData) {
+            return {
+                method: params.method,
+                body: params.body,
+                headers: {
+                    'X-CSRFToken': csrfToken,
+                },
+            };
+        }
+        const newParams = {
+            method: params.method,
+            body: JSON.stringify(params.body),
+            headers: {
+                'X-CSRFToken': csrfToken,
+                Accept: 'application/json',
+                'Content-Type': 'application/json; charset=utf-8',
+            },
+        };
+        return newParams;
+    },
+
+    transformProps: props => props,
+
     transformUrl: (url) => {
         if (/^https?:\/\//i.test(url)) {
             return url;
         }
 
         return `${wsEndpoint}${url}`;
-    },
-
-    transformParams: (params) => {
-        const csrfToken = getCookie('csrftoken');
-        if (!csrfToken) {
-            return params;
-        }
-
-        const settings = {
-            headers: { $auto: {
-                'X-CSRFToken': { $set: csrfToken },
-            } },
-        };
-
-        return update(params, settings);
     },
 
     transformErrors: (response) => {
@@ -76,5 +95,6 @@ export const RequestCoordinator = createRequestCoordinator({
     },
 });
 
-export const RequestClient = createRequestClient();
-export const requestMethods = RestRequest.methods;
+export const RequestClient = createRequestClient;
+export const RequestCoordinator = createConnectedRequestCoordinator();
+export const requestMethods = methods;

@@ -122,7 +122,7 @@ dmypy.json
 .pyre/
 
 # Maps tmp files
-pdf_generator/resources/mapfiles/map_tmp/*
+core/resources/mapfiles/map_tmp/*
 
 # custom docker-compose file
 docker-compose-custom.yml
@@ -131,3 +131,4 @@ docker-compose-custom.yml
 react-plugins/src/vendor/react-rest-request/
 react-plugins/src/vendor/react-store/
 
+media/

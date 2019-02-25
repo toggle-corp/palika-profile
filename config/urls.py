@@ -1,25 +1,21 @@
-"""config URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/2.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-from django.contrib import admin
-from django.conf.urls import url
+from django.views.decorators.clickjacking import xframe_options_exempt
+from django.conf.urls import url, static
 from django.urls import include, path
+from django.views.static import serve
 from rest_framework import routers
+from django.conf import settings
+from django.contrib import admin
+
+from generator.apis import (
+    GeneratorViewSet,
+    TaskViewSet,
+)
 
 # Rest Routers
 router = routers.DefaultRouter()
+
+router.register(r'generators', GeneratorViewSet, basename='generator')
+router.register(r'tasks', TaskViewSet, basename='task')
 
 # Versioning : (v1|v2|v3)
 API_PREFIX = r'^api/(?P<version>(v1))/'
@@ -32,4 +28,8 @@ def get_api_path(path):
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(get_api_path(''), include(router.urls)),
-]
+    url(r'^generators/', include('generator.urls')),
+] + static.static(
+    settings.MEDIA_URL, view=xframe_options_exempt(serve),
+    document_root=settings.MEDIA_ROOT
+)
