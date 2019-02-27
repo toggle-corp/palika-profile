@@ -21,12 +21,14 @@ class GeneratorInline(admin.TabularInline):
 
 @admin.register(Generator)
 class GeneratorAdmin(admin.ModelAdmin):
+    change_list_template = 'admin/generator_change_list.html'
     inlines = (ExportInline,)
     search_fields = ('file',)
-    list_display = ('__str__', 'file', 'created_at', 'updated_at', 'status')
-    ordering = ('file', 'created_at', 'updated_at')
-    list_filter = ('created_at', 'updated_at', 'status')
-    readonly_fields = ['data', 'errors', 'status']
+    list_display = ('__str__', 'file', 'created_at', 'updated_at', 'status',)
+    ordering = ('file', 'created_at', 'updated_at',)
+    list_filter = ('created_at', 'updated_at', 'status',)
+    readonly_fields = ('status',)
+    exclude = ('data', 'errors',)
 
 
 @admin.register(Export)

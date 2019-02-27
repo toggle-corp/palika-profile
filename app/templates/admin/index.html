@@ -1,0 +1,14 @@
+{% extends "admin/index.html" %}
+
+{% block sidebar %}
+    {{block.super}}
+    <div>
+        <h1>Generator</h1>
+        <a href="{% url 'generator:list' %}">
+            List Generators
+        </a>
+        <a href="{% url 'generator:add' %}" class="addlink">
+            Add Generators
+        </a>
+    </div>
+{% endblock %}

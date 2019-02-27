@@ -26,9 +26,18 @@ def get_api_path(path):
 
 
 urlpatterns = [
+    # Admin url patterns
     path('admin/', admin.site.urls),
+
+    # API url patterns
     url(get_api_path(''), include(router.urls)),
-    url(r'^generators/', include('generator.urls')),
+
+    # App url patterns
+    url(r'^generators/', include(
+        ('generator.urls', 'generator'),
+        namespace='generator'),
+        ),
+
 ] + static.static(
     settings.MEDIA_URL, view=xframe_options_exempt(serve),
     document_root=settings.MEDIA_ROOT

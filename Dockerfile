@@ -8,29 +8,30 @@ ARG UBUNTU_GIS_REPO='https://qgis.org/debian'
 
 RUN apt-get update -y \
     && apt-get install -y \
+        libgirepository1.0-dev \
+        gcc \
         python3 \
         python3-dev \
         python3-setuptools \
         python3-pip \
+        libcairo2-dev \
+        pkg-config \
+        gir1.2-gtk-3.0 \
+        gir1.2-rsvg-2.0 \
         curl \
         unzip \
         vim \
         wget \
         git \
         software-properties-common \
+    # Install QGIS
     && echo "deb ${UBUNTU_GIS_REPO} bionic main" >> /etc/apt/sources.list \
     && echo "deb-src ${UBUNTU_GIS_REPO} bionic main" >> /etc/apt/sources.list \
     && wget -O - https://qgis.org/downloads/qgis-2017.gpg.key | gpg --import \
     && gpg --fingerprint CAEB3DC3BDF7FB45 \
     && gpg --export --armor CAEB3DC3BDF7FB45 | apt-key add - \
     && apt-get update -y \
-    && apt-get install -y \
-        python3-gi \
-        python3-gi-cairo \
-        gir1.2-gtk-3.0 \
-        gir1.2-rsvg-2.0 \
-        qgis-server \
-        python-qgis \
+    && apt-get install -y qgis-server python-qgis \
     # Install required fonts
     && curl -L https://github.com/google/roboto/releases/download/v2.138/roboto-android.zip -o /tmp/font.zip \
     && unzip -o /tmp/font.zip -d /root/.fonts/ \
@@ -38,7 +39,9 @@ RUN apt-get update -y \
     && unzip -o /tmp/font1.zip -d /root/.fonts/ \
     && curl -L https://noto-website-2.storage.googleapis.com/pkgs/NotoSans-hinted.zip -o /tmp/font2.zip \
     && unzip -o /tmp/font2.zip -d /root/.fonts/ \
-    && fc-cache --force --verbose
+    && fc-cache --force --verbose \
+    # Remove apt cache to make the image smaller
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /code
 
