@@ -92,12 +92,13 @@ def generate(skip= [], lang_in='en', test_len=None, make_maps=False, make_scnd=T
             .draw(Page1(cur_rep.data, lang_in))
         if make_scnd:
             pdf_draft.draw(Page2(cur_rep.data, lang_in))
+        pdf_draft.surface.__exit__()
 
 
 if __name__ == '__main__':
     generate(skip= [51001, 51002],
              lang_in='en', 
-             test_len=1,
+             test_len=5,
              make_maps=False,
              make_scnd=True,
              map_img_type='svg', 

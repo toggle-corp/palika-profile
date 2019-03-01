@@ -34,14 +34,14 @@ ALLOWED_HOSTS = [os.environ.get('DJANGO_ALLOWED_HOSTS', '*')]
 # Application definition
 
 LOCAL_APPS = [
-    'commons',
+    'common',
     'generator',
     'geo',
 ]
 
 INSTALLED_APPS = [
     # Django Apps
-    'django.contrib.admin',
+    'config.apps.AdminConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -216,13 +216,12 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = 'app/media'
 MEDIA_URL = '/media/'
 
-LOGIN_REDIRECT_URL = '/admin/'
-LOGOUT_REDIRECT_URL = '/admin/login/'
-
 REACT_ENDPOINT = os.environ.get(
     'REACT_ENDPOINT', 'http://localhost:3008',
 )
 
-CORE_OUTPUT_PATH = '/tmp/core/'
-CORE_PDF_TITLE = '%s_%s.pdf'
-CORE_PDF_WRITE_PATH = CORE_OUTPUT_PATH + CORE_PDF_TITLE
+
+from django.urls import reverse_lazy # noqa
+
+LOGIN_REDIRECT_URL = reverse_lazy('generator:list')
+LOGOUT_REDIRECT_URL = '/admin/login/'

@@ -5,14 +5,10 @@ import pandas as pd
 from core.report.common.Sheet import Sheet
 from core.report.common import SHT_RESERVE_CHAR
 
-from django.conf import settings
-
-OUTPUT_PATH = settings.CORE_OUTPUT_PATH
-PDF_WRITE_PATH = settings.CORE_PDF_WRITE_PATH
-
 
 def validate(
-        self, generator, skip=[], lang_in='en', test_len=None, overwrite=False,
+        self, cc, generator, skip=[], lang_in='en', test_len=None,
+        overwrite=False,
 ):
     job_progress = {
         'itemList': ['testing'],
@@ -27,7 +23,7 @@ def validate(
         job_progress['items'].update(data)
         update_meta({'progress': job_progress})
 
-    os.makedirs(OUTPUT_PATH, exist_ok=True)
+    os.makedirs(cc.get_output_path(), exist_ok=True)
     data = Sheet(
         pd.read_excel(
             generator.file, sheet_name='Profile Data', index_col=0, header=0,
@@ -35,7 +31,7 @@ def validate(
         skip=skip,
         test_len=test_len,
         overwrite=overwrite,
-        OUTPUT_PATH=OUTPUT_PATH,
+        OUTPUT_PATH=cc.get_output_path(),
         lang_in=lang_in,
         num_rows_strip=3,
         remove_reserve_dims='columns',

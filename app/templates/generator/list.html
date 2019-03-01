@@ -1,7 +1,13 @@
 {% extends "react_plugins_base.html" %}
-{% load i18n admin_urls static admin_list %}
+{% load i18n %}
 
-{% block breadcrumb %}&rsaquo; List Generators{% endblock %}
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+        <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+        &rsaquo; List Generators
+        {% block breadcrumb %}{% endblock %}
+    </div>
+{% endblock %}
 
 {% block content %}
     <div id="generator-list"></div>
@@ -13,6 +19,9 @@
         reactPlugins.render(
             'Generators',
             '#generator-list',
+            {
+                'addGeneratorPageUrl': '{% url 'generator:add' %}',
+            }
         );
     </script>
 {% endblock %}

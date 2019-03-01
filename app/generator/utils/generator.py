@@ -3,10 +3,6 @@ import logging
 
 import pandas as pd
 
-from generator.models import Export
-
-from django.core.files import File
-
 from drafter.draft import PdfDraft
 from core.report import Page1, Page2
 from core.report.common.utils import gen_maps
@@ -15,17 +11,13 @@ from core.report.common.boiler import set_lang
 from core.report.common.Sheet import Sheet
 from core.report.common import SHT_RESERVE_CHAR
 
-from django.conf import settings
-
 logger = logging.getLogger(__name__)
-
-OUTPUT_PATH = settings.CORE_OUTPUT_PATH
-PDF_WRITE_PATH = settings.CORE_PDF_WRITE_PATH
 
 
 def generate(
         self,
-        generator,
+        cc,
+        file,
         skip=[],
         lang_in='en',
         test_len=None,
@@ -41,8 +33,9 @@ def generate(
     job_palika_progress = {}
 
     def update_meta(data):
-        self.job_meta.update(data)
-        self.update_state(meta=self.job_meta)
+        if self:
+            self.job_meta.update(data)
+            self.update_state(meta=self.job_meta)
 
     def update_progress(data):
         job_progress['items'].update(data)
@@ -54,15 +47,15 @@ def generate(
 
     set_lang(lang_in)
 
-    os.makedirs(OUTPUT_PATH, exist_ok=True)
+    os.makedirs(cc.get_output_path(), exist_ok=True)
     data = Sheet(
         pd.read_excel(
-            generator.file, sheet_name='Profile Data', index_col=0, header=0,
+            file, sheet_name='Profile Data', index_col=0, header=0,
         ),
         skip=skip,
         test_len=test_len,
         overwrite=overwrite,
-        OUTPUT_PATH=OUTPUT_PATH,
+        OUTPUT_PATH=cc.get_output_path(),
         lang_in=lang_in,
         num_rows_strip=3,
         remove_reserve_dims='columns',
@@ -71,12 +64,11 @@ def generate(
     )
     # for now, all data is processed regardless of it is filtered or not
     data.process()
-    generator.errors = data.errors
     update_progress({'testing': 100})
 
     meta = Sheet(
         pd.read_excel(
-            generator.file, sheet_name='Meta', index_col=0, header=0,
+            file, sheet_name='Meta', index_col=0, header=0,
         ),
         num_rows_strip=1,
         remove_reserve_dims='columns',
@@ -87,7 +79,7 @@ def generate(
 
     faq = Sheet(
         pd.read_excel(
-            generator.file, sheet_name='FAQs', index_col=0, header=0,
+            file, sheet_name='FAQs', index_col=0, header=0,
         ),
         num_rows_strip=1,
         remove_reserve_dims='columns',
@@ -98,7 +90,7 @@ def generate(
 
     titles = Sheet(
         pd.read_excel(
-            generator.file, sheet_name='titles', index_col=0, header=0,
+            file, sheet_name='titles', index_col=0, header=0,
         ),
         num_rows_strip=1,
         remove_reserve_dims=['rows', 'columns'],
@@ -116,6 +108,7 @@ def generate(
 
     total_palika = len(palika_codes)
     completed = 0
+    pdf_files = []
     update_palika_progress({
         'pdf': {
             'total': total_palika,
@@ -123,24 +116,26 @@ def generate(
         },
     })
     for v in palika_codes:
-        print('Creating profile for %s' % v)
-        cur_rep = Report(gc=v, data_sht=data.sht, meta_sht=meta.sht,
-                         faq_sht=faq.sht, map_img_type=map_img_type)
+        print('Creating profile for {}'.format(v))
+        cur_rep = Report(
+            gc=v, data_sht=data.sht, meta_sht=meta.sht,
+            faq_sht=faq.sht, map_img_type=map_img_type,
+        )
         cur_rep.create_data()
 
-        pdf_file_path = PDF_WRITE_PATH % (v, lang_in)
+        pdf_file_path = cc.get_pdf_write_path('{}_{}.pdf', v, lang_in)
         pdf_draft = PdfDraft(pdf_file_path).draw(Page1(cur_rep.data, lang_in))
         if make_scnd:
             pdf_draft.draw(Page2(cur_rep.data, lang_in))
+
+        pdf_draft.surface.__exit__()
+        pdf_files.append(pdf_file_path)
         completed += 1
-        with open(pdf_file_path, 'rb') as fp:
-            Export.objects.create(
-                generator=generator,
-                file=File(fp, pdf_file_path.split('/')[-1]),
-            )
         update_palika_progress({
             'pdf': {
                 'total': total_palika,
                 'complete': completed,
             },
         })
+
+    return pdf_files, data.errors
