@@ -16,7 +16,6 @@ class Migration(migrations.Migration):
             name='GeoArea',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=255)),
                 ('file', models.FileField(max_length=255, upload_to='shape_files/')),
                 ('geo_type', models.CharField(choices=[('ward', 'Ward'), ('palika', 'Palika'), ('district', 'District')], max_length=30, unique=True)),
             ],
