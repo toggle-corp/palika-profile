@@ -1,0 +1,26 @@
+@import '~base-scss/base';
+
+.form {
+    display: flex;
+    flex-direction: column;
+    margin: $spacing-large 0;
+    border: $width-separator-thin solid $color-separator;
+    padding: $spacing-medium;
+    width: 360px;
+
+    .bottom-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .button {
+            padding: $spacing-small $spacing-medium;
+            text-transform: capitalize;
+            font-size: $font-size-medium-alt;
+        }
+    }
+}
+
+.table {
+    height: 600px;
+}
