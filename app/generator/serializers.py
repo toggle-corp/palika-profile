@@ -1,10 +1,11 @@
 from rest_framework import serializers
 from celery.result import AsyncResult
 
+from common.serializers import RemoveNullFieldsMixin
 from .models import Generator, Export
 
 
-class TaskSerializer(serializers.Serializer):
+class TaskSerializer(RemoveNullFieldsMixin, serializers.Serializer):
     task_id = serializers.CharField()
     state = serializers.SerializerMethodField()
 

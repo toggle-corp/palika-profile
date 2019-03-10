@@ -3,43 +3,29 @@ import { requestMethods } from '#request';
 const requests = {
     generatorGet: {
         method: requestMethods.GET,
-        url: ({
-            props: {
-                generator: { id },
-            },
-        }) => `/generators/${id}/errors/`,
+        url: ({ props: { generator: { id } } }) => `/generators/${id}/`,
         onSuccess: ({
             response,
-            props: {
-                updateGenerator,
-            },
-        }) => (
-            updateGenerator({
-                $auto: {
-                    errors: { $set: response.errors },
-                },
-            })
-        ),
+            props: { updateGenerator },
+        }) => updateGenerator({ $set: response }),
         onFailure: () => console.warn('failure'),
         onFatal: () => console.warn('fatal'),
     },
 
-    generatorTriggerValidator: {
+    generatorTriggerExport: {
         method: requestMethods.GET,
-        url: ({
-            props: { generator: { id } },
-        }) => `/generators/${id}/trigger-validation`,
+        url: ({ props: { generator: { id } } }) => `/generators/${id}/trigger-export`,
         onSuccess: ({
             response: { taskId },
             props: {
-                requests: { generatorTriggerValidatorPoll },
+                requests: { generatorTriggerExportPoll },
             },
-        }) => generatorTriggerValidatorPoll.do({ taskId }),
+        }) => generatorTriggerExportPoll.do({ taskId }),
         onFailure: () => console.warn('failure'),
         onFatal: () => console.warn('fatal'),
     },
 
-    generatorTriggerValidatorPoll: {
+    generatorTriggerExportPoll: {
         method: requestMethods.GET,
         url: ({
             params: { taskId },
@@ -59,11 +45,7 @@ const requests = {
         }),
         onSuccess: ({
             response: { state },
-            props: {
-                requests: { generatorGet },
-                generator: { id },
-            },
-            props: { setStatus },
+            props: { generator: { id }, requests: { generatorGet }, setStatus },
         }) => {
             setStatus(state);
             generatorGet.do({ generatorId: id });

@@ -13,4 +13,20 @@ const FileLink = ({ url }) => {
     return '';
 };
 
+export const FileLinks = ({ urls, keySelector, urlSelector }) => {
+    if (urls) {
+        return urls.map(
+            exp => (
+                <div key={keySelector(exp)}>
+                    <FileLink
+                        url={urlSelector(exp)}
+                    />
+                </div>
+            ),
+        );
+    }
+    return '';
+};
+
+
 export default FileLink;
