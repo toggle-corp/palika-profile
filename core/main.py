@@ -92,7 +92,7 @@ def generate(skip= [], lang_in='en', test_len=None, make_maps=False, make_scnd=T
             .draw(Page1(cur_rep.data, lang_in))
         if make_scnd:
             pdf_draft.draw(Page2(cur_rep.data, lang_in))
-        pdf_draft.surface.__exit__()
+        # pdf_draft.surface.__exit__()
 
 
 if __name__ == '__main__':
