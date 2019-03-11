@@ -223,11 +223,11 @@ class Report(object):
             'trainings': {
                 'short': {
                     'reached': cp['short_training_reached_cnt'],
-                    'remaining': cp['short_training_remaining_cnt'],
+                    'reqd': cp['short_training_reqd_cnt'],
                 },
                 'vocational': {
                     'reached': cp['voc_training_reached_cnt'],
-                    'remaining': cp['voc_training_remaining_cnt'],
+                    'reqd': cp['voc_training_reqd_cnt'],
                 },
             },
 

@@ -77,6 +77,7 @@ def generate(skip= [], lang_in='en', test_len=None, make_maps=False, make_scnd=T
     if make_maps:
         gen_maps(list(palika_codes), map_img_type)
 
+
     # process
     print('Creating for: ', data.sht.index.values)
 
@@ -92,14 +93,14 @@ def generate(skip= [], lang_in='en', test_len=None, make_maps=False, make_scnd=T
             .draw(Page1(cur_rep.data, lang_in))
         if make_scnd:
             pdf_draft.draw(Page2(cur_rep.data, lang_in))
-        # pdf_draft.surface.__exit__()
+        pdf_draft.surface.__exit__()
 
 
 if __name__ == '__main__':
-    generate(skip= [51001, 51002],
-             lang_in='en', 
-             test_len=5,
-             make_maps=False,
+    generate(
+             test_len=80,
+             lang_in='en',
+             make_maps=True,
              make_scnd=True,
-             map_img_type='svg', 
+             map_img_type='svg',
              overwrite = True)

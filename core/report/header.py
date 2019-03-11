@@ -18,13 +18,6 @@ def Header(data):
             height=52,
             relative=True,
         ).add(
-            Image(
-                filename=get_resource_abspath('images/logo.png'),
-                width=96,
-                absolute=True,
-                top=-6,
-                left=0,
-            ),
             Text(
                 text=boil('header_title'),
                 font_family='Roboto Condensed',
