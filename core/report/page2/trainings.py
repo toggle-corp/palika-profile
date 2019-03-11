@@ -133,17 +133,20 @@ class PieChart(Shape):
         # ).render(ctx)
 
 
+def _calc_reached(reqd, reached):
+        return max(0, reqd - reached)
+
 def Trainings(data):
     short = data['short']
     vocational = data['vocational']
 
     short_training = [
         {'value': short['reached'], 'color': Color.ACCENT},
-        {'value': short['remaining'], 'color': Color.GRAY},
+        {'value': _calc_reached(short['reqd'], short['reached']), 'color': Color.GRAY},
     ]
     vocational_training = [
         {'value': vocational['reached'], 'color': Color.ACCENT},
-        {'value': vocational['remaining'], 'color': Color.GRAY},
+        {'value': _calc_reached(vocational['reqd'], vocational['reached']), 'color': Color.GRAY},
     ]
 
     items = [

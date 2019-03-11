@@ -2,15 +2,15 @@ from drafter.utils import Rect
 from drafter.layouts import Row, Column
 from drafter.nodes import Text
 
-from ..common.boiler import boil
-from ..common.utils import is_nan
+from report.common.boiler import boil
+from report.common import ZERO_DEFAULT
 
 
 def Contact(it, title, contact):
 
-    # TODO: general handle
     for k, v in contact.items():
-        if is_nan(v) or v == 'nan':
+        #TODO: fix 'none'
+        if not v or v == 'None':
             contact[k] = '-'
 
     return Column(width='100%', padding=Rect([0, 8, 0, 8])).add(
@@ -21,17 +21,17 @@ def Contact(it, title, contact):
             font_weight=Text.BOLD,
         ),
         Text(
-            text=contact['name'],
+            text=contact['name'] if contact['name'] != ZERO_DEFAULT else '',
             font_family="Roboto Condensed",
             font_size=7,
         ),
         Text(
-            text=contact['title'],
+            text=contact['title'] if contact['title'] != ZERO_DEFAULT else '',
             font_family="Roboto Condensed",
             font_size=7,
         ),
         Text(
-            text=contact['contact'],
+            text=contact['contact'] if contact['contact'] != ZERO_DEFAULT else '',
             font_family="Roboto Condensed",
             font_size=7,
         )

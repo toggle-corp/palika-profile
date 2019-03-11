@@ -108,7 +108,6 @@ def Typologies(data):
 
         Text(
                 width='100%',
-                # TODO: add to lib
                 text=boil('typologies_cbs_footer'),
                 font_family="Roboto Light",
                 font_size=6,

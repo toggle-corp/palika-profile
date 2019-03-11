@@ -217,9 +217,9 @@ def gen_maps(pka_list, img_type):
 
     atlas = at(
         data_uri=get_resource_abspath('data/profile_data_structure_template.xlsx'), # noqa
-        wards_uri=get_resource_abspath('mapfiles/hrrp_shapes/wards/merge.shp'),
-        palika_uri=get_resource_abspath('mapfiles/hrrp_shapes/palika/GaPaNaPa_hrrp.shp'), # noqa
-        dists_uri=get_resource_abspath('mapfiles/hrrp_shapes/districts/Districts_hrrp.shp'), # noqa
+        wards_uri=get_resource_abspath('mapfiles/hrrp_shapes/jsons/merge.json'),
+        palika_uri=get_resource_abspath('mapfiles/hrrp_shapes/jsons/GaPaNaPa_hrrp.json'), # noqa
+        dists_uri=get_resource_abspath('mapfiles/hrrp_shapes/jsons/Districts_hrrp.json'), # noqa
 
         dists_syle=get_resource_abspath('mapfiles/styles/dist_style.qml'),
         pka_style=pka_style_lang,
@@ -235,8 +235,10 @@ def gen_maps(pka_list, img_type):
         out_path=get_resource_abspath('mapfiles/map_tmp/')
     )
 
+    atlas.setup()
     atlas.make_maps()
-
+    atlas.exit()
+    del(atlas)
 
 def get_text_width(text, fontsize, font, font_weight):
     """get width of text"""
@@ -263,4 +265,5 @@ def is_nan(val):
             return True
     except: # noqa
         pass
+
     return False

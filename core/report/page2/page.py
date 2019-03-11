@@ -31,15 +31,15 @@ def FurtherInfoNotes(data, **kwargs):
                 Text(
                     text='{}. {} ({})'.format(
                         i + 1,
-                        contact['name'],
-                        contact['title'],
+                        contact['name'] if contact['name'] and contact['name'] != 'None' else '',
+                        contact['title'] if contact['title'] and contact['title'] != 'None' else '',
                     ),
                     font_family='Roboto Condensed',
                     font_size=7,
                     padding=Rect([5, 0, 0, 0]),
                 ),
                 Text(
-                    text='     {}'.format(contact['phone']),
+                    text='     {}'.format(contact['phone'] if contact['phone'] and contact['phone'] != 'None' else ''),
                     font_family='Roboto Condensed',
                     font_size=7,
                 ),
