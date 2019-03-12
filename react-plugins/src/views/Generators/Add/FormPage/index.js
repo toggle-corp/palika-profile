@@ -1,11 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
 import Faram, {
     requiredCondition,
 } from '@togglecorp/faram';
 import FileInput from '#rsci/RawFileInput';
 import PrimaryButton from '#rsca/Button/PrimaryButton';
+
+import {
+    generatorSelectorGP,
+} from '#selectors';
+import {
+    setGeneratorActionGP,
+    setGeneratorStateActionGP,
+    setGeneratorStatusActionGP,
+} from '#actionCreators';
 
 import {
     RequestCoordinator,
@@ -19,18 +30,13 @@ import styles from './styles.scss';
 const propTypes = {
     /* eslint-disable react/forbid-prop-types */
     requests: PropTypes.object.isRequired,
-    generator: PropTypes.object,
+    generator: PropTypes.object.isRequired,
     /* eslint-enable react/forbid-prop-types */
-    onSuccess: PropTypes.func.isRequired,
     onNext: PropTypes.func.isRequired,
 };
 
-const defaultProps = {
-    generator: {},
-};
+const defaultProps = {};
 
-@RequestCoordinator
-@RequestClient(requests)
 class FormPage extends React.PureComponent {
     static propTypes = propTypes;
     static defaultProps = defaultProps;
@@ -51,6 +57,7 @@ class FormPage extends React.PureComponent {
     }
 
     componentDidMount() {
+        // NOTE: This is for debugging only
         const {
             generator: { id },
             onNext,
@@ -84,23 +91,16 @@ class FormPage extends React.PureComponent {
         generatorAdd.do({
             data: formData,
             setState: params => this.setState(params),
-            onSuccess: this.onSuccess,
         });
     };
-
-    onSuccess = (params) => {
-        const {
-            onSuccess,
-            onNext,
-        } = this.props;
-        onSuccess(params);
-        onNext();
-    }
 
     render() {
         const {
             requests: {
                 generatorAdd: { pending },
+                generatorTriggerValidatorPoll,
+                generatorTriggerValidator,
+                generatorGet,
             },
         } = this.props;
 
@@ -109,6 +109,15 @@ class FormPage extends React.PureComponent {
             faramErrors,
             pristine,
         } = this.state;
+
+        const metaExtractionPending = (
+            generatorTriggerValidatorPoll.pending || generatorTriggerValidator.pending
+            || generatorGet.pending
+        );
+
+        if (metaExtractionPending) {
+            return 'Validating Document';
+        }
 
         return (
             <Faram
@@ -143,4 +152,18 @@ class FormPage extends React.PureComponent {
     }
 }
 
-export default FormPage;
+const mapStateToProps = state => ({
+    generator: generatorSelectorGP(state),
+});
+
+const mapDispatchToProps = dispatch => ({
+    setGenerator: params => dispatch(setGeneratorActionGP(params)),
+    setGeneratorState: params => dispatch(setGeneratorStateActionGP(params)),
+    setGeneratorStatus: params => dispatch(setGeneratorStatusActionGP(params)),
+});
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    RequestCoordinator,
+    RequestClient(requests),
+)(FormPage);

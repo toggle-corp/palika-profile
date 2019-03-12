@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 
 @transaction.atomic
-def _generate_pdf(self, cc, generator):
+def _generate_pdf(self, cc, generator, selected_palika_codes):
     # Celery state
     self.update_state(state='PROGRESS')
     self.job_meta = {}
@@ -31,8 +31,8 @@ def _generate_pdf(self, cc, generator):
         self,
         cc,
         generator.file,
+        selected_palika_codes,
         lang_in='en',
-        test_len=5,
         make_maps=False,
         make_scnd=True,
         map_img_type='svg',
@@ -40,11 +40,13 @@ def _generate_pdf(self, cc, generator):
     )
 
     # Save files to Generator
-    for pdf_file in pdf_files:
+    for palika_code, pdf_file in pdf_files:
         with open(pdf_file, 'rb') as fp:
             Export.objects.create(
+                title=pdf_file.split('/')[-1],
                 generator=generator,
                 file=File(fp, pdf_file.split('/')[-1]),
+                palika_code=palika_code,
             )
 
     generator.errors = errors
@@ -53,11 +55,11 @@ def _generate_pdf(self, cc, generator):
 
 
 @app.task(bind=True)
-def generate_pdf(self, id):
+def generate_pdf(self, id, selected_palika_codes=None):
     cc = CoreConfig()
     generator = Generator.objects.get(pk=id)
     try:
-        _generate_pdf(self, cc, generator)
+        _generate_pdf(self, cc, generator, selected_palika_codes)
     except Exception:
         generator.status = Generator.FAILURE
         generator.data = {
@@ -80,8 +82,11 @@ def test_doc(self, id):
             self.update_state(state='PROGRESS')
             self.job_meta = {}
             generator = Generator.objects.get(pk=id)
-            errors = validator.validate(self, cc, generator)
+            errors, palika_codes = validator.validate(self, cc, generator.file)
             generator.errors = errors
+            generator.geo_meta = {
+                'palika_codes': list(set(palika_codes)),
+            }
             generator.save()
     except Exception:
         logger.error(

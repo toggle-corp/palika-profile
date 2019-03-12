@@ -18,6 +18,10 @@ module.exports = function config(api) {
                         '.',
                     ],
                     alias: {
+                        '#config': './src/config',
+                        '#utils': './src/utils',
+                        '#actionCreators': './src/store/actionCreators',
+                        '#selectors': './src/store/selectors',
                         '#rscv': './src/vendor/react-store/components/View',
                         '#rsca': './src/vendor/react-store/components/Action',
                         '#rscg': './src/vendor/react-store/components/General',

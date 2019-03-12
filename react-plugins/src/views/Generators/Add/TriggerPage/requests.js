@@ -4,54 +4,54 @@ const requests = {
     generatorGet: {
         method: requestMethods.GET,
         url: ({
+            params: { pullMeta },
             props: {
                 generator: { id },
             },
-        }) => `/generators/${id}/errors/`,
+        }) => (
+            pullMeta ? `/generators/${id}/meta/` : `/generators/${id}/`
+        ),
         onSuccess: ({
             response,
-            props: {
-                updateGenerator,
-            },
-        }) => (
-            updateGenerator({
-                $auto: {
-                    errors: { $set: response.errors },
-                },
-            })
-        ),
+            props: { setGenerator, onNext },
+            params: { callOnNext },
+        }) => {
+            setGenerator({ generator: response });
+            if (callOnNext) {
+                onNext();
+            }
+        },
         onFailure: () => console.warn('failure'),
         onFatal: () => console.warn('fatal'),
     },
 
-    generatorTriggerValidator: {
-        method: requestMethods.GET,
-        url: ({
-            props: { generator: { id } },
-        }) => `/generators/${id}/trigger-validation`,
+    generatorTriggerExport: {
+        method: requestMethods.POST,
+        url: ({ props: { generator: { id } } }) => `/generators/${id}/trigger-export/`,
+        body: ({ params: { selectedPalikaCodes } }) => ({ selectedPalikaCodes }),
         onSuccess: ({
             response: { taskId },
             props: {
-                requests: { generatorTriggerValidatorPoll },
+                requests: { generatorTriggerExportPoll },
             },
-        }) => generatorTriggerValidatorPoll.do({ taskId }),
+        }) => generatorTriggerExportPoll.do({ taskId }),
         onFailure: () => console.warn('failure'),
         onFatal: () => console.warn('fatal'),
     },
 
-    generatorTriggerValidatorPoll: {
+    generatorTriggerExportPoll: {
         method: requestMethods.GET,
         url: ({
             params: { taskId },
         }) => `/tasks/${taskId}/`,
-        options: ({ props: { setState } }) => ({
+        options: ({ props: { setGeneratorState } }) => ({
             pollTime: 1000,
             shouldPoll: ({ state }) => {
                 const breakPoll = (
                     state === 'success' || state === 'failure'
                 );
                 if (!breakPoll) {
-                    setState(state);
+                    setGeneratorState({ exportState: state });
                     return true;
                 }
                 return false;
@@ -60,13 +60,16 @@ const requests = {
         onSuccess: ({
             response: { state },
             props: {
-                requests: { generatorGet },
                 generator: { id },
+                requests: { generatorGet },
+                setGeneratorStatus,
             },
-            props: { setStatus },
         }) => {
-            setStatus(state);
-            generatorGet.do({ generatorId: id });
+            setGeneratorStatus({ exportStatus: state });
+            generatorGet.do({
+                generatorId: id,
+                callOnNext: true,
+            });
         },
         onFailure: () => console.warn('failure'),
         onFatal: () => console.warn('fatal'),

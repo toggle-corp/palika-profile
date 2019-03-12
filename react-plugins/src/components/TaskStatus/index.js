@@ -8,21 +8,24 @@ const TaskStatus = ({
         items = emptyList,
         itemList = emptyList,
     } = emptyObject,
-}) => (
-    itemList.map(
-        item => (
-            <div key={item}>
-                <span>{`${item}:  `}</span>
-                <span>
-                    {
-                        typeof (items[item]) === 'object'
-                            ? `${items[item].complete}/${items[item].total}`
-                            : items[item]
-                    }
-                </span>
-            </div>
-        ),
-    )
-);
+}) => {
+    if (itemList && itemList.length) {
+        return itemList.map(
+            item => (
+                <div key={item}>
+                    <span>{`${item}:  `}</span>
+                    <span>
+                        {
+                            typeof (items[item]) === 'object'
+                                ? `${items[item].complete}/${items[item].total}`
+                                : items[item]
+                        }
+                    </span>
+                </div>
+            ),
+        );
+    }
+    return '..';
+};
 
 export default TaskStatus;

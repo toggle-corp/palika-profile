@@ -2,8 +2,8 @@ from drafter.utils import Rect
 from drafter.layouts import Row, Column
 from drafter.nodes import Text
 
-from report.common.boiler import boil
-from report.common import ZERO_DEFAULT
+from ..common.boiler import boil
+from ..common import ZERO_DEFAULT
 
 
 def Contact(it, title, contact):

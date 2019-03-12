@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import Sortable from '#rscv/Taebul/Sortable';
 import ColumnWidth from '#rscv/Taebul/ColumnWidth';
 import NormalTaebul from '#rscv/Taebul';
-import TaskStatus from '#components/TaskStatus';
 
 import columns from './columns';
 import styles from './styles.scss';
@@ -12,14 +11,11 @@ import styles from './styles.scss';
 const Taebul = Sortable(ColumnWidth(NormalTaebul));
 
 const propTypes = {
-    /* eslint-disable react/forbid-prop-types */
+    // eslint-disable-next-line react/forbid-prop-types
     errors: PropTypes.array,
-    progress: PropTypes.object,
-    /* eslint-enable react/forbid-prop-types */
 };
 
 const defaultProps = {
-    progress: {},
     errors: undefined,
 };
 
@@ -45,30 +41,20 @@ class ValidatorPreview extends React.PureComponent {
     }
 
     render() {
-        const {
-            progress,
-            errors,
-        } = this.props;
+        const { errors } = this.props;
 
         const {
             taebulOptions,
         } = this.state;
 
-        if (errors) {
-            return (
-                <Taebul
-                    className={styles.table}
-                    data={errors}
-                    settings={taebulOptions}
-                    keySelector={keySelector}
-                    columns={columns}
-                    onChange={this.handleSettingsChange}
-                />
-            );
-        }
         return (
-            <TaskStatus
-                progress={progress}
+            <Taebul
+                className={styles.table}
+                data={errors}
+                settings={taebulOptions}
+                keySelector={keySelector}
+                columns={columns}
+                onChange={this.handleSettingsChange}
             />
         );
     }

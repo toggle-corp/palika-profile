@@ -28,3 +28,27 @@ class GeoStyle(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Province(models.Model):
+    title = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.title
+
+
+class District(models.Model):
+    title = models.CharField(max_length=255)
+    province = models.ForeignKey(Province, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
+
+
+class Palika(models.Model):
+    title = models.CharField(max_length=255)
+    code = models.CharField(max_length=255, unique=True)
+    district = models.ForeignKey(District, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return '{} ({})'.format(self.title, self.code)

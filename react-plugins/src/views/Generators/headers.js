@@ -1,7 +1,7 @@
 import React from 'react';
 import FormattedDate from '#rscv/FormattedDate';
 import iconNames from '#rsk/iconNames';
-import FileLink from '#components/FileLink';
+import FileLink, { GeneratorExportsDownload } from '#components/FileLink';
 
 const RenderStatus = ({ status }) => {
     if (status) {
@@ -63,13 +63,9 @@ const headers = [
         label: 'Exports',
         order: 3,
         modifier: generator => (
-            generator.exports.map(exp => (
-                <div key={exp.id}>
-                    <FileLink
-                        url={exp.file}
-                    />
-                </div>
-            ))
+            <GeneratorExportsDownload
+                exports={generator.exports}
+            />
         ),
     },
 ];

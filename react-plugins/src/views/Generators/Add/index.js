@@ -12,19 +12,14 @@ class GeneratorAdd extends React.PureComponent {
         super(props);
 
         this.state = {
-            generator: {},
+            generator: {
+            },
+            selectedPalikaCodes: undefined,
 
             exportState: undefined,
             exportStatus: undefined,
-
-            validationState: undefined,
-            validationStatus: undefined,
         };
     }
-
-    onAddSuccess = (generator) => {
-        this.setState({ generator });
-    };
 
     updateGenerator = (settings) => {
         const { generator } = this.state;
@@ -32,6 +27,13 @@ class GeneratorAdd extends React.PureComponent {
         this.setState({
             generator: newGenerator,
         });
+    }
+
+    setPalikaCodes = ({
+        selectedPalikaCodes,
+        callback,
+    }) => {
+        this.setState({ selectedPalikaCodes }, callback);
     }
 
     setExportState = state => this.setState({ exportState: state });
@@ -43,30 +45,21 @@ class GeneratorAdd extends React.PureComponent {
     render() {
         const {
             generator,
+            selectedPalikaCodes,
 
             exportState,
             exportStatus,
-
-            validationState,
-            validationStatus,
         } = this.state;
 
         return (
             <Wizard>
-                <FormPage
-                    generator={generator}
-                    onSuccess={this.onAddSuccess}
-                />
+                <FormPage />
                 <TriggerPage
-                    generator={generator}
-                    updateGenerator={this.updateGenerator}
-                    setState={this.setValidationState}
-                    setStatus={this.setValidationStatus}
-                    exportState={validationState}
-                    exportStatus={validationStatus}
+                    setPalikaCodes={this.setPalikaCodes}
                 />
                 <ExportPage
                     generator={generator}
+                    selectedPalikaCodes={selectedPalikaCodes}
                     updateGenerator={this.updateGenerator}
                     setState={this.setExportState}
                     setStatus={this.setExportStatus}

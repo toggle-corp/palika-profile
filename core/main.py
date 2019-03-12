@@ -98,9 +98,18 @@ def generate(skip= [], lang_in='en', test_len=None, make_maps=False, make_scnd=T
 
 if __name__ == '__main__':
     generate(
-             test_len=80,
-             lang_in='en',
-             make_maps=True,
-             make_scnd=True,
-             map_img_type='svg',
-             overwrite = True)
+        test_len=5,
+        lang_in='en',
+        make_maps=True,
+        make_scnd=True,
+        map_img_type='svg',
+        overwrite=True,
+    )
+    generate(
+        test_len=5,
+        lang_in='np',
+        make_maps=True,
+        make_scnd=True,
+        map_img_type='svg',
+        overwrite=True,
+    )

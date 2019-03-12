@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
 import PrimaryButton from '#rsca/Button/PrimaryButton';
 import iconNames from '#rsk/iconNames';
 
-import { FileLinks } from '#components/FileLink';
+import { GeneratorExportsDownload } from '#components/FileLink';
 import TaskStatus from '#components/TaskStatus';
 
 import {
@@ -12,6 +14,13 @@ import {
     RequestClient,
 } from '#request';
 
+import {
+    setGeneratorActionGP,
+} from '#actionCreators';
+import {
+    generatorSelectorGP,
+    exportStatusSelectorGP,
+} from '#selectors';
 import requests from './requests';
 // import styles from './styles.scss';
 
@@ -19,27 +28,17 @@ const propTypes = {
     /* eslint-disable react/forbid-prop-types */
     requests: PropTypes.object.isRequired,
     generator: PropTypes.object.isRequired,
-    exportState: PropTypes.object,
-    exportStatus: PropTypes.string,
     /* eslint-enable react/forbid-prop-types */
-    updateGenerator: PropTypes.func.isRequired,
-    setState: PropTypes.func.isRequired,
-    setStatus: PropTypes.func.isRequired,
+    exportStatus: PropTypes.string,
     onPrev: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
-    exportState: {},
     exportStatus: undefined,
 };
 const emptyObject = {};
 const emptyList = [];
 
-const fileKeySelector = file => file.id;
-const fileUrlSelector = file => file.file;
-
-@RequestCoordinator
-@RequestClient(requests)
 class ExportPage extends React.PureComponent {
     static propTypes = propTypes;
     static defaultProps = defaultProps;
@@ -47,12 +46,16 @@ class ExportPage extends React.PureComponent {
     componentDidMount() {
         const {
             requests: {
-                generatorTriggerExport,
+                generatorGet,
             },
+            generator,
             exportStatus,
         } = this.props;
-        if (!exportStatus) {
-            generatorTriggerExport.do();
+        if (exportStatus === 'failed') {
+            generatorGet.do({ getExportState: true });
+        } else if (!generator.exports) {
+            // NOTE: This is for debugging only
+            generatorGet.do();
         }
     }
 
@@ -60,41 +63,56 @@ class ExportPage extends React.PureComponent {
         const {
             generator: {
                 exports = emptyList,
+                data = emptyObject,
             } = emptyObject,
-            exportState,
             exportStatus,
             onPrev,
         } = this.props;
 
-        if (exportStatus) {
-            if (exportStatus === 'success') {
-                return (
-                    <div>
-                        <PrimaryButton
-                            className={iconNames.backward}
-                            onClick={onPrev}
-                        >
-                                Go Back
-                        </PrimaryButton>
-                        <FileLinks
-                            urls={exports}
-                            keySelector={fileKeySelector}
-                            urlSelector={fileUrlSelector}
-                        />
-                    </div>
-                );
-            }
-            return 'Failed';
+        if (exportStatus === 'failed') {
+            return (
+                <div>
+                    <h1>Failed to generate PDFs</h1>
+                    <h3>Server Error:</h3>
+                    <code>
+                        {data.errors}
+                    </code>
+                    <h3>Final Status:</h3>
+                    <TaskStatus
+                        progress={data.progress}
+                    />
+                </div>
+            );
         }
 
         return (
             <div>
-                <TaskStatus
-                    {...exportState}
+                <PrimaryButton
+                    className={iconNames.backward}
+                    onClick={onPrev}
+                >
+                        Go Back
+                </PrimaryButton>
+                <GeneratorExportsDownload
+                    exports={exports}
                 />
             </div>
         );
     }
 }
 
-export default ExportPage;
+
+const mapStateToProps = state => ({
+    generator: generatorSelectorGP(state),
+    exportStatus: exportStatusSelectorGP(state),
+});
+
+const mapDispatchToProps = dispatch => ({
+    setGenerator: params => dispatch(setGeneratorActionGP(params)),
+});
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    RequestCoordinator,
+    RequestClient(requests),
+)(ExportPage);

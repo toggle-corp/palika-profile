@@ -18,6 +18,7 @@ def generate(
         self,
         cc,
         file,
+        selected_palika_codes,
         skip=[],
         lang_in='en',
         test_len=None,
@@ -32,17 +33,17 @@ def generate(
     }
     job_palika_progress = {}
 
-    def update_meta(data):
+    def update_meta(state):
         if self:
-            self.job_meta.update(data)
+            self.job_meta.update(state)
             self.update_state(meta=self.job_meta)
 
-    def update_progress(data):
-        job_progress['items'].update(data)
+    def update_progress(state):
+        job_progress['items'].update(state)
         update_meta({'progress': job_progress})
 
-    def update_palika_progress(data):
-        job_palika_progress.update(data)
+    def update_palika_progress(state):
+        job_palika_progress.update(state)
         update_progress(job_palika_progress)
 
     set_lang(lang_in)
@@ -100,7 +101,9 @@ def generate(
     titles.process()
     update_progress({'titles': 100})
 
-    palika_codes = data.sht.index[:test_len] if test_len else data.sht.index
+    palika_codes = selected_palika_codes or (
+        data.sht.index[:test_len] if test_len else data.sht.index
+    )
 
     if make_maps:
         gen_maps(list(palika_codes), map_img_type)
@@ -129,7 +132,7 @@ def generate(
             pdf_draft.draw(Page2(cur_rep.data, lang_in))
 
         pdf_draft.surface.__exit__()
-        pdf_files.append(pdf_file_path)
+        pdf_files.append([v, pdf_file_path])
         completed += 1
         update_palika_progress({
             'pdf': {
