@@ -1,0 +1,13 @@
+@import '~base-scss/base';
+
+.bottom-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .button {
+        padding: $spacing-small $spacing-medium;
+        text-transform: capitalize;
+        font-size: $font-size-medium-alt;
+    }
+}

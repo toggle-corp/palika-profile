@@ -33,7 +33,7 @@ def _generate_pdf(self, cc, generator, selected_palika_codes):
         generator.file,
         selected_palika_codes,
         lang_in='en',
-        make_maps=False,
+        make_maps=True,
         make_scnd=True,
         map_img_type='svg',
         overwrite=True,

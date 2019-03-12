@@ -205,7 +205,10 @@ def get_faq(faq_num, faq_sht, meta_sht):
     }
 
 
-def gen_maps(pka_list, img_type):
+def gen_maps(
+        pka_list, img_type,
+        wards_uri=None, palika_uri=None, dists_uri=None,
+):
     # TODO: error, check if the provided palika codes are actually in our data
     # TODO: delete once finished running
 
@@ -217,9 +220,9 @@ def gen_maps(pka_list, img_type):
 
     atlas = at(
         data_uri=get_resource_abspath('data/profile_data_structure_template.xlsx'), # noqa
-        wards_uri=get_resource_abspath('mapfiles/hrrp_shapes/jsons/merge.json'),
-        palika_uri=get_resource_abspath('mapfiles/hrrp_shapes/jsons/GaPaNaPa_hrrp.json'), # noqa
-        dists_uri=get_resource_abspath('mapfiles/hrrp_shapes/jsons/Districts_hrrp.json'), # noqa
+        wards_uri=wards_uri or get_resource_abspath('mapfiles/hrrp_shapes/jsons/merge.json'), # noqa
+        palika_uri=palika_uri or get_resource_abspath('mapfiles/hrrp_shapes/jsons/GaPaNaPa_hrrp.json'), # noqa
+        dists_uri=dists_uri or get_resource_abspath('mapfiles/hrrp_shapes/jsons/Districts_hrrp.json'), # noqa
 
         dists_syle=get_resource_abspath('mapfiles/styles/dist_style.qml'),
         pka_style=pka_style_lang,
@@ -239,6 +242,7 @@ def gen_maps(pka_list, img_type):
     atlas.make_maps()
     atlas.exit()
     del(atlas)
+
 
 def get_text_width(text, fontsize, font, font_weight):
     """get width of text"""

@@ -40,7 +40,7 @@ const fileUrlSelector = file => file.file;
 export class GeneratorExportsDownload extends React.PureComponent {
     static propTypes = {
         // eslint-disable-next-line react/forbid-prop-types
-        exports: PropTypes.object,
+        exports: PropTypes.array,
     };
     static defaultProps = {
         exports: undefined,

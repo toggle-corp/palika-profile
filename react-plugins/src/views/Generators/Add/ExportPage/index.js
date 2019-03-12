@@ -1,118 +1,261 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import memoize from 'memoize-one';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
+import Faram, {
+    requiredCondition,
+} from '@togglecorp/faram';
 import PrimaryButton from '#rsca/Button/PrimaryButton';
-import iconNames from '#rsk/iconNames';
+import MultiSelectInput from '#rsci/MultiSelectInput';
 
-import { GeneratorExportsDownload } from '#components/FileLink';
-import TaskStatus from '#components/TaskStatus';
+import {
+    generatorSelectorGP,
+    generatorErrorListSelectorGP,
+    generatorProvinceListSelectorGP,
+
+    exportDistrictListSelectorGP,
+    exportPalikaListSelectorGP,
+    exportFaramSelectorGP,
+    exportStateSelectorGP,
+} from '#selectors';
+import {
+    setGeneratorActionGP,
+    setExportFaramActionGP,
+    setGeneratorStatusActionGP,
+    setGeneratorStateActionGP,
+} from '#actionCreators';
 
 import {
     RequestCoordinator,
     RequestClient,
 } from '#request';
 
-import {
-    setGeneratorActionGP,
-} from '#actionCreators';
-import {
-    generatorSelectorGP,
-    exportStatusSelectorGP,
-} from '#selectors';
+
+import TaskStatus from '#components/TaskStatus';
+import ValidatorPreview from '../ValidatorPreview';
+
 import requests from './requests';
-// import styles from './styles.scss';
+import styles from './styles.scss';
 
 const propTypes = {
     /* eslint-disable react/forbid-prop-types */
     requests: PropTypes.object.isRequired,
     generator: PropTypes.object.isRequired,
+    errors: PropTypes.array.isRequired,
+    provinces: PropTypes.array.isRequired,
+    districts: PropTypes.array.isRequired,
+    palikaCodes: PropTypes.array.isRequired,
+    exportFaram: PropTypes.object.isRequired,
+    exportState: PropTypes.object.isRequired,
     /* eslint-enable react/forbid-prop-types */
-    exportStatus: PropTypes.string,
-    onPrev: PropTypes.func.isRequired,
+    setExportFaram: PropTypes.func.isRequired,
+    setGeneratorStatus: PropTypes.func.isRequired,
+    setGeneratorState: PropTypes.func.isRequired,
+    onNext: PropTypes.func.isRequired,
 };
 
-const defaultProps = {
-    exportStatus: undefined,
-};
+const defaultProps = {};
+
 const emptyObject = {};
-const emptyList = [];
 
-class ExportPage extends React.PureComponent {
+const KeySelector = ele => ele.id;
+const labelSelector = (ele = emptyObject) => ele.title;
+const palikaKeySelector = palika => palika.code;
+const palikaLabelSelector = labelSelector;
+
+@RequestCoordinator
+@RequestClient(requests)
+class TriggerPage extends React.PureComponent {
     static propTypes = propTypes;
     static defaultProps = defaultProps;
+    static schema = {
+        fields: {
+            selectedProvince: [],
+            selectedDistrict: [],
+            selectedPalikaCodes: [requiredCondition],
+        },
+    }
 
     componentDidMount() {
+        // NOTE: This is for debugging only
         const {
-            requests: {
-                generatorGet,
-            },
-            generator,
-            exportStatus,
+            generator: { id },
+            requests: { generatorGet },
         } = this.props;
-        if (exportStatus === 'failed') {
-            generatorGet.do({ getExportState: true });
-        } else if (!generator.exports) {
-            // NOTE: This is for debugging only
-            generatorGet.do();
+        if (id) {
+            generatorGet.do({ pullMeta: true });
         }
     }
 
+    getValidatedDistrictId = memoize(
+        (selectedDistricts, districts) => {
+            if (selectedDistricts && selectedDistricts.length) {
+                return selectedDistricts.filter(
+                    districtId => districts.findIndex(
+                        district => district.id === districtId,
+                    ) !== -1,
+                );
+            }
+            return [];
+        },
+    )
+
+    getValidatedPalikaCodes = memoize(
+        (selectedPalikaCodes, palikaCodes) => {
+            if (selectedPalikaCodes && selectedPalikaCodes.length) {
+                return selectedPalikaCodes.filter(
+                    palikaCode => palikaCodes.findIndex(
+                        pc => pc.code === palikaCode,
+                    ) !== -1,
+                );
+            }
+            return [];
+        },
+    )
+
+    handleFaramChange = (faramValues, faramErrors) => {
+        const {
+            setExportFaram,
+        } = this.props;
+        setExportFaram({
+            faramValues,
+            faramErrors,
+            // pristine: false,
+        });
+    };
+
+    handleFaramFailure = (faramErrors) => {
+        const { setExportFaram } = this.props;
+        setExportFaram({ faramErrors });
+    };
+
+    handleFaramSuccess = (_, { selectedPalikaCodes }) => {
+        const {
+            requests: {
+                generatorTriggerExport,
+            },
+        } = this.props;
+        generatorTriggerExport.do({ selectedPalikaCodes });
+    };
+
     render() {
         const {
-            generator: {
-                exports = emptyList,
-                data = emptyObject,
-            } = emptyObject,
-            exportStatus,
-            onPrev,
+            requests: {
+                generatorTriggerExport,
+                generatorTriggerExportPoll,
+            },
+            errors,
+            provinces,
+            districts,
+            palikaCodes,
+
+            exportFaram,
+            exportState,
         } = this.props;
 
-        if (exportStatus === 'failed') {
-            return (
-                <div>
-                    <h1>Failed to generate PDFs</h1>
-                    <h3>Server Error:</h3>
-                    <code>
-                        {data.errors}
-                    </code>
-                    <h3>Final Status:</h3>
-                    <TaskStatus
-                        progress={data.progress}
-                    />
-                </div>
-            );
-        }
+        const {
+            faramValues,
+            faramErrors,
+            // pristine,
+        } = exportFaram;
+
+        const {
+            selectedDistrict,
+            selectedPalikaCodes,
+        } = faramValues;
+
+        const validatedFaramValues = {
+            ...faramValues,
+            selectedDistrict: this.getValidatedDistrictId(selectedDistrict, districts),
+            selectedPalikaCodes: this.getValidatedPalikaCodes(selectedPalikaCodes, palikaCodes),
+        };
+        const pending = false;
+        const exportPending = (
+            generatorTriggerExportPoll.pending || generatorTriggerExport.pending
+        );
 
         return (
             <div>
-                <PrimaryButton
-                    className={iconNames.backward}
-                    onClick={onPrev}
-                >
-                        Go Back
-                </PrimaryButton>
-                <GeneratorExportsDownload
-                    exports={exports}
+                <div className={styles.bottomContainer}>
+                    <Faram
+                        className={styles.form}
+                        onValidationSuccess={this.handleFaramSuccess}
+                        onValidationFailure={this.handleFaramFailure}
+                        onChange={this.handleFaramChange}
+                        schema={TriggerPage.schema}
+                        value={validatedFaramValues}
+                        error={faramErrors}
+                    >
+                        <MultiSelectInput
+                            faramElementName="selectedProvince"
+                            keySelector={KeySelector}
+                            labelSelector={labelSelector}
+                            options={provinces}
+                            showHintAndError={false}
+                            placeholder="Select Province"
+                        />
+                        <MultiSelectInput
+                            faramElementName="selectedDistrict"
+                            keySelector={KeySelector}
+                            labelSelector={labelSelector}
+                            options={districts}
+                            showHintAndError={false}
+                            placeholder="Select District"
+                        />
+                        <MultiSelectInput
+                            faramElementName="selectedPalikaCodes"
+                            keySelector={palikaKeySelector}
+                            labelSelector={palikaLabelSelector}
+                            options={palikaCodes}
+                            showHintAndError={false}
+                            placeholder="Select Palikas"
+                        />
+                        <PrimaryButton
+                            className={styles.button}
+                            pending={pending}
+                            type="submit"
+                        >
+                            Export
+                        </PrimaryButton>
+                    </Faram>
+                </div>
+                {
+                    exportPending && (
+                        <TaskStatus
+                            {...exportState}
+                        />
+                    )
+                }
+                <ValidatorPreview
+                    errors={errors}
                 />
             </div>
         );
     }
 }
 
-
 const mapStateToProps = state => ({
     generator: generatorSelectorGP(state),
-    exportStatus: exportStatusSelectorGP(state),
+    errors: generatorErrorListSelectorGP(state),
+    provinces: generatorProvinceListSelectorGP(state),
+
+    districts: exportDistrictListSelectorGP(state),
+    palikaCodes: exportPalikaListSelectorGP(state),
+    exportFaram: exportFaramSelectorGP(state),
+    exportState: exportStateSelectorGP(state),
 });
 
 const mapDispatchToProps = dispatch => ({
     setGenerator: params => dispatch(setGeneratorActionGP(params)),
+    setExportFaram: params => dispatch(setExportFaramActionGP(params)),
+    setGeneratorStatus: params => dispatch(setGeneratorStatusActionGP(params)),
+    setGeneratorState: params => dispatch(setGeneratorStateActionGP(params)),
 });
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     RequestCoordinator,
     RequestClient(requests),
-)(ExportPage);
+)(TriggerPage);

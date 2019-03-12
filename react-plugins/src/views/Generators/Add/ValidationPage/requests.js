@@ -1,30 +1,6 @@
 import { requestMethods } from '#request';
 
 const requests = {
-    generatorAdd: {
-        method: requestMethods.POST,
-        url: '/generators/',
-        body: ({ params: { data } }) => data,
-        extras: { isFormData: true },
-        onSuccess: ({
-            response, props: {
-                setGenerator,
-                requests: { generatorTriggerValidator },
-            },
-        }) => {
-            setGenerator({ generator: response });
-            generatorTriggerValidator.do({ id: response.id });
-        },
-        onFailure: ({ params: { setState }, error: { faramErrors } }) => setState({ faramErrors }),
-        onFatal: ({ params: { setState } }) => (
-            setState({
-                faramErrors: {
-                    $internal: 'Something bad happened. Try again or contact admin',
-                },
-            })
-        ),
-    },
-
     generatorGet: {
         method: requestMethods.GET,
         url: ({

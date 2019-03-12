@@ -37,7 +37,7 @@ const propTypes = {
 
 const defaultProps = {};
 
-class FormPage extends React.PureComponent {
+class UploadPage extends React.PureComponent {
     static propTypes = propTypes;
     static defaultProps = defaultProps;
     static schema = {
@@ -110,22 +110,13 @@ class FormPage extends React.PureComponent {
             pristine,
         } = this.state;
 
-        const metaExtractionPending = (
-            generatorTriggerValidatorPoll.pending || generatorTriggerValidator.pending
-            || generatorGet.pending
-        );
-
-        if (metaExtractionPending) {
-            return 'Validating Document';
-        }
-
         return (
             <Faram
                 className={styles.form}
                 onValidationSuccess={this.handleFaramSuccess}
                 onValidationFailure={this.handleFaramFailure}
                 onChange={this.handleFaramChange}
-                schema={FormPage.schema}
+                schema={UploadPage.schema}
                 value={faramValues}
                 error={faramErrors}
             >
@@ -166,4 +157,4 @@ export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     RequestCoordinator,
     RequestClient(requests),
-)(FormPage);
+)(UploadPage);

@@ -106,7 +106,10 @@ def generate(
     )
 
     if make_maps:
-        gen_maps(list(palika_codes), map_img_type)
+        gen_maps(
+            list(palika_codes), map_img_type,
+            wards_uri=None, palika_uri=None, dists_uri=None,
+        )
         update_progress({'maps': 100})
 
     total_palika = len(palika_codes)
