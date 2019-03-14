@@ -221,7 +221,7 @@ REACT_ENDPOINT = os.environ.get(
 )
 
 
-from django.urls import reverse_lazy # noqa
+from django.urls import reverse_lazy # noqa E402
 
 LOGIN_URL = '/admin/login/'
 LOGIN_REDIRECT_URL = reverse_lazy('generator:list')

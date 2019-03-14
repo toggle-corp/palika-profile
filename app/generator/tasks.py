@@ -7,6 +7,7 @@ from django.core.files import File
 
 from config.celery import app
 
+from geo.models import get_map_params_for_generation
 from .models import (
     Generator,
     Export,
@@ -26,12 +27,15 @@ def _generate_pdf(self, cc, generator, selected_palika_codes):
     # Delete previous exports
     generator.exports.all().delete()
 
+    map_params = get_map_params_for_generation()
+
     # Generate new exports
     pdf_files, errors = pdf_generator.generate(
         self,
         cc,
         generator.file,
         selected_palika_codes,
+        map_params,
         lang_in='en',
         make_maps=True,
         make_scnd=True,

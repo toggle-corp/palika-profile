@@ -1,1 +1,1 @@
-from .page import *  # noqa
+from .page import *  # noqa F403

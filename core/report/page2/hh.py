@@ -19,7 +19,7 @@ NUM_PADDING = 555*.02
 
 def _rect_size(hh_cnt, font_size, font, font_weight, sum_total):
     """if overlap, return smallest possible width"""
-    # TODO: get actual width as opposed to manually specifying incase it changes # noqa
+    # TODO: get actual width as opposed to manually specifying incase it changes # noqa E501
     rel_w = TOTAL_W_BAR * (hh_cnt / sum_total)
     actual_w = get_text_width(
         fmt_num(hh_cnt), font_size, font, font_weight,

@@ -28,7 +28,7 @@ def Footer(data):
 
     return Column(
         width='100%',
-        # padding=Rect([10, 16, 6, 16]),
+        padding=Rect([10, 16, 6, 16]),
     ).add(
         *faq_blocks,
     )

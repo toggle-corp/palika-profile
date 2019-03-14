@@ -3,7 +3,7 @@
         "model": "geo.GeoArea",
         "pk": 1,
         "fields": {
-            "file": "core/resources/mapfiles/hrrp_shapes/wards/merge.shp",
+            "file": "core/resources/mapfiles/hrrp_shapes/jsons/merge.json",
             "geo_type": "ward"
         }
     },
@@ -11,7 +11,7 @@
         "model": "geo.GeoArea",
         "pk": 2,
         "fields": {
-            "file": "core/resources/mapfiles/hrrp_shapes/palika/GaPaNaPa_hrrp.shp",
+            "file": "core/resources/mapfiles/hrrp_shapes/jsons/GaPaNaPa_hrrp.json",
             "geo_type": "palika"
         }
     },
@@ -19,26 +19,27 @@
         "model": "geo.GeoArea",
         "pk": 3,
         "fields": {
-            "file": "core/resources/mapfiles/hrrp_shapes/districts/Districts_hrrp.shp",
+            "file": "core/resources/mapfiles/hrrp_shapes/jsons/Districts_hrrp.json",
             "geo_type": "district"
         }
     },
+
     {
         "model": "geo.GeoStyle",
         "pk": 1,
         "fields": {
             "title": "District styling",
             "file": "core/resources/mapfiles/styles/dist_style.qml",
-            "geoarea": 3
+            "style_type": "district_style"
         }
     },
     {
         "model": "geo.GeoStyle",
         "pk": 2,
         "fields": {
-            "title": "Palika styling (english)",
+            "title": "Palika styling (English)",
             "file": "core/resources/mapfiles/styles/palika_style_en.qml",
-            "geoarea": 2
+            "style_type": "palika_en_style"
         }
     },
     {
@@ -47,7 +48,7 @@
         "fields": {
             "title": "Palika styling (Nepali)",
             "file": "core/resources/mapfiles/styles/palika_style_np.qml",
-            "geoarea": 2
+            "style_type": "palika_np_style"
         }
     },
     {
@@ -56,7 +57,7 @@
         "fields": {
             "title": "Hidden palika styling",
             "file": "core/resources/mapfiles/styles/palika_hide_style.qml",
-            "geoarea": 2
+            "style_type": "palika_hide_style"
         }
     },
     {
@@ -65,7 +66,7 @@
         "fields": {
             "title": "Ward Styling",
             "file": "core/resources/mapfiles/styles/ward_style.qml",
-            "geoarea": 1
+            "style_type": "ward_style"
         }
     },
     {
@@ -73,7 +74,8 @@
         "pk": 6,
         "fields": {
             "title": "Atlas Layout",
-            "file": "core/resources/mapfiles/styles/atlas_layout.qpt"
+            "file": "core/resources/mapfiles/styles/atlas_layout.qpt",
+            "style_type": "atlas_style"
         }
     }
 ]
