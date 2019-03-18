@@ -111,34 +111,38 @@ class UploadPage extends React.PureComponent {
         } = this.state;
 
         return (
-            <Faram
-                className={styles.form}
-                onValidationSuccess={this.handleFaramSuccess}
-                onValidationFailure={this.handleFaramFailure}
-                onChange={this.handleFaramChange}
-                schema={UploadPage.schema}
-                value={faramValues}
-                error={faramErrors}
-            >
-                <FileInput
-                    disabled={pending}
-                    faramElementName="file"
-                    error={faramErrors.file}
-                    accept=".xlsx"
+            <div className={styles.container}>
+                <h2>Upload your file </h2>
+                <Faram
+                    className={styles.form}
+                    onValidationSuccess={this.handleFaramSuccess}
+                    onValidationFailure={this.handleFaramFailure}
+                    onChange={this.handleFaramChange}
+                    schema={UploadPage.schema}
+                    value={faramValues}
+                    error={faramErrors}
                 >
-                    {'Click to Select File'}
-                </FileInput>
-                <div className={styles.bottomContainer}>
-                    <PrimaryButton
-                        className={styles.button}
-                        type="submit"
-                        pending={pending}
-                        disabled={pristine}
+                    <FileInput
+                        className={styles.fileLoader}
+                        disabled={pending}
+                        faramElementName="file"
+                        error={faramErrors.file}
+                        accept=".xlsx"
                     >
-                            Submit
-                    </PrimaryButton>
-                </div>
-            </Faram>
+                        {'Click to Upload your file here'}
+                    </FileInput>
+                    <div className={styles.bottomContainer}>
+                        <PrimaryButton
+                            className={styles.button}
+                            type="submit"
+                            pending={pending}
+                            disabled={pristine}
+                        >
+                                Submit
+                        </PrimaryButton>
+                    </div>
+                </Faram>
+            </div>
         );
     }
 }

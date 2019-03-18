@@ -178,7 +178,7 @@ class TriggerPage extends React.PureComponent {
 
         return (
             <div>
-                <div className={styles.bottomContainer}>
+                <div className={styles.formContainer}>
                     <Faram
                         className={styles.form}
                         onValidationSuccess={this.handleFaramSuccess}
@@ -188,30 +188,33 @@ class TriggerPage extends React.PureComponent {
                         value={validatedFaramValues}
                         error={faramErrors}
                     >
-                        <MultiSelectInput
-                            faramElementName="selectedProvince"
-                            keySelector={KeySelector}
-                            labelSelector={labelSelector}
-                            options={provinces}
-                            showHintAndError={false}
-                            placeholder="Select Province"
-                        />
-                        <MultiSelectInput
-                            faramElementName="selectedDistrict"
-                            keySelector={KeySelector}
-                            labelSelector={labelSelector}
-                            options={districts}
-                            showHintAndError={false}
-                            placeholder="Select District"
-                        />
-                        <MultiSelectInput
-                            faramElementName="selectedPalikaCodes"
-                            keySelector={palikaKeySelector}
-                            labelSelector={palikaLabelSelector}
-                            options={palikaCodes}
-                            showHintAndError={false}
-                            placeholder="Select Palikas"
-                        />
+                        <h2> Select Admin Areas </h2>
+                        <div className={styles.selectContainer}>
+                            <MultiSelectInput
+                                faramElementName="selectedProvince"
+                                keySelector={KeySelector}
+                                labelSelector={labelSelector}
+                                options={provinces}
+                                showHintAndError={false}
+                                placeholder="Select Province"
+                            />
+                            <MultiSelectInput
+                                faramElementName="selectedDistrict"
+                                keySelector={KeySelector}
+                                labelSelector={labelSelector}
+                                options={districts}
+                                showHintAndError={false}
+                                placeholder="Select District"
+                            />
+                            <MultiSelectInput
+                                faramElementName="selectedPalikaCodes"
+                                keySelector={palikaKeySelector}
+                                labelSelector={palikaLabelSelector}
+                                options={palikaCodes}
+                                showHintAndError={false}
+                                placeholder="Select Palikas"
+                            />
+                        </div>
                         <PrimaryButton
                             className={styles.button}
                             pending={pending}
@@ -228,9 +231,12 @@ class TriggerPage extends React.PureComponent {
                         />
                     )
                 }
-                <ValidatorPreview
-                    errors={errors}
-                />
+                <div className={styles.validatorContainer}>
+                    <h2>Status</h2>
+                    <ValidatorPreview
+                        errors={errors}
+                    />
+                </div>
             </div>
         );
     }

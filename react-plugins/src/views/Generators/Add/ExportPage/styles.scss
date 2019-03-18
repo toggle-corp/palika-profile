@@ -1,13 +1,34 @@
 @import '~base-scss/base';
 
-.bottom-container {
+.form-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    .button {
-        padding: $spacing-small $spacing-medium;
-        text-transform: capitalize;
-        font-size: $font-size-medium-alt;
+    .form {
+        .select-container {
+            display: flex;
+            margin: 20px 0;
+            width: 800px;
+
+            >* {
+                margin-right: 40px;
+            }
+        }
+
+        .button {
+            padding: $spacing-small $spacing-medium;
+            text-transform: capitalize;
+            font-size: $font-size-medium-alt;
+        }
+    }
+}
+
+.validator-container {
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+        margin: 20px 0;
     }
 }

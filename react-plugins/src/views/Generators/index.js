@@ -56,12 +56,15 @@ class Generator extends React.PureComponent {
                 >
                         Add Generator
                 </PrimaryButton>
-                <Table
-                    className={styles.table}
-                    data={generators}
-                    headers={headers}
-                    keySelector={keySelector}
-                />
+                <h2> Recent Exports </h2>
+                <div className={styles.container}>
+                    <Table
+                        className={styles.table}
+                        data={generators}
+                        headers={headers}
+                        keySelector={keySelector}
+                    />
+                </div>
             </div>
         );
     }

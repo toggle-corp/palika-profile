@@ -1,9 +1,16 @@
 @import '~base-scss/base';
 
-.table {
-    border: $width-separator-thin solid $color-separator;
+button {
+    margin: 12px 0;
+}
+.container {
+    height: 70vh;
+    .table {
+        margin-top: 12px;
+        border: $width-separator-thin solid $color-separator;
 
-    span {
-        color: $color-text-label;
+        span {
+            color: $color-text-label;
+        }
     }
 }
