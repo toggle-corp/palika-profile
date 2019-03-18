@@ -1,32 +1,53 @@
 @import '~base-scss/base';
 
-.form-container {
+.top {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    .form-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
 
-    .form {
-        .select-container {
-            display: flex;
-            margin: 20px 0;
-            width: 800px;
+        .form {
+            .select-container {
+                display: flex;
+                margin: 20px 0;
+                width: 800px;
 
-            >* {
-                margin-right: 40px;
+                >* {
+                    margin-right: 40px;
+                }
+            }
+
+            .button {
+                padding: $spacing-small $spacing-medium;
+                text-transform: capitalize;
+            }
+        }
+    }
+
+    .export-status {
+        text-transform: uppercase;
+        font-size: $font-size-medium;
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        >div {
+            margin: 4px 0;
+
+            >span {
+                color: $color-primary;
             }
         }
 
-        .button {
-            padding: $spacing-small $spacing-medium;
-            text-transform: capitalize;
-            font-size: $font-size-medium-alt;
-        }
     }
-}
+ }
 
 .validator-container {
     display: flex;
     flex-direction: column;
+    margin: 20px 0;
 
     h2 {
         margin: 20px 0;

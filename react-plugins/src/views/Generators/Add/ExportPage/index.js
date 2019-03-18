@@ -9,6 +9,7 @@ import Faram, {
 } from '@togglecorp/faram';
 import PrimaryButton from '#rsca/Button/PrimaryButton';
 import MultiSelectInput from '#rsci/MultiSelectInput';
+import iconNames from '#rsk/iconNames';
 
 import {
     generatorSelectorGP,
@@ -224,61 +225,67 @@ class TriggerPage extends React.PureComponent {
 
         return (
             <div>
-                <div className={styles.formContainer}>
-                    <Faram
-                        className={styles.form}
-                        onValidationSuccess={this.handleFaramSuccess}
-                        onValidationFailure={this.handleFaramFailure}
-                        onChange={this.handleFaramChange}
-                        schema={TriggerPage.schema}
-                        value={validatedFaramValues}
-                        error={faramErrors}
-                    >
-                        <h2> Select Admin Areas </h2>
-                        <div className={styles.selectContainer}>
-                            <MultiSelectInput
-                                faramElementName="selectedProvince"
-                                keySelector={KeySelector}
-                                labelSelector={labelSelector}
-                                options={provinces}
-                                showHintAndError={false}
-                                placeholder="Select Province"
-                            />
-                            <MultiSelectInput
-                                faramElementName="selectedDistrict"
-                                keySelector={KeySelector}
-                                labelSelector={labelSelector}
-                                options={filteredDistricts}
-                                showHintAndError={false}
-                                placeholder="Select District"
-                            />
-                            <MultiSelectInput
-                                faramElementName="selectedPalikaCodes"
-                                keySelector={palikaKeySelector}
-                                labelSelector={palikaLabelSelector}
-                                options={filteredPalikaCodeList}
-                                showHintAndError={false}
-                                placeholder="Select Palikas"
-                            />
-                        </div>
-                        <PrimaryButton
-                            className={styles.button}
-                            pending={pending}
-                            type="submit"
+                <div className={styles.top}>
+                    <div className={styles.formContainer}>
+                        <Faram
+                            className={styles.form}
+                            onValidationSuccess={this.handleFaramSuccess}
+                            onValidationFailure={this.handleFaramFailure}
+                            onChange={this.handleFaramChange}
+                            schema={TriggerPage.schema}
+                            value={validatedFaramValues}
+                            error={faramErrors}
                         >
-                            Export
-                        </PrimaryButton>
-                    </Faram>
+                            <h2> Select Admin Areas </h2>
+                            <div className={styles.selectContainer}>
+                                <MultiSelectInput
+                                    faramElementName="selectedProvince"
+                                    keySelector={KeySelector}
+                                    labelSelector={labelSelector}
+                                    options={provinces}
+                                    showHintAndError={false}
+                                    placeholder="Select Province"
+                                />
+                                <MultiSelectInput
+                                    faramElementName="selectedDistrict"
+                                    keySelector={KeySelector}
+                                    labelSelector={labelSelector}
+                                    options={filteredDistricts}
+                                    showHintAndError={false}
+                                    placeholder="Select District"
+                                />
+                                <MultiSelectInput
+                                    faramElementName="selectedPalikaCodes"
+                                    keySelector={palikaKeySelector}
+                                    labelSelector={palikaLabelSelector}
+                                    options={filteredPalikaCodeList}
+                                    showHintAndError={false}
+                                    placeholder="Select Palikas"
+                                />
+                            </div>
+                            <PrimaryButton
+                                className={styles.button}
+                                pending={pending}
+                                type="submit"
+                                iconName={iconNames.textDoc}
+                            >
+                                Export
+                            </PrimaryButton>
+                        </Faram>
+                    </div>
+                    {
+                        exportPending && (
+                            <div className={styles.exportStatus}>
+                                <h2>Export Status</h2>
+                                <TaskStatus
+                                    {...exportState}
+                                />
+                            </div>
+                        )
+                    }
                 </div>
-                {
-                    exportPending && (
-                        <TaskStatus
-                            {...exportState}
-                        />
-                    )
-                }
                 <div className={styles.validatorContainer}>
-                    <h2>Status</h2>
+                    <h2>Validation Preview</h2>
                     <ValidatorPreview
                         errors={errors}
                     />

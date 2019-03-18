@@ -22,7 +22,7 @@ import {
     exportStatusSelectorGP,
 } from '#selectors';
 import requests from './requests';
-// import styles from './styles.scss';
+import styles from './styles.scss';
 
 const propTypes = {
     /* eslint-disable react/forbid-prop-types */
@@ -86,16 +86,25 @@ class ExportPage extends React.PureComponent {
         }
 
         return (
-            <div>
-                <PrimaryButton
-                    className={iconNames.backward}
-                    onClick={onPrev}
-                >
-                        Go Back
-                </PrimaryButton>
-                <GeneratorExportsDownload
-                    exports={exports}
-                />
+            <div className={styles.container}>
+                <div className={styles.left}>
+                    <div className={styles.downImage}>
+                        Download files
+                    </div>
+                    <GeneratorExportsDownload
+                        exports={exports}
+                    />
+                </div>
+                <div className={styles.right}>
+                    <div className={styles.backImage}>
+                        Click here to go back
+                    </div>
+                    <PrimaryButton
+                        onClick={onPrev}
+                    >
+                            Back
+                    </PrimaryButton>
+                </div>
             </div>
         );
     }
