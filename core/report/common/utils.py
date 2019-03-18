@@ -51,7 +51,7 @@ def fmt_num(val):
 
     if get_lang() == 'np':
         # a bit hacky
-        v_str = swap_nep_chars(str(val))
+        v_str = swap_nep_chars(str(int(val)))
         COMM_PT = 2
         skip = ''
 

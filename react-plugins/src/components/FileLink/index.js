@@ -40,19 +40,23 @@ const fileUrlSelector = file => file.file;
 export class GeneratorExportsDownload extends React.PureComponent {
     static propTypes = {
         // eslint-disable-next-line react/forbid-prop-types
-        exports: PropTypes.array,
+        generator: PropTypes.object,
     };
     static defaultProps = {
-        exports: undefined,
+        generator: {},
     };
 
-    getDownloadAsZipUrl = memoize((exports) => {
-        const exportsId = exports.map(ex => ex.id);
-        return `/download-palika-documents?${P({ exportsId })}`;
-    })
+    getDownloadAsZipUrl = memoize(id => (
+        `/download-palika-documents?${P({ generatorId: id })}`
+    ))
 
     render() {
-        const { exports } = this.props;
+        const {
+            generator: {
+                id,
+                exports,
+            },
+        } = this.props;
         if (exports && exports.length) {
             return (
                 <div>
@@ -63,7 +67,7 @@ export class GeneratorExportsDownload extends React.PureComponent {
                         urlSelector={fileUrlSelector}
                     />
                     <a
-                        href={this.getDownloadAsZipUrl(exports)}
+                        href={this.getDownloadAsZipUrl(id)}
                         target="_blank"
                         rel="noopener noreferrer"
                     >

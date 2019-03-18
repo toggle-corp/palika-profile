@@ -4,7 +4,6 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 
 import PrimaryButton from '#rsca/Button/PrimaryButton';
-import iconNames from '#rsk/iconNames';
 
 import { GeneratorExportsDownload } from '#components/FileLink';
 import TaskStatus from '#components/TaskStatus';
@@ -37,7 +36,6 @@ const defaultProps = {
     exportStatus: undefined,
 };
 const emptyObject = {};
-const emptyList = [];
 
 class ExportPage extends React.PureComponent {
     static propTypes = propTypes;
@@ -61,13 +59,12 @@ class ExportPage extends React.PureComponent {
 
     render() {
         const {
-            generator: {
-                exports = emptyList,
-                data = emptyObject,
-            } = emptyObject,
+            generator,
             exportStatus,
             onPrev,
         } = this.props;
+
+        const { data = emptyObject } = generator;
 
         if (exportStatus === 'failed') {
             return (
@@ -92,7 +89,7 @@ class ExportPage extends React.PureComponent {
                         Download files
                     </div>
                     <GeneratorExportsDownload
-                        exports={exports}
+                        generator={generator}
                     />
                 </div>
                 <div className={styles.right}>

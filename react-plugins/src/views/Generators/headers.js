@@ -64,7 +64,7 @@ const headers = [
         order: 3,
         modifier: generator => (
             <GeneratorExportsDownload
-                exports={generator.exports}
+                generator={generator}
             />
         ),
     },

@@ -114,7 +114,7 @@ if __name__ == '__main__':
     # )
 
     generate(
-        # test_len=1,
+        test_len=1,
         lang_in='np',
         make_maps=False,
         make_scnd=True,
