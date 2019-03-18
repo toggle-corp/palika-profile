@@ -1,3 +1,4 @@
+import json
 from rest_framework import serializers
 from celery.result import AsyncResult
 
@@ -29,7 +30,11 @@ class TaskSerializer(RemoveNullFieldsMixin, serializers.Serializer):
 
     def get_state(self, obj):
         task = AsyncResult(obj['task_id'])
-        return self.state_info(task)
+        try:
+            json.dumps(self.state_info(task))
+            return self.state_info(task)
+        except TypeError:
+            return Generator.FAILURE
 
 
 class ExportSerializer(serializers.ModelSerializer):

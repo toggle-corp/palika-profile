@@ -1,8 +1,7 @@
 const state = {
     generatorAdd: {
         generator: {
-            // id: 10,
-            // skipTriggerPage: true,
+            id: 1,
         },
         selectedPalikaCodes: undefined,
 

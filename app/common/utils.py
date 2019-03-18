@@ -1,3 +1,4 @@
+import shutil
 import os
 from django.utils.crypto import get_random_string
 
@@ -16,3 +17,8 @@ class CoreConfig():
     def get_pdf_write_path(self, pdf_title_format, *args, **kwargs):
         pdf_path_format = os.path.join(self.output_path, pdf_title_format)
         return pdf_path_format.format(*args, **kwargs)
+
+    def clean_ouput_path(self):
+        directory = self.get_output_path()
+        if os.path.isdir(directory):
+            shutil.rmtree(directory)

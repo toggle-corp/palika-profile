@@ -1,4 +1,3 @@
-import shutil
 import logging
 import traceback
 
@@ -22,7 +21,6 @@ logger = logging.getLogger(__name__)
 def _generate_pdf(self, cc, generator, selected_palika_codes):
     # Celery state
     self.update_state(state='PROGRESS')
-    self.job_meta = {}
 
     # Delete previous exports
     generator.exports.all().delete()
@@ -62,6 +60,7 @@ def _generate_pdf(self, cc, generator, selected_palika_codes):
 def generate_pdf(self, id, selected_palika_codes=None):
     cc = CoreConfig()
     generator = Generator.objects.get(pk=id)
+    self.job_meta = {}
     try:
         _generate_pdf(self, cc, generator, selected_palika_codes)
     except Exception:
@@ -72,7 +71,7 @@ def generate_pdf(self, id, selected_palika_codes=None):
         }
         logger.error('Failed to generator pdf for ({})'.format(id), exc_info=1)
     # Clean generator files
-    shutil.rmtree(cc.get_output_path())
+    cc.clean_ouput_path()
     generator.save()
     return generator.status
 
@@ -99,5 +98,5 @@ def test_doc(self, id):
         )
         return Generator.FAILURE
     # Clean generator files
-    shutil.rmtree(cc.get_output_path())
+    cc.clean_ouput_path()
     return Generator.SUCCESS

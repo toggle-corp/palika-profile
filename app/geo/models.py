@@ -21,12 +21,15 @@ class GeoArea(models.Model):
     file = models.FileField(upload_to='shape_files/', max_length=255)
     geo_type = models.CharField(max_length=30, choices=GEO_TYPES, unique=True)
 
-    def get_file_path(self):
-        file_uri = os.path.join(GEOJSON_FILE_DIR, self.file.name)
+    @staticmethod
+    def get_file_path(geo_type):
+        geoarea = GeoArea.objects.filter(geo_type=geo_type).first()
+        file_uri = os.path.join(GEOJSON_FILE_DIR, geoarea.file.name)
         if os.path.isfile(file_uri):
             return file_uri
+        os.makedirs(os.path.dirname(file_uri), exist_ok=True)
         with open(file_uri, 'wb') as fp:
-            fp.write(self.file.read())
+            fp.write(geoarea.file.read())
         return file_uri
 
     def __str__(self):
@@ -54,12 +57,15 @@ class GeoStyle(models.Model):
     file = models.FileField(upload_to='style_files/', max_length=255)
     style_type = models.CharField(max_length=30, choices=STYLE_TYPES, unique=True)
 
-    def get_file_path(self):
-        file_uri = os.path.join(GEO_STYE_FILE_DIR, self.file.name)
+    @staticmethod
+    def get_file_path(style_type):
+        geostyle = GeoStyle.objects.filter(style_type=style_type).first()
+        file_uri = os.path.join(GEOJSON_FILE_DIR, geostyle.file.name)
         if os.path.isfile(file_uri):
             return file_uri
+        os.makedirs(os.path.dirname(file_uri), exist_ok=True)
         with open(file_uri, 'wb') as fp:
-            fp.write(self.file.read())
+            fp.write(geostyle.file.read())
         return file_uri
 
     def __str__(self):
@@ -91,15 +97,15 @@ class Palika(models.Model):
 
 
 def get_map_params_for_generation():
-    ward_uri = GeoArea.get_file_path(geo_type=GeoArea.WARD)
-    palika_uri = GeoArea.get_file_path(geo_type=GeoArea.PALIKA)
-    district_uri = GeoArea.get_file_path(geo_type=GeoArea.DISTRICT)
+    ward_uri = GeoArea.get_file_path(GeoArea.WARD)
+    palika_uri = GeoArea.get_file_path(GeoArea.PALIKA)
+    district_uri = GeoArea.get_file_path(GeoArea.DISTRICT)
 
-    district_style_uri = GeoStyle.get_file_path(geo_type=GeoStyle.DISTRICT_STYLE)
-    palika_hide_style_uri = GeoStyle.get_file_path(geo_type=GeoStyle.PALIKA_HIDE_STYLE)
-    atlas_style_uri = GeoStyle.get_file_path(geo_type=GeoStyle.ATLAS_STYLE)
-    ward_style_uri = GeoStyle.get_file_path(geo_type=GeoStyle.WARD_STYLE)
-    pka_style_lang_uri = GeoStyle.get_file_path(geo_type=GeoStyle.PALIKA_EN_STYLE)
+    district_style_uri = GeoStyle.get_file_path(GeoStyle.DISTRICT_STYLE)
+    palika_hide_style_uri = GeoStyle.get_file_path(GeoStyle.PALIKA_HIDE_STYLE)
+    atlas_style_uri = GeoStyle.get_file_path(GeoStyle.ATLAS_STYLE)
+    ward_style_uri = GeoStyle.get_file_path(GeoStyle.WARD_STYLE)
+    pka_style_lang_uri = GeoStyle.get_file_path(GeoStyle.PALIKA_EN_STYLE)
 
     return {
         # Shapes

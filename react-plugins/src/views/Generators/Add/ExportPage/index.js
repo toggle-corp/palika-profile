@@ -15,9 +15,9 @@ import {
     generatorErrorListSelectorGP,
     generatorProvinceListSelectorGP,
 
-    exportDistrictListSelectorGP,
-    exportPalikaListSelectorGP,
-    exportFaramSelectorGP,
+    generatorDistrictListSelectorGP,
+    generatorPalikaCodeListSelectorGP,
+
     exportStateSelectorGP,
 } from '#selectors';
 import {
@@ -47,7 +47,6 @@ const propTypes = {
     provinces: PropTypes.array.isRequired,
     districts: PropTypes.array.isRequired,
     palikaCodes: PropTypes.array.isRequired,
-    exportFaram: PropTypes.object.isRequired,
     exportState: PropTypes.object.isRequired,
     /* eslint-enable react/forbid-prop-types */
     setExportFaram: PropTypes.func.isRequired,
@@ -78,6 +77,16 @@ class TriggerPage extends React.PureComponent {
         },
     }
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            faramValues: {},
+            faramErrors: {},
+            // pristine: true,
+        };
+    }
+
     componentDidMount() {
         // NOTE: This is for debugging only
         const {
@@ -88,6 +97,40 @@ class TriggerPage extends React.PureComponent {
             generatorGet.do({ pullMeta: true });
         }
     }
+
+    getFilteredDistrictList = memoize((districts, selectedProvince) => {
+        if (selectedProvince && selectedProvince.length) {
+            return districts.filter(
+                district => (
+                    selectedProvince.findIndex(
+                        provinceId => provinceId === district.province,
+                    ) !== -1
+                ),
+            );
+        }
+        return districts;
+    })
+
+    getFilteredPalikaCodeList = memoize((palikaCodes, selectedProvince, selectedDistrict) => {
+        if (selectedDistrict && selectedDistrict.length) {
+            return palikaCodes.filter(
+                palika => (
+                    selectedDistrict.findIndex(
+                        districtId => districtId === palika.district,
+                    ) !== -1
+                ),
+            );
+        } if (selectedProvince && selectedProvince.length) {
+            return palikaCodes.filter(
+                palika => (
+                    selectedProvince.findIndex(
+                        provinceId => provinceId === palika.province,
+                    ) !== -1
+                ),
+            );
+        }
+        return palikaCodes;
+    })
 
     getValidatedDistrictId = memoize(
         (selectedDistricts, districts) => {
@@ -116,10 +159,7 @@ class TriggerPage extends React.PureComponent {
     )
 
     handleFaramChange = (faramValues, faramErrors) => {
-        const {
-            setExportFaram,
-        } = this.props;
-        setExportFaram({
+        this.setState({
             faramValues,
             faramErrors,
             // pristine: false,
@@ -127,8 +167,7 @@ class TriggerPage extends React.PureComponent {
     };
 
     handleFaramFailure = (faramErrors) => {
-        const { setExportFaram } = this.props;
-        setExportFaram({ faramErrors });
+        this.setState({ faramErrors });
     };
 
     handleFaramSuccess = (_, { selectedPalikaCodes }) => {
@@ -151,7 +190,6 @@ class TriggerPage extends React.PureComponent {
             districts,
             palikaCodes,
 
-            exportFaram,
             exportState,
         } = this.props;
 
@@ -159,17 +197,25 @@ class TriggerPage extends React.PureComponent {
             faramValues,
             faramErrors,
             // pristine,
-        } = exportFaram;
+        } = this.state;
 
         const {
+            selectedProvince,
             selectedDistrict,
             selectedPalikaCodes,
         } = faramValues;
 
+        const filteredDistricts = this.getFilteredDistrictList(districts, selectedProvince);
+        const filteredPalikaCodeList = this.getFilteredPalikaCodeList(
+            palikaCodes, selectedProvince, selectedDistrict,
+        );
+
         const validatedFaramValues = {
             ...faramValues,
-            selectedDistrict: this.getValidatedDistrictId(selectedDistrict, districts),
-            selectedPalikaCodes: this.getValidatedPalikaCodes(selectedPalikaCodes, palikaCodes),
+            selectedDistrict: this.getValidatedDistrictId(selectedDistrict, filteredDistricts),
+            selectedPalikaCodes: this.getValidatedPalikaCodes(
+                selectedPalikaCodes, filteredPalikaCodeList,
+            ),
         };
         const pending = false;
         const exportPending = (
@@ -202,7 +248,7 @@ class TriggerPage extends React.PureComponent {
                                 faramElementName="selectedDistrict"
                                 keySelector={KeySelector}
                                 labelSelector={labelSelector}
-                                options={districts}
+                                options={filteredDistricts}
                                 showHintAndError={false}
                                 placeholder="Select District"
                             />
@@ -210,7 +256,7 @@ class TriggerPage extends React.PureComponent {
                                 faramElementName="selectedPalikaCodes"
                                 keySelector={palikaKeySelector}
                                 labelSelector={palikaLabelSelector}
-                                options={palikaCodes}
+                                options={filteredPalikaCodeList}
                                 showHintAndError={false}
                                 placeholder="Select Palikas"
                             />
@@ -247,9 +293,8 @@ const mapStateToProps = state => ({
     errors: generatorErrorListSelectorGP(state),
     provinces: generatorProvinceListSelectorGP(state),
 
-    districts: exportDistrictListSelectorGP(state),
-    palikaCodes: exportPalikaListSelectorGP(state),
-    exportFaram: exportFaramSelectorGP(state),
+    districts: generatorDistrictListSelectorGP(state),
+    palikaCodes: generatorPalikaCodeListSelectorGP(state),
     exportState: exportStateSelectorGP(state),
 });
 
