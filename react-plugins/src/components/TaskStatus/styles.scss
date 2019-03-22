@@ -1,0 +1,21 @@
+@import '~base-scss/base';
+
+.container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow-y: auto;
+    text-transform: uppercase;
+    font-size: $font-size-medium;
+
+    .item {
+        padding: $spacing-small;
+    }
+}
+
+.spinner-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-large;
+}

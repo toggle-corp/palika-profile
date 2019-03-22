@@ -9,6 +9,9 @@ import Faram, {
 } from '@togglecorp/faram';
 import PrimaryButton from '#rsca/Button/PrimaryButton';
 import MultiSelectInput from '#rsci/MultiSelectInput';
+import ScrollTabs from '#rscv/ScrollTabs';
+import MultiViewContainer from '#rscv/MultiViewContainer';
+import Message from '#rscv/Message';
 import iconNames from '#rsk/iconNames';
 
 import {
@@ -60,6 +63,11 @@ const defaultProps = {};
 
 const emptyObject = {};
 
+const tabs = {
+    progress: 'Export Progress',
+    validation: 'Validation',
+};
+
 const KeySelector = ele => ele.id;
 const labelSelector = (ele = emptyObject) => ele.title;
 const palikaKeySelector = palika => palika.code;
@@ -84,7 +92,53 @@ class TriggerPage extends React.PureComponent {
         this.state = {
             faramValues: {},
             faramErrors: {},
+            activeTab: 'validation',
             // pristine: true,
+        };
+
+        this.views = {
+            progress: {
+                component: () => {
+                    const {
+                        requests: {
+                            generatorTriggerExport,
+                            generatorTriggerExportPoll,
+                        },
+                        exportState,
+                    } = this.props;
+
+                    const exportPending = (
+                        generatorTriggerExportPoll.pending || generatorTriggerExport.pending
+                    );
+
+                    return (
+                        <div className={styles.exportStatus}>
+                            {exportPending ? (
+                                <TaskStatus
+                                    {...exportState}
+                                />
+                            ) : (
+                                <div className={styles.messageContainer}>
+                                    <Message>
+                                        Export has not been started
+                                    </Message>
+                                </div>
+                            )}
+                        </div>
+                    );
+                },
+                wrapContainer: true,
+            },
+            validation: {
+                component: () => {
+                    const { errors } = this.props;
+
+                    return (
+                        <ValidatorPreview errors={errors} />
+                    );
+                },
+                wrapContainer: true,
+            },
         };
     }
 
@@ -177,8 +231,13 @@ class TriggerPage extends React.PureComponent {
                 generatorTriggerExport,
             },
         } = this.props;
+        this.setState({ activeTab: 'progress' });
         generatorTriggerExport.do({ selectedPalikaCodes });
     };
+
+    handleTabClick = (activeTab) => {
+        this.setState({ activeTab });
+    }
 
     render() {
         const {
@@ -186,7 +245,6 @@ class TriggerPage extends React.PureComponent {
                 generatorTriggerExport,
                 generatorTriggerExportPoll,
             },
-            errors,
             provinces,
             districts,
             palikaCodes,
@@ -195,6 +253,8 @@ class TriggerPage extends React.PureComponent {
         } = this.props;
 
         const {
+            activeTab,
+
             faramValues,
             faramErrors,
             // pristine,
@@ -224,70 +284,65 @@ class TriggerPage extends React.PureComponent {
         );
 
         return (
-            <div>
+            <div className={styles.export}>
                 <div className={styles.top}>
-                    <div className={styles.formContainer}>
-                        <Faram
-                            className={styles.form}
-                            onValidationSuccess={this.handleFaramSuccess}
-                            onValidationFailure={this.handleFaramFailure}
-                            onChange={this.handleFaramChange}
-                            schema={TriggerPage.schema}
-                            value={validatedFaramValues}
-                            error={faramErrors}
+                    <h1>Select Palikas</h1>
+                    <Faram
+                        className={styles.form}
+                        onValidationSuccess={this.handleFaramSuccess}
+                        onValidationFailure={this.handleFaramFailure}
+                        onChange={this.handleFaramChange}
+                        schema={TriggerPage.schema}
+                        value={validatedFaramValues}
+                        error={faramErrors}
+                    >
+                        <div className={styles.selectContainer}>
+                            <MultiSelectInput
+                                faramElementName="selectedProvince"
+                                keySelector={KeySelector}
+                                labelSelector={labelSelector}
+                                options={provinces}
+                                showHintAndError={false}
+                                placeholder="Select Province"
+                            />
+                            <MultiSelectInput
+                                faramElementName="selectedDistrict"
+                                keySelector={KeySelector}
+                                labelSelector={labelSelector}
+                                options={filteredDistricts}
+                                showHintAndError={false}
+                                placeholder="Select District"
+                            />
+                            <MultiSelectInput
+                                faramElementName="selectedPalikaCodes"
+                                keySelector={palikaKeySelector}
+                                labelSelector={palikaLabelSelector}
+                                options={filteredPalikaCodeList}
+                                showHintAndError={false}
+                                placeholder="Select Palikas"
+                            />
+                        </div>
+                        <PrimaryButton
+                            className={styles.button}
+                            pending={pending}
+                            type="submit"
+                            iconName={iconNames.textDoc}
                         >
-                            <h2> Select Admin Areas </h2>
-                            <div className={styles.selectContainer}>
-                                <MultiSelectInput
-                                    faramElementName="selectedProvince"
-                                    keySelector={KeySelector}
-                                    labelSelector={labelSelector}
-                                    options={provinces}
-                                    showHintAndError={false}
-                                    placeholder="Select Province"
-                                />
-                                <MultiSelectInput
-                                    faramElementName="selectedDistrict"
-                                    keySelector={KeySelector}
-                                    labelSelector={labelSelector}
-                                    options={filteredDistricts}
-                                    showHintAndError={false}
-                                    placeholder="Select District"
-                                />
-                                <MultiSelectInput
-                                    faramElementName="selectedPalikaCodes"
-                                    keySelector={palikaKeySelector}
-                                    labelSelector={palikaLabelSelector}
-                                    options={filteredPalikaCodeList}
-                                    showHintAndError={false}
-                                    placeholder="Select Palikas"
-                                />
-                            </div>
-                            <PrimaryButton
-                                className={styles.button}
-                                pending={pending}
-                                type="submit"
-                                iconName={iconNames.textDoc}
-                            >
-                                Export
-                            </PrimaryButton>
-                        </Faram>
-                    </div>
-                    {
-                        exportPending && (
-                            <div className={styles.exportStatus}>
-                                <h2>Export Status</h2>
-                                <TaskStatus
-                                    {...exportState}
-                                />
-                            </div>
-                        )
-                    }
+                            Export
+                        </PrimaryButton>
+                    </Faram>
                 </div>
-                <div className={styles.validatorContainer}>
-                    <h2>Validation Preview</h2>
-                    <ValidatorPreview
-                        errors={errors}
+                <div className={styles.bottomContainer}>
+                    <ScrollTabs
+                        className={styles.tabs}
+                        tabs={tabs}
+                        active={activeTab}
+                        onClick={this.handleTabClick}
+                    />
+                    <MultiViewContainer
+                        views={this.views}
+                        active={activeTab}
+                        containerClassName={styles.view}
                     />
                 </div>
             </div>

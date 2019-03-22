@@ -23,7 +23,6 @@ import {
     RequestClient,
 } from '#request';
 
-
 import requests from './requests';
 import styles from './styles.scss';
 
@@ -112,7 +111,7 @@ class UploadPage extends React.PureComponent {
 
         return (
             <div className={styles.container}>
-                <h2>Upload your file </h2>
+                <h1>Upload your file</h1>
                 <Faram
                     className={styles.form}
                     onValidationSuccess={this.handleFaramSuccess}
@@ -129,7 +128,7 @@ class UploadPage extends React.PureComponent {
                         error={faramErrors.file}
                         accept=".xlsx"
                     >
-                        {'Click to Upload your file here'}
+                        Click to Upload your file here
                     </FileInput>
                     <div className={styles.bottomContainer}>
                         <PrimaryButton
@@ -138,7 +137,7 @@ class UploadPage extends React.PureComponent {
                             pending={pending}
                             disabled={pristine}
                         >
-                                Submit
+                            Submit
                         </PrimaryButton>
                     </div>
                 </Faram>

@@ -1,13 +1,23 @@
 @import '~base-scss/base';
 
-button {
-    margin: 12px 0;
-}
-.container {
-    height: 70vh;
+.generator {
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .button {
+            padding: $spacing-small $spacing-medium;
+            text-transform: capitalize;
+            font-size: $font-size-medium-alt;
+            font-weight: $font-weight-medium;
+        }
+    }
+
     .table {
         margin-top: 12px;
         border: $width-separator-thin solid $color-separator;
+        border-top: $width-separator-thin solid $color-separator;
 
         span {
             color: $color-text-label;

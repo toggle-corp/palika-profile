@@ -6,9 +6,11 @@ import ValidationPage from './ValidationPage';
 import ExportPage from './ExportPage';
 import FinalPage from './FinalPage';
 
+import styles from './styles.scss';
+
 
 const GeneratorAdd = () => (
-    <Wizard>
+    <Wizard className={styles.wizard}>
         <UploadPage />
         <ValidationPage />
         <ExportPage />

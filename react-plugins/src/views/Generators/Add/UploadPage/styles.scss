@@ -1,41 +1,43 @@
 @import '~base-scss/base';
 
-.form {
-    display: flex;
-    flex-direction: column;
-    margin: $spacing-large 0;
-    border: $width-separator-thin solid $color-separator;
-    padding: $spacing-medium;
-    width: 800px;
-
-    .file-loader {
+.container {
+    .form {
         display: flex;
-        flex-wrap: wrap;
+        flex-direction: column;
+        margin: $spacing-large 0;
+        border: $width-separator-thin solid $color-separator;
+        padding: $spacing-medium;
+        width: 320px;
 
-        label {
+        .file-loader {
             display: flex;
-            flex-basis: 100%;
+            flex-wrap: wrap;
+
+            label {
+                display: flex;
+                align-items: center;
+                flex-basis: 100%;
+                justify-content: center;
+                border-style: dashed;
+                height: 240px;
+            }
+
+            p {
+                margin: 8px 0;
+            }
+        }
+
+        .bottom-container {
+            display: flex;
             align-items: center;
             justify-content: center;
-            height: 400px;
-            border-style: dashed;
-        }
 
-        p {
-            margin: 8px 0;
-        }
-    }
-
-    .bottom-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        .button {
-            margin: 20px 0;
-            padding: $spacing-small $spacing-medium;
-            text-transform: capitalize;
-            font-size: $font-size-medium-alt;
+            .button {
+                margin: 20px 0;
+                padding: $spacing-small $spacing-medium;
+                text-transform: capitalize;
+                font-size: $font-size-medium-alt;
+            }
         }
     }
 }

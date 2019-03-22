@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import memoize from 'memoize-one';
+import { mapToList } from '@togglecorp/fujs';
 
-import Sortable from '#rscv/Taebul/Sortable';
-import ColumnWidth from '#rscv/Taebul/ColumnWidth';
-import NormalTaebul from '#rscv/Taebul';
+import ListView from '#rscv/List/ListView';
 
-import columns from './columns';
+import ErrorItem from './ErrorItem';
 import styles from './styles.scss';
 
-const Taebul = Sortable(ColumnWidth(NormalTaebul));
 
 const propTypes = {
     // eslint-disable-next-line react/forbid-prop-types
@@ -25,36 +24,45 @@ class ValidatorPreview extends React.PureComponent {
     static propTypes = propTypes;
     static defaultProps = defaultProps;
 
-    constructor(props) {
-        super(props);
+    getGroupedErrors = memoize((errors) => {
+        const groupedErrors = {};
+        errors.forEach((e) => {
+            if (groupedErrors[e.index]) {
+                groupedErrors[e.index].columns = [
+                    e,
+                    ...groupedErrors[e.index].columns,
+                ];
+            } else {
+                groupedErrors[e.index] = {
+                    index: e.index,
+                    columns: [e],
+                };
+            }
+        });
+        const groupedErrorsList = mapToList(
+            groupedErrors,
+            (d, k) => ({
+                index: k,
+                ...d,
+            }),
+        );
+        return groupedErrorsList;
+    });
 
-        this.state = {
-            taebulOptions: {
-                defaultColumnWidth: 250,
-                minColumnWidth: 250,
-            },
-        };
-    }
-
-    handleSettingsChange = (options) => {
-        this.setState({ taebulOptions: options });
-    }
+    rendererParams = (_, error) => ({
+        ...error,
+    });
 
     render() {
         const { errors } = this.props;
-
-        const {
-            taebulOptions,
-        } = this.state;
+        const groupedErrors = this.getGroupedErrors(errors);
 
         return (
-            <Taebul
-                className={styles.table}
-                data={errors}
-                settings={taebulOptions}
+            <ListView
+                data={groupedErrors}
                 keySelector={keySelector}
-                columns={columns}
-                onChange={this.handleSettingsChange}
+                rendererParams={this.rendererParams}
+                renderer={ErrorItem}
             />
         );
     }

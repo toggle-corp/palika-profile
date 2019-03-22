@@ -1,0 +1,38 @@
+@import '~base-scss/base';
+
+.error-item {
+    border-bottom: $width-separator-thin solid $color-separator;
+    cursor: pointer;
+    padding: $spacing-small $spacing-medium;
+
+    .top {
+        .left {
+            .key-value-pair {
+                margin-right: $spacing-small;
+                padding: $spacing-extra-small 0;
+
+                .key {
+                    margin-right: $spacing-small;
+                    color: $color-text-label;
+                }
+            }
+        }
+    }
+
+    &:hover {
+        background-color: $color-background-hover;
+    }
+
+    .bottom {
+        border-top: $width-separator-thin solid $color-separator;
+        padding-top: $spacing-medium;
+
+        h3 {
+            padding: $spacing-medium 0;
+        }
+
+        .individual-errors {
+            display: table;
+        }
+    }
+}

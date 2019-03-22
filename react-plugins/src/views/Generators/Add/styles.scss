@@ -1,5 +1,9 @@
 @import '~base-scss/base';
 
+.wizard {
+    height: 100%;
+}
+
 .form {
     display: flex;
     flex-direction: column;
@@ -19,8 +23,4 @@
             font-size: $font-size-medium-alt;
         }
     }
-}
-
-.table {
-    height: 600px;
 }
