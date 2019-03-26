@@ -96,7 +96,7 @@ class Palika(models.Model):
         return '{} ({})'.format(self.title, self.code)
 
 
-def get_map_params_for_generation():
+def get_map_params_for_generation(language='en'):
     ward_uri = GeoArea.get_file_path(GeoArea.WARD)
     palika_uri = GeoArea.get_file_path(GeoArea.PALIKA)
     district_uri = GeoArea.get_file_path(GeoArea.DISTRICT)
@@ -105,7 +105,13 @@ def get_map_params_for_generation():
     palika_hide_style_uri = GeoStyle.get_file_path(GeoStyle.PALIKA_HIDE_STYLE)
     atlas_style_uri = GeoStyle.get_file_path(GeoStyle.ATLAS_STYLE)
     ward_style_uri = GeoStyle.get_file_path(GeoStyle.WARD_STYLE)
-    pka_style_lang_uri = GeoStyle.get_file_path(GeoStyle.PALIKA_EN_STYLE)
+
+    if language == 'en':
+        pka_style_lang_uri = GeoStyle.get_file_path(GeoStyle.PALIKA_EN_STYLE)
+    elif language == 'np':
+        pka_style_lang_uri = GeoStyle.get_file_path(GeoStyle.PALIKA_NP_STYLE)
+    else:
+        raise Exception('Unknown Language {} supplied for map params'.format(language))
 
     return {
         # Shapes

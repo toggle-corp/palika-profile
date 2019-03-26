@@ -26,6 +26,7 @@ script:
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - ./docker_ci push --on on_build
+  - if [ "${TRAVIS_BRANCH}" == "${RC_BRANCH}" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ] ; then ./docker_ci push --on on_release; fi
 
 env:
   global:

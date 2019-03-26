@@ -133,3 +133,5 @@ react-plugins/src/vendor/react-store/
 
 media/
 tmp/
+
+deploy/configs/nginx.conf

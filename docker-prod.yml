@@ -1,0 +1,70 @@
+version: '3.2'
+
+services:
+    db:
+        image: postgres:9.5
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+
+    redis:
+        image: redis:latest
+        volumes:
+            - redis-data:/data
+
+    server:
+        image: palikaprofile/server:release
+        build: .
+        environment:
+          - DJANGO_DEBUG=False
+        env_file:
+            - .env
+        command: bash -c '/code/scripts/wait-for-it.sh db:5432 && /code/deploy/scripts/run_django.sh'
+        volumes:
+            - static-data:/static
+            - ./app/media:/code/app/media
+        depends_on:
+            - db
+            - redis
+
+    celery:
+        image: palikaprofile/server:release
+        build: .
+        environment:
+          - DJANGO_DEBUG=False
+        env_file:
+            - .env
+        command: bash -c '/code/scripts/wait-for-it.sh db:5432 && /code/deploy/scripts/run_celery.sh'
+        volumes:
+            - ./app/media:/code/app/media
+        depends_on:
+            - db
+            - redis
+
+    react-plugins:
+        image: palikaprofile/react-plugins:release
+        build: ./react-plugins
+        env_file:
+            - .env
+        environment:
+          - RP_KITAB_BUILD_DIR=/static/js
+        command: sh -c '/code/scripts/build.sh'
+        volumes:
+          - static-data:/static:z
+
+    nginx: # NGINX Server
+        build: ./deploy/nginx/
+        volumes:
+          - ./deploy/configs/nginx.conf:/etc/nginx/conf.d/default.conf:z
+          - static-data:/app/static:z
+          - ./app/media:/app/media:z
+          - ./certs:/etc/letsencrypt
+        ports:
+            - '80:80'
+            - '443:443'
+        depends_on:
+            - server
+
+volumes:
+  postgres-data:
+  redis-data:
+  static-data:
