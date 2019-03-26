@@ -10,7 +10,7 @@ from .serializers import (
     TaskSerializer,
     GeneratorSerializer,
     GeneratorDataSerializer,
-    GeneratorErrorsSerializer,
+    GeneratorMetaSerializer,
 )
 
 
@@ -51,8 +51,8 @@ class GeneratorViewSet(viewsets.ModelViewSet):
 
     @action(
         detail=True,
-        url_path='errors',
-        serializer_class=GeneratorErrorsSerializer,
+        url_path='meta',
+        serializer_class=GeneratorMetaSerializer,
     )
     def get_errors(self, request, pk=None, version=None):
         generator = self.get_object()
@@ -61,11 +61,19 @@ class GeneratorViewSet(viewsets.ModelViewSet):
 
     @action(
         detail=True,
+        methods=['get', 'post'],
         url_path='trigger-export',
     )
     def trigger_export(self, request, pk=None, version=None):
-        generator = self.get_object()
-        task_id = generate_pdf.s(generator.id).delay().id
+        if request.method == 'POST':
+            generator = self.get_object()
+            task_id = generate_pdf.s(
+                generator.id,
+                request.data.get('selected_palika_codes'),
+            ).delay().id
+        else:
+            generator = self.get_object()
+            task_id = generate_pdf.s(generator.id).delay().id
         return GeneratorViewSet.get_task_response(task_id, request)
 
     @action(

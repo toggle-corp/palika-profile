@@ -43,19 +43,19 @@ class Report(object):
                             'dist_pct': cp['%s_district_pct' % i[0]],
                         })
                     for i in [
-                         ('stone_and_cement', 'typologies_stone_and_cement_mortar_masonry_row_title'), # noqa
-                         ('stone_and_mud', 'typologies_stone_and_mud_mortar_masonry_row_title'), # noqa
-                         ('brick_and_cement', 'typologies_brick_and_cement_mortar_masonry_row_title'), # noqa
-                         ('brick_and_mud', 'typologies_brick_and_mud_mortar_masonry_row_title'), # noqa
-                         ('rcc_frame', 'typologies_reinforced_cement_concrete_(rcc)_frame_row_title'), # noqa
+                         ('stone_and_cement', 'typologies_stone_and_cement_mortar_masonry_row_title'), # noqa E501
+                         ('stone_and_mud', 'typologies_stone_and_mud_mortar_masonry_row_title'), # noqa E501
+                         ('brick_and_cement', 'typologies_brick_and_cement_mortar_masonry_row_title'), # noqa E501
+                         ('brick_and_mud', 'typologies_brick_and_mud_mortar_masonry_row_title'), # noqa E501
+                         ('rcc_frame', 'typologies_reinforced_cement_concrete_(rcc)_frame_row_title'), # noqa E501
                          ('hybrid', 'typologies_hybrid_structure_row_title'),
-                         ('timber_frame', 'typologies_timber_frame_structure_row_title'), # noqa
-                         ('hollow_concrete', 'typologies_hollow_concrete_block_masonry_row_title'), # noqa
-                         ('dry_stone', 'typologies_dry_stone_masonry_row_title'), # noqa
+                         ('timber_frame', 'typologies_timber_frame_structure_row_title'), # noqa E501
+                         ('hollow_concrete', 'typologies_hollow_concrete_block_masonry_row_title'), # noqa E501
+                         ('dry_stone', 'typologies_dry_stone_masonry_row_title'), # noqa E501
                          ('adobe', 'typologies_adobe_structures_row_title'),
                          ('bamboo', 'typologies_bamboo_row_title'),
-                         ('sceb', 'typologies_compressed_stabilized_earth_block_(sceb)_masonry_row_title'), # noqa
-                         ('light_steel', 'typologies_light_steel_frame_structures_row_title')] # noqa
+                         ('sceb', 'typologies_compressed_stabilized_earth_block_(sceb)_masonry_row_title'), # noqa E501
+                         ('light_steel', 'typologies_light_steel_frame_structures_row_title')] # noqa E501
                 ]),
 
             # Housing Reconstruction & Retrofit Updates
@@ -70,22 +70,22 @@ class Report(object):
                     {
                         'label': 'recon_&_retrofit_pa_agreement_(both)',
                         'value1': cp['pa_agreement_cnt_(reconstruction)'],
-                        'value2': cp['total_eligible_hhs_(reconstruction)'] - cp['pa_agreement_cnt_(reconstruction)'], # noqa
+                        'value2': cp['total_eligible_hhs_(reconstruction)'] - cp['pa_agreement_cnt_(reconstruction)'], # noqa E501
                     },
                     {
-                        'label': 'recon_&_retrofit_ist_tranche_received_(both)', # noqa
+                        'label': 'recon_&_retrofit_ist_tranche_received_(both)', # noqa E501
                         'value1': cp['1st_tranche_cnt_(reconstruction)'],
-                        'value2': cp['total_eligible_hhs_(reconstruction)'] - cp['1st_tranche_cnt_(reconstruction)'], # noqa
+                        'value2': cp['total_eligible_hhs_(reconstruction)'] - cp['1st_tranche_cnt_(reconstruction)'], # noqa E501
                     },
                     {
-                        'label': 'recon_&_retrofit_iind_tranche_received_(both)', # noqa
+                        'label': 'recon_&_retrofit_iind_tranche_received_(both)', # noqa E501
                         'value1': cp['2nd_tranche_cnt_(reconstruction)'],
-                        'value2': cp['total_eligible_hhs_(reconstruction)'] - cp['2nd_tranche_cnt_(reconstruction)'], # noqa
+                        'value2': cp['total_eligible_hhs_(reconstruction)'] - cp['2nd_tranche_cnt_(reconstruction)'], # noqa E501
                     },
                     {
                         'label': 'recon_&_retrofit_iiird_tranche_received',
                         'value1': cp['3rd_tranche_cnt_(reconstruction)'],
-                        'value2': cp['total_eligible_hhs_(reconstruction)'] - cp['3rd_tranche_cnt_(reconstruction)'], # noqa
+                        'value2': cp['total_eligible_hhs_(reconstruction)'] - cp['3rd_tranche_cnt_(reconstruction)'], # noqa E501
                     }
                 ],
 
@@ -103,17 +103,17 @@ class Report(object):
                     {
                         'label': 'recon_&_retrofit_pa_agreement_(both)',
                         'value1': cp['pa_agreement_cnt_(retrofit)'],
-                        'value2': cp['total_eligible_hhs_(retrofit)'] - cp['pa_agreement_cnt_(retrofit)'], # noqa
+                        'value2': cp['total_eligible_hhs_(retrofit)'] - cp['pa_agreement_cnt_(retrofit)'], # noqa E501
                     },
                     {
-                        'label': 'recon_&_retrofit_ist_tranche_received_(both)', # noqa
+                        'label': 'recon_&_retrofit_ist_tranche_received_(both)', # noqa E501
                         'value1': cp['1st_tranche_cnt_(retrofit)'],
-                     'value2': cp['total_eligible_hhs_(retrofit)'] - cp['1st_tranche_cnt_(retrofit)'], # noqa
+                     'value2': cp['total_eligible_hhs_(retrofit)'] - cp['1st_tranche_cnt_(retrofit)'], # noqa E501
                     },
                     {
-                        'label': 'recon_&_retrofit_iind_tranche_received_(both)', # noqa
+                        'label': 'recon_&_retrofit_iind_tranche_received_(both)', # noqa E501
                         'value1': cp['2nd_tranche_cnt_(retrofit)'],
-                     'value2': cp['total_eligible_hhs_(retrofit)'] - cp['2nd_tranche_cnt_(retrofit)'], # noqa
+                     'value2': cp['total_eligible_hhs_(retrofit)'] - cp['2nd_tranche_cnt_(retrofit)'], # noqa E501
                     },
                 ],
 

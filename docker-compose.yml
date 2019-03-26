@@ -23,8 +23,8 @@ services:
         volumes:
             - ./:/code
             # NOTE: DO NOT PUSH [THIS CHANGE]
-            # - ..path_to_drafter/:/dep/drafter
-            # - ..path_to_hrrp-maps:/dep/hrrp-maps
+            # - ../drafter/:/dep/drafter
+            # - ../hrrp-maps:/dep/hrrpmaps
         ports:
             - '8008:8000'
         depends_on:

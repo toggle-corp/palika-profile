@@ -2,7 +2,13 @@
 import React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 
-const storage = {};
+const storage = {
+    generatorAddPage: {
+        generator: {
+            id: 3,
+        },
+    },
+};
 const listeners = {};
 
 export const addListener = (listenerKey, listener) => {

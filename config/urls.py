@@ -10,6 +10,10 @@ from generator.apis import (
     GeneratorViewSet,
     TaskViewSet,
 )
+from generator.views import (
+    get_latest_palika_pdf,
+    download_export_as_zip,
+)
 
 # Rest Routers
 router = routers.DefaultRouter()
@@ -28,6 +32,18 @@ def get_api_path(path):
 urlpatterns = [
     # Admin url patterns
     path('admin/', admin.site.urls),
+
+    # Recent palika document
+    url(
+        r'^recent-palika-document/(?P<palika_code>\d+)/$',
+        get_latest_palika_pdf,
+        name='recent-palika-document',
+    ),
+    url(
+        r'^download-palika-documents/$',
+        download_export_as_zip,
+        name='recent-palika-document',
+    ),
 
     # API url patterns
     url(get_api_path(''), include(router.urls)),

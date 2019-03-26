@@ -1,0 +1,64 @@
+@import '~base-scss/base';
+
+.info-group {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: $spacing-large;
+
+    .info-value {
+        color: $color-text-label;
+        font-size: $font-size-extra-large;
+    }
+
+    .info-label {
+        color: $color-accent;
+        font-size: $font-size-large;
+    }
+}
+
+.normal-info-group {
+    display: flex;
+    align-items: flex-end;
+    flex-basis: 50%;
+    font-size: $font-size-medium-alt;
+
+    .info-value {
+        color: $color-text-label;
+    }
+
+    .info-label {
+        flex-shrink: 0;
+        margin-right: $spacing-small;
+        color: $color-text-label;
+
+        &:after {
+            content: ':',
+        }
+    }
+}
+
+.table-info-group {
+    display: table-row;
+    align-items: flex-end;
+    flex-basis: 50%;
+    font-size: $font-size-medium-alt;
+
+    .info-value {
+        display: table-cell;
+        color: $color-text-label;
+    }
+
+    .info-label {
+        display: table-cell;
+        flex-shrink: 0;
+        margin-right: $spacing-small;
+        padding: 0 $spacing-small;
+        color: $color-text-label;
+
+        &:after {
+            content: ':',
+        }
+    }
+}

@@ -49,19 +49,25 @@ class Generator extends React.PureComponent {
         } = this.props;
 
         return (
-            <div>
-                <PrimaryButton
-                    className={iconNames.add}
-                    onClick={this.handleAddGeneratorPageUrl}
-                >
+            <div className={styles.generator}>
+                <div className={styles.header}>
+                    <h1>Recent Exports</h1>
+                    <PrimaryButton
+                        className={styles.button}
+                        iconName={iconNames.add}
+                        onClick={this.handleAddGeneratorPageUrl}
+                    >
                         Add Generator
-                </PrimaryButton>
-                <Table
-                    className={styles.table}
-                    data={generators}
-                    headers={headers}
-                    keySelector={keySelector}
-                />
+                    </PrimaryButton>
+                </div>
+                <div className={styles.container}>
+                    <Table
+                        className={styles.table}
+                        data={generators}
+                        headers={headers}
+                        keySelector={keySelector}
+                    />
+                </div>
             </div>
         );
     }

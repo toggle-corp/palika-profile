@@ -5,7 +5,7 @@ import celery
 
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
-from django.conf import settings # noqa
+from django.conf import settings # noqa E402
 sys.path.append(settings.APPS_DIR)
 
 app = celery.Celery('palika_profile')

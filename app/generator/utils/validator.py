@@ -7,7 +7,7 @@ from core.report.common import SHT_RESERVE_CHAR
 
 
 def validate(
-        self, cc, generator, skip=[], lang_in='en', test_len=None,
+        self, cc, file, skip=[], lang_in='en', test_len=None,
         overwrite=False,
 ):
     job_progress = {
@@ -25,9 +25,7 @@ def validate(
 
     os.makedirs(cc.get_output_path(), exist_ok=True)
     data = Sheet(
-        pd.read_excel(
-            generator.file, sheet_name='Profile Data', index_col=0, header=0,
-        ),
+        pd.read_excel(file, sheet_name='Profile Data', index_col=0, header=0),
         skip=skip,
         test_len=test_len,
         overwrite=overwrite,
@@ -41,4 +39,4 @@ def validate(
     # for now, all data is processed regardless of it is filtered or not
     data.process()
     update_progress({'testing': 100})
-    return data.errors
+    return data.errors, list(data.sht.index)

@@ -1,5 +1,3 @@
-import os
-import shutil
 import logging
 import traceback
 
@@ -8,6 +6,7 @@ from django.core.files import File
 
 from config.celery import app
 
+from geo.models import get_map_params_for_generation
 from .models import (
     Generator,
     Export,
@@ -19,33 +18,37 @@ logger = logging.getLogger(__name__)
 
 
 @transaction.atomic
-def _generate_pdf(self, cc, generator):
+def _generate_pdf(self, cc, generator, selected_palika_codes):
     # Celery state
     self.update_state(state='PROGRESS')
-    self.job_meta = {}
 
     # Delete previous exports
     generator.exports.all().delete()
+
+    map_params = get_map_params_for_generation()
 
     # Generate new exports
     pdf_files, errors = pdf_generator.generate(
         self,
         cc,
         generator.file,
+        selected_palika_codes,
+        map_params,
         lang_in='en',
-        test_len=5,
-        make_maps=False,
+        make_maps=True,
         make_scnd=True,
         map_img_type='svg',
         overwrite=True,
     )
 
     # Save files to Generator
-    for pdf_file in pdf_files:
+    for palika_code, pdf_file in pdf_files:
         with open(pdf_file, 'rb') as fp:
             Export.objects.create(
+                title=pdf_file.split('/')[-1],
                 generator=generator,
                 file=File(fp, pdf_file.split('/')[-1]),
+                palika_code=palika_code,
             )
 
     generator.errors = errors
@@ -54,11 +57,12 @@ def _generate_pdf(self, cc, generator):
 
 
 @app.task(bind=True)
-def generate_pdf(self, id):
+def generate_pdf(self, id, selected_palika_codes=None):
     cc = CoreConfig()
     generator = Generator.objects.get(pk=id)
+    self.job_meta = {}
     try:
-        _generate_pdf(self, cc, generator)
+        _generate_pdf(self, cc, generator, selected_palika_codes)
     except Exception:
         generator.status = Generator.FAILURE
         generator.data = {
@@ -67,7 +71,7 @@ def generate_pdf(self, id):
         }
         logger.error('Failed to generator pdf for ({})'.format(id), exc_info=1)
     # Clean generator files
-    shutil.rmtree(cc.get_output_path())
+    cc.clean_ouput_path()
     generator.save()
     return generator.status
 
@@ -81,8 +85,11 @@ def test_doc(self, id):
             self.update_state(state='PROGRESS')
             self.job_meta = {}
             generator = Generator.objects.get(pk=id)
-            errors = validator.validate(self, cc, generator)
+            errors, palika_codes = validator.validate(self, cc, generator.file)
             generator.errors = errors
+            generator.geo_meta = {
+                'palika_codes': list(set(palika_codes)),
+            }
             generator.save()
     except Exception:
         logger.error(
@@ -91,5 +98,5 @@ def test_doc(self, id):
         )
         return Generator.FAILURE
     # Clean generator files
-    shutil.rmtree(cc.get_output_path())
+    cc.clean_ouput_path()
     return Generator.SUCCESS

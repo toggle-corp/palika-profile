@@ -14,6 +14,7 @@ standard_error_string = (
 )
 
 
+
 def custom_exception_handler(exc, context):
     # First the get response by django rest framework
     response = exception_handler(exc, context)

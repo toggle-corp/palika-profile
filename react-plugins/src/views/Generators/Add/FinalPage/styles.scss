@@ -1,0 +1,31 @@
+@import '~base-scss/base';
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+    .left,
+    .right {
+        display: flex;
+        width: 400px;
+        border: 1px solid $color-separator;
+        border-style: dashed;
+        padding: $spacing-large;
+        height: 400px;
+        margin: 100px;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        .downImage,
+        .backImage {
+            display: flex;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+        }
+    }
+}

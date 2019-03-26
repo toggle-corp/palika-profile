@@ -4,6 +4,7 @@ import {
     createRequestCoordinator,
     createRequestClient,
     methods,
+    prepareUrlParams,
 } from '@togglecorp/react-rest-request';
 
 export * from '@togglecorp/react-rest-request';
@@ -98,3 +99,4 @@ export const createConnectedRequestCoordinator = () => createRequestCoordinator(
 export const RequestClient = createRequestClient;
 export const RequestCoordinator = createConnectedRequestCoordinator();
 export const requestMethods = methods;
+export const P = prepareUrlParams;

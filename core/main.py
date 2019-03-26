@@ -14,25 +14,31 @@ OUTPUT_PATH = './output/'
 PDF_TITLE = '%s_%s.pdf'
 PDF_WRITE_PATH = OUTPUT_PATH + PDF_TITLE
 
-def generate(skip= [], lang_in='en', test_len=None, make_maps=False, make_scnd=True, map_img_type='svg',
-             overwrite=False):
+
+def generate(
+        skip=[], lang_in='en', test_len=None, make_maps=False, make_scnd=True,
+        map_img_type='svg', overwrite=False,
+):
 
     set_lang(lang_in)
 
     # read in sheets
     # TODO: test sheets are OK?
     # TODO: more pythonic way of passing args
-    data = Sheet(pd.read_excel(XLS_URI, sheet_name='Profile Data', index_col=0, header=0),
-                    skip=skip,
-                    test_len=test_len,
-                    overwrite=overwrite,
-                    OUTPUT_PATH=OUTPUT_PATH,
-                    lang_in=lang_in,
+    data = Sheet(
+        pd.read_excel(
+            XLS_URI, sheet_name='Profile Data', index_col=0, header=0,
+        ),
+        skip=skip,
+        test_len=test_len,
+        overwrite=overwrite,
+        OUTPUT_PATH=OUTPUT_PATH,
+        lang_in=lang_in,
 
-                    num_rows_strip=3,
-                    remove_reserve_dims='columns',
-                    reserve_val=SHT_RESERVE_CHAR,
-                    process_specific='data'
+        num_rows_strip=3,
+        remove_reserve_dims='columns',
+        reserve_val=SHT_RESERVE_CHAR,
+        process_specific='data'
     )
     # for now, all data is processed regardless of it is filtered or not
     data.process()
@@ -40,26 +46,29 @@ def generate(skip= [], lang_in='en', test_len=None, make_maps=False, make_scnd=T
     print('Errors for data:')
     # print(data.errors)
 
-    meta = Sheet(pd.read_excel(XLS_URI, sheet_name='Meta', index_col=0, header=0),
-                    num_rows_strip=1,
-                    remove_reserve_dims='columns',
-                    reserve_val=SHT_RESERVE_CHAR
-                )
+    meta = Sheet(
+        pd.read_excel(XLS_URI, sheet_name='Meta', index_col=0, header=0),
+        num_rows_strip=1,
+        remove_reserve_dims='columns',
+        reserve_val=SHT_RESERVE_CHAR
+    )
     meta.process()
 
-    faq = Sheet(pd.read_excel(XLS_URI, sheet_name='FAQs', index_col=0, header=0),
-                    num_rows_strip=1,
-                    remove_reserve_dims='columns',
-                    reserve_val=SHT_RESERVE_CHAR
-                )
+    faq = Sheet(
+        pd.read_excel(XLS_URI, sheet_name='FAQs', index_col=0, header=0),
+        num_rows_strip=1,
+        remove_reserve_dims='columns',
+        reserve_val=SHT_RESERVE_CHAR
+    )
     faq.process()
 
-    titles = Sheet(pd.read_excel(XLS_URI, sheet_name='titles', index_col=0, header=0),
-                    num_rows_strip=1,
-                    remove_reserve_dims=['rows', 'columns'],
-                    reserve_val=SHT_RESERVE_CHAR,
-                    process_specific='titles'
-                   )
+    titles = Sheet(
+        pd.read_excel(XLS_URI, sheet_name='titles', index_col=0, header=0),
+        num_rows_strip=1,
+        remove_reserve_dims=['rows', 'columns'],
+        reserve_val=SHT_RESERVE_CHAR,
+        process_specific='titles'
+    )
     titles.process()
 
     # clean sheets
@@ -77,11 +86,9 @@ def generate(skip= [], lang_in='en', test_len=None, make_maps=False, make_scnd=T
     if make_maps:
         gen_maps(list(palika_codes), map_img_type)
 
-
     # process
     print('Creating for: ', data.sht.index.values)
 
-    PATH = './output/%s_%s.pdf'
     for v in palika_codes:
         print('Creating profile for %s' % v)
         cur_rep = Report(gc=v, data_sht=data.sht, meta_sht=meta.sht,
@@ -97,10 +104,20 @@ def generate(skip= [], lang_in='en', test_len=None, make_maps=False, make_scnd=T
 
 
 if __name__ == '__main__':
+    # generate(
+    #     # test_len=5,
+    #     lang_in='en',
+    #     # make_maps=True,
+    #     make_scnd=True,
+    #     map_img_type='svg',
+    #     overwrite=True,
+    # )
+
     generate(
-             test_len=80,
-             lang_in='en',
-             make_maps=True,
-             make_scnd=True,
-             map_img_type='svg',
-             overwrite = True)
+        test_len=1,
+        lang_in='np',
+        make_maps=False,
+        make_scnd=True,
+        map_img_type='svg',
+        overwrite=True,
+    )

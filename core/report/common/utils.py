@@ -51,7 +51,7 @@ def fmt_num(val):
 
     if get_lang() == 'np':
         # a bit hacky
-        v_str = swap_nep_chars(str(val))
+        v_str = swap_nep_chars(str(int(val)))
         COMM_PT = 2
         skip = ''
 
@@ -205,27 +205,35 @@ def get_faq(faq_num, faq_sht, meta_sht):
     }
 
 
-def gen_maps(pka_list, img_type):
+def gen_maps(
+        pka_list, img_type,
+        # Shapes
+        wards_uri=None, palika_uri=None, dists_uri=None,
+        # Styles
+        dists_style_uri=None, pka_hide_style_uri=None, atlas_style_uri=None,
+        ward_style_uri=None, pka_style_lang_uri=None,
+):
     # TODO: error, check if the provided palika codes are actually in our data
     # TODO: delete once finished running
 
     print(get_lang())
     if get_lang() in ('en', 'np'):
-        pka_style_lang = get_resource_abspath('mapfiles/styles/palika_style_%s.qml' % get_lang()) # noqa
+        pka_style_lang = get_resource_abspath('mapfiles/styles/palika_style_%s.qml' % get_lang()) # noqa E501
     else:
         raise Exception('Bad language for map styling, bro.')
 
     atlas = at(
-        data_uri=get_resource_abspath('data/profile_data_structure_template.xlsx'), # noqa
-        wards_uri=get_resource_abspath('mapfiles/hrrp_shapes/jsons/merge.json'),
-        palika_uri=get_resource_abspath('mapfiles/hrrp_shapes/jsons/GaPaNaPa_hrrp.json'), # noqa
-        dists_uri=get_resource_abspath('mapfiles/hrrp_shapes/jsons/Districts_hrrp.json'), # noqa
+        data_uri=get_resource_abspath('data/profile_data_structure_template.xlsx'),  # noqa: E501
 
-        dists_syle=get_resource_abspath('mapfiles/styles/dist_style.qml'),
-        pka_style=pka_style_lang,
-        pka_hide_style=get_resource_abspath('mapfiles/styles/palika_hide_style.qml'), # noqa
-        ward_style=get_resource_abspath('mapfiles/styles/ward_style.qml'),
-        atlas_style=get_resource_abspath('mapfiles/styles/atlas_layout.qpt'),
+        wards_uri=wards_uri or get_resource_abspath('mapfiles/hrrp_shapes/jsons/merge.json'),  # noqa: E501
+        palika_uri=palika_uri or get_resource_abspath('mapfiles/hrrp_shapes/jsons/GaPaNaPa_hrrp.json'),  # noqa: E501
+        dists_uri=dists_uri or get_resource_abspath('mapfiles/hrrp_shapes/jsons/Districts_hrrp.json'),  # noqa: E501
+
+        dists_syle=dists_style_uri or get_resource_abspath('mapfiles/styles/dist_style.qml'),  # noqa: E501
+        pka_style=pka_style_lang_uri or pka_style_lang,
+        pka_hide_style=pka_hide_style_uri or get_resource_abspath('mapfiles/styles/palika_hide_style.qml'),  # noqa: E501
+        ward_style=ward_style_uri or get_resource_abspath('mapfiles/styles/ward_style.qml'),  # noqa: E501
+        atlas_style=atlas_style_uri or get_resource_abspath('mapfiles/styles/atlas_layout.qpt'),  # noqa: E501
 
         parent_join_cd='N_WCode',
         to_join_code='ward',
@@ -239,6 +247,7 @@ def gen_maps(pka_list, img_type):
     atlas.make_maps()
     atlas.exit()
     del(atlas)
+
 
 def get_text_width(text, fontsize, font, font_weight):
     """get width of text"""
@@ -263,7 +272,7 @@ def is_nan(val):
     try:
         if math.isnan(val):
             return True
-    except: # noqa
+    except Exception:
         pass
 
     return False
