@@ -10,7 +10,9 @@ import styles from './styles.scss';
 
 
 const GeneratorAdd = () => (
-    <Wizard className={styles.wizard}>
+    <Wizard
+        className={styles.wizard}
+    >
         <UploadPage />
         <ValidationPage />
         <ExportPage />

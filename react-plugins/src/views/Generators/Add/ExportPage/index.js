@@ -295,6 +295,7 @@ class TriggerPage extends React.PureComponent {
                         schema={TriggerPage.schema}
                         value={validatedFaramValues}
                         error={faramErrors}
+                        disabled={exportPending}
                     >
                         <div className={styles.selectContainer}>
                             <MultiSelectInput
@@ -324,9 +325,10 @@ class TriggerPage extends React.PureComponent {
                         </div>
                         <PrimaryButton
                             className={styles.button}
-                            pending={pending}
+                            pending={exportPending}
                             type="submit"
                             iconName={iconNames.textDoc}
+                            disabled={exportPending}
                         >
                             Export
                         </PrimaryButton>

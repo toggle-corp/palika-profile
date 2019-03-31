@@ -1,8 +1,10 @@
 import React from 'react';
 import memoize from 'memoize-one';
 import PropTypes from 'prop-types';
+import { _cs } from '@togglecorp/fujs';
 
 import { P } from '#request';
+import styles from './styles.scss';
 
 const FileLink = ({ url, label }) => {
     if (url) {
@@ -20,7 +22,10 @@ export const FileLinks = ({ urls, keySelector, labelSelector, urlSelector }) => 
     if (urls) {
         return urls.map(
             exp => (
-                <div key={keySelector(exp)}>
+                <div
+                    key={keySelector(exp)}
+                    className={styles.file}
+                >
                     <FileLink
                         url={urlSelector(exp)}
                         label={labelSelector(exp)}
@@ -41,8 +46,10 @@ export class GeneratorExportsDownload extends React.PureComponent {
     static propTypes = {
         // eslint-disable-next-line react/forbid-prop-types
         generator: PropTypes.object,
+        className: PropTypes.string,
     };
     static defaultProps = {
+        className: '',
         generator: {},
     };
 
@@ -52,6 +59,7 @@ export class GeneratorExportsDownload extends React.PureComponent {
 
     render() {
         const {
+            className,
             generator: {
                 id,
                 exports,
@@ -59,24 +67,31 @@ export class GeneratorExportsDownload extends React.PureComponent {
         } = this.props;
         if (exports && exports.length) {
             return (
-                <div>
-                    <FileLinks
-                        urls={exports}
-                        keySelector={fileKeySelector}
-                        labelSelector={fileLabelSelector}
-                        urlSelector={fileUrlSelector}
-                    />
+                <div className={_cs(className, styles.container)}>
                     <a
+                        className={styles.downloadZip}
                         href={this.getDownloadAsZipUrl(id)}
                         target="_blank"
                         rel="noopener noreferrer"
                     >
                         Download as zip
                     </a>
+                    <div className={styles.filesContainer}>
+                        <FileLinks
+                            urls={exports}
+                            keySelector={fileKeySelector}
+                            labelSelector={fileLabelSelector}
+                            urlSelector={fileUrlSelector}
+                        />
+                    </div>
                 </div>
             );
         }
-        return 'No export found..';
+        return (
+            <div className={className}>
+                No exports found.
+            </div>
+        );
     }
 }
 
