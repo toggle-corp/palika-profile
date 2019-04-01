@@ -28,7 +28,9 @@
         .downloads {
             flex-grow: 1;
             padding: $spacing-small;
+            max-width: 640px;
             overflow-y: auto;
+            text-align: center;
         }
     }
 
@@ -38,5 +40,9 @@
         width: auto;
         text-transform: capitalize;
         font-size: $font-size-medium-alt;
+
+        >span {
+            margin-right: $spacing-small;
+        }
     }
 }

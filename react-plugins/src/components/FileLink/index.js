@@ -74,6 +74,7 @@ export class GeneratorExportsDownload extends React.PureComponent {
                         target="_blank"
                         rel="noopener noreferrer"
                     >
+                        <span className={_cs(styles.icon, 'ion-ios-download-outline')} />
                         Download as zip
                     </a>
                     <div className={styles.filesContainer}>

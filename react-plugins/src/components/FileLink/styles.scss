@@ -4,13 +4,11 @@
     .files-container {
         display: flex;
         flex-wrap: wrap;
-        max-width: 640px;
 
         .file {
-            padding-left: $spacing-medium;
-
             &:not(:last-child) {
                 &:after {
+                    padding-right: $spacing-medium;
                     content: ',';
                 }
             }
@@ -18,9 +16,12 @@
     }
 
     .download-zip {
-        display: block;
-        padding-bottom: $spacing-large;
-        text-align: center;
-        font-size: $font-size-large;
+        @include button-like-link($color-foreground);
+        margin-bottom: $spacing-medium-alt;
+        font-size: $font-size-small;
+
+        .icon {
+            margin-right: $spacing-small;
+        }
     }
 }

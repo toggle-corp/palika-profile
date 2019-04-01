@@ -89,7 +89,8 @@ class ExportPage extends React.PureComponent {
                         onClick={onPrev}
                         className={styles.button}
                     >
-                        Back
+                        <span className="ion-android-arrow-back" />
+                        Go Back
                     </PrimaryButton>
                 </div>
                 <div className={styles.content}>

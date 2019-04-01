@@ -1,26 +1,27 @@
 @import '~base-scss/base';
 
-.wizard {
+$height-header: 32px;
+
+.wizard-container {
     height: 100%;
-}
 
-.form {
-    display: flex;
-    flex-direction: column;
-    margin: $spacing-large 0;
-    border: $width-separator-thin solid $color-separator;
-    padding: $spacing-medium;
-    width: 360px;
-
-    .bottom-container {
+    .header {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-end;
+        height: $height-header;
 
-        .button {
-            padding: $spacing-small $spacing-medium;
-            text-transform: capitalize;
-            font-size: $font-size-medium-alt;
+        .download-button {
+            @include button-like-link($color-foreground);
+            margin-left: $spacing-medium;
+
+            >span {
+                margin-right: $spacing-small;
+            }
         }
+    }
+
+    .wizard {
+        height: calc(100% - #{$height-header});
     }
 }

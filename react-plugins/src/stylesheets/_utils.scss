@@ -132,10 +132,11 @@ $radius-button-border: 2px;
     @include background-color($background-color);
     display: inline-block;
     border-radius: $radius-button-border;
-    padding: $spacing-small $spacing-small-alt;
-    text-transform: uppercase;
-    font-size: $font-size-small;
-    font-weight: $font-weight-bold;
+    padding: $spacing-small $spacing-medium;
+    text-transform: capitalize;
+    text-decoration: none;
+    font-size: $font-size-medium-alt;
+    font-weight: $font-weight-medium;
 
     &:active {
         @include shadow-button-active;
