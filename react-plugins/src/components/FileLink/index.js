@@ -10,7 +10,11 @@ const FileLink = ({ url, label }) => {
     if (url) {
         const filename = label || url.split('/').pop();
         return (
-            <a href={url}>
+            <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+            >
                 {filename}
             </a>
         );

@@ -39,6 +39,12 @@
             :global {
                 .header {
                     top: -2px;
+
+                }
+                .headers {
+                    .export {
+                        width: 50vw;
+                    }
                 }
 
                 th {

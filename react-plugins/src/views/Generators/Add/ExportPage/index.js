@@ -100,7 +100,7 @@ class TriggerPage extends React.PureComponent {
             selectedProvince: [],
             selectedDistrict: [],
             selectedPalikaCodes: [requiredCondition],
-            language: [requiredCondition],
+            language: [],
         },
     }
 
@@ -341,6 +341,7 @@ class TriggerPage extends React.PureComponent {
                                 showHintAndError={false}
                                 placeholder="Select Palikas"
                             />
+                            {/*
                             <SegmentInput
                                 options={languageOptions}
                                 keySelector={languageOptionsKeySelector}
@@ -348,6 +349,7 @@ class TriggerPage extends React.PureComponent {
                                 faramElementName="language"
                                 label="Language"
                             />
+                            */}
                         </div>
                         <PrimaryButton
                             className={styles.button}

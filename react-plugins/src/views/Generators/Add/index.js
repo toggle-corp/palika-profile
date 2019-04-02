@@ -13,11 +13,14 @@ const GeneratorAdd = () => (
         <div className={styles.header}>
             <a
                 className={styles.downloadButton}
-                href="https://imgur.com/gallery/XXWzc0z"
+                href="/static/palika/sample_template.xlsx"
+                target="_blank"
+                rel="noopener noreferrer"
             >
                 <span className="ion-ios-download-outline" />
                 Sample sheet
             </a>
+            {/*
             <a
                 className={styles.downloadButton}
                 href="https://imgur.com/gallery/XXWzc0z"
@@ -25,6 +28,7 @@ const GeneratorAdd = () => (
                 <span className="ion-ios-download-outline" />
                 Shape files
             </a>
+            */}
         </div>
         <Wizard
             className={styles.wizard}
