@@ -2,10 +2,10 @@ import unittest
 import math
 from collections import OrderedDict
 
-from report.common import boiler, utils
-from report.common.Sheet import Sheet
-from report.common.boiler import strings
-from report.page2 import hh
+from ..common import boiler, utils
+from ..common.Sheet import Sheet
+from ..common.boiler import strings
+from ..page2 import hh
 
 import numpy as np
 import pandas as pd
@@ -90,6 +90,7 @@ class Tests(unittest.TestCase):
                          test_sht.errors[0]['message'])
 
     ####report.commons.utils
+
     def test_decimal_prop(self):
         self.assertEqual(utils.fmt_pct(0.5, 2), '50.00%')
         self.assertEqual(utils.fmt_pct(0.5, 0), '50%')
@@ -159,33 +160,34 @@ class Tests(unittest.TestCase):
 
         self.assertEqual(utils.get_list_typo(l, 5), res)
 
-    def test_list_typo_bad_len(self):
-        pass
-        # TODO: func call?
-        # l = [(1), (1, 2)]
-        #
-        # with self.assertRaises(AssertionError) as cm:
-        #     utils.get_list_typo(l, 5)
-        #
-        # the_exception = cm.exception
-        # self.assertEqual(the_exception.error_code, AssertionError)
-
-    def test_list_typo_short(self):
-        l = [
-            ('v', None),
-            ('v2', 2)
-        ]
-        self.assertEqual(utils.get_list_typo(l, 5), [['v2', 2], ['v', 0]])
-
     def test_fmt_num_np(self):
         "get num back like 1,23,45,67,890"
         boiler.set_lang('np')
+        self.assertEqual(utils.fmt_num(2.5), '२')
+        self.assertEqual(utils.fmt_num(3), '३')
         self.assertEqual(utils.fmt_num(123), '१२३')
         self.assertEqual(utils.fmt_num(1234), '१,२३४')
         self.assertEqual(utils.fmt_num(12345), '१२,३४५')
         self.assertEqual(utils.fmt_num(123456789), '१२,३४,५६,७८९')
         self.assertEqual(utils.fmt_num(3123456789), '३,१२,३४,५६,७८९')
         self.assertEqual(utils.fmt_num(31234567890), '३१,२३,४५,६७,८९०')
+
+    def test_fmt_dec_en(self):
+        self.assertEqual(utils.fmt_dec(2, 2), '2.00')
+        self.assertEqual(utils.fmt_dec(3.3, 2), '3.30')
+        self.assertEqual(utils.fmt_dec(3.36, 2), '3.36')
+        self.assertEqual(utils.fmt_dec(3.3666, 2), '3.37')
+
+    def test_fmt_dec_np(self):
+        boiler.set_lang('np')
+        self.assertEqual(utils.fmt_dec(2, 2), '२.००')
+        self.assertEqual(utils.fmt_dec(3.3, 2), '३.३०')
+        self.assertEqual(utils.fmt_dec(3.36, 2), '३.३६')
+        self.assertEqual(utils.fmt_dec(3.3666, 2), '३.३७')
+
+        # '0': '०', '1': '१', '2': '२', '3': '३', '4': '४',
+        # '5': '५', '6': '६', '7': '७', '8': '८', '9': '९'
+
 
     def test_swap(self):
         self.assertEqual(utils.swap_nep_chars('1,234.00%'), '१,२३४.००%')

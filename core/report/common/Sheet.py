@@ -182,7 +182,7 @@ class Sheet(object):
         """apply dec cleaning functions to a pd Series"""
         ERR_STR = 'Bad decimal value for {}'
         col = []
-        for ind, v in srs.iteritems():
+        for ind, v in srs. iteritems():
             try:
                 if is_nan(v):
                     col.append(None)
