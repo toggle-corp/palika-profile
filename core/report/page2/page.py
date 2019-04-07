@@ -27,19 +27,24 @@ def FurtherInfoNotes(data, **kwargs):
             padding=Rect([12.5, 0, 0, 5]),
         ),
         *[
-            Column(width='20%', padding=Rect(8)).add(
+            Column(padding=Rect(8)).add(
                 Text(
                     text='{}. {} ({})'.format(
                         i + 1,
-                        contact['name'] if contact['name'] and contact['name'] != 'None' else '',
-                        contact['title'] if contact['title'] and contact['title'] != 'None' else '',
+                        contact['name'] if contact['name'] and contact['name'] != 'None'
+                        else '',
+                        contact['title'] if contact['title'] and contact['title'] != 'None'
+                        else '',
                     ),
                     font_family='Roboto Condensed',
                     font_size=7,
                     padding=Rect([5, 0, 0, 0]),
                 ),
                 Text(
-                    text='     {}'.format(contact['phone'] if contact['phone'] and contact['phone'] != 'None' else ''),
+                    text='     {}'
+                    .format(
+                        contact['phone'] if contact['phone'] and contact['phone'] != 'None' else ''
+                    ),
                     font_family='Roboto Condensed',
                     font_size=7,
                 ),

@@ -112,7 +112,7 @@ def Typologies(data):
                 font_family="Roboto Light",
                 font_size=6,
                 alignment=Text.RIGHT,
-                color=Color.GRAY,
+                color=Color.DARK_GRAY,
                 padding=Rect([0, 0, 10, 0])
             ),
         )
