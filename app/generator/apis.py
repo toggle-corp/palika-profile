@@ -70,6 +70,7 @@ class GeneratorViewSet(viewsets.ModelViewSet):
             task_id = generate_pdf.s(
                 generator.id,
                 request.data.get('selected_palika_codes'),
+                request.data.get('language'),
             ).delay().id
         else:
             generator = self.get_object()

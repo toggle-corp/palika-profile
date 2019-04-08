@@ -28,7 +28,7 @@ const requests = {
     generatorTriggerExport: {
         method: requestMethods.POST,
         url: ({ props: { generator: { id } } }) => `/generators/${id}/trigger-export/`,
-        body: ({ params: { selectedPalikaCodes } }) => ({ selectedPalikaCodes }),
+        body: ({ params: { selectedPalikaCodes, language } }) => ({ selectedPalikaCodes, language }),
         onSuccess: ({
             response: { taskId },
             props: {
