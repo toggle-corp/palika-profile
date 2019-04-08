@@ -133,7 +133,7 @@ class Sheet(object):
             try:
                 #TODO: warn on decimal convert
                 col.append(int(v))
-            except:
+            except Exception:
                 self._add_error(message=ERR_STR.format(str(v)), column=col_nm, index=ind)
                 col.append(None)
 
@@ -172,7 +172,7 @@ class Sheet(object):
                     col.append(None)
                 else:
                     col.append(str(v))
-            except:
+            except Exception:
                 self._add_error(message=ERR_STR.format(str(v)), column=col_nm, index=ind)
                 col.append(None)
 
@@ -182,13 +182,13 @@ class Sheet(object):
         """apply dec cleaning functions to a pd Series"""
         ERR_STR = 'Bad decimal value for {}'
         col = []
-        for ind, v in srs. iteritems():
+        for ind, v in srs.iteritems():
             try:
                 if is_nan(v):
                     col.append(None)
                 else:
                     col.append(float(v))
-            except:
+            except Exception:
                 self._add_error(message=ERR_STR.format(str(v)), column=col_nm, index=ind)
                 col.append(None)
 
@@ -204,7 +204,7 @@ class Sheet(object):
                     col.append(None)
                 else:
                     col.append(float(v))
-            except:
+            except Exception:
                 self._add_error(message=ERR_STR.format(str(v)), column=col_nm, index=ind)
                 col.append(None)
 

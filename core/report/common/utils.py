@@ -3,16 +3,13 @@
 import math
 import os
 import copy
-import sys
 from collections import OrderedDict
 
 import cairo
 from hrrpmaps.atlas_auto import at
 
-sys.path.extend(['.', '..'])
-
-from .boiler import get_lang, boil
-from . import ZERO_DEFAULT
+from ..common.boiler import get_lang, boil
+from ..common import ZERO_DEFAULT
 
 
 RESOURCES_DIR = os.path.abspath(
@@ -80,7 +77,7 @@ def fmt_num(val):
     return fmtd
 
 
-def fmt_dec(val, pts, dec = False):
+def fmt_dec(val, pts, dec=False):
     """convert values to decimal format with specified number of decimals"""
 
     try:
@@ -110,7 +107,7 @@ def fmt_pct(val, pts):
             return val
 
     if val > 1:
-        #TODO: error handler
+        # TODO: error handler
         # raise Exception('Decimal value is greater than 1: {0}'.format(val))
         # val/=100
         print('Decimal value is greater than 1: {0}'.format(val))
@@ -118,7 +115,7 @@ def fmt_pct(val, pts):
     ret = fmt_dec(val, pts, True)
 
     if val is None or val == 0:
-            ret = '0.{}%'.format('0'*pts)
+        ret = '0.{}%'.format('0'*pts)
 
     else:
         ret = '{0}{1}'.format(fmt_dec(val, pts, True), '%')

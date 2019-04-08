@@ -216,7 +216,7 @@ def CMTable(top_data, bot_data):
             {'text': material['unit']},
             {'text': fmt_num(datum['req_quantity'])},
             {'text': datum['ava']},
-            {'text': fmt_dec(datum['cost'])},
+            {'text': fmt_dec(datum['cost'], 2)},
         ])
 
     headers = ['<b>{}</b>'.format(boil(k)) for k in [
