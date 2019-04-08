@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
+import Spinner from '#rscz/Spinner';
+import Message from '#rscv/Message';
 import {
     generatorSelectorGP,
 } from '#selectors';
@@ -19,6 +21,7 @@ import {
 
 
 import requests from './requests';
+import styles from './styles.scss';
 
 const propTypes = {
     /* eslint-disable react/forbid-prop-types */
@@ -47,7 +50,16 @@ class ValidationPage extends React.PureComponent {
     }
 
     render() {
-        return 'Validating Document.....';
+        return (
+            <div className={styles.container}>
+                <Spinner className={styles.spinner} />
+                <div className={styles.messageContainer}>
+                    <Message>
+                        Validating Document
+                    </Message>
+                </div>
+            </div>
+        );
     }
 }
 

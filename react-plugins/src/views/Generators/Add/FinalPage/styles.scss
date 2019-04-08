@@ -2,30 +2,47 @@
 
 .container {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
 
-    .left,
-    .right {
+    .content {
         display: flex;
-        width: 400px;
+        align-items: center;
+        flex-direction: column;
+        flex-grow: 1;
+        justify-content: center;
+        margin-top: $spacing-large;
         border: 1px solid $color-separator;
         border-style: dashed;
         padding: $spacing-large;
-        height: 400px;
-        margin: 100px;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
+        width: 100%;
+        overflow-y: auto;
 
-        .downImage,
-        .backImage {
+        .downImage {
             display: flex;
-            height: 100%;
-            align-items: center;
-            justify-content: center;
-            margin: auto;
+            flex-shrink: 0;
+            font-size: $font-size-large;
+        }
+
+        .downloads {
+            flex-grow: 1;
+            padding: $spacing-small;
+            max-width: 640px;
+            overflow-y: auto;
+            text-align: center;
+        }
+    }
+
+    .button {
+        flex-basis: auto;
+        padding: $spacing-small $spacing-medium;
+        width: auto;
+        text-transform: capitalize;
+        font-size: $font-size-medium-alt;
+
+        >span {
+            margin-right: $spacing-small;
         }
     }
 }

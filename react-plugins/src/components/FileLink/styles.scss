@@ -1,0 +1,27 @@
+@import '~base-scss/base';
+
+.container {
+    .files-container {
+        display: flex;
+        flex-wrap: wrap;
+
+        .file {
+            &:not(:last-child) {
+                &:after {
+                    padding-right: $spacing-medium;
+                    content: ',';
+                }
+            }
+        }
+    }
+
+    .download-zip {
+        @include button-like-link($color-foreground);
+        margin-bottom: $spacing-medium-alt;
+        font-size: $font-size-small;
+
+        .icon {
+            margin-right: $spacing-small;
+        }
+    }
+}

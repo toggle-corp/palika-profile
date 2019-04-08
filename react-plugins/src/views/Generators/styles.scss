@@ -1,9 +1,15 @@
 @import '~base-scss/base';
 
 .generator {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
+
     .header {
         display: flex;
         align-items: center;
+        flex-shrink: 0;
         justify-content: space-between;
 
         .button {
@@ -14,13 +20,44 @@
         }
     }
 
-    .table {
+    .container {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
         margin-top: 12px;
         border: $width-separator-thin solid $color-separator;
-        border-top: $width-separator-thin solid $color-separator;
+        overflow-y: auto;
 
-        span {
-            color: $color-text-label;
+        .table {
+            flex-grow: 1;
+            border-top: 0;
+
+            span {
+                color: $color-text-label;
+            }
+
+            :global {
+                .header {
+                    top: -2px;
+
+                }
+                .headers {
+                    .export {
+                        width: 50vw;
+                    }
+                }
+
+                th {
+                    >div {
+                        border-top: 0;
+                        text-transform: capitalize;
+                    }
+                }
+
+                .row {
+                    background-color: $color-foreground;
+                }
+            }
         }
     }
 }

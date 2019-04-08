@@ -66,7 +66,7 @@ class ExportPage extends React.PureComponent {
 
         const { data = emptyObject } = generator;
 
-        if (exportStatus === 'failed') {
+        if (!exportStatus === 'failed') {
             return (
                 <div>
                     <h1>Failed to generate PDFs</h1>
@@ -84,23 +84,23 @@ class ExportPage extends React.PureComponent {
 
         return (
             <div className={styles.container}>
-                <div className={styles.left}>
+                <div>
+                    <PrimaryButton
+                        onClick={onPrev}
+                        className={styles.button}
+                    >
+                        <span className="ion-android-arrow-back" />
+                        Go Back
+                    </PrimaryButton>
+                </div>
+                <div className={styles.content}>
                     <div className={styles.downImage}>
                         Download files
                     </div>
                     <GeneratorExportsDownload
+                        className={styles.downloads}
                         generator={generator}
                     />
-                </div>
-                <div className={styles.right}>
-                    <div className={styles.backImage}>
-                        Click here to go back
-                    </div>
-                    <PrimaryButton
-                        onClick={onPrev}
-                    >
-                            Back
-                    </PrimaryButton>
                 </div>
             </div>
         );

@@ -71,7 +71,7 @@ def TechnicalStaff(tech_data, mason_data):
                     width=widths[i],
                     height='15',
                     font_family='Roboto Condensed',
-                    font_size=7,
+                    font_size=7 if i == 0 else 9,
                     font_weight=Pango.Weight.BOLD if i == 0 else None,
                     padding=Rect([3, 0, 0, 4]),
                     alignment=(
@@ -111,7 +111,7 @@ def TechnicalStaff(tech_data, mason_data):
                                 boil('tech_staff_days')
                             ),
                             font_family='Roboto Condensed',
-                            font_size=5,
+                            font_size=6,
                             width='100%',
                             alignment=Text.CENTER,
                             padding=Rect([2, 0, 0, 0]),
@@ -124,7 +124,7 @@ def TechnicalStaff(tech_data, mason_data):
                                 boil('tech_staff_days')
                             ),
                             font_family='Roboto Condensed',
-                            font_size=5,
+                            font_size=6,
                             width='100%',
                             alignment=Text.CENTER,
                         )
@@ -141,7 +141,7 @@ def TechnicalStaff(tech_data, mason_data):
                             boil('tech_staff_days')
                         ),
                         font_family='Roboto Condensed',
-                        font_size=5,
+                        font_size=6,
                         width='100%',
                         alignment=Text.CENTER,
                         padding=Rect([2, 0, 0, 0]),
@@ -154,7 +154,7 @@ def TechnicalStaff(tech_data, mason_data):
                             boil('tech_staff_days')
                         ),
                         font_family='Roboto Condensed',
-                        font_size=5,
+                        font_size=6,
                         width='100%',
                         alignment=Text.CENTER,
                     )

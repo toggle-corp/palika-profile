@@ -5,6 +5,7 @@ class Color:
     BLACK = rgb(0, 0, 0)
     WHITE = rgb(255, 255, 255)
     GRAY = rgb(190, 190, 190)
+    DARK_GRAY = rgb(96, 96, 96)
     LIGHT_GRAY = rgb(225, 225, 225)
     BLUE = rgb(26, 35, 126)
     ORANGE = rgb(237, 125, 49)

@@ -1,0 +1,20 @@
+@import '~base-scss/base';
+
+.container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+
+    .spinner {
+        width: $font-size-super-large-alt;
+        height: $font-size-super-large-alt;
+    }
+
+    .message-container {
+        margin-top: $spacing-large;
+        width: 100%;
+        height: $font-size-super-large-alt;
+    }
+}

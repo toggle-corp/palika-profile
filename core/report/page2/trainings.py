@@ -110,7 +110,7 @@ class PieChart(Shape):
                             pos=num_pos,
                             text=fmt_num(value),
                             font_family='Roboto Condensed',
-                            font_size=5,
+                            font_size=8,
                             line_cap=LineShape
                         )
                     )
@@ -134,7 +134,8 @@ class PieChart(Shape):
 
 
 def _calc_reached(reqd, reached):
-        return max(0, reqd - reached)
+    return max(0, reqd - reached)
+
 
 def Trainings(data):
     short = data['short']

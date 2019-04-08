@@ -158,6 +158,14 @@ def TwoValueLineChart(data, bar_color):
     elif get_lang() == 'np':
         row_margin = [6, 0, 0, 0]
 
+    label = boil(data['label'])
+    if (label == 'Ist Tranche received'):
+        label = 'I<sup>st</sup> Tranche received'
+    if (label == 'IInd Tranche received'):
+        label = 'II<sup>nd</sup> Tranche received'
+    if (label == 'IIIrd Tranche received'):
+        label = 'III<sup>rd</sup> Tranche received'
+
     return Row(
         width='100%',
         height=16,
@@ -165,7 +173,7 @@ def TwoValueLineChart(data, bar_color):
     ).add(
         Text(
             width='40%',
-            text=boil(data['label']),
+            markup=label,
             font_family="Roboto Condensed",
             font_size=9,
             font_weight=Text.BOLD,

@@ -1,6 +1,9 @@
 import React from 'react';
 
 import Spinner from '#rscz/Spinner';
+import { _cs } from '@togglecorp/fujs';
+
+import InfoGroup from '#components/InfoGroup';
 
 import styles from './styles.scss';
 
@@ -17,26 +20,22 @@ const TaskStatus = ({
         return (
             <div className={styles.container}>
                 {itemList.map(item => (
-                    <div
-                        key={item}
-                        className={styles.item}
-                    >
-                        <span>{`${item}:  `}</span>
-                        <span>
-                            {
-                                typeof (items[item]) === 'object'
-                                    ? `${items[item].complete}/${items[item].total}`
-                                    : items[item]
-                            }
-                        </span>
-                    </div>
+                    <InfoGroup
+                        label={item}
+                        type="table"
+                        value={
+                            typeof (items[item]) === 'object'
+                                ? `${items[item].complete}/${items[item].total}`
+                                : items[item]
+                        }
+                    />
                 ))}
             </div>
         );
     }
     return (
-        <div className={styles.container}>
-            <Spinner />
+        <div className={_cs(styles.container, styles.spinnerContainer)}>
+            <Spinner className={styles.spinner} />
         </div>
     );
 };

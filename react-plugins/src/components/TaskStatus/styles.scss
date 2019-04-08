@@ -1,21 +1,22 @@
 @import '~base-scss/base';
 
 .container {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
+    width: auto;
     overflow-y: auto;
-    text-transform: uppercase;
+    text-transform: capitalize;
     font-size: $font-size-medium;
-
-    .item {
-        padding: $spacing-small;
-    }
 }
 
 .spinner-container {
     display: flex;
     align-items: center;
+    flex-direction: column;
+    flex-grow: 1;
     justify-content: center;
     padding: $spacing-large;
+
+    .spinner {
+        width: $font-size-super-large-alt;
+        height: $font-size-super-large-alt;
+    }
 }

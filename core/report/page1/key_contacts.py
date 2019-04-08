@@ -9,7 +9,7 @@ from ..common import ZERO_DEFAULT
 def Contact(it, title, contact):
 
     for k, v in contact.items():
-        #TODO: fix 'none'
+        # TODO: fix 'none'
         if not v or v == 'None':
             contact[k] = '-'
 

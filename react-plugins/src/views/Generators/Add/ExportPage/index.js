@@ -9,6 +9,7 @@ import Faram, {
 } from '@togglecorp/faram';
 import PrimaryButton from '#rsca/Button/PrimaryButton';
 import MultiSelectInput from '#rsci/MultiSelectInput';
+import SegmentInput from '#rsci/SegmentInput';
 import ScrollTabs from '#rscv/ScrollTabs';
 import MultiViewContainer from '#rscv/MultiViewContainer';
 import Message from '#rscv/Message';
@@ -67,11 +68,27 @@ const tabs = {
     progress: 'Export Progress',
     validation: 'Validation',
 };
+const NEPALI = 'nep';
+const ENGLISH = 'eng';
+
+const languageOptions = [
+    {
+        title: 'Nepali',
+        key: NEPALI,
+    },
+    {
+        title: 'English',
+        key: ENGLISH,
+    },
+];
 
 const KeySelector = ele => ele.id;
 const labelSelector = (ele = emptyObject) => ele.title;
 const palikaKeySelector = palika => palika.code;
 const palikaLabelSelector = labelSelector;
+
+const languageOptionsLabelSelector = l => l.title;
+const languageOptionsKeySelector = l => l.key;
 
 @RequestCoordinator
 @RequestClient(requests)
@@ -83,6 +100,7 @@ class TriggerPage extends React.PureComponent {
             selectedProvince: [],
             selectedDistrict: [],
             selectedPalikaCodes: [requiredCondition],
+            language: [],
         },
     }
 
@@ -90,7 +108,9 @@ class TriggerPage extends React.PureComponent {
         super(props);
 
         this.state = {
-            faramValues: {},
+            faramValues: {
+                language: ENGLISH,
+            },
             faramErrors: {},
             activeTab: 'validation',
             // pristine: true,
@@ -278,7 +298,6 @@ class TriggerPage extends React.PureComponent {
                 selectedPalikaCodes, filteredPalikaCodeList,
             ),
         };
-        const pending = false;
         const exportPending = (
             generatorTriggerExportPoll.pending || generatorTriggerExport.pending
         );
@@ -295,6 +314,7 @@ class TriggerPage extends React.PureComponent {
                         schema={TriggerPage.schema}
                         value={validatedFaramValues}
                         error={faramErrors}
+                        disabled={exportPending}
                     >
                         <div className={styles.selectContainer}>
                             <MultiSelectInput
@@ -321,10 +341,19 @@ class TriggerPage extends React.PureComponent {
                                 showHintAndError={false}
                                 placeholder="Select Palikas"
                             />
+                            {/*
+                            <SegmentInput
+                                options={languageOptions}
+                                keySelector={languageOptionsKeySelector}
+                                labelSelector={languageOptionsLabelSelector}
+                                faramElementName="language"
+                                label="Language"
+                            />
+                            */}
                         </div>
                         <PrimaryButton
                             className={styles.button}
-                            pending={pending}
+                            pending={exportPending}
                             type="submit"
                             iconName={iconNames.textDoc}
                         >
