@@ -77,43 +77,48 @@ def fmt_num(val):
     return fmtd
 
 
+def fmt_dec(val, pts, dec=False):
+    """convert values to decimal format with specified number of decimals"""
+
+    try:
+        val = float(val)
+        if dec:
+            val *= 100
+
+    except Exception:
+        pass
+        # TODO: error handler
+        # raise Exception('bad decimal for {0}'.format(val))
+
+        print('bad decimal for {0}, converting to 0'.format(val))
+        val = 0.0
+
+    fmtd = '{:.{}f}'.format(val, pts)
+
+    return fmtd if get_lang() != 'np' else swap_nep_chars(fmtd)
+
+
 def fmt_pct(val, pts):
     """
     assert that we have decimal pct and give it the required decimal points
     """
-    ret = ''
     if isinstance(val, str):
         if '%' in val:
             return val
 
-        else:
-            try:
-                val = float(val)
-            except Exception:
-                raise Exception('bad decimal for {0}'.format(val))
+    if val > 1:
+        # TODO: error handler
+        # raise Exception('Decimal value is greater than 1: {0}'.format(val))
+        # val/=100
+        print('Decimal value is greater than 1: {0}'.format(val))
 
-    # if val > 1:
-    #     #TODO: revert
-    #     # raise Exception('bad decimal for {0}'.format(val))
-    #     val/=100
+    ret = fmt_dec(val, pts, True)
 
     if val is None or val == 0:
         ret = '0.{}%'.format('0'*pts)
 
     else:
-        # can be done using decimal fmt?
-        rnd = str(round(val * 100, pts))
-        # TODO: revert?
-        if len(rnd.split('.')) > 1:
-            l_r = len(rnd.split('.')[1])
-
-            if pts == 0:
-                rnd = rnd.split('.')[0]
-
-            elif l_r < pts:
-                rnd += '0' * (pts - l_r)
-
-        ret = '{0}{1}'.format(rnd, '%')
+        ret = '{0}{1}'.format(fmt_dec(val, pts, True), '%')
 
     if get_lang() == 'np':
         ret = swap_nep_chars(ret)

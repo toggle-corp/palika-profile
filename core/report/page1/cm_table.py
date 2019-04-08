@@ -4,9 +4,10 @@ from drafter.nodes import Text, Image
 from drafter.shapes import Pango
 
 from ..common.color import Color
-from ..common.utils import fmt_num
+from ..common.utils import fmt_num, fmt_dec
 from ..common.boiler import boil
 from ..common.utils import get_resource_abspath
+from ..common import ZERO_DEFAULT
 
 
 def xstr(item):
@@ -208,14 +209,14 @@ def CMTable(top_data, bot_data):
         label = material['label']
 
         if datum['ava'] is None:
-            datum['ava'] = '-'
+            datum['ava'] = ZERO_DEFAULT
 
         rows.append([
             {'text': label, 'icon': material.get('icon')},
             {'text': material['unit']},
             {'text': fmt_num(datum['req_quantity'])},
             {'text': datum['ava']},
-            {'text': fmt_num(datum['cost'])},
+            {'text': fmt_dec(datum['cost'], 2)},
         ])
 
     headers = ['<b>{}</b>'.format(boil(k)) for k in [
