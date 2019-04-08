@@ -68,8 +68,8 @@ const tabs = {
     progress: 'Export Progress',
     validation: 'Validation',
 };
-const NEPALI = 'nep';
-const ENGLISH = 'eng';
+const NEPALI = 'np';
+const ENGLISH = 'en';
 
 const languageOptions = [
     {
@@ -245,14 +245,14 @@ class TriggerPage extends React.PureComponent {
         this.setState({ faramErrors });
     };
 
-    handleFaramSuccess = (_, { selectedPalikaCodes }) => {
+    handleFaramSuccess = (_, { selectedPalikaCodes, language }) => {
         const {
             requests: {
                 generatorTriggerExport,
             },
         } = this.props;
         this.setState({ activeTab: 'progress' });
-        generatorTriggerExport.do({ selectedPalikaCodes });
+        generatorTriggerExport.do({ selectedPalikaCodes, language });
     };
 
     handleTabClick = (activeTab) => {
@@ -341,7 +341,6 @@ class TriggerPage extends React.PureComponent {
                                 showHintAndError={false}
                                 placeholder="Select Palikas"
                             />
-                            {/*
                             <SegmentInput
                                 options={languageOptions}
                                 keySelector={languageOptionsKeySelector}
@@ -349,7 +348,6 @@ class TriggerPage extends React.PureComponent {
                                 faramElementName="language"
                                 label="Language"
                             />
-                            */}
                         </div>
                         <PrimaryButton
                             className={styles.button}

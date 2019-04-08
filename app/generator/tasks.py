@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 
 @transaction.atomic
-def _generate_pdf(self, cc, generator, selected_palika_codes):
+def _generate_pdf(self, cc, generator, selected_palika_codes, language):
     # Celery state
     self.update_state(state='PROGRESS')
 
@@ -34,7 +34,7 @@ def _generate_pdf(self, cc, generator, selected_palika_codes):
         generator.file,
         selected_palika_codes,
         map_params,
-        lang_in='en',
+        lang_in=language,
         make_maps=True,
         make_scnd=True,
         map_img_type='svg',
@@ -57,12 +57,12 @@ def _generate_pdf(self, cc, generator, selected_palika_codes):
 
 
 @app.task(bind=True)
-def generate_pdf(self, id, selected_palika_codes=None):
+def generate_pdf(self, id, selected_palika_codes=None, language='en'):
     cc = CoreConfig()
     generator = Generator.objects.get(pk=id)
     self.job_meta = {}
     try:
-        _generate_pdf(self, cc, generator, selected_palika_codes)
+        _generate_pdf(self, cc, generator, selected_palika_codes, language)
     except Exception:
         generator.status = Generator.FAILURE
         generator.data = {
