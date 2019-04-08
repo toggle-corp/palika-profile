@@ -31,7 +31,7 @@ RUN apt-get update -y \
     && gpg --fingerprint CAEB3DC3BDF7FB45 \
     && gpg --export --armor CAEB3DC3BDF7FB45 | apt-key add - \
     && apt-get update -y \
-    && apt-get install -y qgis-server python-qgis \
+    && apt-get install -y qgis python3-qgis \
     # Install required fonts
     && curl -L https://github.com/google/roboto/releases/download/v2.138/roboto-android.zip -o /tmp/font.zip \
     && unzip -o /tmp/font.zip -d /root/.fonts/ \

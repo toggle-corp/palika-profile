@@ -25,7 +25,7 @@ def _generate_pdf(self, cc, generator, selected_palika_codes, language):
     # Delete previous exports
     generator.exports.all().delete()
 
-    map_params = get_map_params_for_generation()
+    map_params = get_map_params_for_generation(language)
 
     # Generate new exports
     pdf_files, errors = pdf_generator.generate(
