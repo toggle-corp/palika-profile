@@ -15,7 +15,7 @@ def TrainingsFooter(**kwargs):
         **kwargs,
         text=boil('training_footer'),
         font_family='Roboto Condensed Light',
-        font_size=5,
+        font_size=6,
     )
 
 
@@ -111,6 +111,8 @@ class PieChart(Shape):
                             text=fmt_num(value),
                             font_family='Roboto Condensed',
                             font_size=8,
+                            color=Color.WHITE,
+                            font_weight=Pango.Weight.BOLD,
                             line_cap=LineShape
                         )
                     )

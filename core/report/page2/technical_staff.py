@@ -13,7 +13,7 @@ def TechnicalStaffFooter(**kwargs):
         **kwargs,
         text=boil('tech_staff_footer'),
         font_family='Roboto Condensed Light',
-        font_size=5,
+        font_size=6,
     )
 
 

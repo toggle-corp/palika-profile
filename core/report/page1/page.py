@@ -1,5 +1,6 @@
 from drafter.layouts import Row, Column
 from drafter.nodes import Text
+from drafter.color import rgb, hx
 
 from ..common.panel import Panel
 from ..common.sidebar import Sidebar

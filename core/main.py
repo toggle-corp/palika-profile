@@ -115,9 +115,9 @@ if __name__ == '__main__':
 
     generate(
         test_len=1,
-        lang_in='en',
+        lang_in='np',
         make_maps=False,
-        make_scnd=True,
+        make_scnd=False,
         map_img_type='svg',
         overwrite=True,
     )
