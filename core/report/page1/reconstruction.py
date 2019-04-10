@@ -153,10 +153,11 @@ class Bars(Shape):
 
 
 def TwoValueLineChart(data, bar_color):
-    if get_lang() == 'en':
-        row_margin = [4, 0, 0, 0]
-    elif get_lang() == 'np':
-        row_margin = [6, 0, 0, 0]
+    row_margin = [4, 0, 0, 0]
+    # if get_lang() == 'en':
+    #     row_margin = [4, 0, 0, 0]
+    # elif get_lang() == 'np':
+    #     row_margin = [6, 0, 0, 0]
 
     label = boil(data['label'])
     if (label == 'Ist Tranche received'):

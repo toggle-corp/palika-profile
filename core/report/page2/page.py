@@ -64,6 +64,7 @@ def Page(data):
         Row(width='100%').add(
             Panel(
                 title=boil('tech_staff_panel_title'),
+                height='100% - 20',
                 width='50% - 10',
                 right_footer=TechnicalStaffFooter,
             ).add(

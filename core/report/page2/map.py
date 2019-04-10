@@ -14,7 +14,7 @@ def Map(data):
     ).add(
         Column(
             width='100%',
-            height=380,
+            height=360,
             border=Border(
                 width=0.5,
                 color=Color.BLACK,
