@@ -6,7 +6,7 @@ from django.core.files import File
 
 from config.celery import app
 
-from geo.models import get_map_params_for_generation
+from geo.models import get_map_params_for_generation, Palika
 from .models import (
     Generator,
     Export,
@@ -43,11 +43,19 @@ def _generate_pdf(self, cc, generator, selected_palika_codes, language):
 
     # Save files to Generator
     for palika_code, pdf_file in pdf_files:
+        palika = Palika.objects.filter(code=palika_code).first()
+        filename = pdf_file.split('/')[-1]
+        if palika:
+            filename = '{}__{}__{}.pdf'.format(
+                palika.district.title.replace(' ', '_'),
+                palika.title.replace(' ', '_'),
+                language,
+            )
         with open(pdf_file, 'rb') as fp:
             Export.objects.create(
-                title=pdf_file.split('/')[-1],
+                title=filename,
                 generator=generator,
-                file=File(fp, pdf_file.split('/')[-1]),
+                file=File(fp, filename),
                 palika_code=palika_code,
             )
 
