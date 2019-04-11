@@ -94,10 +94,11 @@ class FinalPage extends React.PureComponent {
                         ) : (
                             <div className={styles.content}>
                                 <div className={styles.downImage}>
-                                        Download files
+                                    Download files
                                 </div>
                                 <GeneratorExportsDownload
                                     className={styles.downloads}
+                                    filesContainerClassName={styles.filesContainer}
                                     generator={generator}
                                 />
                             </div>

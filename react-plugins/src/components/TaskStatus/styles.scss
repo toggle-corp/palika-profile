@@ -4,7 +4,19 @@
     width: auto;
     overflow-y: auto;
     text-transform: capitalize;
-    font-size: $font-size-medium;
+
+    .info-group {
+        font-size: $font-size-large;
+
+        .label {
+            padding: $spacing-small-alt $spacing-medium;
+        }
+
+        .value {
+            padding: $spacing-small-alt $spacing-medium;
+            font-weight: $font-weight-bold;
+        }
+    }
 }
 
 .spinner-container {
