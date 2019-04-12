@@ -188,6 +188,7 @@ class Sheet(object):
                     col.append(None)
                 else:
                     col.append(float(v))
+
             except Exception:
                 self._add_error(message=ERR_STR.format(str(v)), column=col_nm, index=ind)
                 col.append(None)

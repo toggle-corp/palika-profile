@@ -71,31 +71,33 @@ def fmt_num(val):
             fmtd = v_str
 
     else:
-        # TODO: revert
         fmtd = '{:,}'.format(round(int(val), 2))
 
     return fmtd
 
 
 def fmt_dec(val, pts, dec=False):
-    """convert values to decimal format with specified number of decimals"""
-
+    """convert values to decimal format with specified number of decimals.
+        dec used for pct conversion.
+    """
     try:
         val = float(val)
         if dec:
             val *= 100
 
     except Exception:
-        pass
+        print('in')
         # TODO: error handler
-        # raise Exception('bad decimal for {0}'.format(val))
 
-        print('bad decimal for {0}, converting to 0'.format(val))
-        val = 0.0
+        print('bad decimal for {0}, converting to blank'.format(val))
+        return ZERO_DEFAULT
 
-    fmtd = '{:.{}f}'.format(val, pts)
+    if is_nan(val):
+        return ZERO_DEFAULT
 
-    return fmtd if get_lang() != 'np' else swap_nep_chars(fmtd)
+    else:
+        fmtd = '{:.{}f}'.format(val, pts)
+        return fmtd if get_lang() != 'np' else swap_nep_chars(fmtd)
 
 
 def fmt_pct(val, pts):
@@ -221,7 +223,6 @@ def gen_maps(
     # TODO: error, check if the provided palika codes are actually in our data
     # TODO: delete once finished running
 
-    print(get_lang())
     if get_lang() in ('en', 'np'):
         pka_style_lang = get_resource_abspath('mapfiles/styles/palika_style_%s.qml' % get_lang()) # noqa E501
     else:
