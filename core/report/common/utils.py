@@ -8,7 +8,7 @@ from collections import OrderedDict
 import cairo
 from hrrpmaps.atlas_auto import at
 
-from ..common.boiler import get_lang, boil
+from ..common.boiler import get_lang, boil, boil_header
 from ..common import ZERO_DEFAULT
 
 
@@ -199,16 +199,15 @@ def get_list_typo(in_vals, top):
     return out_vals
 
 
-def get_faq(faq_num, faq_sht, meta_sht):
+def get_faq(faq_num, faq_sht):
     """get FAQ values. if no FAQ specified or invalid, go to default"""
     # TODO: collect error here for when invalid or not in list
-    # TODO: Nep trans
     if faq_num not in faq_sht.index:
-        faq_num = meta_sht.loc['Default FAQ']['value_en']
+        faq_num = boil('faq_num')
 
     return {
-        'q': faq_sht.loc[faq_num]['question'],
-        'a': faq_sht.loc[faq_num]['answer'],
+        'q': faq_sht.loc[faq_num][boil_header('question', override = True)],
+        'a': faq_sht.loc[faq_num][boil_header('answer', override = True)],
     }
 
 

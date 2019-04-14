@@ -4,7 +4,7 @@ from collections import OrderedDict
 
 from ..common import boiler, utils
 from ..common.Sheet import Sheet
-from ..common.boiler import strings
+from ..common.boiler import title_strings
 from ..page2 import hh
 
 import numpy as np
@@ -15,7 +15,7 @@ import pandas as pd
 class Tests(unittest.TestCase):
     def setUp(self):
         boiler.set_lang('en')
-        strings['typologies_others'] = {'en' : 'Others'}
+        title_strings['typologies_others'] = {'en' : 'Others'}
 
         # hh
         self.hh_test_data = {

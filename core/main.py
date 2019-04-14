@@ -46,14 +46,6 @@ def generate(
     print('Errors for data:')
     # print(data.errors)
 
-    meta = Sheet(
-        pd.read_excel(XLS_URI, sheet_name='Meta', index_col=0, header=0),
-        num_rows_strip=1,
-        remove_reserve_dims='columns',
-        reserve_val=SHT_RESERVE_CHAR
-    )
-    meta.process()
-
     faq = Sheet(
         pd.read_excel(XLS_URI, sheet_name='FAQs', index_col=0, header=0),
         num_rows_strip=1,
@@ -71,16 +63,6 @@ def generate(
     )
     titles.process()
 
-    # clean sheets
-    # # TODO: process the rest 2
-    # titles = process_sht(titles)
-    # titles.rename(lambda x: x.strip('#'), axis='rows', inplace = True)
-    # import_titles(titles)
-    #
-    # data = clean_xls_headers(data, 2)
-    # meta = clean_xls_headers(meta, 1)
-    # faq = clean_xls_headers(faq, 1)
-
     palika_codes = data.sht.index[:test_len] if test_len else data.sht.index
 
     if make_maps:
@@ -91,8 +73,7 @@ def generate(
 
     for v in palika_codes:
         print('Creating profile for %s' % v)
-        cur_rep = Report(gc=v, data_sht=data.sht, meta_sht=meta.sht,
-                         faq_sht=faq.sht, map_img_type=map_img_type)
+        cur_rep = Report(gc=v, data_sht=data.sht, faq_sht=faq.sht, map_img_type=map_img_type)
         cur_rep.create_data()
 
         os.makedirs(OUTPUT_PATH, exist_ok=True)
@@ -108,7 +89,7 @@ if __name__ == '__main__':
         test_len=1,
         lang_in='np',
         make_maps=False,
-        make_scnd=False,
+        make_scnd=True,
         map_img_type='svg',
         overwrite=True,
     )
