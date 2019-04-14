@@ -2,28 +2,27 @@ from collections import OrderedDict
 
 from ..common.utils import get_faq
 from ..common.utils import get_resource_abspath
+from ..common.boiler import boil_header, get_lang
 
 
 class Report(object):
-    def __init__(self, gc, data_sht, meta_sht, faq_sht, map_img_type):
+    def __init__(self, gc, data_sht, faq_sht, map_img_type):
         self.data_sht = data_sht
-        self.meta_sht = meta_sht
         self.faq_sht = faq_sht
         self.map_img_type = map_img_type
 
         self.gc = gc
 
     def create_data(self):
+        """properly format input data according to sections. boiler.boil() is not used here but instead in the helper
+            functions. boiler.boil_header() is used here, however, as it refers to dynamic content"""
         cp = self.data_sht.loc[self.gc]
 
         self.data = {
             # Date
             'rep_data': {
-                # TODO: trans
-                'month': self.meta_sht.loc['Report Month']['value_en'],
-                'year': self.meta_sht.loc['Report Year']['value_en'],
-                'dist_nm': cp['district_name'],
-                'palika_nm': cp['palika_name'],
+                'dist_nm': cp[boil_header('district_name')],
+                'palika_nm': cp[boil_header('palika_name')],
             },
 
             # Facts and figures
@@ -130,8 +129,8 @@ class Report(object):
 
             # POs Presence
             'pos_presence': {
-                'po_presence_active': (cp['active_pos_list']),
-                'po_presence_phased_out': (cp['phased_out_pos_list']),
+                'po_presence_active': (cp[boil_header('active_pos_list')]),
+                'po_presence_phased_out': (cp[boil_header('phased_out_pos_list')]),
             },
 
             # Other Sectors
@@ -153,7 +152,7 @@ class Report(object):
             'construction_materials': {
                 m: {
                     'req_quantity': cp['%s_required_quantity' % m],
-                    'ava': cp['%s_availability' % m],
+                    'ava': cp[boil_header('%s_availability' % m)],
                     'cost': cp['%s_cost' % m]}
                 for m in [
                         'stone', 'aggregate', 'sand', 'timber', 'cement_ppc',
@@ -167,8 +166,8 @@ class Report(object):
             # Key contacts
             'key_contacts': [
                 {
-                    'name': cp['%sname' % c],
-                    'title': cp['%srole' % c],
+                    'name': cp[boil_header('%sname' % c)],
+                    'title': cp[boil_header('%srole' % c)],
                     'contact': str(cp['%scontact' % c])
                 } for c in [
                     'municipal_contact_%i_' % n for n in range(1, 5)
@@ -247,12 +246,10 @@ class Report(object):
                     'q': get_faq(
                         cp['faq_number_%i' % i],
                         self.faq_sht,
-                        self.meta_sht
                     )['q'],
                     'a': get_faq(
                         cp['faq_number_%i' % i],
                         self.faq_sht,
-                        self.meta_sht,
                     )['a']
                 } for i in range(1, 3)
             ],
@@ -260,8 +257,8 @@ class Report(object):
             # Further info
             'further_info': [
                 {
-                    'name': cp['further_info_%i_name' % i],
-                    'title': cp['further_info_%i_title' % i],
+                    'name': cp[boil_header('further_info_%i_name' % i)],
+                    'title': cp[boil_header('further_info_%i_title' % i)],
                     'phone': cp['further_info_%i_number' % i],
                 } for i in range(1, 4)
             ],

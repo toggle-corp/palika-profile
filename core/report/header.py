@@ -37,8 +37,8 @@ def Header(data):
             Column(height='100%', justify='end').add(
                 Text(
                     text='{} {}'.format(
-                        data['rep_data']['month'],
-                        data['rep_data']['year'],
+                        boil('header_month'),
+                        boil('header_year'),
                     ),
                     font='Roboto Light',
                     font_size=10,

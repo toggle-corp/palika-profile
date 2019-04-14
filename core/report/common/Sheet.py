@@ -2,7 +2,7 @@
 import math
 import os
 
-from ..common.boiler import import_titles
+from ..common.boiler import import_titles, import_data_header
 from ..common import XLS_URI, SHT_RESERVE_CHAR
 from ..common.utils import is_nan
 
@@ -98,11 +98,13 @@ class Sheet(object):
             elif v.type == 'pct':
                 self.sht[v.Index] = self._clean_pct(v.Index, self.sht[v.Index])
             elif v.type == 'uid':
-                #UIDs are indexes, and are coerced to being strings if they're not
+                #UIDs are indexes, and are coerced to being title_strings if they're not
                 self.sht.index = self._clean_uid(v.Index, list(self.sht.index))
             else:
                 raise Exception('Bad item type for type {}. Must be in (int, str, dec, pct, uid). '
                                 'Did you change something in the data_types sheet?'.format(v))
+
+        import_data_header(list(self.sht.columns))
 
         self._trim_data()
 
@@ -188,6 +190,7 @@ class Sheet(object):
                     col.append(None)
                 else:
                     col.append(float(v))
+
             except Exception:
                 self._add_error(message=ERR_STR.format(str(v)), column=col_nm, index=ind)
                 col.append(None)

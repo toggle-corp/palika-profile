@@ -93,7 +93,7 @@ def PoGroup(h, pos):
 def Pop(data):
     for k,v in data.items():
         if not v:
-            data[k] = 'No POs Reported'
+            data[k] = boil('partner_orgs_no_partner_orgs')
 
     hs = _calc_box_hs([v for v in data.values()])
 

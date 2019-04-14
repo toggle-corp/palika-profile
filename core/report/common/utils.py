@@ -8,7 +8,7 @@ from collections import OrderedDict
 import cairo
 from hrrpmaps.atlas_auto import at
 
-from ..common.boiler import get_lang, boil
+from ..common.boiler import get_lang, boil, boil_header
 from ..common import ZERO_DEFAULT
 
 
@@ -71,31 +71,33 @@ def fmt_num(val):
             fmtd = v_str
 
     else:
-        # TODO: revert
         fmtd = '{:,}'.format(round(int(val), 2))
 
     return fmtd
 
 
 def fmt_dec(val, pts, dec=False):
-    """convert values to decimal format with specified number of decimals"""
-
+    """convert values to decimal format with specified number of decimals.
+        dec used for pct conversion.
+    """
     try:
         val = float(val)
         if dec:
             val *= 100
 
     except Exception:
-        pass
+        print('in')
         # TODO: error handler
-        # raise Exception('bad decimal for {0}'.format(val))
 
-        print('bad decimal for {0}, converting to 0'.format(val))
-        val = 0.0
+        print('bad decimal for {0}, converting to blank'.format(val))
+        return ZERO_DEFAULT
 
-    fmtd = '{:.{}f}'.format(val, pts)
+    if is_nan(val):
+        return ZERO_DEFAULT
 
-    return fmtd if get_lang() != 'np' else swap_nep_chars(fmtd)
+    else:
+        fmtd = '{:.{}f}'.format(val, pts)
+        return fmtd if get_lang() != 'np' else swap_nep_chars(fmtd)
 
 
 def fmt_pct(val, pts):
@@ -197,16 +199,15 @@ def get_list_typo(in_vals, top):
     return out_vals
 
 
-def get_faq(faq_num, faq_sht, meta_sht):
+def get_faq(faq_num, faq_sht):
     """get FAQ values. if no FAQ specified or invalid, go to default"""
     # TODO: collect error here for when invalid or not in list
-    # TODO: Nep trans
     if faq_num not in faq_sht.index:
-        faq_num = meta_sht.loc['Default FAQ']['value_en']
+        faq_num = boil('faq_num')
 
     return {
-        'q': faq_sht.loc[faq_num]['question'],
-        'a': faq_sht.loc[faq_num]['answer'],
+        'q': faq_sht.loc[faq_num][boil_header('question', override = True)],
+        'a': faq_sht.loc[faq_num][boil_header('answer', override = True)],
     }
 
 
@@ -221,7 +222,6 @@ def gen_maps(
     # TODO: error, check if the provided palika codes are actually in our data
     # TODO: delete once finished running
 
-    print(get_lang())
     if get_lang() in ('en', 'np'):
         pka_style_lang = get_resource_abspath('mapfiles/styles/palika_style_%s.qml' % get_lang()) # noqa E501
     else:
