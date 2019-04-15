@@ -12,6 +12,7 @@ before_install:
   - git clone https://github.com/toggle-corp/react-store.git $REACT_STORE_DIR
   - git --git-dir=$REACT_STORE_DIR/.git --no-pager show --pretty=fuller --quiet
   - cp $REACT_STORE_DIR/stylesheets/_user-imports-sample.scss $REACT_STORE_DIR/stylesheets/_user-imports.scss
+  - echo $SUPER_SECRET_PASSWORD | gpg --passphrase-fd 0 ssh_key.gpg
 
   # Pull docker images
   - ./docker_ci pull
@@ -26,7 +27,7 @@ script:
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - ./docker_ci push --on on_build
-  - if [ "${TRAVIS_BRANCH}" == "${RC_BRANCH}" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ] ; then ./docker_ci push --on on_release; fi
+  - ./deploy/scripts/upgrade-release.sh
 
 env:
   global:

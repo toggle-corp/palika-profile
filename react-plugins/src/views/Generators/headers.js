@@ -6,7 +6,7 @@ import FileLink, { GeneratorExportsDownload } from '#components/FileLink';
 const RenderStatus = ({ status }) => {
     if (status) {
         let icon = iconNames.error;
-        let title = 'Failed';
+        let title = 'Failure';
 
         if (status === 'success') {
             icon = iconNames.check;
