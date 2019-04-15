@@ -8,7 +8,7 @@ const state = {
         exportState: undefined,
         validationState: undefined,
 
-        exportStatus: 'failed',
+        exportStatus: undefined,
         validationStatus: undefined,
     },
 };

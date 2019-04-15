@@ -29,7 +29,7 @@ def generate(
         overwrite=False,
 ):
     job_progress = {
-        'itemList': ['meta', 'titles', 'faq', 'pdf'],
+        'itemList': ['titles', 'faq', 'pdf'],
         'items': {},
     }
     job_palika_progress = {}
@@ -67,17 +67,6 @@ def generate(
     # for now, all data is processed regardless of it is filtered or not
     data.process()
     update_progress({'testing': 100})
-
-    meta = Sheet(
-        pd.read_excel(
-            file, sheet_name='Meta', index_col=0, header=0,
-        ),
-        num_rows_strip=1,
-        remove_reserve_dims='columns',
-        reserve_val=SHT_RESERVE_CHAR
-    )
-    meta.process()
-    update_progress({'meta': 100})
 
     faq = Sheet(
         pd.read_excel(
@@ -121,10 +110,7 @@ def generate(
     })
     for v in palika_codes:
         print('Creating profile for {}'.format(v))
-        cur_rep = Report(
-            gc=v, data_sht=data.sht, meta_sht=meta.sht,
-            faq_sht=faq.sht, map_img_type=map_img_type,
-        )
+        cur_rep = Report(gc=v, data_sht=data.sht, faq_sht=faq.sht, map_img_type=map_img_type)
         cur_rep.create_data()
 
         pdf_file_path = cc.get_pdf_write_path('{}_{}.pdf', v, lang_in)

@@ -37,7 +37,7 @@ const defaultProps = {
 };
 const emptyObject = {};
 
-class ExportPage extends React.PureComponent {
+class FinalPage extends React.PureComponent {
     static propTypes = propTypes;
     static defaultProps = defaultProps;
 
@@ -49,7 +49,7 @@ class ExportPage extends React.PureComponent {
             generator,
             exportStatus,
         } = this.props;
-        if (exportStatus === 'failed') {
+        if (exportStatus === 'failure') {
             generatorGet.do({ getExportState: true });
         } else if (!generator.exports) {
             // NOTE: This is for debugging only
@@ -66,22 +66,6 @@ class ExportPage extends React.PureComponent {
 
         const { data = emptyObject } = generator;
 
-        if (!exportStatus === 'failed') {
-            return (
-                <div>
-                    <h1>Failed to generate PDFs</h1>
-                    <h3>Server Error:</h3>
-                    <code>
-                        {data.errors}
-                    </code>
-                    <h3>Final Status:</h3>
-                    <TaskStatus
-                        progress={data.progress}
-                    />
-                </div>
-            );
-        }
-
         return (
             <div className={styles.container}>
                 <div>
@@ -93,15 +77,32 @@ class ExportPage extends React.PureComponent {
                         Go Back
                     </PrimaryButton>
                 </div>
-                <div className={styles.content}>
-                    <div className={styles.downImage}>
-                        Download files
-                    </div>
-                    <GeneratorExportsDownload
-                        className={styles.downloads}
-                        generator={generator}
-                    />
-                </div>
+                {
+                    exportStatus === 'failure'
+                        ? (
+                            <div>
+                                <h1>Failed to generate PDFs</h1>
+                                <h3>Server Error:</h3>
+                                <code>
+                                    {data.errors}
+                                </code>
+                                <h3>Final Status:</h3>
+                                <TaskStatus
+                                    progress={data.progress}
+                                />
+                            </div>
+                        ) : (
+                            <div className={styles.content}>
+                                <div className={styles.downImage}>
+                                        Download files
+                                </div>
+                                <GeneratorExportsDownload
+                                    className={styles.downloads}
+                                    generator={generator}
+                                />
+                            </div>
+                        )
+                }
             </div>
         );
     }
@@ -121,4 +122,4 @@ export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     RequestCoordinator,
     RequestClient(requests),
-)(ExportPage);
+)(FinalPage);
