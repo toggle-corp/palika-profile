@@ -87,7 +87,7 @@ def generate(
 if __name__ == '__main__':
     generate(
         test_len=1,
-        lang_in='np',
+        lang_in='en',
         make_maps=False,
         make_scnd=True,
         map_img_type='svg',

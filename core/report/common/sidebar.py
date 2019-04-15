@@ -27,6 +27,8 @@ def Icon(filename):
 def Sidebar(**kwargs):
     children = [
         Label(boil('social_connect')),
+        Icon('hrrp.png'),
+        Label('www.hrrpnepal.org'),
         Icon('fb.png'),
         Label(boil('social_fb')),
         Icon('twitter.png'),
