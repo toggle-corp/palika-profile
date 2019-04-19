@@ -5,7 +5,7 @@ from drafter.nodes.text import Pango
 
 from .common.color import Color
 from .common.boiler import boil
-from .common.utils import get_resource_abspath
+from .common.utils import swap_nep_chars
 
 
 def Header(data):
@@ -38,7 +38,8 @@ def Header(data):
                 Text(
                     text='{} {}'.format(
                         boil('header_month'),
-                        boil('header_year'),
+                        boil('header_year') if isinstance(boil('header_year'), str)
+                            else swap_nep_chars(str(boil('header_year'))),
                     ),
                     font='Roboto Light',
                     font_size=10,
