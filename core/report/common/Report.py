@@ -239,7 +239,7 @@ class Report(object):
                     'mapfiles/map_tmp/%s.%s' % (self.gc, self.map_img_type)
                 ),
                 'default_map_uri': get_resource_abspath('images/no_map.svg'),
-                'legend_uri': get_resource_abspath('images/map_legend.png'),
+                'legend_uri': get_resource_abspath('images/{}.png'.format(boil_header('map_legend', override=True))),
             },
 
             # FAQ
