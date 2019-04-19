@@ -87,7 +87,7 @@ class Bagel(Shape):
             ).render(ctx)
 
             String(
-                pos=[x + 14, y - 5 - 2],
+                pos=[x + 14, y],
                 markup='<small>{}</small>\n<b>{}</b>'.format(
                     label, fmt_num(value),
                 ),
