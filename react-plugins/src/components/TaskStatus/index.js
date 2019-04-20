@@ -21,6 +21,9 @@ const TaskStatus = ({
             <div className={styles.container}>
                 {itemList.map(item => (
                     <InfoGroup
+                        className={styles.infoGroup}
+                        valueClassName={styles.value}
+                        labelClassName={styles.label}
                         label={item}
                         type="table"
                         value={

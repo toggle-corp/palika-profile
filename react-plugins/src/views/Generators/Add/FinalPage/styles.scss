@@ -31,6 +31,20 @@
             max-width: 640px;
             overflow-y: auto;
             text-align: center;
+
+            .files-container {
+                justify-content: space-between;
+
+                >div {
+                    flex-basis: 50%;
+                    padding: $spacing-medium 0;
+                    text-align: left;
+
+                    &:after {
+                        content: '';
+                    }
+                }
+            }
         }
     }
 

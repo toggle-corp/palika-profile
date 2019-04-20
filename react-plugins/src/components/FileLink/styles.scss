@@ -12,6 +12,7 @@
                     content: ',';
                 }
             }
+
         }
     }
 
@@ -24,4 +25,8 @@
             margin-right: $spacing-small;
         }
     }
+}
+
+.link {
+    text-transform: none;
 }

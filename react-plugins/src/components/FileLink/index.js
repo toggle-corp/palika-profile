@@ -14,6 +14,7 @@ const FileLink = ({ url, label }) => {
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
+                className={styles.link}
             >
                 {filename}
             </a>
@@ -51,9 +52,11 @@ export class GeneratorExportsDownload extends React.PureComponent {
         // eslint-disable-next-line react/forbid-prop-types
         generator: PropTypes.object,
         className: PropTypes.string,
+        filesContainerClassName: PropTypes.string,
     };
     static defaultProps = {
         className: '',
+        filesContainerClassName: '',
         generator: {},
     };
 
@@ -63,6 +66,7 @@ export class GeneratorExportsDownload extends React.PureComponent {
 
     render() {
         const {
+            filesContainerClassName,
             className,
             generator: {
                 id,
@@ -81,7 +85,7 @@ export class GeneratorExportsDownload extends React.PureComponent {
                         <span className={_cs(styles.icon, 'ion-ios-download-outline')} />
                         Download as zip
                     </a>
-                    <div className={styles.filesContainer}>
+                    <div className={_cs(styles.filesContainer, filesContainerClassName)}>
                         <FileLinks
                             urls={exports}
                             keySelector={fileKeySelector}
