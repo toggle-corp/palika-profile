@@ -1,10 +1,10 @@
 from drafter.utils import Rect
 from drafter.layouts import Row, Column
 from drafter.nodes import Text
-from drafter.color import rgb, hx
 
 from ..common.boiler import boil
 from ..common import ZERO_DEFAULT
+from ..common.utils import get_lang_num
 
 
 def Contact(it, title, contact):
@@ -32,7 +32,7 @@ def Contact(it, title, contact):
             font_size=7,
         ),
         Text(
-            text=contact['contact'] if contact['contact'] != ZERO_DEFAULT else '',
+            text=get_lang_num(contact['contact']) if contact['contact'] != ZERO_DEFAULT else '',
             font_family="Roboto Condensed",
             font_size=7,
         )

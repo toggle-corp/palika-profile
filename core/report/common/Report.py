@@ -2,7 +2,7 @@ from collections import OrderedDict
 
 from ..common.utils import get_faq
 from ..common.utils import get_resource_abspath
-from ..common.boiler import boil_header, get_lang
+from ..common.boiler import boil_header
 
 
 class Report(object):
@@ -14,8 +14,9 @@ class Report(object):
         self.gc = gc
 
     def create_data(self):
-        """properly format input data according to sections. boiler.boil() is not used here but instead in the helper
-            functions. boiler.boil_header() is used here, however, as it refers to dynamic content"""
+        """properly format input data according to sections.
+        boiler.boil() is not used here but instead in the helper
+        functions. boiler.boil_header() is used here, however, as it refers to dynamic content"""
         cp = self.data_sht.loc[self.gc]
 
         self.data = {
@@ -59,6 +60,7 @@ class Report(object):
 
             # Housing Reconstruction & Retrofit Updates
             'reconstruction_retrofit_updates': {
+                'recon_footer_date': cp[boil_header('recon_footer_date')],
                 'reconstruction_status': [
                     # title
                     {
@@ -237,7 +239,7 @@ class Report(object):
                     'mapfiles/map_tmp/%s.%s' % (self.gc, self.map_img_type)
                 ),
                 'default_map_uri': get_resource_abspath('images/no_map.svg'),
-                'legend_uri': get_resource_abspath('images/map_legend.png'),
+                'legend_uri': get_resource_abspath('images/{}.png'.format(boil_header('map_legend', override=True))),
             },
 
             # FAQ

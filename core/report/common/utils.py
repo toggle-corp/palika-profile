@@ -33,6 +33,13 @@ def swap_nep_chars(num):
     return ''.join([swap[v] if v in swap else v for v in num])
 
 
+def get_lang_num(val):
+    """get number string according to lang"""
+    if get_lang() == 'np':
+        return swap_nep_chars(str(val))
+    return val
+
+
 def fmt_num(val):
     """properly format a number with the right thounsands seperation into eng or np
         remove decimals for all nums"""

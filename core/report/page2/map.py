@@ -24,7 +24,7 @@ def Map(data):
                 filename=data['legend_uri'],
                 width='35%',
                 height='5%',
-                padding=Rect([0, 0, 0, 5])
+                padding=Rect([3, 0, 0, 5])
             )
         ).add(
             Image(

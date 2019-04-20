@@ -7,7 +7,7 @@ from ..common.sidebar import Sidebar
 from ..common.boiler import boil
 
 from .ff import FF
-from .reconstruction import ReconstructionAndRetrofit
+from .reconstruction import ReconstructionAndRetrofit, ReconstructionAndRetrofitFooter
 from .cm_table import CMTable
 from .pop import Pop
 from .typologies import Typologies
@@ -51,6 +51,8 @@ def Page(data):
             Panel(
                 title=boil('recon_&_retrofit_panel_title'),
                 width='100%',
+                right_footer=ReconstructionAndRetrofitFooter,
+                footer_data=data['reconstruction_retrofit_updates']['recon_footer_date'],
             ).add(
                 ReconstructionAndRetrofit(
                     data['reconstruction_retrofit_updates']

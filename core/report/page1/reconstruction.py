@@ -365,3 +365,14 @@ def ReconstructionAndRetrofit(data):
             ),
         )
     )
+
+
+def ReconstructionAndRetrofitFooter(**kwargs):
+    return Text(
+        **kwargs,
+        text='{} {}'.format(boil('recon_&_retrofit_panel_footer'), kwargs['data']),
+        font_family="Roboto Light",
+        font_size=6,
+        color=Color.DARK_GRAY,
+        padding=Rect([0, 5, 2, 0])
+    )
