@@ -52,7 +52,7 @@ def boil(key):
     return title_strings[key][lang]
 
 
-def boil_header(key, override = False):
+def boil_header(key, override=False):
     """used for getting specific language version of a header in profile data. is different than boil()
         in that boil() works on the titles worksheet - this is used for specifying different language values
         for dynamic content in profiles"""

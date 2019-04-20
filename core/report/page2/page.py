@@ -5,7 +5,7 @@ from drafter.shapes import Pango
 
 from ..common.panel import Panel
 from ..common.sidebar import Sidebar
-from ..common.utils import is_nan, swap_nep_chars
+from ..common.utils import is_nan, get_lang_num
 from ..common.boiler import boil
 
 from .hh import HH
@@ -30,7 +30,7 @@ def FurtherInfoNotes(data, **kwargs):
             Column(padding=Rect(8)).add(
                 Text(
                     text='{}. {} ({})'.format(
-                        swap_nep_chars(str(i + 1)),
+                        get_lang_num(i + 1),
                         contact['name'] if contact['name'] and contact['name'] != 'None'
                         else '',
                         contact['title'] if contact['title'] and contact['title'] != 'None'
@@ -43,7 +43,7 @@ def FurtherInfoNotes(data, **kwargs):
                 Text(
                     text='     {}'
                     .format(
-                        contact['phone'] if contact['phone'] and contact['phone'] != 'None' else ''
+                        get_lang_num(contact['phone']) if contact['phone'] and contact['phone'] != 'None' else ''
                     ),
                     font_family='Roboto Condensed',
                     font_size=7,
