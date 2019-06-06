@@ -9,7 +9,7 @@ before_install:
   - curl https://s3.amazonaws.com/toggle-utils/docker_ci --output docker_ci && chmod +x docker_ci
 
   - mkdir -p $REACT_STORE_DIR
-  - git clone https://github.com/toggle-corp/react-store.git $REACT_STORE_DIR
+  - git clone --branch=palika-profile https://github.com/toggle-corp/react-store.git $REACT_STORE_DIR
   - git --git-dir=$REACT_STORE_DIR/.git --no-pager show --pretty=fuller --quiet
   - cp $REACT_STORE_DIR/stylesheets/_user-imports-sample.scss $REACT_STORE_DIR/stylesheets/_user-imports.scss
   - echo $SUPER_SECRET_PASSWORD | gpg --passphrase-fd 0 ssh_key.gpg

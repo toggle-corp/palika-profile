@@ -2,23 +2,11 @@ from django.contrib import admin
 from geo.models import (
     GeoArea,
     GeoStyle,
+    GeoStyleFile,
     Province,
     District,
     Palika,
 )
-
-
-@admin.register(GeoStyle)
-class GeoStyleAdmin(admin.ModelAdmin):
-    search_fields = ('title', 'file', 'style_type',)
-    list_display = ('title', 'file', 'style_type',)
-    ordering = ('title', 'file', 'style_type',)
-    readonly_fields = ('style_type',)
-
-    def has_add_permission(self, request, obj=None):
-        if GeoStyle.objects.count() >= len(GeoStyle.STYLE_TYPES):
-            return False
-        return True
 
 
 @admin.register(GeoArea)
@@ -29,6 +17,31 @@ class GeoAreaAdmin(admin.ModelAdmin):
 
     def has_add_permission(self, request, obj=None):
         if GeoArea.objects.count() >= len(GeoArea.GEO_TYPES):
+            return False
+        return True
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+class GeoStyleFileInline(admin.TabularInline):
+    model = GeoStyleFile
+    max_num = 2
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+@admin.register(GeoStyle)
+class GeoStyleAdmin(admin.ModelAdmin):
+    inlines = (GeoStyleFileInline,)
+    search_fields = ('title', 'style_type',)
+    list_display = ('title', 'style_type',)
+    ordering = ('title', 'style_type',)
+    readonly_fields = ('style_type',)
+
+    def has_add_permission(self, request, obj=None):
+        if GeoStyle.objects.count() >= len(GeoStyle.STYLE_TYPES):
             return False
         return True
 
