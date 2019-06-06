@@ -10,7 +10,7 @@ server:
         - TRAVIS_PULL_REQUEST_BRANCH
         - TRAVIS_BRANCH
     LATEST:
-      push: on_test
+      push: on_build
       value: latest
     RELEASE:
       push: on_release

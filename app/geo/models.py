@@ -1,6 +1,8 @@
+import logging
 import os
 from django.db import models
 
+logger = logging.getLogger(__name__)
 
 GEO_FILE_DIR = '/tmp/palika_geo/'
 GEOJSON_FILE_DIR = os.path.join(GEO_FILE_DIR, 'geojsons')
@@ -41,35 +43,62 @@ class GeoStyle(models.Model):
     PALIKA_HIDE_STYLE = 'palika_hide_style'
     ATLAS_STYLE = 'atlas_style'
     WARD_STYLE = 'ward_style'
-    PALIKA_EN_STYLE = 'palika_en_style'
-    PALIKA_NP_STYLE = 'palika_np_style'
+    PALIKA_STYLE = 'palika_style'
 
     STYLE_TYPES = (
         (DISTRICT_STYLE, 'District Style'),
         (PALIKA_HIDE_STYLE, 'Palika Hide Style'),
         (ATLAS_STYLE, 'Atlas Style'),
         (WARD_STYLE, 'Ward Style'),
-        (PALIKA_EN_STYLE, 'Palika en Style'),
-        (PALIKA_NP_STYLE, 'Palika np Style'),
+        (PALIKA_STYLE, 'Palika Style'),
     )
 
     title = models.CharField(max_length=255)
-    file = models.FileField(upload_to='style_files/', max_length=255)
     style_type = models.CharField(max_length=30, choices=STYLE_TYPES, unique=True)
 
     @staticmethod
-    def get_file_path(style_type):
+    def get_file_path(style_type, language, default_language):
         geostyle = GeoStyle.objects.filter(style_type=style_type).first()
-        file_uri = os.path.join(GEOJSON_FILE_DIR, geostyle.file.name)
+
+        geostylefile = geostyle.geostylefile_set.filter(language=language).first()
+        if geostylefile is None:  # NOTE: Use default style (EN)
+            geostylefile = geostyle.geostylefile_set.filter(language=default_language).first()
+            logger.warning(f'Style:{style_type} not set for LANG: {language}, Using Default Lang: {default_language}')
+        if geostylefile is None:  # NOTE: This should never happen
+            raise Exception(f'Default style not set for Style:{style_type}')
+
+        file_uri = os.path.join(GEOJSON_FILE_DIR, geostylefile.file.name)
         if os.path.isfile(file_uri):
             return file_uri
         os.makedirs(os.path.dirname(file_uri), exist_ok=True)
         with open(file_uri, 'wb') as fp:
-            fp.write(geostyle.file.read())
+            fp.write(geostylefile.file.read())
         return file_uri
 
     def __str__(self):
         return self.title
+
+
+class GeoStyleFile(models.Model):
+    DEFAULT = 'en'
+    NEPALI = 'np'
+
+    LANGUAGE_CHOICES = (
+        (DEFAULT, 'English (Default)'),
+        (NEPALI, 'NEPALI'),
+    )
+
+    SUPPORTED_LANGUAGES = [lang for lang, _ in LANGUAGE_CHOICES]
+
+    geo_style = models.ForeignKey(GeoStyle, on_delete=models.CASCADE)
+    language = models.CharField(max_length=30, choices=LANGUAGE_CHOICES, default=DEFAULT)
+    file = models.FileField(upload_to='style_files/', max_length=255)
+
+    class Meta:
+        unique_together = ('language', 'geo_style')
+
+    def __str__(self):
+        return f'{self.geo_style.title} :: {self.get_language_display()}'
 
 
 class Province(models.Model):
@@ -97,31 +126,30 @@ class Palika(models.Model):
 
 
 def get_map_params_for_generation(language='en'):
-    ward_uri = GeoArea.get_file_path(GeoArea.WARD)
-    palika_uri = GeoArea.get_file_path(GeoArea.PALIKA)
-    district_uri = GeoArea.get_file_path(GeoArea.DISTRICT)
+    areas_uri = {}
+    styles_uri = {}
 
-    district_style_uri = GeoStyle.get_file_path(GeoStyle.DISTRICT_STYLE)
-    palika_hide_style_uri = GeoStyle.get_file_path(GeoStyle.PALIKA_HIDE_STYLE)
-    atlas_style_uri = GeoStyle.get_file_path(GeoStyle.ATLAS_STYLE)
-    ward_style_uri = GeoStyle.get_file_path(GeoStyle.WARD_STYLE)
+    for geoarea_key, geoarea_type in [
+        ('wards_uri', GeoArea.WARD),
+        ('palika_uri', GeoArea.PALIKA),
+        ('dists_uri', GeoArea.DISTRICT),
+    ]:
+        areas_uri[geoarea_key] = GeoArea.get_file_path(geoarea_type)
 
-    if language == 'en':
-        pka_style_lang_uri = GeoStyle.get_file_path(GeoStyle.PALIKA_EN_STYLE)
-    elif language == 'np':
-        pka_style_lang_uri = GeoStyle.get_file_path(GeoStyle.PALIKA_NP_STYLE)
-    else:
-        raise Exception('Unknown Language {} supplied for map params'.format(language))
+    for style_key, style_type in [
+        ('dists_style_uri', GeoStyle.DISTRICT_STYLE),
+        ('pka_hide_style_uri', GeoStyle.PALIKA_HIDE_STYLE),
+        ('atlas_style_uri', GeoStyle.ATLAS_STYLE),
+        ('ward_style_uri', GeoStyle.WARD_STYLE),
+        ('pka_style_lang_uri', GeoStyle.PALIKA_STYLE),
+    ]:
+        if language not in GeoStyleFile.SUPPORTED_LANGUAGES:
+            raise Exception('Unknown Language {} supplied for map params'.format(language))
+        styles_uri[style_key] = GeoStyle.get_file_path(style_type, language, GeoStyleFile.DEFAULT)
 
     return {
         # Shapes
-        'wards_uri': ward_uri,
-        'palika_uri': palika_uri,
-        'dists_uri': district_uri,
+        **areas_uri,
         # Styles
-        'dists_style_uri': district_style_uri,
-        'pka_hide_style_uri': palika_hide_style_uri,
-        'atlas_style_uri': atlas_style_uri,
-        'ward_style_uri': ward_style_uri,
-        'pka_style_lang_uri': pka_style_lang_uri,
+        **styles_uri,
     }

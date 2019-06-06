@@ -29,7 +29,6 @@
         "pk": 1,
         "fields": {
             "title": "District styling",
-            "file": "core/resources/mapfiles/styles/dist_style.qml",
             "style_type": "district_style"
         }
     },
@@ -37,45 +36,87 @@
         "model": "geo.GeoStyle",
         "pk": 2,
         "fields": {
-            "title": "Palika styling (English)",
-            "file": "core/resources/mapfiles/styles/palika_style_en.qml",
-            "style_type": "palika_en_style"
+            "title": "Palika styling",
+            "style_type": "palika_style"
         }
     },
     {
         "model": "geo.GeoStyle",
         "pk": 3,
         "fields": {
-            "title": "Palika styling (Nepali)",
-            "file": "core/resources/mapfiles/styles/palika_style_np.qml",
-            "style_type": "palika_np_style"
+            "title": "Hidden palika styling",
+            "style_type": "palika_hide_style"
         }
     },
     {
         "model": "geo.GeoStyle",
         "pk": 4,
         "fields": {
-            "title": "Hidden palika styling",
-            "file": "core/resources/mapfiles/styles/palika_hide_style.qml",
-            "style_type": "palika_hide_style"
+            "title": "Ward Styling",
+            "style_type": "ward_style"
         }
     },
     {
         "model": "geo.GeoStyle",
         "pk": 5,
         "fields": {
-            "title": "Ward Styling",
-            "file": "core/resources/mapfiles/styles/ward_style.qml",
-            "style_type": "ward_style"
+            "title": "Atlas Layout",
+            "style_type": "atlas_style"
+        }
+    },
+
+    {
+        "model": "geo.GeoStyleFile",
+        "pk": 1,
+        "fields": {
+            "geo_style": 1,
+            "language": "en",
+            "file": "core/resources/mapfiles/styles/dist_style.qml"
         }
     },
     {
-        "model": "geo.GeoStyle",
+        "model": "geo.GeoStyleFile",
+        "pk": 2,
+        "fields": {
+            "geo_style": 2,
+            "language": "en",
+            "file": "core/resources/mapfiles/styles/palika_style_en.qml"
+        }
+    },
+    {
+        "model": "geo.GeoStyleFile",
+        "pk": 3,
+        "fields": {
+            "geo_style": 2,
+            "language": "np",
+            "file": "core/resources/mapfiles/styles/palika_style_np.qml"
+        }
+    },
+    {
+        "model": "geo.GeoStyleFile",
+        "pk": 4,
+        "fields": {
+            "geo_style": 3,
+            "language": "en",
+            "file": "core/resources/mapfiles/styles/palika_hide_style.qml"
+        }
+    },
+    {
+        "model": "geo.GeoStyleFile",
+        "pk": 5,
+        "fields": {
+            "geo_style": 4,
+            "language": "en",
+            "file": "core/resources/mapfiles/styles/ward_style.qml"
+        }
+    },
+    {
+        "model": "geo.GeoStyleFile",
         "pk": 6,
         "fields": {
-            "title": "Atlas Layout",
-            "file": "core/resources/mapfiles/styles/atlas_layout.qpt",
-            "style_type": "atlas_style"
+            "geo_style": 5,
+            "language": "en",
+            "file": "core/resources/mapfiles/styles/atlas_layout.qpt"
         }
     }
 ]
