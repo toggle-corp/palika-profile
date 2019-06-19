@@ -86,9 +86,9 @@ def generate(
 
 if __name__ == '__main__':
     generate(
-        test_len=1,
+        test_len=4,
         lang_in=os.environ.get('P_LANG') or 'en',
-        make_maps=False,
+        make_maps=True,
         make_scnd=True,
         map_img_type='svg',
         overwrite=True,

@@ -93,7 +93,6 @@ def fmt_dec(val, pts, dec=False):
             val *= 100
 
     except Exception:
-        print('in')
         # TODO: error handler
 
         print('bad decimal for {0}, converting to blank'.format(val))
@@ -231,6 +230,8 @@ def gen_maps(
 
     if get_lang() in ('en', 'np'):
         pka_style_lang = get_resource_abspath('mapfiles/styles/palika_style_%s.qml' % get_lang()) # noqa E501
+        ward_style_lang = get_resource_abspath('mapfiles/styles/ward_style_%s.qml' % get_lang())  # noqa E501
+        dist_style_lang = get_resource_abspath('mapfiles/styles/dist_style_%s.qml' % get_lang())  # noqa E501
     else:
         raise Exception('Bad language for map styling, bro.')
 
@@ -241,10 +242,10 @@ def gen_maps(
         palika_uri=palika_uri or get_resource_abspath('mapfiles/hrrp_shapes/jsons/GaPaNaPa_hrrp.json'),  # noqa: E501
         dists_uri=dists_uri or get_resource_abspath('mapfiles/hrrp_shapes/jsons/Districts_hrrp.json'),  # noqa: E501
 
-        dists_syle=dists_style_uri or get_resource_abspath('mapfiles/styles/dist_style.qml'),  # noqa: E501
+        dists_syle=dists_style_uri or dist_style_lang,  # noqa: E501
         pka_style=pka_style_lang_uri or pka_style_lang,
         pka_hide_style=pka_hide_style_uri or get_resource_abspath('mapfiles/styles/palika_hide_style.qml'),  # noqa: E501
-        ward_style=ward_style_uri or get_resource_abspath('mapfiles/styles/ward_style.qml'),  # noqa: E501
+        ward_style=ward_style_uri or ward_style_lang,
         atlas_style=atlas_style_uri or get_resource_abspath('mapfiles/styles/atlas_layout.qpt'),  # noqa: E501
 
         parent_join_cd='N_WCode',
