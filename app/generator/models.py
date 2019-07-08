@@ -3,6 +3,8 @@ import os
 from django.db import models
 from django.contrib.postgres.fields import JSONField
 
+from geo.models import GeoStyleFile
+
 
 class TaskModel(models.Model):
     NOT_PROCESSED = 'not_processed'
@@ -46,6 +48,9 @@ class Export(models.Model):
     title = models.CharField(max_length=255, null=True, blank=True)
     file = models.FileField(upload_to='exports/', max_length=255)
     palika_code = models.CharField(max_length=255, null=True, blank=True)
+    language = models.CharField(
+        max_length=30, choices=GeoStyleFile.LANGUAGE_CHOICES, default=GeoStyleFile.ENGLISH,
+    )
     generator = models.ForeignKey(
         Generator,
         on_delete=models.CASCADE,

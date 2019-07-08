@@ -57,6 +57,7 @@ def _generate_pdf(self, cc, generator, selected_palika_codes, language):
                 generator=generator,
                 file=File(fp, filename),
                 palika_code=palika_code,
+                language=language,
             )
 
     generator.errors = errors

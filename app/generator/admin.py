@@ -34,3 +34,5 @@ class GeneratorAdmin(admin.ModelAdmin):
 @admin.register(Export)
 class ExportAdmin(admin.ModelAdmin):
     search_fields = ('file',)
+    list_display = ('title', 'file', 'palika_code', 'language',)
+    list_filter = ('language',)
