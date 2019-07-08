@@ -35,7 +35,7 @@ urlpatterns = [
 
     # Recent palika document
     url(
-        r'^recent-palika-document/(?P<palika_code>\d+)/$',
+        r'^recent-palika-document/(?P<palika_code>\d+)/(?P<language>\w+)/$',
         get_latest_palika_pdf,
         name='recent-palika-document',
     ),

@@ -80,18 +80,18 @@ class GeoStyle(models.Model):
 
 
 class GeoStyleFile(models.Model):
-    DEFAULT = 'en'
+    ENGLISH = 'en'
     NEPALI = 'np'
 
     LANGUAGE_CHOICES = (
-        (DEFAULT, 'English (Default)'),
+        (ENGLISH, 'English (Default)'),
         (NEPALI, 'NEPALI'),
     )
 
     SUPPORTED_LANGUAGES = [lang for lang, _ in LANGUAGE_CHOICES]
 
     geo_style = models.ForeignKey(GeoStyle, on_delete=models.CASCADE)
-    language = models.CharField(max_length=30, choices=LANGUAGE_CHOICES, default=DEFAULT)
+    language = models.CharField(max_length=30, choices=LANGUAGE_CHOICES, default=ENGLISH)
     file = models.FileField(upload_to='style_files/', max_length=255)
 
     class Meta:
@@ -145,7 +145,7 @@ def get_map_params_for_generation(language='en'):
     ]:
         if language not in GeoStyleFile.SUPPORTED_LANGUAGES:
             raise Exception('Unknown Language {} supplied for map params'.format(language))
-        styles_uri[style_key] = GeoStyle.get_file_path(style_type, language, GeoStyleFile.DEFAULT)
+        styles_uri[style_key] = GeoStyle.get_file_path(style_type, language, GeoStyleFile.ENGLISH)
 
     return {
         # Shapes

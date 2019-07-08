@@ -10,6 +10,7 @@ from django.http import (
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
+from geo.models import GeoStyleFile
 from .models import Export
 
 
@@ -23,9 +24,10 @@ def add(request):
     return render(request, 'generator/add.html')
 
 
-def get_latest_palika_pdf(request, palika_code):
+def get_latest_palika_pdf(request, palika_code, language=GeoStyleFile.ENGLISH):
     export = Export.objects.filter(
         palika_code=palika_code,
+        language=language,
     ).order_by('-pk').first()
     if export:
         response = FileResponse(export.file)
