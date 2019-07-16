@@ -19,6 +19,7 @@ class CoreConfig():
         return pdf_path_format.format(*args, **kwargs)
 
     def clean_ouput_path(self):
+        # TODO: Remove from S3 if used
         directory = self.get_output_path()
         if os.path.isdir(directory):
             shutil.rmtree(directory)

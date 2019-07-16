@@ -18,6 +18,7 @@ services:
           - DJANGO_DEBUG=False
         env_file:
             - .env
+        restart: on-failure
         command: bash -c '/code/scripts/wait-for-it.sh db:5432 && /code/deploy/scripts/run_django.sh'
         volumes:
             - static-data:/static
@@ -33,6 +34,7 @@ services:
           - DJANGO_DEBUG=False
         env_file:
             - .env
+        restart: on-failure
         command: bash -c '/code/scripts/wait-for-it.sh db:5432 && /code/deploy/scripts/run_celery.sh'
         volumes:
             - ./app/media:/code/app/media

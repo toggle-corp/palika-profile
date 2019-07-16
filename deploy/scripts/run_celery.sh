@@ -9,4 +9,4 @@ export PYTHONUNBUFFERED=1
 . /venv/bin/activate
 
 echo '>> [Running] Uwsgi server'
-celery -A config worker -l info
+celery -A config worker -l info --concurrency=2
