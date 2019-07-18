@@ -145,6 +145,7 @@ class Migration(migrations.Migration):
             ),
         ),
 
-        migrations.RunPython(load_initial_districts),
-        migrations.RunPython(upload_files),
+        # NOTE: Don't Need this now
+        # migrations.RunPython(load_initial_districts),
+        # migrations.RunPython(upload_files),
     ]

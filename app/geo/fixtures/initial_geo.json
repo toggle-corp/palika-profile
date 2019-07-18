@@ -71,7 +71,7 @@
         "fields": {
             "geo_style": 1,
             "language": "en",
-            "file": "core/resources/mapfiles/styles/dist_style.qml"
+            "file": "core/resources/mapfiles/styles/dist_style_en.qml"
         }
     },
     {
@@ -107,7 +107,7 @@
         "fields": {
             "geo_style": 4,
             "language": "en",
-            "file": "core/resources/mapfiles/styles/ward_style.qml"
+            "file": "core/resources/mapfiles/styles/ward_style_en.qml"
         }
     },
     {

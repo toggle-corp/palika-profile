@@ -15,5 +15,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(load_initial_palika_codes),
+        # NOTE: Don't Need this now
+        # migrations.RunPython(load_initial_palika_codes),
     ]
