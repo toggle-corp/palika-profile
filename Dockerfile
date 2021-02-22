@@ -4,7 +4,6 @@ MAINTAINER togglecorp info@togglecorp.com
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV QT_QPA_PLATFORM=offscreen
-ARG UBUNTU_GIS_REPO='https://qgis.org/debian'
 
 RUN apt-get update -y \
     && apt-get install -y \
@@ -25,11 +24,9 @@ RUN apt-get update -y \
         git \
         software-properties-common \
     # Install QGIS
-    && echo "deb ${UBUNTU_GIS_REPO} bionic main" >> /etc/apt/sources.list \
-    && echo "deb-src ${UBUNTU_GIS_REPO} bionic main" >> /etc/apt/sources.list \
-    && wget -O - https://qgis.org/downloads/qgis-2017.gpg.key | gpg --import \
-    && gpg --fingerprint CAEB3DC3BDF7FB45 \
-    && gpg --export --armor CAEB3DC3BDF7FB45 | apt-key add - \
+    && wget -qO - https://qgis.org/downloads/qgis-2020.gpg.key | gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/qgis-archive.gpg --import \
+    && chmod a+r /etc/apt/trusted.gpg.d/qgis-archive.gpg \
+    && add-apt-repository "deb https://qgis.org/debian bionic main" \
     && apt-get update -y \
     && apt-get install -y qgis python3-qgis \
     # Install required fonts

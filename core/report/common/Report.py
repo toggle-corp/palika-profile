@@ -140,7 +140,7 @@ class Report(object):
                 'schools': {
                     'damaged': cp['schools_damaged_cnt'],
                     'under_construction': cp['school_completed_cnt'],
-                    'const_comp': cp['school_completed_cnt'],
+                    'const_comp': cp['schools_under_const_cnt'],
                 },
                 'health_posts': {
                     'damaged': cp['health_posts_damaged_cnt'],
